@@ -1863,20 +1863,6 @@
     "lz-string" "^1.4.4"
     "pretty-format" "^26.6.2"
 
-"@testing-library/dom@>=7.21.4":
-  "integrity" "sha512-9LId28I+lx70wUiZjLvi1DB/WT2zGOxUh46glrSNMaWVx849kKAluezVzZrXJfTKKoQTmEOutLes/bHg4Bj3aA=="
-  "resolved" "https://registry.npmjs.org/@testing-library/dom/-/dom-8.11.3.tgz"
-  "version" "8.11.3"
-  dependencies:
-    "@babel/code-frame" "^7.10.4"
-    "@babel/runtime" "^7.12.5"
-    "@types/aria-query" "^4.2.0"
-    "aria-query" "^5.0.0"
-    "chalk" "^4.1.0"
-    "dom-accessibility-api" "^0.5.9"
-    "lz-string" "^1.4.4"
-    "pretty-format" "^27.0.2"
-
 "@testing-library/jest-dom@^5.11.4":
   "integrity" "sha512-FuKiq5xuk44Fqm0000Z9w0hjOdwZRNzgx7xGGxQYepWFZy+OYUMOT/wPI4nLYXCaVltNVpU1W/qmD88wLWDsqQ=="
   "resolved" "https://registry.npmjs.org/@testing-library/jest-dom/-/jest-dom-5.11.10.tgz"
@@ -2578,7 +2564,7 @@
   "resolved" "https://registry.npmjs.org/ansi-regex/-/ansi-regex-4.1.0.tgz"
   "version" "4.1.0"
 
-"ansi-regex@^5.0.0", "ansi-regex@^5.0.1":
+"ansi-regex@^5.0.0":
   "integrity" "sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ=="
   "resolved" "https://registry.npmjs.org/ansi-regex/-/ansi-regex-5.0.1.tgz"
   "version" "5.0.1"
@@ -2596,11 +2582,6 @@
   "version" "4.3.0"
   dependencies:
     "color-convert" "^2.0.1"
-
-"ansi-styles@^5.0.0":
-  "integrity" "sha512-Cxwpt2SfTzTtXcfOlzGEee8O+c+MmUgGrNiBcXnuWxuFJHe6a5Hz7qwhwe5OgaSYI0IJvkLqWX1ASG+cJOkEiA=="
-  "resolved" "https://registry.npmjs.org/ansi-styles/-/ansi-styles-5.2.0.tgz"
-  "version" "5.2.0"
 
 "ansicolors@~0.3.2":
   "integrity" "sha1-ZlWX3oap/+Oqm/vmyuXG6kJrSXk="
@@ -2668,11 +2649,6 @@
   dependencies:
     "@babel/runtime" "^7.10.2"
     "@babel/runtime-corejs3" "^7.10.2"
-
-"aria-query@^5.0.0":
-  "integrity" "sha512-V+SM7AbUwJ+EBnB8+DXs0hPZHO0W6pqBcc0dW90OwtVG02PswOu/teuARoLQjdDOH+t9pJgGnW5/Qmouf3gPJg=="
-  "resolved" "https://registry.npmjs.org/aria-query/-/aria-query-5.0.0.tgz"
-  "version" "5.0.0"
 
 "arity-n@^1.0.4":
   "integrity" "sha1-2edrEXM+CFacCEeuezmyhgswt0U="
@@ -4882,7 +4858,7 @@
     "esutils" "^2.0.2"
     "isarray" "^1.0.0"
 
-"dom-accessibility-api@^0.5.4", "dom-accessibility-api@^0.5.9":
+"dom-accessibility-api@^0.5.4":
   "integrity" "sha512-R305kwb5CcMDIpSHUnLyIAp7SrSPBx6F0VfQFB3M75xVMHhXJJIdePYgbPPh1o57vCHNu5QztokWUPsLjWzFqw=="
   "resolved" "https://registry.npmjs.org/dom-accessibility-api/-/dom-accessibility-api-0.5.13.tgz"
   "version" "0.5.13"
@@ -10817,15 +10793,6 @@
     "@jest/types" "^26.6.2"
     "ansi-regex" "^5.0.0"
     "ansi-styles" "^4.0.0"
-    "react-is" "^17.0.1"
-
-"pretty-format@^27.0.2":
-  "integrity" "sha512-Qb1gy5OrP5+zDf2Bvnzdl3jsTf1qXVMazbvCoKhtKqVs4/YK4ozX4gKQJJVyNe+cajNPn0KoC0MC3FUmaHWEmQ=="
-  "resolved" "https://registry.npmjs.org/pretty-format/-/pretty-format-27.5.1.tgz"
-  "version" "27.5.1"
-  dependencies:
-    "ansi-regex" "^5.0.1"
-    "ansi-styles" "^5.0.0"
     "react-is" "^17.0.1"
 
 "pretty-hrtime@^1.0.3":
