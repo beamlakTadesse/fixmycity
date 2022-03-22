@@ -596,14 +596,14 @@ video {
 .-ml-4{
 	margin-left: -1rem;
 }
+.mb-16{
+	margin-bottom: 4rem;
+}
 .mb-14{
 	margin-bottom: 3.5rem;
 }
 .-mt-28{
 	margin-top: -7rem;
-}
-.mb-16{
-	margin-bottom: 4rem;
 }
 .mt-14{
 	margin-top: 3.5rem;
@@ -671,11 +671,11 @@ video {
 .h-10{
 	height: 2.5rem;
 }
-.h-40{
-	height: 10rem;
-}
 .h-auto{
 	height: auto;
+}
+.h-40{
+	height: 10rem;
 }
 .h-\[600px\]{
 	height: 600px;
@@ -2708,6 +2708,12 @@ video {
 	.xl\:col-end-7{
 		grid-column-end: 7;
 	}
+	.xl\:col-end-12{
+		grid-column-end: 12;
+	}
+	.xl\:col-end-1{
+		grid-column-end: 1;
+	}
 	.xl\:col-start-1{
 		grid-column-start: 1;
 	}
@@ -2717,13 +2723,22 @@ video {
 	.xl\:col-start-5{
 		grid-column-start: 5;
 	}
-	.xl\:grid-cols-5{
-		grid-template-columns: repeat(5, minmax(0, 1fr));
-	}
 	.xl\:grid-cols-4{
 		grid-template-columns: repeat(4, minmax(0, 1fr));
 	}
+	.xl\:grid-cols-5{
+		grid-template-columns: repeat(5, minmax(0, 1fr));
+	}
 	.xl\:grid-cols-6{
 		grid-template-columns: repeat(6, minmax(0, 1fr));
+	}
+	.xl\:grid-cols-1{
+		grid-template-columns: repeat(1, minmax(0, 1fr));
+	}
+	.xl\:grid-cols-2{
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+	.xl\:grid-cols-3{
+		grid-template-columns: repeat(3, minmax(0, 1fr));
 	}
 }

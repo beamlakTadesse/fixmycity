@@ -3,6 +3,7 @@ import Sidebar from 'components/Sidebar';
 import Dashboard from 'pages/Dashboard';
 import Settings from 'pages/Settings';
 import Tables from 'pages/Tables';
+import Dash  from 'pages/Dash';
 import Maps from 'pages/Maps';
 import Footer from 'components/Footer';
 
@@ -22,6 +23,7 @@ function App() {
                     <Route exact path="/tables" component={Tables} />
                     <Route exact path="/maps" component={Maps} />
                     <Route exact path="/sectors" component={Sector} />
+                    <Route exact path='/dash' component={Dash}/>
                     <Redirect from="*" to="/" />
                 </Switch>
                 <Footer />
