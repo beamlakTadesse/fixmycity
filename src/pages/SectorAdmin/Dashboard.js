@@ -81,10 +81,10 @@ export default function Dashboard() {
                 <div className="container mx-auto max-w-full">
                     <div className="grid grid-cols-1 xl:grid-cols-5">
                         <div className="xl:col-start-1 xl:col-end-4 px-4 mb-14">
-                            <PageVisitsCard />
+                            {/* <PageVisitsCard /> */}
                         </div>
                         <div className="xl:col-start-4 xl:col-end-6 px-4 mb-14">
-                            <TrafficCard />
+                            {/* <TrafficCard /> */}
                         </div>
                     </div>
                 </div>
