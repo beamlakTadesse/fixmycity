@@ -5,6 +5,7 @@ import Settings from 'pages/Settings';
 import Tables from 'pages/Tables';
 import Maps from 'pages/Maps';
 import Footer from 'components/Footer';
+import User from 'pages/userList';
 
 // Tailwind CSS Style Sheet
 import 'assets/styles/tailwind.css';
@@ -13,7 +14,7 @@ import Sector from 'pages/Sector';
 function App() {
     return (
         <>
-        
+
             <Sidebar />
             <div className="md:ml-64">
                 <Switch>
@@ -22,6 +23,7 @@ function App() {
                     <Route exact path="/tables" component={Tables} />
                     <Route exact path="/maps" component={Maps} />
                     <Route exact path="/sectors" component={Sector} />
+                    <Route exact path="/users" component={User} />
                     <Redirect from="*" to="/" />
                 </Switch>
                 <Footer />
