@@ -1,15 +1,16 @@
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Sidebar from 'components/Sidebar';
 import Dashboard from 'pages/Dashboard';
+import SectorDash from 'pages/SectorAdmin/Dashboard';
 import Settings from 'pages/Settings';
 import Tables from 'pages/Tables';
-import Dash  from 'pages/Dash';
+import Dash  from 'pages/Admin/Dash';
 import Maps from 'pages/Maps';
 import Footer from 'components/Footer';
 
 // Tailwind CSS Style Sheet
 import 'assets/styles/tailwind.css';
-import Sector from 'pages/Sector';
+import Sector from 'pages/Admin/Sector';
 
 function App() {
     return (
@@ -22,8 +23,9 @@ function App() {
                     <Route exact path="/settings" component={Settings} />
                     <Route exact path="/tables" component={Tables} />
                     <Route exact path="/maps" component={Maps} />
-                    <Route exact path="/sectors" component={Sector} />
-                    <Route exact path='/dash' component={Dash}/>
+                    <Route exact path="/admin/sectors" component={Sector} />
+                    <Route exact path='/admin/dashboard' component={Dash}/>
+                    <Route exact path='/sectors/dashboard' component={SectorDash}/>
                     <Redirect from="*" to="/" />
                 </Switch>
                 <Footer />
