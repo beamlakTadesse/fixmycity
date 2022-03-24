@@ -40,7 +40,7 @@ export default function Announcement() {
                 <div className="container mx-auto max-w-full">
                     <div className="grid grid-cols-1 xl:grid-cols-1">
                         
-                            <CardTable/>
+                            {/* <CardTable/> */}
                         
                     </div>
                 </div>
