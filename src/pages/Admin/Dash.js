@@ -5,10 +5,10 @@
 
 
 import StatusCard from 'components/StatusCard';
-import ChartLine from 'components/ChartLine';
+// import ChartLine from 'components/ChartLine';
 import ChartBar from 'components/ChartBar';
-import PageVisitsCard from 'components/PageVisitsCard';
-import TrafficCard from 'components/TrafficCard';
+// import PageVisitsCard from 'components/PageVisitsCard';
+// import TrafficCard from 'components/TrafficCard';
 import SectorManage from 'components/SectorManage';
 
 export default function Dashboard() {
