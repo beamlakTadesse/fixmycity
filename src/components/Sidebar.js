@@ -46,7 +46,7 @@ export default function Sidebar() {
                                     activeClassName="bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-md"
                                 >
                                     <Icon name="settings" size="2xl" />
-                                    Settings
+                                    My Profile
                                 </NavLink>
                             </li>
                             <li className="rounded-lg mb-2">
