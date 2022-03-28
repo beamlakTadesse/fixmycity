@@ -12,8 +12,6 @@ export default function Dashboard() {
 
             <div className="px-3 md:px-8 -mt-24">
 
-
-
             <div className="px-3 md:px-8">
                 <div className="container mx-auto max-w-full">
                     <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 mb-4">
@@ -38,8 +36,6 @@ export default function Dashboard() {
                             date="Since last week"
                         />
                        
-                          
-    
                           <StatusCard
                             color="blue"
                             icon="poll"
