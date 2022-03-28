@@ -11,7 +11,7 @@ import { FaPlay } from "react-icons/fa";
 import { MoonIcon } from "@heroicons/react/solid";
 import { SunIcon } from "@heroicons/react/solid";
 
-export default function Announcement_Card({ toggle, settoggle }) {
+export default function AnnouncementCard({ toggle, settoggle }) {
 
 
     const [readMore,setReadMore]=useState(false);
