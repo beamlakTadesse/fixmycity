@@ -2,8 +2,8 @@
 // import DefaultFooter from '../components/DefaultFooter';
 // import DefaultNavbar from '../components/DefaultNavbar';
 
-import SectorsSection from '../components/sector/sectorsList';
-
+// import SectorsSection from '../../components/sector/sectorsList';
+import SectorsSection from "components/sector/sectorsList";
 export default function Sector() {
     return (
         <>

@@ -4,64 +4,78 @@ import Card from '@material-tailwind/react/Card';
 import CardHeader from '@material-tailwind/react/CardHeader';
 import CardBody from '@material-tailwind/react/CardBody';
 
-export default function ChartBar() {
+export default function ChartLine() {
     useEffect(() => {
-        let config = {
-            type: 'bar',
+        var config = {
+            type: 'line',
             data: {
                 labels: [
-                    'Water and Sewage',
-                    'ELPA',
-                    'Roads Authority',
-                    'Tele'
+                    'January',
+                    'February',
+                    'March',
+                    'April',
+                    'May',
+                    'June',
+                    'July',
                 ],
                 datasets: [
                     {
-                        label: new Date().getFullYear(),
+                        label: 'Resolved Reports',
                         backgroundColor: '#03a9f4',
                         borderColor: '#03a9f4',
-                        data: [30, 78, 56, 34, 100, 45, 13],
+                        data: [65, 78, 66, 44, 56, 67, 75],
                         fill: false,
-                        barThickness: 50,
                     },
-                 
+                    {
+                        label: 'Active Reports',
+                        fill: false,
+                        backgroundColor: '#ff9800',
+                        borderColor: '#ff9800',
+                        data: [40, 68, 86, 74, 56, 60, 87],
+                    },
                 ],
             },
             options: {
                 maintainAspectRatio: false,
                 responsive: true,
                 title: {
-                    display: true,
-                    text: 'Main Sectors',
-                },
-                // tooltips: {
-                    // mode: 'index',
-                    // intersect: true,
-                // },
-                hover: {
-                    mode: 'nearest',
-                    intersect: true,
+                    display: false,
+                    text: 'Report Status Charts',
+                    fontColor: 'white',
                 },
                 legend: {
                     labels: {
-                        fontColor: 'rgba(17,17,17,.7)',
+                        fontColor: 'black',
                     },
                     align: 'end',
                     position: 'bottom',
                 },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true,
+                },
                 scales: {
                     xAxes: [
                         {
-                            display: false,
+                            ticks: {
+                                fontColor: 'rgba(17,17,17,.7)',
+                            },
+                            display: true,
                             scaleLabel: {
-                                display: true,
-                                labelString: 'Main Sector',
+                                display: false,
+                                labelString: 'Month',
+                                fontColor: 'white',
                             },
                             gridLines: {
+                                display: false,
                                 borderDash: [2],
                                 borderDashOffset: [2],
                                 color: 'rgba(33, 37, 41, 0.3)',
-                                zeroLineColor: 'rgba(33, 37, 41, 0.3)',
+                                zeroLineColor: 'rgba(0, 0, 0, 0)',
                                 zeroLineBorderDash: [2],
                                 zeroLineBorderDashOffset: [2],
                             },
@@ -69,17 +83,21 @@ export default function ChartBar() {
                     ],
                     yAxes: [
                         {
+                            ticks: {
+                                fontColor: 'rgba(17,17,17,.7)',
+                            },
                             display: true,
                             scaleLabel: {
                                 display: false,
-                                labelString: 'Number of branchs',
+                                labelString: 'Value',
+                                fontColor: 'white',
                             },
                             gridLines: {
-                                borderDash: [2],
+                                borderDash: [3],
+                                borderDashOffset: [3],
                                 drawBorder: false,
-                                borderDashOffset: [2],
-                                color: 'rgba(33, 37, 41, 0.2)',
-                                zeroLineColor: 'rgba(33, 37, 41, 0.15)',
+                                color: 'rgba(17, 17, 17, 0.15)',
+                                zeroLineColor: 'rgba(33, 37, 41, 0)',
                                 zeroLineBorderDash: [2],
                                 zeroLineBorderDashOffset: [2],
                             },
@@ -88,20 +106,21 @@ export default function ChartBar() {
                 },
             },
         };
-        let ctx = document.getElementById('bar-chart').getContext('2d');
-        window.myBar = new Chart(ctx, config);
+        var ctx = document.getElementById('line-chart').getContext('2d');
+        window.myLine = new Chart(ctx, config);
     }, []);
+
     return (
         <Card>
-            <CardHeader color="blue" contentPosition="left">
+            <CardHeader color="orange" contentPosition="left">
                 <h6 className="uppercase text-gray-200 text-xs font-medium">
                     Overview
                 </h6>
-                <h2 className="text-white text-2xl">Number of Sectors' Branch</h2>
+                <h2 className="text-white text-2xl">Report Status</h2>
             </CardHeader>
             <CardBody>
                 <div className="relative h-96">
-                    <canvas id="bar-chart"></canvas>
+                    <canvas id="line-chart"></canvas>
                 </div>
             </CardBody>
         </Card>
