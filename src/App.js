@@ -6,6 +6,8 @@ import Tables from 'pages/Tables';
 import Maps from 'pages/Maps';
 import Footer from 'components/Footer';
 import User from 'pages/userList';
+import Report from 'pages/report';
+
 
 // Tailwind CSS Style Sheet
 import 'assets/styles/tailwind.css';
@@ -24,6 +26,7 @@ function App() {
                     <Route exact path="/maps" component={Maps} />
                     <Route exact path="/sectors" component={Sector} />
                     <Route exact path="/users" component={User} />
+                    <Route exact path="/reports" component={Report} />
                     <Redirect from="*" to="/" />
                 </Switch>
                 <Footer />

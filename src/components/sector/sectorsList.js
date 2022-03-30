@@ -20,7 +20,7 @@ import Icon from '@material-tailwind/react/Icon';
 
 
 export default function SectorsSection() {
-    const [showModal, setShowModal] = React.useState(false);
+    const [showModal, setShowModal] = useState(false);
     return (
         <section className="pt-20 pb-48">
             <div className="container max-w-md mx-auto px-8">
