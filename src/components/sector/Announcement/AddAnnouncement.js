@@ -16,45 +16,83 @@ import Textarea from '@material-tailwind/react/Textarea';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useDispatch, useSelector } from 'react-redux';
+import { announcementActions } from 'actions';
 
 export default function AddAnnouncement() {
 
-  
-      const dispatch = useDispatch();
-      function componentDidMount() {
-          navigator.geolocation.getCurrentPosition(function (position) {
-              console.log("Latitude is :", position.coords.latitude);
-              console.log("Longitude is :", position.coords.longitude);
-          });
-      }
-  
-      const [inputs, setInputs] = useState({
-          title: '',
-          description: '',
-          // detaile: '',
-  
-      });
+      
+      const [picture, setPicture] = useState('');
       const [submitted, setSubmitted] = useState(false);
-      const { title, description } = inputs;
-      function handleChange(e) {
-          const { name, value } = e.target;
-          setInputs(inputs => ({ ...inputs, [name]: value }));
-      }
+      
+
+
+    const onChangePicture = e => {
+      console.log('picture: ', picture);
+
+    setPicture(URL.createObjectURL(e.target.files[0]));
+
+      };
+
+      const [values, setValues] = useState({
+        title: '',
+        description: ''
+      });
+      const handleTitleInputChange = (event) => {
+        event.persist();
+        setValues((values) => ({
+          ...values,
+          title: event.target.value,
+        }));
+      };
+
+      const handleDescriptionInputChange = (event) => {
+        event.persist();
+        setValues((values) => ({
+          ...values,
+          description: event.target.value,
+        }));
+      };
+
+    //   componentDidMount() {
+       
+    // }
   
-      function handleSubmit(e) {
-          e.preventDefault();
+      function addFile(e) {
+        var formData = new FormData();
+        formData.append("file", picture);
+        formData.append('title', values.title);
+        formData.append('description', values.description);
+        console.log(picture);
+    
+        fetch(`http://localhost:8000/v1/announcment/`, {
+            method: 'POST',
+            headers: {'Content-Type': 'multipart/form-data'},
+            body: {formData}
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            this.setState({images: data.images, isLoading: false});
+            this.props.updateImages(data.images);
+        })
+        .catch(error => this.setState({error, isLoading: false}));
+    }
+    const dispatch = useDispatch();
+
+
+    function handleSubmit(e) {
+        e.preventDefault();
+
+        // addFile(e);
+        if (values.title && values.description) {
+            console.log('hello form is submmitted')
+            dispatch(announcementActions.create(values));
+            dispatch(announcementActions.getAll());
+        }
+        setSubmitted(true);
+
+    }
+    
   
-          setSubmitted(true);
-          if (title && description) {
-              console.log('hello form is submmitted')
-              // dispatch(sectorActions.create(inputs));
-              // dispatch(sectorActions.getAll());
-          }
-      }
-  
-  
-  
-      const [startDate, setStartDate] = useState(new Date());
       return (
           <Card>
               <CardHeader color="blue" contentPosition="none">
@@ -64,7 +102,7 @@ export default function AddAnnouncement() {
                   </div>
               </CardHeader>
               <CardBody>
-                  <form>
+                  <form encType="multipart/form-data">
                       <h6 className="text-purple-500 text-sm mt-3 mb-6 font-light uppercase">
                           Title
                       </h6>
@@ -75,9 +113,9 @@ export default function AddAnnouncement() {
                                   color="purple"
                                   placeholder="District Name"
                                   name="districtName" 
-                                  // value={title} onChange={handleChange}
+                                  value={values.title} onChange={handleTitleInputChange}
                               />
-                              {submitted && !title &&
+                              {submitted && !values.title &&
                                   <div className="mt-2 text-sm text-red-600">Announcement title is required</div>
                               }
                           </div>
@@ -103,11 +141,11 @@ export default function AddAnnouncement() {
                           "
                           id="announcement_description"
                           rows="3"
-                          // value={description} onChange={handleChange}
+                          value={values.description} onChange={handleDescriptionInputChange}
                           placeholder="Description"
                         ></textarea>
 
-                                {submitted && !description &&
+                                {submitted && !values.description &&
                                   <div className="mt-2 text-sm text-red-600">description is required</div>
                               }
                           </div>
@@ -124,18 +162,20 @@ export default function AddAnnouncement() {
                                   Image(jpg,png,svg,jpeg)</label>
                               <div class="flex items-center justify-center w-full">
                                   <label class="flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
-                                      <div class="flex flex-col items-center justify-center pt-7">
-                                          <svg xmlns="http://www.w3.org/2000/svg"
-                                              class="w-12 h-12 text-gray-400 group-hover:text-gray-600" viewBox="0 0 20 20"
-                                              fill="currentColor">
-                                              <path fill-rule="evenodd"
-                                                  d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
-                                                  clip-rule="evenodd" />
-                                          </svg>
-                                          <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
-                                              Select a photo</p>
-                                      </div>
-                                      <input type="file" class="opacity-0" />
+                                      {/* <div class="flex flex-col items-center justify-center pt-1"> */}
+                                     {    !picture?(
+                                              
+                                                <div class="flex flex-col items-center justify-center pt-7"><p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
+                                              Select a photo</p> </div>
+                                            ):(
+                                                <div class="flex flex-col items-center justify-center">
+                                              <img class="object-cover h-32 w-full" src={picture} /></div>
+                                            )
+                                          }
+                                          
+                                              
+                                      {/* </div> */}
+                                      <input type="file" class="opacity-0" onChange={onChangePicture} multiple accept="image/*" />
                                   </label>
                               </div>
                           </div>
