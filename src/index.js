@@ -5,7 +5,7 @@ import App from 'App';
 import reportWebVitals from './reportWebVitals';
 import { configureFakeBackend, store } from './helpers';
 import { Provider } from 'react-redux';
-configureFakeBackend();
+// configureFakeBackend();
 ReactDOM.render(
     <React.StrictMode>
         <BrowserRouter>

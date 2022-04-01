@@ -39,7 +39,7 @@ export default function Sidebar() {
                                     Dashboard
                                 </NavLink>
                             </li>
-                            <li className="rounded-lg mb-2">
+                            {/* <li className="rounded-lg mb-2">
                                 <NavLink
                                     to="/settings"
                                     className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
@@ -48,7 +48,7 @@ export default function Sidebar() {
                                     <Icon name="settings" size="2xl" />
                                     Settings
                                 </NavLink>
-                            </li>
+                            </li> */}
                             <li className="rounded-lg mb-2">
                                 <NavLink
                                     to="/sectors"
@@ -69,7 +69,7 @@ export default function Sidebar() {
                                     Users
                                 </NavLink>
                             </li>
-                            <li className="rounded-lg mb-2 ">
+                            {/* <li className="rounded-lg mb-2 ">
                                 <NavLink
                                     to="/tables"
                                     className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
@@ -78,7 +78,7 @@ export default function Sidebar() {
                                     <Icon name="toc" size="2xl" />
                                     Tables
                                 </NavLink>
-                            </li>
+                            </li> */}
                             <li className="rounded-lg mb-2 text-gray-700">
                                 <NavLink
                                     to="/reports"
@@ -89,7 +89,7 @@ export default function Sidebar() {
                                     Report
                                 </NavLink>
                             </li>
-                            <li className="px-4 rounded-lg mb-2 text-gray-700">
+                            {/* <li className="px-4 rounded-lg mb-2 text-gray-700">
                                 <a
                                     // href="https://demos.creative-tim.com/material-tailwind-kit-react/#/login"
                                     target="_blank"
@@ -99,8 +99,8 @@ export default function Sidebar() {
                                     <Icon name="fingerprint" size="2xl" />
                                     Login
                                 </a>
-                            </li>
-                            <li className="px-4 rounded-lg mb-2 text-gray-700">
+                            </li> */}
+                            {/* <li className="px-4 rounded-lg mb-2 text-gray-700">
                                 <a
                                     // href="https://demos.creative-tim.com/material-tailwind-kit-react/#/register"
                                     target="_blank"
@@ -110,8 +110,8 @@ export default function Sidebar() {
                                     <Icon name="list_alt" size="2xl" />
                                     Register
                                 </a>
-                            </li>
-                            <li className="px-4 rounded-lg mb-2 text-gray-700">
+                            </li> */}
+                            {/* <li className="px-4 rounded-lg mb-2 text-gray-700">
                                 <a
                                     // href="https://demos.creative-tim.com/material-tailwind-kit-react/#/landing"
                                     target="_blank"
@@ -121,7 +121,7 @@ export default function Sidebar() {
                                     <Icon name="web" size="2xl" />
                                     Landing Page
                                 </a>
-                            </li>
+                            </li> */}
                             <li className="px-4 rounded-lg mb-2 text-gray-700">
                                 <a
                                     // href="https://demos.creative-tim.com/material-tailwind-kit-react/#/profile"
@@ -135,9 +135,9 @@ export default function Sidebar() {
                             </li>
                         </ul>
 
-             
-                           
-                                 
+
+
+
                     </div>
                 </div>
             </div>

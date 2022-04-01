@@ -1,4 +1,7 @@
 // array in local storage for registered users
+
+
+
 let users = JSON.parse(localStorage.getItem('users')) || [];
 let sectors = JSON.parse(localStorage.getItem('sectors')) || [];
 export function configureFakeBackend() {
@@ -79,6 +82,7 @@ export function configureFakeBackend() {
 
                 return ok();
             }
+
 
             function getUsers() {
                 // if (!isLoggedIn()) return unauthorized();

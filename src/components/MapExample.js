@@ -5,14 +5,13 @@ import ModalHeader from "@material-tailwind/react/ModalHeader";
 import ModalBody from "@material-tailwind/react/ModalBody";
 export default function MapExample() {
     const defaultCenter = {
-        lat: 40.748817,
-        lng: -73.985428,
+        lat: 9.0380,
+        lng: 38.7618,
     };
     const center = {
-        lat: 70.748817,
-        lng: -73.985428,
+        lat: 8.97332944,
+        lng: 38.792996828,
     };
-    const [showModal, setShowModal] = useState(false);
 
     return (
         <>
@@ -25,18 +24,12 @@ export default function MapExample() {
                     >
                         <Marker key="location" position={defaultCenter} />
 
-                        <Marker key="location" position={center} />
+                        <Marker key="location1" position={center} />
                     </GoogleMap>
                 </LoadScript>
 
             </div>
-            {/* <Modal size="lg" active={showModal} toggler={() => setShowModal(false)}>
 
-                <ModalBody>
-
-                    <p>{defaultCenter}</p>
-                </ModalBody>
-            </Modal> */}
         </>
     );
 }

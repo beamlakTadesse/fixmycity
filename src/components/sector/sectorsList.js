@@ -29,7 +29,7 @@ export default function SectorsSection() {
                         <div></div>
                         <div></div>
                         <div></div>
-                        <Button className="flex justify-center" onClick={(e) => setShowModal(true)}>Create Sector</Button></div>
+                        <Button className="flex justify-center bg-purple" onClick={(e) => setShowModal(true)}>Create Sector</Button></div>
 
                 </div>
 
