@@ -10,13 +10,10 @@ export default function ChartBar() {
             type: 'bar',
             data: {
                 labels: [
-                    'January',
-                    'February',
-                    'March',
-                    'April',
-                    'May',
-                    'June',
-                    'July',
+                    'Water and Sewage',
+                    'ELPA',
+                    'Roads Authority',
+                    'Tele'
                 ],
                 datasets: [
                     {
@@ -25,29 +22,22 @@ export default function ChartBar() {
                         borderColor: '#03a9f4',
                         data: [30, 78, 56, 34, 100, 45, 13],
                         fill: false,
-                        barThickness: 8,
+                        barThickness: 50,
                     },
-                    {
-                        label: new Date().getFullYear() - 1,
-                        fill: false,
-                        backgroundColor: '#f44336',
-                        borderColor: '#f44336',
-                        data: [27, 68, 86, 74, 10, 4, 87],
-                        barThickness: 8,
-                    },
+                 
                 ],
             },
             options: {
                 maintainAspectRatio: false,
                 responsive: true,
                 title: {
-                    display: false,
-                    text: 'Orders Chart',
+                    display: true,
+                    text: 'Main Sectors',
                 },
-                tooltips: {
-                    mode: 'index',
-                    intersect: false,
-                },
+                // tooltips: {
+                    // mode: 'index',
+                    // intersect: true,
+                // },
                 hover: {
                     mode: 'nearest',
                     intersect: true,
@@ -65,7 +55,7 @@ export default function ChartBar() {
                             display: false,
                             scaleLabel: {
                                 display: true,
-                                labelString: 'Month',
+                                labelString: 'Main Sector',
                             },
                             gridLines: {
                                 borderDash: [2],
@@ -82,7 +72,7 @@ export default function ChartBar() {
                             display: true,
                             scaleLabel: {
                                 display: false,
-                                labelString: 'Value',
+                                labelString: 'Number of branchs',
                             },
                             gridLines: {
                                 borderDash: [2],
@@ -103,11 +93,11 @@ export default function ChartBar() {
     }, []);
     return (
         <Card>
-            <CardHeader color="pink" contentPosition="left">
+            <CardHeader color="blue" contentPosition="left">
                 <h6 className="uppercase text-gray-200 text-xs font-medium">
                     Overview
                 </h6>
-                <h2 className="text-white text-2xl">Sales value</h2>
+                <h2 className="text-white text-2xl">Number of Sectors' Branch</h2>
             </CardHeader>
             <CardBody>
                 <div className="relative h-96">
