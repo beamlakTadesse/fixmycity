@@ -11,7 +11,7 @@ import { FaPlay } from "react-icons/fa";
 import { MoonIcon } from "@heroicons/react/solid";
 import { SunIcon } from "@heroicons/react/solid";
 
-export default function AnnouncementCard({ toggle, settoggle }) {
+export default function AnnouncementCard({ title, description, image }) {
 
 
     const [readMore,setReadMore]=useState(false);
@@ -46,7 +46,7 @@ export default function AnnouncementCard({ toggle, settoggle }) {
         </div> */}
         <div className="h-full w-full relative border-2 border-white rounded-2xl">
           <Image
-            src={thumb}
+            src={image}
             alt="thumbnail"
             layout="fill"
             objectFit="cover"
@@ -65,14 +65,18 @@ export default function AnnouncementCard({ toggle, settoggle }) {
         <div className="flex flex-row items-left m-2">
             <p className="m-2 font-bold pl-1 text-lg text-[#5865F2]">#roadsauthority</p>
         </div>
-        
+
+        {/* <div className="flex flex-row items-left m-2">
+            <p className="m-2 font-bold pl-1 text-lg text-[#5865F2]">{title}</p>
+        </div> */}
+
         </div>
 
         <h2 className="m-2 text-4xl font-bold dark:text-white">
-        Inclement weather announcement
+          {title}
         </h2>
         <p className="m-2  font-normal dark:text-white">
-        Recent severe weather reports project heavy rain and thunderstorms for tomorrow. If conditions are too hazardous, expect that we'll close the building.
+          {description}
         </p>
 
       {readMore && extraContent}
