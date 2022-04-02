@@ -15,10 +15,14 @@ async function create(announcement) {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        // headers: {'Content-Type': 'multipart/form-data'},
+
         body: JSON.stringify(announcement)
+        // body: {announcement}
+        
     };
 
-    const response = await fetch(`http://localhost:8000/sectors/announcement`, requestOptions);
+    const response = await fetch(`http://localhost:8000/v1/announcment/`, requestOptions);
     return handleResponse(response);
 }
 async function getAll() {
@@ -29,7 +33,7 @@ async function getAll() {
     };
    
 
-    const response = (await fetch(`http://localhost:8001/v1/announcment/`, requestOptions));
+    const response = (await fetch(`http://localhost:8000/v1/announcment/`, requestOptions));
     // const response = (await fetch(`https://6a46-197-156-86-169.ngrok.io/v1/announcement/`, requestOptions));
 
     // console.log("response",response.json())

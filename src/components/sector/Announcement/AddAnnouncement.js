@@ -17,20 +17,21 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useDispatch, useSelector } from 'react-redux';
 import { announcementActions } from 'actions';
+import { announcement } from 'reducers/announcement.reducer';
 
 export default function AddAnnouncement() {
 
       
       const [picture, setPicture] = useState('');
       const [submitted, setSubmitted] = useState(false);
-      
+      const [currentPic, setCurrentPic] = useState(null);
 
 
     const onChangePicture = e => {
       console.log('picture: ', picture);
 
     setPicture(URL.createObjectURL(e.target.files[0]));
-
+    setCurrentPic(e.target.files[0]);
       };
 
       const [values, setValues] = useState({
@@ -58,23 +59,32 @@ export default function AddAnnouncement() {
     // }
   
       function addFile(e) {
-        var formData = new FormData();
-        formData.append("file", picture);
-        formData.append('title', values.title);
-        formData.append('description', values.description);
-        console.log(picture);
-    
-        fetch(`http://localhost:8000/v1/announcment/`, {
-            method: 'POST',
-            headers: {'Content-Type': 'multipart/form-data'},
-            body: {formData}
-        })
-        .then((response) => response.json())
-        .then((data) => {
-            this.setState({images: data.images, isLoading: false});
-            this.props.updateImages(data.images);
-        })
-        .catch(error => this.setState({error, isLoading: false}));
+        e.preventDefault();
+
+        // addFile(e);
+        if (values.title && values.description && currentPic) {
+          console.log("pictureeeeeeeeeeeee",currentPic);
+          var formData = new FormData();
+          formData.append("file", currentPic);
+          formData.append('title', values.title);
+          formData.append('description', values.description);
+          
+      
+          fetch(`http://localhost:8000/v1/announcment/`, {
+              method: 'POST',
+              headers: {'Content-Type': 'multipart/form-data'},
+              body: {formData}
+          })
+          .then((response) => response.json())
+          .then((data) => {
+              // this.setState({images: data.images, isLoading: false});
+              // this.props.updateImages(data.images);
+              console.log("Heeeeeeere");
+          })
+          .catch(error => this.setState({error, isLoading: false}));
+        }
+        setSubmitted(true);
+       
     }
     const dispatch = useDispatch();
 
@@ -83,10 +93,15 @@ export default function AddAnnouncement() {
         e.preventDefault();
 
         // addFile(e);
-        if (values.title && values.description) {
+        if (values.title && values.description && currentPic) {
             console.log('hello form is submmitted')
+            var formData = new FormData();
+            formData.append("file", currentPic.name);
+            formData.append('title', values.title);
+            formData.append('description', values.description);
+            console.log("picturrrrr",currentPic.name);
             dispatch(announcementActions.create(values));
-            dispatch(announcementActions.getAll());
+            // dispatch(announcementActions.getAll());
         }
         setSubmitted(true);
 
@@ -189,6 +204,9 @@ export default function AddAnnouncement() {
 
                   <div className="grid grid-rows-3 grid-flow-col gap-1 mt-4">
                           <div className="row-span-3">
+                          {/* <Button onClick={(e) => addFile(e)}>
+                                  Submit
+                              </Button> */}
                               <Button onClick={(e) => handleSubmit(e)}>
                                   Submit
                               </Button>

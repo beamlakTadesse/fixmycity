@@ -19,7 +19,7 @@ function getAll() {
         // headers: { "Access-Control-Allow-Origin": "*" }
     };
 
-    return fetch('https://7677-197-156-86-169.ngrok.io/v1/report/', requestOptions).then(handleResponse);
+    return fetch('http://localhost:8000/v1/report/', requestOptions).then(handleResponse);
 }
 
 // function getById(id) {
