@@ -26,9 +26,8 @@ export default function AdminNavbar({ showSidebar, setShowSidebar }) {
                         <Icon name="menu" size="2xl" color="white" />
                     </Button>
                     <div
-                        className={`absolute top-2 md:hidden ${
-                            showSidebar === 'left-0' ? 'left-64' : '-left-64'
-                        } z-50 transition-all duration-300`}
+                        className={`absolute top-2 md:hidden ${showSidebar === 'left-0' ? 'left-64' : '-left-64'
+                            } z-50 transition-all duration-300`}
                     >
                         <Button
                             color="transparent"
@@ -68,15 +67,16 @@ export default function AdminNavbar({ showSidebar, setShowSidebar }) {
                                     color: 'transparent',
                                 }}
                             >
+
                                 <DropdownItem color="lightBlue">
-                                    Action
+                                    Help
                                 </DropdownItem>
                                 <DropdownItem color="lightBlue">
-                                    Another Action
+                                    Logout
                                 </DropdownItem>
-                                <DropdownItem color="lightBlue">
+                                {/* <DropdownItem color="lightBlue">
                                     Something Else
-                                </DropdownItem>
+                                </DropdownItem> */}
                             </Dropdown>
                         </div>
                     </div>
