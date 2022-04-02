@@ -46,7 +46,7 @@ export default function Sidebar() {
                                     activeClassName="bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-md"
                                 >
                                     <Icon name="settings" size="2xl" />
-                                    Settings
+                                    My Profile
                                 </NavLink>
                             </li> */}
                             <li className="rounded-lg mb-2">
@@ -122,16 +122,15 @@ export default function Sidebar() {
                                     Landing Page
                                 </a>
                             </li> */}
-                            <li className="px-4 rounded-lg mb-2 text-gray-700">
-                                <a
-                                    // href="https://demos.creative-tim.com/material-tailwind-kit-react/#/profile"
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    className="flex items-center gap-4 text-sm font-light py-3"
+                            <li className="rounded-lg mb-2">
+                                <NavLink
+                                    to="/settings"
+                                    className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
+                                    activeClassName="bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-md"
                                 >
-                                    <Icon name="account_circle" size="2xl" />
-                                    Profile Page
-                                </a>
+                                    <Icon name="settings" size="2xl" />
+                                    Profile
+                                </NavLink>
                             </li>
                         </ul>
 
