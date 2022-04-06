@@ -25,7 +25,7 @@ export default function AddAnnouncement() {
       const [picture, setPicture] = useState('');
       const [submitted, setSubmitted] = useState(false);
       const [currentPic, setCurrentPic] = useState(null);
-
+      
 
     const onChangePicture = e => {
       console.log('picture: ', picture);
@@ -104,6 +104,7 @@ export default function AddAnnouncement() {
             // dispatch(announcementActions.getAll());
         }
         setSubmitted(true);
+
 
     }
     
