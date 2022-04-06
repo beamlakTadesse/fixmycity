@@ -4,6 +4,7 @@ import { alert } from './alert.reducer';
 import { sectors } from './sector.reducer';
 import { report } from './report.reducer';
 import { announcement } from './announcement.reducer';
+import { profileReducer } from './profile-reducer';
 
 const rootReducer = combineReducers({
 
@@ -11,7 +12,8 @@ const rootReducer = combineReducers({
     alert,
     sectors,
     report,
-    announcement
+    announcement,
+    profileReducer
 });
 
 export default rootReducer;
