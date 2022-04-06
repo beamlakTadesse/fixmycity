@@ -10,7 +10,7 @@ export const sectorService = {
 };
 
 
-function create(sector) {
+async function create(sector) {
 
     const requestOptions = {
         method: 'POST',
@@ -18,47 +18,52 @@ function create(sector) {
         body: JSON.stringify(sector)
     };
 
-    return fetch(`/sectors/create`, requestOptions).then(handleResponse);
+    const response = await fetch(`/sectors/create`, requestOptions);
+    return handleResponse(response);
 }
-function getAll() {
+async function getAll() {
     console.log('getAll')
     const requestOptions = {
         method: 'GET',
         // headers: authHeader()
     };
 
-    return fetch(`/sectors`, requestOptions).then(handleResponse);
+    const response = await fetch(`/sectors`, requestOptions);
+    return handleResponse(response);
 }
 
-function getById(id) {
+async function getById(id) {
     const requestOptions = {
         method: 'GET',
         headers: authHeader()
     };
 
-    return fetch(`/sectors/${id}`, requestOptions).then(handleResponse);
+    const response = await fetch(`/sectors/${id}`, requestOptions);
+    return handleResponse(response);
 }
 
 
 
-function update(sector) {
+async function update(sector) {
     const requestOptions = {
         method: 'PUT',
         headers: { ...authHeader(), 'Content-Type': 'application/json' },
         body: JSON.stringify(sector)
     };
 
-    return fetch(`/sectors/${sector.id}`, requestOptions).then(handleResponse);;
+    const response = await fetch(`/sectors/${sector.id}`, requestOptions);
+    return handleResponse(response);;
 }
 
 // prefixed function name with underscore because delete is a reserved word in javascript
-function _delete(id) {
+async function _delete(id) {
     const requestOptions = {
         method: 'DELETE',
         headers: authHeader()
     };
 
-    return fetch(`/sectors/${id}`, requestOptions).then(handleResponse);
+    const response = await fetch(`/sectors/${id}`, requestOptions);
+    return handleResponse(response);
 }
 
 function handleResponse(response) {
