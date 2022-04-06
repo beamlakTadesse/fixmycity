@@ -19,16 +19,8 @@ export default function AnnouncementList() {
     </div>)
     const dispatch = useDispatch();
     const announcements = useSelector(state => state.announcement);
-
-    // const [announcement , setAnnouncement] = useState({});
-    // const an = useSelector(state => state.announcement.items[0]);
-
-    // const [an1, setAn] = useState(null);
     useEffect(() => {
         dispatch(announcementActions.getAll());
-        // setAnnouncement(announcements.items);
-        // console.log("announcements", announcement);
-
     }, [])
     console.log("announcement2", announcements['items']);
 
@@ -51,9 +43,6 @@ export default function AnnouncementList() {
                     )
                 })
 
-
-
-                //   </div>
             }
 
 

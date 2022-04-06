@@ -1,5 +1,6 @@
 import StatusCard from 'components/StatusCard';
 import ChartLine from 'components/sector/ChartLine';
+import ReportChart from 'components/sector/ReportChart';
 // import ChartBar from 'components/ChartBar';
 import PageVisitsCard from 'components/sector/PageVisitsCard';
 // import TrafficCard from 'components/TrafficCard';
@@ -66,7 +67,8 @@ export default function Dashboard() {
 
                     <div className="grid grid-cols-1 xl:grid-cols-5">
                         <div className="xl:col-start-1 xl:col-end-4 px-4 mb-14">
-                            <ChartLine />
+                            {/* <ChartLine /> */}
+                            <ReportChart />
                         </div>
                         <div className="xl:col-start-4 xl:col-end-6 px-4 mb-14">
                             <PageVisitsCard />
