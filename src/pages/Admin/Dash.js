@@ -6,26 +6,36 @@
 
 import StatusCard from 'components/StatusCard';
 // import ChartLine from 'components/ChartLine';
-import ChartBar from 'components/ChartBar';
+import ChartBar from 'components/admin/ChartBar';
 // import PageVisitsCard from 'components/PageVisitsCard';
 // import TrafficCard from 'components/TrafficCard';
 import SectorManage from 'components/SectorManage';
+import React, { useEffect, useState} from 'react';
 
 export default function Dashboard() {
 
-    const products = ['Custom users', 'Banned Users', 'Sectors'];
 
-    const list = products.map(product => <StatusCard
-        color="blue"
-        icon="group"
-        title = {product}
-        amount="924"
-        percentage="1.10"
-        percentageIcon="arrow_downward"
-        percentageColor="orange"
-        date="Since yesterday"
-    />)
   
+    const [data ,setData] = useState({});
+
+    useEffect(() => {
+        const url = `http://localhost:8000/v1/admins/user_count/`;
+    
+        const fetchData = async () => {
+          try {
+            const response = await fetch(url);
+            const json = await response.json();
+            setData(json);
+            console.log(json.banned);
+          } catch (error) {
+            console.log("error", error);
+          }
+        };
+    
+        fetchData();
+    }, []);
+
+   
   
     return (
         <>
@@ -38,7 +48,31 @@ export default function Dashboard() {
                 <div className="px-3 md:px-8">
                 <div className="container mx-auto max-w-full">
                     <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 mb-4">
-                        {list}
+                       
+
+            {data &&
+                //   <div>
+
+
+                Object.keys(data).map((oneKey, i) => {
+                    return (
+                        <StatusCard
+                                color="blue"
+                                icon="group"
+                                title = {data[oneKey][1]}
+                                amount={data[oneKey][0]}
+                                percentage="1.10"
+                                percentageIcon="arrow_downward"
+                                percentageColor="orange"
+                                date="Since yesterday"
+                            />
+
+                    )
+                })
+
+            }
+
+                        {/* {list} */}
                   
                     </div>
                 </div>
