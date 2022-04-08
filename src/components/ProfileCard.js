@@ -48,7 +48,7 @@ export default function ProfileCard() {
                     </h6>
                     <div className="flex flex-wrap text-xs mt-10">
                         <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">
-                            <h1>Sector : ELPA</h1>
+                            <h1>Sector :</h1>
                             <h1>ELPA</h1>
                             
                         </div>
