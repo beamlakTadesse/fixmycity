@@ -1023,6 +1023,9 @@ video {
 .font-light{
 	font-weight: 300;
 }
+.font-semibold{
+	font-weight: 600;
+}
 .uppercase{
 	text-transform: uppercase;
 }

@@ -24,20 +24,20 @@ export default function ProfileCard() {
                     </h6>
                     <div className="flex flex-wrap text-xs mt-10">
                         <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">
-                            <h1>Full name : </h1>
+                            <h1 className = 'font-medium'>Full name : </h1>
                             <h1>John Doe</h1>
                             
                         </div>
                         <div className="w-full lg:w-6/12 pl-4 mb-10 font-light">
-                            <h1>Email : </h1>
+                            <h1 className = 'font-medium'>Email : </h1>
                             <h1>Johndoe@gmail.com</h1>
                         </div>
-                        <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">
-                            <h1>Location :</h1>
+                        <div  className="w-full lg:w-6/12 pr-4 mb-10 font-light">
+                            <h1 className = 'font-medium'>Location :</h1>
                             <h1> Addis Ababa / Ethiopia</h1>
                         </div>
                         <div className="w-full lg:w-6/12 pl-4 mb-10 font-light">
-                            <h1>Phone No. : </h1>
+                            <h1 className = 'font-medium'>Phone No. : </h1>
                             <h1>+251 9867888899</h1>
                         </div>
                         
@@ -48,20 +48,20 @@ export default function ProfileCard() {
                     </h6>
                     <div className="flex flex-wrap text-xs mt-10">
                         <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">
-                            <h1>Sector :</h1>
+                            <h1 className = 'font-medium'>Sector :</h1>
                             <h1>ELPA</h1>
                             
                         </div>
                         <div className="w-full lg:w-6/12 pl-4 mb-10 font-light">
-                            <h1>Location : </h1>
+                            <h1 className = 'font-medium'>Location : </h1>
                             <h1>Addis Ababa / Ethiopia</h1>
                         </div>
                         <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">
-                            <h1>Email : </h1>
+                            <h1 className = 'font-medium'>Email : </h1>
                             <h1> Elpa@gmail.com</h1>
                         </div>
                         <div className="w-full lg:w-6/12 pl-4 mb-10 font-light">
-                            <h1>Phone No. : </h1>
+                            <h1 className = 'font-medium'>Phone No. : </h1>
                             <h1>+251 9867888899</h1>
                         </div>
                         
