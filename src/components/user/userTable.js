@@ -18,19 +18,45 @@ import Modal from "@material-tailwind/react/Modal";
 import RegisterPage from './register'
 
 export default function UserTable() {
-    const users = useSelector(state => state.users);
+    // const users = useSelector(state => state.users);
 
     // const user = useSelector(state => state.authentication.user);
     const dispatch = useDispatch();
 
+    const [users , setUsers] = useState({});
     useEffect(() => {
-        dispatch(userActions.getAll());
-    }, []);
+        // mounted.current = true;
+        const url = `http://localhost:8000/v1/admins/custom_users/`;
 
-    function handleDeleteUser(id) {
+
+        const fetchData = async () => {
+          try {
+            const response = await fetch(url);
+           
+            const json = await response.json();
+            
+            setUsers(json.users);
+           
+            // console.log("Sectors: ", json.sectors[0].district_name);
+          } catch (error) {
+            console.log("error", error);
+          }
+        };
+
+          fetchData();
+      
+    }, [users]);
+    const [msg, setMsg] = useState('');
+    async function handleDeleteUser(id) {
+        const requestOptions = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' }
+        };
         console.log(id)
-
-        dispatch(userActions.delete(id));
+        const response = await fetch(`http://localhost:8000/v1/admins/custom_users/${id}`,requestOptions);
+        const json = await response.json();
+        setMsg(json.message);
+        // dispatch(userActions.delete(id));
         setSubmitted(false)
     }
     function handleDeleteCancel() {
@@ -48,7 +74,7 @@ export default function UserTable() {
             </CardHeader>
             <CardBody>
                 <div className="overflow-x-auto">
-                    {users.items &&
+                    {users &&
 
                         <table className="items-center w-full bg-transparent border-collapse">
                             <thead>
@@ -66,19 +92,20 @@ export default function UserTable() {
                                 </tr>
                             </thead>
                             {
-                                users.items.map((user, index) =>
+                                 Object.keys(users).map((oneKey, i) => {
+                                    return (
                                     <tbody>
 
                                         <tr>
                                             <th className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
-                                                {user.firstName}
+                                                {users[oneKey].first_name}
                                             </th>
                                             <th className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
-                                                {user.lastName}
+                                                {users[oneKey].last_name}
                                             </th>
                                             <th className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
                                                 <i className="fas fa-circle fa-sm text-orange-500 mr-2"></i>{' '}
-                                                {user.phone}
+                                                {users[oneKey].phone_number}
                                             </th>
 
                                             <th className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
@@ -94,11 +121,11 @@ export default function UserTable() {
                                                 </ModalTitle>
                                                 <ModalBody>
                                                     <p>
-                                                        Are you sure you want to ban {user.firstName}  {user.lastName}
+                                                        Are you sure you want to ban {users[oneKey].first_name}  {users[oneKey].last_name}
                                                     </p>
                                                 </ModalBody>
                                                 <ModalFooter>
-                                                    <Button onClick={() => handleDeleteUser(user.id)
+                                                    <Button onClick={() => handleDeleteUser(users[oneKey].id)
                                                     }
                                                     >Confirm</Button>
                                                     <Button onClick={() => handleDeleteCancel()}> Cancel</Button>
@@ -107,7 +134,7 @@ export default function UserTable() {
                                             </Modal>
                                         </tr>
                                     </tbody>
-
+                                    )}
                                 )}
                         </table>}
 
