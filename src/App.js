@@ -12,8 +12,7 @@ import Maps from 'pages/Maps';
 import Footer from 'components/Footer';
 import User from 'pages/userList';
 import Report from 'pages/report';
-
-
+import ReportTableChart from 'components/sector/ReportTable';
 // Tailwind CSS Style Sheet
 import 'assets/styles/tailwind.css';
 import Sector from 'pages/Admin/Sector';
@@ -39,6 +38,7 @@ function App() {
                     <Route exact path="/sectors" component={Sector} />
                     <Route exact path="/users" component={User} />
                     <Route exact path="/reports" component={Report} />
+                    <Route exact path="/report_chart" component={ReportTableChart}/>
                     <Redirect from="*" to="/" />
                 </Switch>
                 <Footer />
