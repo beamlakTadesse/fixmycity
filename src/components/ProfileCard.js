@@ -8,6 +8,8 @@ import Textarea from '@material-tailwind/react/Textarea';
 import ProfilePicture from 'assets/img/team-1-800x800.jpg';
 
 export default function ProfileCard() {
+    const products = useSelector((state) => state.allProducts.product);
+    console.log(products);
     return (
         <Card>
             <div className="flex flex-wrap justify-center">
