@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { reportActions } from '../../actions';
 import { Button } from '@material-tailwind/react';
 import { NavLink } from 'react-router-dom';
+import Table from 'components/sector/Table2';
+import ReportTableChart from 'components/sector/ReportTable';
 
 
 export default function ReportTable() {
@@ -44,7 +46,8 @@ export default function ReportTable() {
             </CardHeader>
             <CardBody>
                 <div className="overflow-x-auto">
-                    {report.items &&
+                    <ReportTableChart />
+                    {/* {report.items &&
                         // <div>
                         //     {
                         //         report.items.map((rep, index) =>
@@ -111,7 +114,7 @@ export default function ReportTable() {
                                     )}
                             </tbody>
                         </table>
-                    }
+                    } */}
                 </div>
             </CardBody>
         </Card>
