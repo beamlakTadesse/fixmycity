@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Card from '@material-tailwind/react/Card';
 import CardHeader from '@material-tailwind/react/CardHeader';
 import CardBody from '@material-tailwind/react/CardBody';
@@ -13,12 +13,32 @@ import { sectorActions } from '../../actions';
 
 
 export default function SectorTable() {
-    const sectors = useSelector(state => state.sectors);
+    // const sectors = useSelector(state => state.sectors);
     // const user = useSelector(state => state.authentication.user);
     const dispatch = useDispatch();
+    const [mains, setMains] = useState([])
 
+    const [sectors , setSectors] = useState({});
     useEffect(() => {
-        dispatch(sectorActions.getAll());
+        // mounted.current = true;
+        const url = `http://localhost:8000/v1/admins/sector/sector`;
+
+        const fetchData = async () => {
+          try {
+            const response = await fetch(url);
+           
+            const json = await response.json();
+            
+            setSectors(json.results);
+            setMains(["EthioTelecom", "Water and Sewage", "Roads Authority", "ELPA"]);
+            // console.log("Sectors: ", json.sectors[0].district_name);
+          } catch (error) {
+            console.log("error", error);
+          }
+        };
+
+          fetchData();
+      
     }, []);
 
     function handleDeleteUser(id) {
@@ -32,7 +52,7 @@ export default function SectorTable() {
             </CardHeader>
             <CardBody>
                 <div className="overflow-x-auto">
-                    {sectors.items &&
+                    {sectors  &&
 
                         <table className="items-center w-full bg-transparent border-collapse">
                             <thead>
@@ -46,32 +66,39 @@ export default function SectorTable() {
                                     <th className="px-2 text-purple-500 align-middle border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
                                         Phone
                                     </th>
-
+                                    <th className="px-2 text-purple-500 align-middle border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
+                                        District Type
+                                    </th>
                                 </tr>
                             </thead>
-                            {
-                                sectors.items.map((sector, index) =>
+                            {Object.keys(sectors).map((oneKey, i) => {
+                                    return (
                                     <tbody>
 
                                         <tr>
                                             <th className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
-                                                {sector.districtName}
+                                                {sectors[oneKey].district_name}
                                             </th>
                                             <th className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
-                                                {sector.email}
+                                                {sectors[oneKey].email}
                                             </th>
                                             <th className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
                                                 <i className="fas fa-circle fa-sm text-orange-500 mr-2"></i>{' '}
-                                                {sector.phone}
+                                                {sectors[oneKey].phone_number}
                                             </th>
-
+                                            <th className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
+                                                <i className="fas fa-circle fa-sm text-orange-500 mr-2"></i>{' '}
+                                                {mains[sectors[oneKey].sector_type -1]}
+                                            </th>
 
                                         </tr>
 
 
 
                                     </tbody>
-                                )}
+                             )        }) 
+                }
+
                         </table>}
                 </div>
             </CardBody>
