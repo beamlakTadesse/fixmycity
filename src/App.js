@@ -19,6 +19,8 @@ import Sector from 'pages/Admin/Sector';
 // import CollapsibleTable from 'components/sector/NewTable';
 import ReportShow from 'components/report/ReportShow';
 import PageVisitsCard from 'components/report/ReportDetail';
+import ReportDet from 'components/report/ReportDetail';
+// import ReportDet from 'pages/Report';
 
 function App() {
     return (
@@ -41,6 +43,7 @@ function App() {
                     <Route exact path="/sectors" component={Sector} />
                     <Route exact path="/users" component={User} />
                     <Route exact path="/sector/reports" component={Report} />
+                    <Route exact path="/sector/reportdetail" component={ReportDet} />
                     <Route exact path="/report_show/:id" component={PageVisitsCard}/>
 
                     <Redirect from="*" to="/" />
