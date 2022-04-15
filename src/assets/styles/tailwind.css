@@ -674,6 +674,12 @@ video {
 .mt-7{
 	margin-top: 1.75rem;
 }
+.ml-\[500px\]{
+	margin-left: 500px;
+}
+.ml-\[50px\]{
+	margin-left: 50px;
+}
 .block{
 	display: block;
 }
