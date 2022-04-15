@@ -6,7 +6,7 @@ import Button from '@material-tailwind/react/Button';
 import Input from '@material-tailwind/react/Input';
 import Textarea from '@material-tailwind/react/Textarea';
 import ProfilePicture from 'assets/img/team-1-800x800.jpg';
-
+import useSelector from 'react';
 export default function ProfileCard() {
     const products = useSelector((state) => state.allProducts.product);
     console.log(products);
