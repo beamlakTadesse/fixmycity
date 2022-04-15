@@ -36,7 +36,7 @@ export default function AnnouncementList() {
                     return (
                         <div className="xl:col-start-1 xl:col-end-4 px-4 mb-14 mr-8">
                             {/* <AnnouncementCard /> */}
-                            <AnnouncementCard image={announcements.items[oneKey].image} title={announcements.items[oneKey].title} description={announcements.items[oneKey].description} />
+                            <AnnouncementCard image={announcements.items[oneKey].image} title={announcements.items[oneKey].title} description={announcements.items[oneKey].description} date={announcements.items[oneKey].date} />
 
                         </div>
 
