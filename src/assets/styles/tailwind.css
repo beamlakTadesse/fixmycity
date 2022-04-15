@@ -530,9 +530,6 @@ video {
 .row-span-3{
 	grid-row: span 3 / span 3;
 }
-.m-5{
-	margin: 1.25rem;
-}
 .m-\[30px\]{
 	margin: 30px;
 }
@@ -644,8 +641,8 @@ video {
 .mt-\[30px\]{
 	margin-top: 30px;
 }
-.ml-\[20px\]{
-	margin-left: 20px;
+.ml-\[40px\]{
+	margin-left: 40px;
 }
 .ml-2{
 	margin-left: 0.5rem;
@@ -653,8 +650,14 @@ video {
 .ml-\[30px\]{
 	margin-left: 30px;
 }
+.mt-7{
+	margin-top: 1.75rem;
+}
 .mt-\[40px\]{
 	margin-top: 40px;
+}
+.ml-\[20px\]{
+	margin-left: 20px;
 }
 .ml-\[10px\]{
 	margin-left: 10px;
@@ -662,23 +665,50 @@ video {
 .ml-\[180px\]{
 	margin-left: 180px;
 }
-.mt-\[13px\]{
-	margin-top: 13px;
+.mt-\[\]{
+	margin-top: ;
 }
 .ml-\[100px\]{
 	margin-left: 100px;
 }
-.mt-5{
-	margin-top: 1.25rem;
+.mt-\[13px\]{
+	margin-top: 13px;
 }
-.mt-7{
-	margin-top: 1.75rem;
+.ml-\[70px\]{
+	margin-left: 70px;
 }
-.ml-\[500px\]{
-	margin-left: 500px;
+.ml-5{
+	margin-left: 1.25rem;
+}
+.ml-7{
+	margin-left: 1.75rem;
+}
+.mt-\[50px\]{
+	margin-top: 50px;
+}
+.mt-\[80px\]{
+	margin-top: 80px;
+}
+.mt-4{
+	margin-top: 1rem;
+}
+.ml-10{
+	margin-left: 2.5rem;
 }
 .ml-\[50px\]{
 	margin-left: 50px;
+}
+.ml-\[90px\]{
+	margin-left: 90px;
+}
+.ml-\[80px\]{
+	margin-left: 80px;
+}
+.mt-\[100px\]{
+	margin-top: 100px;
+}
+.ml-\[95px\]{
+	margin-left: 95px;
 }
 .block{
 	display: block;
@@ -734,6 +764,9 @@ video {
 .h-\[150px\]{
 	height: 150px;
 }
+.h-\[80px\]{
+	height: 80px;
+}
 .min-h-full{
 	min-height: 100%;
 }
@@ -761,8 +794,8 @@ video {
 .w-\[700px\]{
 	width: 700px;
 }
-.w-\[650px\]{
-	width: 650px;
+.w-\[600px\]{
+	width: 600px;
 }
 .w-\[300px\]{
 	width: 300px;
@@ -770,11 +803,14 @@ video {
 .w-\[350px\]{
 	width: 350px;
 }
+.w-\[650px\]{
+	width: 650px;
+}
 .w-\[500px\]{
 	width: 500px;
 }
-.w-\[90px\]{
-	width: 90px;
+.w-\[80px\]{
+	width: 80px;
 }
 .min-w-full{
 	min-width: 100%;
@@ -1089,6 +1125,10 @@ video {
 .text-\[25px\]{
 	font-size: 25px;
 }
+.text-xl{
+	font-size: 1.25rem;
+	line-height: 1.75rem;
+}
 .font-medium{
 	font-weight: 500;
 }
@@ -1161,6 +1201,9 @@ video {
 }
 .drop-shadow-2xl{
 	--tw-drop-shadow: drop-shadow(0 25px 25px rgba(0, 0, 0, 0.15));
+}
+.drop-shadow-3xl{
+	--tw-drop-shadow: drop-shadow(0 35px 35px rgba(0, 0, 0, 0.25));
 }
 .transition-all{
 	transition-property: all;
