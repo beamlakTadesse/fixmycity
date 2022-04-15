@@ -11,8 +11,10 @@ import { FaPlay } from "react-icons/fa";
 import { MoonIcon } from "@heroicons/react/solid";
 import { SunIcon } from "@heroicons/react/solid";
 
-export default function AnnouncementCard({ title, description, image }) {
-
+export default function AnnouncementCard({ title, description, image,date }) {
+  function toDate(date) {
+    return new Date(date).toDateString();
+}
 
   const [readMore, setReadMore] = useState(false);
   const extraContent = <div>
@@ -87,7 +89,7 @@ export default function AnnouncementCard({ title, description, image }) {
           <div className="xl:col-start-2 xl:col-end-2 px-3 mb-14 mr-8">
 
             {/* <AiOutlineClockCircle size={20} className="dark:text-white" /> */}
-            <h1 className="pl-1 dark:text-white">Feb 13,2022</h1>
+            <h1 className="pl-1 dark:text-white">{toDate(date)}</h1>
           </div>
 
         </div>
