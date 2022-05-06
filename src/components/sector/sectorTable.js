@@ -47,7 +47,7 @@ export default function SectorTable() {
     }
     return (
         <Card>
-            <CardHeader color="purple" contentPosition="left">
+            <CardHeader color="blue" contentPosition="left">
                 <h2 className="text-white text-2xl">Sectors</h2>
             </CardHeader>
             <CardBody>
