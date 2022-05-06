@@ -45,7 +45,7 @@ export default function UserTable() {
 
           fetchData();
       
-    }, [users]);
+    }, []);
     const [msg, setMsg] = useState('');
     async function handleDeleteUser(id) {
         const requestOptions = {
@@ -68,7 +68,7 @@ export default function UserTable() {
     const [register, setRegister] = useState(false);
     return (
         <Card>
-            <CardHeader color="purple" contentPosition="left">
+            <CardHeader color="blue" contentPosition="left">
                 <h2 className="text-white text-2xl">Users</h2>
                 {/* <Button onClick={() => setRegister(true)}>Register</Button> */}
             </CardHeader>
@@ -108,12 +108,12 @@ export default function UserTable() {
                                                 {users[oneKey].phone_number}
                                             </th>
 
-                                            <th className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
+                                            {/* <th className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
                                                 <Button onClick={() =>
                                                     setSubmitted(!submitted)}
                                                 > Ban </Button>
-                                            </th>
-                                            <Modal size="lg" active={submitted} toggler={() => setSubmitted(false)}>
+                                            </th> */}
+                                            {/* <Modal size="lg" active={submitted} toggler={() => setSubmitted(false)}>
                                                 <ModalTitle>
                                                     <Heading5>
                                                         Confirm Delete
@@ -131,7 +131,7 @@ export default function UserTable() {
                                                     <Button onClick={() => handleDeleteCancel()}> Cancel</Button>
                                                 </ModalFooter>
 
-                                            </Modal>
+                                            </Modal> */}
                                         </tr>
                                     </tbody>
                                     )}
