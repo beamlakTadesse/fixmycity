@@ -19,8 +19,8 @@ export default function ReportTable() {
 
     
     return (
-        <Card>
-            <CardHeader color="purple" contentPosition="left">
+        <Card className="mt-20" >
+            <CardHeader color="blue" contentPosition="left">
                 <div className="flex flex-row items-end">
 
                     <div className='items-end'>
