@@ -13,31 +13,57 @@ export default function AnnouncementList() {
 
     const products = ['Custom users', 'Banned Users', 'Sectors'];
 
-    const list = products.map(product => <div className="xl:col-start-1 xl:col-end-4 px-4 mb-14 mr-8">
-        <AnnouncementCard />
-
-    </div>)
+  
     const dispatch = useDispatch();
-    const announcements = useSelector(state => state.announcement);
+    // const announcements = useSelector(state => state.announcement);
+
+    const [announcements, setSectors] = useState({});
     useEffect(() => {
-        dispatch(announcementActions.getAll());
-    }, [])
-    console.log("announcement2", announcements['items']);
+        // mounted.current = true;
+        const url = `http://localhost:8000/v1/announcment/`;
+
+
+        const fetchData = async () => {
+          try {
+            const response = await fetch(url);
+           
+            const json = await response.json();
+            
+            setSectors(json.results);
+           
+            console.log("Sectors: ", json.results);
+          } catch (error) {
+            console.log("error", error);
+          }
+        };
+
+          fetchData();
+      
+    }, []);
+
+    // useEffect(() => {
+    //     dispatch(announcementActions.getAll());
+    // }, [])
+    // console.log("announcement2", announcements['items']);
 
     return (
         <>
 
 
-            {announcements.items &&
+            {announcements && 
                 //   <div>
 
 
-                Object.keys(announcements.items).map((oneKey, i) => {
+                Object.keys(announcements).map((oneKey, i) => {
                     return (
                         <div className="xl:col-start-1 xl:col-end-4 px-4 mb-14 mr-8">
                             {/* <AnnouncementCard /> */}
-                            <AnnouncementCard image={announcements.items[oneKey].image} title={announcements.items[oneKey].title} description={announcements.items[oneKey].description} date={announcements.items[oneKey].date} />
-
+                            {
+                                announcements[oneKey]  &&
+                            
+                            <AnnouncementCard image={announcements[oneKey].image} title={announcements[oneKey].title} description={announcements[oneKey].description} date={announcements[oneKey].date} sector="Arada Subcity" address="Arada"/>
+                            // {announcements.items[oneKey].sector.district_name} address={announcements.items[oneKey].sector.address}/>
+                            }
                         </div>
 
                     )
