@@ -1,8 +1,10 @@
 import { Input, Image, Button } from "@material-tailwind/react";
-import logo from "../assets/img/fix.jpg";
-import addis from "../assets/img/addis.jpg";
+import logo from "../../assets/img/fix.jpg";
+import addis from "../../assets/img/addis.jpg";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 export default function LogIn() {
+  const history = useHistory();
   const [inputs, setInputs] = useState({
     username: "",
     password: "",
@@ -12,6 +14,8 @@ export default function LogIn() {
     setInputs((inputs) => ({ ...inputs, [name]: value }));
   }
   const [submitted, setSubmitted] = useState(false);
+  const [loginState, setLoginState] = useState(false);
+  const [loginMessage, setLoginMessage] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -23,12 +27,20 @@ export default function LogIn() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(inputs),
       };
-      fetch(
-        `http://3b9a-197-156-95-59.ngrok.io/v1/admins/login_superadmin/`,
-        requestOptions
-      )
+      fetch(`http://localhost:8000/v1/admins/login_superadmin/`, requestOptions)
         .then((response) => response.json())
-        .then((res) => console.log(res));
+        .then((res) => {
+          if (res.message) {
+            setLoginState(true);
+            setLoginMessage(res.message);
+            localStorage.setItem("token", res.token.access);
+            history.push("/");
+          } else {
+            setLoginState(false);
+            setLoginMessage(res.detail);
+          }
+          console.log(res);
+        });
     }
   }
   const { username, password } = inputs;
@@ -36,10 +48,13 @@ export default function LogIn() {
     <div className="bg-white font-family-karla">
       <div className="w-full flex flex-wrap">
         <div className="w-full md:w-1/2 flex flex-col">
+          <div className="flex justify-center pt-8">
+            {submitted && <div className="text-red-400">{loginMessage}</div>}
+          </div>
           <div className="flex justify-center pt-12 md:pl-12 md:-mb-24">
             <Image src={logo}></Image>
           </div>
-          <div></div>
+
           <div className="flex flex-col justify-center md:justify-start my-auto pt-8 md:pt-0 px-8 md:px-24 lg:px-32">
             <form
               className="flex flex-col pt-3 md:pt-8"

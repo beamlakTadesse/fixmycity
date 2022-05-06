@@ -19,34 +19,39 @@ import Sector from "pages/Admin/Sector";
 // import CollapsibleTable from 'components/sector/NewTable';
 import ReportShow from "components/report/ReportShow";
 import PageVisitsCard from "components/report/ReportDetail";
-import LogIn from "pages/login";
+import LogIn from "pages/Admin/login";
+import Register from "pages/SectorAdmin/register";
+import { isAuthenticated } from "./helpers/utils";
 function App() {
   return (
     <>
-      <Switch>
-        {/* <Sidebar /> */}
+      {/* <Sidebar /> */}
 
-        <div className="md:ml-64">
-          <Route exact path="/" component={Dash} />
+      <div className="md:ml-64">
+        <Switch>
+          {isAuthenticated() && <Route exact path="/" component={Dash} />}
 
-          <Route exact path="/settings" component={Settings} />
-          <Route exact path="/tables" component={Tables} />
-          <Route exact path="/maps" component={Maps} />
+          {isAuthenticated() &&  <Route exact path="/settings" component={Settings} />}
+          {isAuthenticated() &&  <Route exact path="/tables" component={Tables} />}
+          {isAuthenticated() &&  <Route exact path="/maps" component={Maps} />}
 
-          <Route exact path="/admin/sectors" component={Sector} />
-          <Route exact path="/admin/dashboard" component={Dash} />
-          <Route exact path="/sectors/dashboard" component={SectorDash} />
-          <Route exact path="/announcement" component={Announcement} />
-          <Route exact path="/ayy" component={AnnouncementList} />
-          <Route exact path="/sectors" component={Sector} />
-          <Route exact path="/users" component={User} />
-          <Route exact path="/sector/reports" component={Report} />
-          <Route exact path="/report_show/:id" component={PageVisitsCard} />
+          {isAuthenticated() &&   <Route exact path="/admin/sectors" component={Sector} />}
+          {isAuthenticated() &&    <Route exact path="/admin/dashboard" component={Dash} />}
+          {isAuthenticated() &&     <Route exact path="/sectors/dashboard" component={SectorDash} />}
+          {isAuthenticated() &&     <Route exact path="/announcement" component={Announcement} />}
+          {isAuthenticated() &&     <Route exact path="/ayy" component={AnnouncementList} />}
+          {isAuthenticated() &&     <Route exact path="/sectors" component={Sector} />}
+          {isAuthenticated() &&   <Route exact path="/users" component={User} />}
+          {isAuthenticated() &&   <Route exact path="/sector/reports" component={Report} />}
+          {isAuthenticated() &&   <Route exact path="/report_show/:id" component={PageVisitsCard} />}
           <Route exact path="/login" component={LogIn} />
-          {/* <Redirect from="*" to="/login" /> */}
+          <Route exact path="/register/" component={Register} />
+
+          <Redirect from="*" to="/login" />
+
           {/* <Footer /> */}
-        </div>
-      </Switch>
+        </Switch>
+      </div>
     </>
   );
 }
