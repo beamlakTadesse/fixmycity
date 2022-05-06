@@ -37,7 +37,52 @@ function GlobalFilter({
 
 // This is a custom filter UI for selecting
 // a unique option from a list
+
+
+
 export function SelectColumnFilter({
+  column: { filterValue, setFilter, preFilteredRows, id, render },
+}) {
+  // Calculate the options for filtering
+  // using the preFilteredRows
+  const options = React.useMemo(() => {
+    const options = new Set()
+    preFilteredRows.forEach(row => {
+      options.add(row.values[id])
+    })
+    return [...options.values()]
+  }, [id, preFilteredRows])
+
+  // Render a multi-select box
+  return (
+    <label className="flex gap-x-2 items-baseline">
+      <span className="text-gray-700">ShowSpamStatus: </span>
+      <select
+        className="rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+        name={id}
+        id={id}
+        value={filterValue}
+        onChange={e => {
+          setFilter(e.target.value || undefined)
+        }}
+      >
+        <option value="">All</option>
+        {options.map((option, i) => (
+          <option key={i} value={option}>
+            
+            {option?"Spam":"Non_Spam"}
+          </option>
+        ))}
+      </select>
+    </label>
+  )
+}
+
+
+
+
+
+export function ReportStatusColumnFilter({
   column: { filterValue, setFilter, preFilteredRows, id, render },
 }) {
   // Calculate the options for filtering
@@ -66,7 +111,8 @@ export function SelectColumnFilter({
         <option value="">All</option>
         {options.map((option, i) => (
           <option key={i} value={option}>
-            {option}
+            
+            {option?"Resolved":"Active"}
           </option>
         ))}
       </select>
@@ -74,9 +120,8 @@ export function SelectColumnFilter({
   )
 }
 
-export function StatusPill({ value }) {
-//   const status = value ? value.toLowerCase() : "unknown";
 
+export function StatusPill({ value }) {
     const status = value?"Resolved":"Active"
   return (
     <span
@@ -85,27 +130,55 @@ export function StatusPill({ value }) {
           "px-3 py-1 uppercase leading-wide font-bold text-xs rounded-full shadow-sm",
           status.startsWith("Resolved") ? "bg-green-100 text-green-800" : null,
           status.startsWith("Active") ? "bg-yellow-100 text-yellow-800" : null,
-        //   status.startsWith("offline") ? "bg-red-100 text-red-800" : null,
         )
       }
     >                                   
      <NavLink to={`/report_show/${value}`} exact> {status}</NavLink>
 
-      {/* {status} */}
     </span>
   );
 };
 
+
+function toDate(date) {
+  return new Date(date).toDateString();
+}
+
+export function PostedAtCell({ value }) {
+     return (
+      <span
+        className={
+          classNames(
+            "px-3 py-1 uppercase leading-wide font-bold text-xs rounded-full shadow-sm bg-yellow-100 text-black-800",   
+          )
+        }
+      >                           
+            {toDate(value)}
+      </span>
+    );
+  };
+
 export function AvatarCell({ value, column, row }) {
   return (
     <div className="flex items-center">
-      <div className="flex-shrink-0 h-10 w-10">
+      {/* <div className="flex-shrink-0 h-10 w-10">
         <img className="h-10 w-10 rounded-full" src={row.original[column.imgAccessor]} alt="" />
-      </div>
+      </div> */}
       <div className="ml-4">
-      <NavLink to={`/report_show/${row.original[column.idAccessor]}`} exact> <div className="text-sm font-medium text-gray-900">{value}</div></NavLink>
+      <NavLink to={`/sector/reportdetail/${row.original[column.idAccessor]}`} exact> <div className="text-sm font-medium text-gray-900">{value}</div></NavLink>
         <div className="text-sm text-gray-500">{row.original[column.emailAccessor]}</div>
       </div>
+    </div>
+  )
+}
+
+export function LelaCell({ value, column, row }) {
+  return (
+    <div className="flex items-center">
+      <div className="flex-shrink-0 h-10 w-10">
+        <img className="h-10 w-10 rounded-full" src={value} alt="" />
+      </div>
+      
     </div>
   )
 }
@@ -136,6 +209,9 @@ function Table({ columns, data }) {
   } = useTable({
     columns,
     data,
+    initialState: {
+      // hiddenColumns: ['spamStatus']
+    }
   },
     useFilters, // useFilters!
     useGlobalFilter,
@@ -145,7 +221,10 @@ function Table({ columns, data }) {
 
   // Render the UI for your table
   return (
+   
     <>
+     {data &&
+     <div>
       <div className="sm:flex sm:gap-x-2">
         <GlobalFilter
           preGlobalFilteredRows={preGlobalFilteredRows}
@@ -162,7 +241,7 @@ function Table({ columns, data }) {
           )
         )}
       </div>
-      {/* table */}
+     
       <div className="mt-4 flex flex-col">
         <div className="-my-2 overflow-x-auto -mx-4 sm:-mx-6 lg:-mx-8">
           <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -296,7 +375,11 @@ function Table({ columns, data }) {
           </div>
         </div>
       </div>
+
+      </div>
+      }
     </>
+              
   )
 }
 
