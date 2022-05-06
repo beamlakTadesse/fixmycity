@@ -20,6 +20,7 @@ import Sector from 'pages/Admin/Sector';
 import ReportShow from 'components/report/ReportShow';
 import PageVisitsCard from 'components/report/ReportDetail';
 import ReportDet from 'components/report/ReportDetail';
+// import SpamReportTable from 'components/report/spamReport/spamReportTable';
 // import ReportDet from 'pages/Report';
 
 function App() {
@@ -38,13 +39,15 @@ function App() {
                     <Route exact path="/admin/sectors" component={Sector} />
                     <Route exact path='/admin/dashboard' component={Dash}/>
                     <Route exact path='/sectors/dashboard' component={SectorDash}/>
-                    <Route exact path='/announcement' component={Announcement}/>
+                    <Route exact path='/sector/announcement' component={Announcement}/>
                     <Route exact path='/ayy' component={AnnouncementList}/>
                     <Route exact path="/sectors" component={Sector} />
                     <Route exact path="/users" component={User} />
+
+
                     <Route exact path="/sector/reports" component={Report} />
-                    <Route exact path="/sector/reportdetail" component={ReportDet} />
-                    <Route exact path="/report_show/:id" component={PageVisitsCard}/>
+                    <Route exact path="/sector/reportdetail/:id" component={ReportDet} />
+                    {/* <Route exact path="/sector/spam" component={SpamReportTable} /> */}
 
                     <Redirect from="*" to="/" />
                 </Switch>
