@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 
-import Table, { AvatarCell, SelectColumnFilter, StatusPill } from './Table'  // new
+import Table, { AvatarCell,LelaCell,PostedAtCell, ReportStatusColumnFilter, SelectColumnFilter, StatusPill } from './Table'  // new
 
 
 
@@ -81,36 +81,57 @@ function ReportShow() {
     
     const columns = React.useMemo(() => [
       {
+        // Header: "Lela",
+        accessor: 'image',
+        Cell: LelaCell,
+        // imgAccessor: "user.ProfileImage",
+        // emailAccessor: "user.full_name",
+        
+        // idAccessor:"id",
+      },
+      {
         Header: "Name",
         accessor: 'user.first_name',
         Cell: AvatarCell,
         imgAccessor: "user.ProfileImage",
         emailAccessor: "user.first_name",
-        idAccessor:"id",
+        
+        // idAccessor:"id",
       },
       {
-        Header: "Sector",
+        Header: "Sector Name",
         accessor: 'sector.district_name',
       },
       {
         Header: "Status",
         accessor: 'state',
         Cell: StatusPill,
-
-        Filter: SelectColumnFilter,  // new
+        
+        Filter: ReportStatusColumnFilter,  // new
         // filter: 'includes',
       },
       {
-        Header: "Like Count",
-        accessor: 'like_count',
+        Header: "Phone Number",
+        accessor: 'user.phone_number',
       },
       {
-        Header: "Address",
-        accessor: 'sector.address',
-
+        Header: "Posted At",
+        accessor: 'postedAt',
+        Cell:PostedAtCell,
+        
         // Filter: SelectColumnFilter,  // new
         // filter: 'includes',
       },
+      {
+        id:"spamStatus",
+        // Header: "spamStatus",
+        accessor: 'spamStatus',
+ 
+        
+        Filter: SelectColumnFilter,  // new
+        // filter: 'includes',
+      },
+      
     ], [])
   
 
@@ -126,10 +147,13 @@ useEffect(() => {
       const response = await fetch(url);
      
       const json = await response.json();
-      const lela = []
+      // const lela = []
+      if(json){
         setData(json);
+      }
        
-      console.log("Sectors: ", json[0].id);
+       
+      console.log("Sectors: ", json);
     } catch (error) {
       console.log("error", error);
     }
@@ -143,14 +167,21 @@ useEffect(() => {
   
     return (
       <div className="min-h-screen bg-gray-100 text-gray-900">
+        {
+          mydata &&
+        
         <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
           {/* <div className="">
             <h1 className="text-xl font-semibold">React Table + Tailwind CSS = ❤</h1>
           </div> */}
           <div className="mt-6">
-            <Table columns={columns} data={mydata} />
+            
+              <Table columns={columns} data={mydata} />
+            
+            
           </div>
         </main>
+}
       </div>
     );
   }
