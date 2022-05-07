@@ -702,6 +702,12 @@ video {
 .ml-\[95px\]{
 	margin-left: 95px;
 }
+.ml-\[10px\]{
+	margin-left: 10px;
+}
+.mt-\[10px\]{
+	margin-top: 10px;
+}
 .mt-\[100px\]{
 	margin-top: 100px;
 }
@@ -828,17 +834,11 @@ video {
 .w-\[350px\]{
 	width: 350px;
 }
-.w-\[650px\]{
-	width: 650px;
-}
 .w-\[500px\]{
 	width: 500px;
 }
 .w-\[80px\]{
 	width: 80px;
-}
-.w-\[200px\]{
-	width: 200px;
 }
 .w-4{
 	width: 1rem;
