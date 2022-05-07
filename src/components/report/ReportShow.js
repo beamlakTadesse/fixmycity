@@ -96,7 +96,7 @@ function ReportShow() {
         imgAccessor: "user.ProfileImage",
         emailAccessor: "user.first_name",
         
-        // idAccessor:"id",
+        idAccessor:"id",
       },
       {
         Header: "Sector Name",

@@ -14,15 +14,20 @@ import { Button, Heading5, ModalFooter } from '@material-tailwind/react';
 import ModalBody from "@material-tailwind/react/ModalBody";
 import ModalTitle from "@material-tailwind/react/ModalHeader"
 import Modal from "@material-tailwind/react/Modal";
+import TransferRadio from "./transferReport";
 export default function ReportDet() {
     let { id } = useParams()
     const [mydata ,setData]= useState({});
+    const [selected, setSelected] = useState(0);
+
+
     const url = `http://localhost:8000/v1/report/${id}/`;
+
 
     
 useEffect(() => {
   // mounted.current = true;
-  const url = `http://localhost:8000/v1/report/${id}`;
+  // const url = `http://localhost:8000/v1/report/${id}`;
 
 
   const fetchData = async () => {
@@ -31,8 +36,12 @@ useEffect(() => {
      
       const json = await response.json();
       setData(json);
-       
-      console.log("Sectors: ", json.description);
+     
+      console.log("Resolved_At: ", json.resolvedAt);
+
+      console.log("postedAt: ", json.postedAt);
+
+      console.log("Sectors: ", json);
     } catch (error) {
       console.log("error", error);
     }
@@ -127,10 +136,12 @@ function toDate(date) {
                 <h1 className="text-[25px] ml-[30px] pt-[30px] text-white ]">Broken Pipe near arada area found.</h1>
             </div>
             <div className='flex'>
-           <img 
+          {
+            mydata.image && <img 
             //  src= {Image1}
              src = {mydata.image}
             className = "ml-[30px] mt-[30px] item-center w-[300px]"/>
+          }
            <div>
            <p className="m-[30px] w-[350px]">
                 {mydata.description}
@@ -162,9 +173,7 @@ function toDate(date) {
          onClick={resolveReport}>
             <h3 className="m-2 font-bold pl-1 text-lg text-[#ffffff]">Resolve</h3></Button>
             }         
-        {/* <p className='ml-[30px] mt-[30px] w-[650px]'>
-                {mydata.description}
-            </p> */}
+        
       </div>
           
           
@@ -180,15 +189,18 @@ function toDate(date) {
             <div >
                 <p className="ml-[40px] mt-4 text-xl font-light">{mydata.state?"Resolved":"Active"}</p>
                 <hr className="border-1 ml-7"></hr>
-                <p className="ml-[100px] mt-2 font-light text-sm">{toDate(mydata.postedAt)}</p>
-            </div>
+               {
+                 (mydata.state)?<p className="ml-[100px] mt-2 font-light text-sm">{toDate(mydata.postedAt)}</p>
+                  :<p className="ml-[100px] mt-2 font-light text-sm">{toDate(mydata.resolvedAt)}</p>
+                  } 
+                    </div>
 
          </div>
 
          {mydata.user &&  
          <div className = "bg-white  w-[300px] h-[100px] mt-[40px] ml-[20px] rounded-xl flex">
          <img 
-               src= {Image2}
+               src= {(mydata.user.image)?mydata.user.image:Image2}
                className = " w-[80px]   rounded-xl"
              />    
                  
@@ -196,7 +208,7 @@ function toDate(date) {
                 <p className="ml-[40px] mt-4 text-xl font-light">{mydata.user.first_name} &nbsp;{mydata.user.last_name}</p> 
                 {/* &nbsp;{mydata.user.last_name} </p> */}
                 <hr className="border-1 ml-7"></hr>
-                <p className="ml-[100px] mt-2 font-light text-sm">Total : 11 reports</p>
+                <p className="ml-[100px] mt-2 font-light text-sm">{mydata.user.phone_number}</p>
             </div>
             
          </div>
@@ -213,12 +225,14 @@ function toDate(date) {
                 <p className="ml-[95px] mt-2 font-light text-sm">Arada, Addis Ababa</p>
             </div>
          </div>
-         <div className = "bg-white  w-[200px] h-[80px] mt-[40px] ml-[20px] rounded-xl flex">
-        
-             <div >
+
+
+
+         <div className = "bg-white  w-[300px] h-[100px] mt-[40px] ml-[20px] rounded-xl flex">
+         <div >
              {(!mydata.spamStatus)?
                 <>
-                   <Button className='ml-[30px] mt-[30px]' style={{backgroundColor: 'rgb(178,34,34)'}} 
+                   <Button className='ml-[10px] mt-[10px]' style={{backgroundColor: 'rgb(178,34,34)'}} 
                 onClick={() =>
                   setSubmitted(!submitted)}>
                 <h3 className="m-2 font-bold pl-1 text-lg text-[#ffffff]">Reject</h3></Button>
@@ -241,7 +255,7 @@ function toDate(date) {
                                                 </ModalFooter>
 
                                             </Modal>
-                </>:<>  <Button className='ml-[30px] mt-[30px]' style={{backgroundColor: 'rgb(178,34,34)'}} 
+                </>:<>  <Button className='ml-[10px] mt-[10px]' style={{backgroundColor: 'rgb(178,34,34)'}} 
                 onClick={() =>
                   setSubmitted(!submitted)}>
                 <h3 className="m-2 font-bold pl-1 text-lg text-[#ffffff]">Add to reports</h3></Button>
@@ -268,7 +282,35 @@ function toDate(date) {
             }  
             </div>
 
+              <div >
+             {(mydata.id) &&
+                <>
+                   <Button className='ml-[20px] mt-[10px]' style={{backgroundColor: 'rgb(204,119,34)'}} 
+                onClick={() =>
+                  setSubmitted(!submitted)}>
+                <h3 className="m-2 font-bold pl-1 text-lg text-[#ffffff]">Transfer</h3></Button>
+                  <Modal size="lg" active={submitted} toggler={() => setSubmitted(false)}>
+                                                <ModalTitle>
+                                                    <Heading5>
+                                                      Transfer Report to other Sector
+                                                    </Heading5>
+                                                </ModalTitle>
+                                                <ModalBody>
+                                                    <TransferRadio report={mydata.id} submitted={submitted} setSubmitted={setSubmitted} />
+                                                </ModalBody>
+                                                <ModalFooter>
+                                                    
+                                                    <Button onClick={() => handleDeleteCancel()}> Cancel</Button>
+                                                </ModalFooter>
+
+                                            </Modal>
+               
+                </>
+            }  
+            </div>
          </div>
+
+         
                 
       </div>
 
