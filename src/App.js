@@ -12,6 +12,7 @@ import Maps from 'pages/Maps';
 import Footer from 'components/Footer';
 import User from 'pages/userList';
 import Report from 'pages/report';
+import 'bootstrap/dist/css/bootstrap.min.css'
 // import ReportTableChart from 'components/sector/ReportTable';
 // Tailwind CSS Style Sheet
 import 'assets/styles/tailwind.css';
