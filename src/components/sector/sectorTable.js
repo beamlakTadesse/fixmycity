@@ -12,13 +12,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { sectorActions } from '../../actions';
 
 
-export default function SectorTable() {
+export default function SectorTable({isEmpty}) {
     // const sectors = useSelector(state => state.sectors);
     // const user = useSelector(state => state.authentication.user);
     const dispatch = useDispatch();
     const [mains, setMains] = useState([])
-
-    const [sectors , setSectors] = useState({});
+    const [myEmpty, setIsEmpty] = useState(true);
+    const [sectors , setSectors] = useState([]);
     useEffect(() => {
         // mounted.current = true;
         const url = `http://localhost:8000/v1/admins/sector/sector`;
@@ -29,7 +29,13 @@ export default function SectorTable() {
            
             const json = await response.json();
             
-            setSectors(json.results);
+            if(json.results.length === 0){
+                setIsEmpty(true)
+            }else{
+                            setSectors(json.results);
+
+                setIsEmpty(false)
+            }
             setMains(["EthioTelecom", "Water and Sewage", "Roads Authority", "ELPA"]);
             // console.log("Sectors: ", json.sectors[0].district_name);
           } catch (error) {
@@ -46,13 +52,17 @@ export default function SectorTable() {
         dispatch(sectorActions.delete(id));
     }
     return (
+        (!isEmpty && myEmpty)?<></>:        
         <Card>
             <CardHeader color="blue" contentPosition="left">
                 <h2 className="text-white text-2xl">Sectors</h2>
             </CardHeader>
             <CardBody>
+                
+            {
+                                sectors.length>0?(
                 <div className="overflow-x-auto">
-                    {sectors  &&
+                  
 
                         <table className="items-center w-full bg-transparent border-collapse">
                             <thead>
@@ -71,7 +81,9 @@ export default function SectorTable() {
                                     </th>
                                 </tr>
                             </thead>
-                            {Object.keys(sectors).map((oneKey, i) => {
+                           
+                            
+                            {sectors && Object.keys(sectors).map((oneKey, i) => {
                                     return (
                                     <tbody>
 
@@ -96,11 +108,23 @@ export default function SectorTable() {
 
 
                                     </tbody>
-                             )        }) 
-                }
-
-                        </table>}
+                                    )        }) 
+                                }
+                                
+                               
+                        </table>
                 </div>
+                 ):(
+                    <div>
+                             <div class="flex justify-center items-center mt-10">
+                 {/* <Loader/>    */}
+                 <h3>No Data to Display</h3>
+                 
+             </div>
+       
+                    </div>
+                
+                )}
             </CardBody>
         </Card>
     );
