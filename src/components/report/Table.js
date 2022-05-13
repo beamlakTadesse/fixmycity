@@ -120,20 +120,81 @@ export function ReportStatusColumnFilter({
   )
 }
 
-
-export function StatusPill({ value }) {
-    const status = value?"Resolved":"Active"
+export function ReportUser({ value }) {
+ 
   return (
     <span
       className={
         classNames(
           "px-3 py-1 uppercase leading-wide font-bold text-xs rounded-full shadow-sm",
-          status.startsWith("Resolved") ? "bg-green-100 text-green-800" : null,
-          status.startsWith("Active") ? "bg-yellow-100 text-yellow-800" : null,
+          value.startsWith("RESOLVED") ? "bg-green-100 text-green-800" : null,
+          value.startsWith("UNRESOLVED") ? "bg-yellow-100 text-yellow-800" : null,
+          value.startsWith("REJECTED") ? "bg-red-100 text-red-800" : null,
+  
         )
       }
     >                                   
-     <NavLink to={`/report_show/${value}`} exact> {status}</NavLink>
+     <NavLink to={`/report_show/${value}`} exact> {value}</NavLink>
+  
+    </span>
+  );
+  };
+
+export function StatusPill({ value }) {
+ 
+return (
+  <span
+    className={
+      classNames(
+        "px-3 py-1 uppercase leading-wide font-bold text-xs rounded-full shadow-sm",
+        value.startsWith("RESOLVED") ? "bg-green-100 text-green-800" : null,
+        value.startsWith("UNRESOLVED") ? "bg-yellow-100 text-yellow-800" : null,
+        value.startsWith("REJECTED") ? "bg-red-100 text-red-800" : null,
+
+      )
+    }
+  >                                   
+   <NavLink to={`/report_show/${value}`} exact> {value}</NavLink>
+
+  </span>
+);
+};
+
+
+
+export function SpamStatus({ value }) {
+  const status = value?"Spam":"Non_Spam"
+return (
+  <span
+    className={
+      classNames(
+        "px-3 py-1 uppercase leading-wide font-bold text-xs rounded-full shadow-sm",
+        status.startsWith("Spam") ? "bg-red-100 text-red-800" : null,
+        status.startsWith("Non_Spam") ? "bg-green-100 text-green-800" : null,
+      )
+    }
+  >  
+  {status}                                 
+   {/* <NavLink to={`/report_show/${value}`} exact> {status}</NavLink> */}
+
+  </span>
+);
+};
+
+export function StatePill({ value }) {
+    const status = value?"seen":"unseen"
+  return (
+    <span
+      className={
+        classNames(
+          "px-3 py-1 uppercase leading-wide font-bold text-xs rounded-full shadow-sm",
+          status.startsWith("unseen") ? "bg-green-100 text-green-800" : null,
+          status.startsWith("seen") ? "bg-yellow-100 text-yellow-800" : null,
+        )
+      }
+    >  
+    {status}                                 
+     {/* <NavLink to={`/report_show/${value}`} exact> {status}</NavLink> */}
 
     </span>
   );
@@ -144,12 +205,40 @@ function toDate(date) {
   return new Date(date).toDateString();
 }
 
-export function PostedAtCell({ value }) {
+export function phoneNumberCell({ value, column, row }) {
+  return (
+    <div className="flex items-center">
+      
+      <div className="ml-4">
+     {(!row.original[column.idAccessor])?
+      <div className="text-sm font-bold bold text-black" >{value}</div>:
+       <div className="text-sm bold font-normal text-black-700">{value}</div>}       
+      </div>
+    </div>
+  )
+}
+export function sectorCell({ value, column, row }) {
+  return (
+    <div className="flex items-center">
+      
+      <div className="ml-4">
+     {(!row.original[column.idAccessor[0]])?
+      <div className="text-sm font-bold bold text-black" >{value}</div>:
+       <div className="text-sm bold font-normal text-black-700">{value}</div>}   
+
+          <div className="text-sm text-gray-500">{row.original[column.idAccessor[1]]}</div>
+    
+      </div>
+    </div>
+  )
+}
+export function PostedAtCell({ value, row, column }) {
      return (
       <span
         className={
           classNames(
-            "px-3 py-1 uppercase leading-wide font-bold text-xs rounded-full shadow-sm bg-yellow-100 text-black-800",   
+            
+            (!row.original[column.idAccessor])?  "px-3 py-1 uppercase leading-wide text-black-800 font-bold text-xs": "text-sm  font-normal text-black-700"
           )
         }
       >                           
@@ -161,12 +250,10 @@ export function PostedAtCell({ value }) {
 export function AvatarCell({ value, column, row }) {
   return (
     <div className="flex items-center">
-      {/* <div className="flex-shrink-0 h-10 w-10">
-        <img className="h-10 w-10 rounded-full" src={row.original[column.imgAccessor]} alt="" />
-      </div> */}
+     
       <div className="ml-4">
-      <NavLink to={`/sector/reportdetail/${row.original[column.idAccessor]}`} exact> <div className="text-sm font-medium text-gray-900">{value}</div></NavLink>
-        <div className="text-sm text-gray-500">{row.original[column.emailAccessor]}</div>
+      <NavLink to={`/sector/reportdetail/${row.original[column.idAccessor[1]]}`} exact>{(!row.original[column.idAccessor[0]])?
+      <div className="text-sm font-bold bold text-black" >{value}</div>: <div className="text-sm bold font-normal text-black-700">{value}</div>}</NavLink>
       </div>
     </div>
   )
@@ -251,8 +338,7 @@ function Table({ columns, data }) {
                   {headerGroups.map(headerGroup => (
                     <tr {...headerGroup.getHeaderGroupProps()}>
                       {headerGroup.headers.map(column => (
-                        // Add the sorting props to control sorting. For this example
-                        // we can add them into the header props
+                       
                         <th
                           scope="col"
                           className="group px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
@@ -278,7 +364,7 @@ function Table({ columns, data }) {
                 </thead>
                 <tbody
                   {...getTableBodyProps()}
-                  className="bg-white divide-y divide-gray-200"
+                  className="bg-gray  divide-y divide-gray-200"
                 >
                   {page.map((row, i) => {  // new
                     prepareRow(row)
@@ -288,11 +374,11 @@ function Table({ columns, data }) {
                           return (
                             <td
                               {...cell.getCellProps()}
-                              className="px-6 py-4 whitespace-nowrap"
+                              className="px-6 py-4  whitespace-nowrap"
                               role="cell"
                             >
                               {cell.column.Cell.name === "defaultRenderer"
-                                ? <div className="text-sm text-black-500">
+                                ? <div className="text-sm  text-black-500">
                                     {/* <NavLink to="/maps" exact> <Button >{cell.render('Cell')}</Button></NavLink> */}
                                     {cell.render('Cell')}
                                     </div>
