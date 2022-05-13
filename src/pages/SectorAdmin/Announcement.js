@@ -4,6 +4,7 @@ import AnnouncementList from 'components/sector/Announcement/AnnouncementList';
 import AddAnnouncement from 'components/sector/Announcement/AddAnnouncement';
 import Loader from 'components/sector/shared/loader';
 import ErrorPage2 from 'components/sector/shared/errorPage2';
+import UnAuthorized from 'components/sector/shared/unauthorized';
 
 
 export default function Announcement() {
@@ -30,8 +31,9 @@ export default function Announcement() {
              
               const json = await response.json();
               
+              if(json.status===401){
               setSectors(json.results);
-             
+              }
               console.log("Sectors: ", json.results);
             } catch (error) {
               console.log("error", error);
@@ -52,6 +54,8 @@ export default function Announcement() {
         <Loader/>   
         
     </div>:(isError)?<ErrorPage2/>:<>
+    {announcements.length===0?<UnAuthorized /> :
+    <>
             <div className="bg-light-blue-500 px-3 md:px-8 h-10" />
             <div className="container mt-10 max-w-full ">
 
@@ -64,7 +68,8 @@ export default function Announcement() {
                    {announcements.length >0 && <AnnouncementList announcements={announcements}/>}
                 </div> 
             </div>
-
+            </>
+}
         </>
     );
 }

@@ -24,7 +24,7 @@ export default function ReportDet() {
     let color = "gray";
     let { id } = useParams()
     const [mydata ,setData]= useState({});
-    const [selected, setSelected] = useState(0);
+    const [rejected, setReject] = useState(false);
 
 
       // ###########################  DROPDOWN #######
@@ -64,6 +64,9 @@ useEffect(() => {
       setData(json);
       if(!json.state){
         ReadReport(url)
+      }
+      if(json.status==="RESOLVED"){
+        setReject(true);
       }
       console.log("Resolved_At: ", json.resolvedAt);
 
@@ -128,7 +131,7 @@ const rejectReport = async () => {
       const json = await response.json();
       setData(json.report);
       setRejectSubmitted(false);
-
+      setReject(false);
       console.log("Report Status: ", json.state);
     } catch (error) {
       console.log("error", error);
@@ -380,7 +383,7 @@ function toDate(date) {
                   {(!mydata.spamStatus)?"Add to Spam":"Remove From Spam"}
                 </div>
 
-                {!mydata.status==="REJECTED" &&
+                {!rejected?
                 <div
                  style={{cursor: "pointer"}}
                   className={
@@ -393,7 +396,7 @@ function toDate(date) {
                   }}
                 >
                   Reject Report
-                </div>
+                </div>:<></>
 }
                
               </div>
@@ -405,8 +408,6 @@ function toDate(date) {
             </div>
             }
      {/* ################## DROPDOWN ############ */}
-
-
 
 
 

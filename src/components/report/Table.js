@@ -211,8 +211,8 @@ export function phoneNumberCell({ value, column, row }) {
       
       <div className="ml-4">
      {(!row.original[column.idAccessor])?
-      <div className="text-sm font-bold bold text-black" >{value}</div>:
-       <div className="text-sm bold font-normal text-black-700">{value}</div>}       
+      <div className="text-sm font-normal text-black-900" >{value}</div>:
+       <div className="text-sm  font-normal text-gray-700">{value}</div>}       
       </div>
     </div>
   )
@@ -223,10 +223,10 @@ export function sectorCell({ value, column, row }) {
       
       <div className="ml-4">
      {(!row.original[column.idAccessor[0]])?
-      <div className="text-sm font-bold bold text-black" >{value}</div>:
-       <div className="text-sm bold font-normal text-black-700">{value}</div>}   
+      <div className="text-sm font-normal text-black-900" >{value}</div>:
+       <div className="text-sm bold font-normal text-gray-700">{value}</div>}   
 
-          <div className="text-sm text-gray-500">{row.original[column.idAccessor[1]]}</div>
+          <div className="text-sm text-gray-700">{row.original[column.idAccessor[1]]}</div>
     
       </div>
     </div>
@@ -238,7 +238,7 @@ export function PostedAtCell({ value, row, column }) {
         className={
           classNames(
             
-            (!row.original[column.idAccessor])?  "px-3 py-1 uppercase leading-wide text-black-800 font-bold text-xs": "text-sm  font-normal text-black-700"
+            (!row.original[column.idAccessor])?  "px-3 py-1 uppercase leading-wide text-black-900 font-normal text-xs": "text-sm  font-normal text-gray-700"
           )
         }
       >                           
@@ -253,7 +253,7 @@ export function AvatarCell({ value, column, row }) {
      
       <div className="ml-4">
       <NavLink to={`/sector/reportdetail/${row.original[column.idAccessor[1]]}`} exact>{(!row.original[column.idAccessor[0]])?
-      <div className="text-sm font-bold bold text-black" >{value}</div>: <div className="text-sm bold font-normal text-black-700">{value}</div>}</NavLink>
+      <div className="text-sm font-normal  text-black-900" >{value}</div>: <div className="text-sm bold font-normal text-gray-700">{value}</div>}</NavLink>
       </div>
     </div>
   )
