@@ -19,7 +19,9 @@ export default function AddAnnouncement({isActive, setIsActive}) {
       const [showModal, setShowModal] = useState(false);
 
       const [submitted, setSubmitted] = useState(false);
-      const [isError, setError] = useState(false);
+      const [isLoading, setIsLoading] = useState(false);
+      const [isError,setError] = useState(false);
+      // const [isError, setError] = useState(false);
       const [errorMessage, setErrorMessage] = useState(false);
       const [statusCode,setStatus] = useState(null);
 
@@ -66,7 +68,7 @@ export default function AddAnnouncement({isActive, setIsActive}) {
      
       try {
           // const response = await fetch(url);
-         
+          
           if (values.title && values.description && isSelected) {
             console.log('hello form is submmitted')
          
