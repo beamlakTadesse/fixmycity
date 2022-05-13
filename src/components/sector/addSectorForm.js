@@ -16,15 +16,27 @@ import ModalHeader from "@material-tailwind/react/ModalHeader";
 import ModalBody from "@material-tailwind/react/ModalBody";
 import { act } from "@testing-library/react";
 // import authHeader from 'helpers'
-export default function AddSectorForm({ isactive}) {
+export default function AddSectorForm({isActive, setIsActive}) {
     const dispatch = useDispatch();
-    // const [district_name, setDistrictName] = useState('');
-    // const [email, setEmail] = useState('');
-    // const [phone_number, setPhoneNumber] = useState(null);
-    // const [sector_type, setSectorType] = useState(4);    
+     
     const [lati, setLat]= useState(null);
-    const me_active = isactive;
     const [lngi, setLng] = useState(null);
+
+
+    // const [showModal, setShowModal] = useState(false);
+    const [checked, setChecked] = React.useState(false);
+
+    // ########### LOADING pAGE
+    // let circleCommonClasses = 'h-2.5 w-2.5 bg-current rounded-full';
+
+    // ####################### Loading PAge End
+    const [isLoading, setIsLoading] = useState(false);
+    const [isEmpty, setIsEmpty] = useState(true);
+    const [errorMessage, setErrorMessage] = useState(false);
+    const [isError, setError] = useState(false);
+    const [statusCode,setStatus] = useState(null);
+
+
     function componentDidMount() {
         navigator.geolocation.getCurrentPosition(function (position) {
             console.log("Latitude is :", position.coords.latitude);
@@ -41,7 +53,9 @@ export default function AddSectorForm({ isactive}) {
         lng:null,
 
     });
-    const [showModal, setShowModal] = useState(me_active);
+    const [showModal, setShowModal] = useState(false);
+
+    // const [showModal, setShowModal] = useState(me_active);
     const [submitted, setSubmitted] = useState(false);
     const { district_name, email, phone_number, sector_type,lat, lng } = inputs;
     const [mydata, setData] = useState({});
@@ -50,80 +64,104 @@ export default function AddSectorForm({ isactive}) {
     let subtitle;
     const [modalIsOpen, setIsOpen] = React.useState(false);
   
-    function openModal() {
-      setIsOpen(me_active);
-    }
+    
   
     function afterOpenModal() {
       // references are now sync'd and can be accessed.
 
     }
   
-    function closeModal() {
-      setIsOpen(!me_active);
-    }
-
-    function handleChange(e) {
-        const { name, value } = e.target;
-        setInputs(inputs => ({ ...inputs, [name]: value }));
-    }
 
     // useEffect(()=>{
 
-    
-   
-    async function handleSubmit(e) {
-        e.preventDefault();
 
-        const url = `http://localhost:8000/v1/admins/sector/sector/`;
-        setSubmitted(true);
-       
-        try {
-            navigator.geolocation.getCurrentPosition(function (position) {
-                console.log("Latitude is :", position.coords.latitude);
-                setLat(position.coords.latitude);
-                setLng(position.coords.longitude);
-                // setInputs(inputs => ({lat: position.coords.latitude,lng:position.coords.longitude }));
-
-                // console.log("Longitude is :", position.coords.longitude);
-            });
-            // const response = await fetch(url);
-           
-          if (district_name && email && phone_number ) {
-            const requestOptions = {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json' },
-                body:JSON.stringify({'district_name':district_name,'phone_number':phone_number,'sector_type':4,'email':email})
-            };
-            console.log('hello form is submmitted')
-            setSubmitted(false);
-            
-            const response = await fetch(url, requestOptions);
-            <NavLink to={'/sector'}></NavLink>
-            
-            const json = await response.json();
-            setData(json);
-            // setSubmitted(isactive);
-
-
-            console.log("Report Status: ", json.state);
-        }
-        
-          } catch (error) {
-            console.log("error", error);
+        const handleChecked = () => {
+            setChecked(!checked);
+          };
+          
+          function handleChange(e) {
+              const { name, value } = e.target;
+              setInputs(inputs => ({ ...inputs, [name]: value }));
           }
-        //   setSubmitted(true);
-       
-    }
+      
+          // useEffect(()=>{
+      
+          
+         
+          async function handleSubmit(e) {
+              e.preventDefault();
+      
+              const url = `http://localhost:8000/v1/admins/sector/sector/`;
+              setSubmitted(true);
+             
+             
+              try {
+                  navigator.geolocation.getCurrentPosition(function (position) {
+                      console.log("Latitude is :", position.coords.latitude);
+                      setLat(position.coords.latitude);
+                      setLng(position.coords.longitude);
+                      // setInputs(inputs => ({lat: position.coords.latitude,lng:position.coords.longitude }));
+      // 
+                      console.log("Longitude is :", position.coords.longitude);
+                  });
+                  // const response = await fetch(url);
+                 
+                if (district_name && email && phone_number ) {
+                  setIsLoading(true);
+                  const requestOptions = {
+                      method: 'POST',
+                      headers: {'Content-Type': 'application/json' },
+                      body:JSON.stringify({'main_sector':checked,'district_name':district_name,'phone_number':phone_number,'sector_type':4,'email':email,"lng":lngi,"lat":lati})
+                  };
+                  console.log('hello form is submmitted')
+                  setSubmitted(false);
+                  
+                  await fetch(url, requestOptions).then((response) => {
+                      if(!response.ok) {
+                      setStatus(response.status);
+                      throw new Error(response.status);
+                  }
+                      else {
+                          return response.json()}
+                    })
+                    .then((data) => {
+                        setData(data);
+                      // this.setState({ isLoading: false, downlines: data.response });
+                      console.log("DATA STORED");
+                      setShowModal(false);
+      
+                      if(mydata.length === 0){
+                          setIsEmpty(true);
+      
+                      }
+                          
+      
+                    })
+                    .catch((error) => {
+                      console.log('error: ' + error);
+                      setErrorMessage("Please try Again");
+                      setError(true);
+                    });;
+                    setTimeout(() => {
+                      setIsLoading(false);            
+                  }, 1500)
+              }
+              
+                } catch (error) {
+                  console.log("error", error);
+                }
+      
+              //   setSubmitted(true);
+             
+          }
+      
 
 
 
     const [startDate, setStartDate] = useState(new Date());
     return (
 
-        <Modal size="lg" isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
-        onRequestClose={closeModal} >
+        <Modal size="lg" active={isActive} toggler={() => setIsActive(false)} >
         {/* active={me_active} toggler={() =>{me_active=!isactive}}> */}
 
         <ModalBody>
