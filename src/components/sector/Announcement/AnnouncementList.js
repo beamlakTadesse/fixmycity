@@ -8,46 +8,27 @@ import CardBody from '@material-tailwind/react/CardBody';
 import AnnouncementCard from './mycard';
 import { useDispatch, useSelector } from 'react-redux';
 import { announcementActions } from 'actions';
-export default function AnnouncementList() {
+import Loader from '../shared/loader';
+export default function AnnouncementList({announcements}) {
 
 
-    const products = ['Custom users', 'Banned Users', 'Sectors'];
 
-  
+    const [isLoading, setIsLoading]= useState(false);
+    const [isError, setError] = useState(false);
     const dispatch = useDispatch();
     // const announcements = useSelector(state => state.announcement);
 
-    const [announcements, setSectors] = useState({});
-    useEffect(() => {
-        // mounted.current = true;
-        const url = `http://localhost:8000/v1/announcment/`;
-
-
-        const fetchData = async () => {
-          try {
-            const response = await fetch(url);
-           
-            const json = await response.json();
-            
-            setSectors(json.results);
-           
-            console.log("Sectors: ", json.results);
-          } catch (error) {
-            console.log("error", error);
-          }
-        };
-
-          fetchData();
-      
-    }, []);
-
+   
     // useEffect(() => {
     //     dispatch(announcementActions.getAll());
     // }, [])
     // console.log("announcement2", announcements['items']);
 
     return (
-        <>
+        (isLoading)? <div class="flex justify-center items-center h-screen">
+        <Loader/>   
+        
+    </div>:<>
 
 
             {announcements && 
