@@ -1,17 +1,18 @@
 import React, {useState, useEffect} from 'react';
 import StatusCard from 'components/StatusCard';
-import ChartLine from 'components/sector/ChartLine';
 import ReportChart from 'components/sector/ReportChart';
 // import ChartBar from 'components/ChartBar';
 
-import PageVisitsCard from 'components/sector/PageVisitsCard';
 // import TrafficCard from 'components/TrafficCard';
 import CardTable from 'components/sector/TableCard';
+import Loader from 'components/sector/shared/loader';
+import ErrorPage2 from 'components/sector/shared/errorPage2';
 
 export default function Dashboard() {
     const [sectors , setSectors] = useState({});
     const [sectorsInfo , setSectorsInfo] = useState({});
-
+    const [isLoading, setIsLoading] = useState(false);
+    const [isError, setError] = useState(false);
     useEffect(() => {
         // mounted.current = true;
         var id = 4;
@@ -19,6 +20,7 @@ export default function Dashboard() {
         const url = `http://localhost:8000/v1/report_status/4/`;
 
         const fetchData = async () => {
+            setIsLoading(true);
           try {
             const response = await fetch(url);
            
@@ -30,7 +32,11 @@ export default function Dashboard() {
             console.log("Sectors: ", json.count);
           } catch (error) {
             console.log("error", error);
-          }
+          };
+          setTimeout(() => {
+            setIsLoading(false);  
+            setError(true);          
+        }, 1500)
         };
 
           fetchData();
@@ -38,7 +44,9 @@ export default function Dashboard() {
     }, []);
     const iconName = ["trending_up","groups","poll","groups"]
     const iconColor = ["pink","blue","green","red"]
-    return (
+    return ( (isLoading)? <div class="flex justify-center items-center h-screen">
+          <Loader/>   
+        </div>:(isError)?<ErrorPage2/>:
         <>
             <div className="bg-light-blue-500 px-3 md:px-8 h-40" />
 
