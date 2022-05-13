@@ -1,15 +1,57 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from '@material-tailwind/react';
 import AnnouncementList from 'components/sector/Announcement/AnnouncementList';
 import AddAnnouncement from 'components/sector/Announcement/AddAnnouncement';
+import Loader from 'components/sector/shared/loader';
+import ErrorPage2 from 'components/sector/shared/errorPage2';
 
 
 export default function Announcement() {
 
       const [showModal, setShowModal] = React.useState(false);
+      
+    
+      const [isLoading, setIsLoading]= useState(false);
+      const [isError, setError] = useState(false);
+      // const announcements = useSelector(state => state.announcement);
+  
+      const [announcements, setSectors] = useState([]);
+      
+      useEffect(() => {
+          // mounted.current = true;
+          const url = `http://localhost:8000/v1/announcment/`;
+  
+  
+          const fetchData = async () => {
+              setIsLoading(true);
+            try {
+                
+              const response = await fetch(url);
+             
+              const json = await response.json();
+              
+              setSectors(json.results);
+             
+              console.log("Sectors: ", json.results);
+            } catch (error) {
+              console.log("error", error);
+              setError(true);
+            };
+            setTimeout(() => {
+              setIsLoading(false);            
+          }, 1500)
+  
+          };
+  
+            fetchData();
+        
+      }, []);
 
     return (
-        <>
+        (isLoading)? <div class="flex justify-center items-center h-screen">
+        <Loader/>   
+        
+    </div>:(isError)?<ErrorPage2/>:<>
             <div className="bg-light-blue-500 px-3 md:px-8 h-10" />
             <div className="container mt-10 max-w-full ">
 
@@ -19,7 +61,7 @@ export default function Announcement() {
 
                 </div> 
                 <AddAnnouncement isActive={showModal} setIsActive={setShowModal}/>
-                    <AnnouncementList />
+                   {announcements.length >0 && <AnnouncementList announcements={announcements}/>}
                 </div> 
             </div>
 
