@@ -21,13 +21,17 @@ import Sector from 'pages/Admin/Sector';
 import ReportShow from 'components/report/ReportShow';
 import PageVisitsCard from 'components/report/ReportDetail';
 import ReportDet from 'components/report/ReportDetail';
+import { ThemeProvider, CSSReset } from '@chakra-ui/core'
+
 // import SpamReportTable from 'components/report/spamReport/spamReportTable';
 // import ReportDet from 'pages/Report';
 
 function App() {
     return (
-        <>
-
+        <ThemeProvider>
+        
+            <CSSReset />
+            
             <Sidebar />
             <div className="md:ml-64">
                 <Switch>
@@ -54,7 +58,9 @@ function App() {
                 </Switch>
                 <Footer />
             </div>
-        </>
+            </ThemeProvider>
+            
+
     );
 }
 
