@@ -1,20 +1,36 @@
-import { useLocation } from "react-router-dom";
 import Button from "@material-tailwind/react/Button";
 import Icon from "@material-tailwind/react/Icon";
 import NavbarInput from "@material-tailwind/react/NavbarInput";
 import Image from "@material-tailwind/react/Image";
 import Dropdown from "@material-tailwind/react/Dropdown";
 import DropdownItem from "@material-tailwind/react/DropdownItem";
-import ProfilePicture from "assets/img/team-1-800x800.jpg";
+import ProfilePicture from "assets/img/profile.jpg";
 import { Logout } from "@mui/icons-material";
-import { useHistory } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { isSectorAdmin } from "helpers/utils";
+import useAuth from "../hooks/auth";
 
 export default function AdminNavbar({ showSidebar, setShowSidebar }) {
   const location = useLocation().pathname;
-  const history = useHistory();
+  const navigate = useNavigate();
+  const { setAuth } = useAuth();
   function Logout() {
-    localStorage.removeItem("token");
-    history.push("/login");
+    const role = localStorage.getItem("role");
+    if (role == 2) {
+      navigate(`/sector/login`);
+
+      localStorage.removeItem("token");
+      localStorage.removeItem("role");
+    } else {
+      navigate(`/login`);
+
+      localStorage.removeItem("token");
+      localStorage.removeItem("role");
+    }
+    setAuth({});
+
+    // setAuthTokens();
+    // setRol();
   }
   return (
     <nav className="bg-light-blue-500  py-6 px-3">

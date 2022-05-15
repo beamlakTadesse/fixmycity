@@ -1,4 +1,5 @@
-import { useJwt } from "react-jwt";
+import jwt_decode from "jwt-decode";
+import React from "react";
 
 export default function getQueryVariable(variable) {
   var query = window.location.search.substring(1);
@@ -14,20 +15,47 @@ export default function getQueryVariable(variable) {
   }
   return false;
 }
+
+let role = localStorage.getItem("role");
+let token = localStorage.getItem("token");
+export function getToken() {
+  return token;
+}
 export function isAuthenticated() {
-  let token = localStorage.getItem("token");
   if (token) {
     return true;
   } else {
     return false;
   }
 }
+export function isSuperAdmin() {
+  if (role == 1) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
-export function GetRole() {
-  let token = localStorage.getItem("token");
-  const { decodedToken, isExpired } = useJwt(token);
-  console.log("get role......");
+export function isSectorAdmin() {
+  if (role === 2) {
+    console.log("role yeeeee");
+    return true;
+  } else {
+    console.log("role nooooo");
 
+    return false;
+  }
+}
+
+export function setRole(token) {
+  var decodedToken = jwt_decode(token.access);
   console.log(decodedToken);
-  console.log(isExpired);
+  localStorage.setItem("userId", decodedToken.user_id);
+  localStorage.setItem("role", decodedToken.role);
+}
+export function getRole() {
+  return localStorage.getItem("role");
+}
+export function getUserId() {
+  return localStorage.getItem("userId");
 }

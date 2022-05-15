@@ -8,16 +8,17 @@ import PageVisitsCard from "components/sector/PageVisitsCard";
 // import TrafficCard from 'components/TrafficCard';
 import CardTable from "components/sector/TableCard";
 import Footer from "../../components/Footer";
+import { getUserId } from "helpers/utils";
 
 export default function Dashboard() {
   const [sectors, setSectors] = useState({});
   const [sectorsInfo, setSectorsInfo] = useState({});
 
   useEffect(() => {
-    // mounted.current = true;
+    const user_id = getUserId();
     var id = 4;
     // const url = `http://localhost:8000/v1/report_status/${id}/`;
-    const url = `http://localhost:8000/v1/report_status/4/`;
+    const url = `http://localhost:8000/v1/report_status/${user_id}/`;
 
     const fetchData = async () => {
       try {

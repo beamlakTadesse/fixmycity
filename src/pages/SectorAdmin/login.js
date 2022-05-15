@@ -1,30 +1,34 @@
 import { Input, Image, Button } from "@material-tailwind/react";
 import logo from "../../assets/img/fix.jpg";
 import addis from "../../assets/img/addis.jpg";
-import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { setRole } from "../../helpers/utils";
+import React, { useState } from "react";
+import { useNavigate, Route, useLocation } from "react-router-dom";
+import { setRole } from "helpers/utils";
+import jwt_decode from "jwt-decode";
+import useAuth from "../../hooks/auth";
 
-export default function LogIn() {
+export default function LogInSectorAdmin() {
+  let location = useLocation();
   const navigate = useNavigate();
-  const location = useLocation();
   const [inputs, setInputs] = useState({
-    username: "",
+    email: "",
     password: "",
   });
   function handleChange(e) {
     const { name, value } = e.target;
     setInputs((inputs) => ({ ...inputs, [name]: value }));
   }
+  const { setAuth } = useAuth();
   const [submitted, setSubmitted] = useState(false);
   const [loginState, setLoginState] = useState(false);
   const [loginMessage, setLoginMessage] = useState("");
+  const [tokenn, setToken] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
     console.log(submitted);
     setSubmitted(true);
-    if (username && password) {
+    if (email && password) {
       const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -32,7 +36,7 @@ export default function LogIn() {
       };
       try {
         fetch(
-          `http://localhost:8000/v1/admins/login_superadmin/`,
+          `http://localhost:8000/v1/admins/login_sectoradmin/`,
           requestOptions
         )
           .then((response) => response.json())
@@ -40,9 +44,19 @@ export default function LogIn() {
             if (res.message) {
               setLoginState(true);
               setLoginMessage(res.message);
+              const token = res.token.access;
+              var decodedToken = jwt_decode(token);
+              console.log(decodedToken);
+              var roles = decodedToken.role;
+              localStorage.setItem("userId", decodedToken.user_id);
+              localStorage.setItem("role", roles);
+
+              setAuth({ token, roles });
               localStorage.setItem("token", res.token.access);
-              setRole(res.token);
-              navigate(`/admin/dashboard`);
+
+              navigate(`/sectors/dashboard`);
+
+              // <Navigate to="/sectors/dashboard" state={{ from: location }} />;
             } else {
               setLoginState(false);
               setLoginMessage(res.detail);
@@ -50,13 +64,23 @@ export default function LogIn() {
             console.log(res);
           });
       } catch (e) {
-        navigate(`/login`);
+        setServErr(e);
+        console.log(e);
+        navigate(`/sector/login`);
       }
     }
   }
-  const { username, password } = inputs;
+  const [servErr, setServErr] = useState("");
+
+  const { email, password } = inputs;
+
   return (
     <div className="bg-white font-family-karla">
+      {servErr && (
+        <div>
+          <alert message={servErr}></alert>
+        </div>
+      )}
       <div className="w-full flex flex-wrap">
         <div className="w-full md:w-1/2 flex flex-col">
           <div className="flex justify-center pt-8">
@@ -75,15 +99,15 @@ export default function LogIn() {
                 <Input
                   type="text"
                   id="username"
-                  name="username"
-                  placeholder="username"
+                  name="email"
+                  placeholder="email"
                   onChange={handleChange}
-                  value={username}
+                  value={email}
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
                 />
               </div>
-              {submitted && !username && (
-                <div className="text-red-400">Username is required</div>
+              {submitted && !email && (
+                <div className="text-red-400">email is required</div>
               )}
 
               <div class="flex flex-col pt-4">

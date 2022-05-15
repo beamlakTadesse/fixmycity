@@ -9,7 +9,6 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { sectorActions, userActions } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
-import Select from "react-select";
 import Table from "components/report/Table";
 
 export default function AddSectorAdminForm() {

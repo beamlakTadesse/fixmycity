@@ -14,7 +14,7 @@ export default function SectorManage({ sectorsCount }) {
 
   return (
     <Card>
-      <CardHeader color="purple" contentPosition="none">
+      <CardHeader color="blue" contentPosition="none">
         <div className="w-full flex items-center justify-between">
           <h2 className="text-white text-2xl">Active Sectors Admin</h2>
           <Button

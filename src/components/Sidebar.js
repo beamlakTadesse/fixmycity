@@ -1,11 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import AdminNavbar from "./AdminNavbar";
 import Icon from "@material-tailwind/react/Icon";
 import H6 from "@material-tailwind/react/Heading6";
+import { isSectorAdmin, isSuperAdmin } from "helpers/utils";
 
 export default function Sidebar() {
+  const [isAdmin, setAdmin] = useState(isSuperAdmin());
   const [showSidebar, setShowSidebar] = useState("-left-64");
+  useEffect(() => {
+    setAdmin(isSuperAdmin());
+  }, [isAdmin]);
+
   return (
     <>
       <AdminNavbar showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
@@ -25,28 +31,43 @@ export default function Sidebar() {
             <hr className="my-4 min-w-full" />
 
             <ul className="flex-col min-w-full flex list-none">
-              <li className="rounded-lg mb-4">
-                <NavLink
-                  to="/"
-                  exact
-                  className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
-                  activeClassName="bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-md"
-                >
-                  <Icon name="dashboard" size="2xl" />
-                  Dashboard
-                </NavLink>
-              </li>
-
-              <li className="rounded-lg mb-2">
-                <NavLink
-                  to="/admin/sectors"
-                  className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
-                  activeClassName="bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-md"
-                >
-                  <Icon name="settings" size="2xl" />
-                  Sector
-                </NavLink>
-              </li>
+              {isAdmin && (
+                <li className="rounded-lg mb-4">
+                  <NavLink
+                    to="/"
+                    exact
+                    className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
+                    activeClassName="bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-md"
+                  >
+                    <Icon name="dashboard" size="2xl" />
+                    Dashboard
+                  </NavLink>
+                </li>
+              )}
+              {!isAdmin && (
+                <li className="rounded-lg mb-2 text-gray-700">
+                  <NavLink
+                    to="/sectors/dashboard"
+                    className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
+                    activeClassName="bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-md"
+                  >
+                    <Icon name="map" size="2xl" />
+                    Sector Dashboard
+                  </NavLink>
+                </li>
+              )}
+              {isAdmin && (
+                <li className="rounded-lg mb-2">
+                  <NavLink
+                    to="/admin/sectors"
+                    className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
+                    activeClassName="bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-md"
+                  >
+                    <Icon name="settings" size="2xl" />
+                    Sector
+                  </NavLink>
+                </li>
+              )}
               <li className="rounded-lg mb-2 ">
                 <NavLink
                   to="/users"
@@ -79,28 +100,18 @@ export default function Sidebar() {
                   Profile
                 </NavLink>
               </li>
-
-              <li className="rounded-lg mb-2 ">
-                <NavLink
-                  to="/announcement"
-                  className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
-                  activeClassName="bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-md"
-                >
-                  <Icon name="toc" size="2xl" />
-                  Announcement
-                </NavLink>
-              </li>
-
-              <li className="rounded-lg mb-2 text-gray-700">
-                <NavLink
-                  to="/sectors/dashboard"
-                  className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
-                  activeClassName="bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-md"
-                >
-                  <Icon name="map" size="2xl" />
-                  Sector Dashboard
-                </NavLink>
-              </li>
+              {!isAdmin && (
+                <li className="rounded-lg mb-2 ">
+                  <NavLink
+                    to="/announcement"
+                    className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
+                    activeClassName="bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-md"
+                  >
+                    <Icon name="toc" size="2xl" />
+                    Announcement
+                  </NavLink>
+                </li>
+              )}
             </ul>
           </div>
         </div>

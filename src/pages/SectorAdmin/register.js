@@ -1,11 +1,11 @@
 import { Input, Image, Button } from "@material-tailwind/react";
 import getQueryVariable from "helpers/utils";
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate, Route, useLocation } from "react-router-dom";
 
 export default function Register() {
-  const history = useHistory();
-
+  let location = useLocation();
+  const navigate = useNavigate();
   const [inputs, setInputs] = useState({
     username: "",
     password: "",
@@ -39,21 +39,23 @@ export default function Register() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(inputs),
         };
-        fetch(
-          `http://localhost:8000/v1/admins/email-verify/`,
-          requestOptions
-        ).then(async (response) => {
-          const data = await response.json();
+        try {
+          fetch(
+            `http://localhost:8000/v1/admins/email-verify/`,
+            requestOptions
+          ).then(async (response) => {
+            const data = await response.json();
 
-          // check for error response
-          if (!response.ok) {
-            console.log(data);
+            // check for error response
+            if (!response.ok) {
+              console.log(data);
 
-            // get error message from body or default to response status
-          } else {
-            history.push("/login");
-          }
-        });
+              // get error message from body or default to response status
+            } else {
+              navigate(`/sector/login`);
+            }
+          });
+        } catch (e) {}
       }
     } else {
     }
