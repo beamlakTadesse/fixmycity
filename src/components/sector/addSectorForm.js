@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Card from '@material-tailwind/react/Card';
 import CardHeader from '@material-tailwind/react/CardHeader';
 import CardBody from '@material-tailwind/react/CardBody';
@@ -9,9 +9,34 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { sectorActions, userActions } from '../../actions'
 import { useDispatch, useSelector } from 'react-redux';
+import { NavLink } from "react-router-dom";
 
-export default function AddSectorForm() {
+import Modal from "@material-tailwind/react/Modal";
+import ModalHeader from "@material-tailwind/react/ModalHeader";
+import ModalBody from "@material-tailwind/react/ModalBody";
+import { act } from "@testing-library/react";
+// import authHeader from 'helpers'
+export default function AddSectorForm({isActive, setIsActive}) {
     const dispatch = useDispatch();
+     
+    const [lati, setLat]= useState(null);
+    const [lngi, setLng] = useState(null);
+
+
+    // const [showModal, setShowModal] = useState(false);
+    const [checked, setChecked] = React.useState(false);
+
+    // ########### LOADING pAGE
+    // let circleCommonClasses = 'h-2.5 w-2.5 bg-current rounded-full';
+
+    // ####################### Loading PAge End
+    const [isLoading, setIsLoading] = useState(false);
+    const [isEmpty, setIsEmpty] = useState(true);
+    const [errorMessage, setErrorMessage] = useState(false);
+    const [isError, setError] = useState(false);
+    const [statusCode,setStatus] = useState(null);
+
+
     function componentDidMount() {
         navigator.geolocation.getCurrentPosition(function (position) {
             console.log("Latitude is :", position.coords.latitude);
@@ -20,35 +45,129 @@ export default function AddSectorForm() {
     }
 
     const [inputs, setInputs] = useState({
-        districtName: '',
+        district_name: '',
         email: '',
-        phone: '',
+        phone_number: '',
+        sector_type: 4,
+        lat:null,
+        lng:null,
 
     });
+    const [showModal, setShowModal] = useState(false);
+
+    // const [showModal, setShowModal] = useState(me_active);
     const [submitted, setSubmitted] = useState(false);
-    const { districtName, email, phone } = inputs;
-    function handleChange(e) {
-        const { name, value } = e.target;
-        setInputs(inputs => ({ ...inputs, [name]: value }));
-    }
+    const { district_name, email, phone_number, sector_type,lat, lng } = inputs;
+    const [mydata, setData] = useState({});
 
-    function handleSubmit(e) {
-        e.preventDefault();
 
-        setSubmitted(true);
-        if (districtName && email && phone) {
-            console.log('hello form is submmitted')
-            dispatch(sectorActions.create(inputs));
-            dispatch(sectorActions.getAll());
-        }
+    let subtitle;
+    const [modalIsOpen, setIsOpen] = React.useState(false);
+  
+    
+  
+    function afterOpenModal() {
+      // references are now sync'd and can be accessed.
+
     }
+  
+
+    // useEffect(()=>{
+
+
+        const handleChecked = () => {
+            setChecked(!checked);
+          };
+          
+          function handleChange(e) {
+              const { name, value } = e.target;
+              setInputs(inputs => ({ ...inputs, [name]: value }));
+          }
+      
+          // useEffect(()=>{
+      
+          
+         
+          async function handleSubmit(e) {
+              e.preventDefault();
+      
+              const url = `http://localhost:8000/v1/admins/sector/sector/`;
+              setSubmitted(true);
+             
+             
+              try {
+                  navigator.geolocation.getCurrentPosition(function (position) {
+                      console.log("Latitude is :", position.coords.latitude);
+                      setLat(position.coords.latitude);
+                      setLng(position.coords.longitude);
+                      // setInputs(inputs => ({lat: position.coords.latitude,lng:position.coords.longitude }));
+      // 
+                      console.log("Longitude is :", position.coords.longitude);
+                  });
+                  // const response = await fetch(url);
+                 
+                if (district_name && email && phone_number ) {
+                  setIsLoading(true);
+                  const requestOptions = {
+                      method: 'POST',
+                      headers: {'Content-Type': 'application/json' },
+                      body:JSON.stringify({'main_sector':checked,'district_name':district_name,'phone_number':phone_number,'sector_type':4,'email':email,"lng":lngi,"lat":lati})
+                  };
+                  console.log('hello form is submmitted')
+                  setSubmitted(false);
+                  
+                  await fetch(url, requestOptions).then((response) => {
+                      if(!response.ok) {
+                      setStatus(response.status);
+                      throw new Error(response.status);
+                  }
+                      else {
+                          return response.json()}
+                    })
+                    .then((data) => {
+                        setData(data);
+                      // this.setState({ isLoading: false, downlines: data.response });
+                      console.log("DATA STORED");
+                      setShowModal(false);
+      
+                      if(mydata.length === 0){
+                          setIsEmpty(true);
+      
+                      }
+                          
+      
+                    })
+                    .catch((error) => {
+                      console.log('error: ' + error);
+                      setErrorMessage("Please try Again");
+                      setError(true);
+                    });;
+                    setTimeout(() => {
+                      setIsLoading(false);            
+                  }, 1500)
+              }
+              
+                } catch (error) {
+                  console.log("error", error);
+                }
+      
+              //   setSubmitted(true);
+             
+          }
+      
 
 
 
     const [startDate, setStartDate] = useState(new Date());
     return (
-        <Card>
-            <CardHeader color="purple" contentPosition="none">
+
+        <Modal size="lg" active={isActive} toggler={() => setIsActive(false)} >
+        {/* active={me_active} toggler={() =>{me_active=!isactive}}> */}
+
+        <ModalBody>
+
+        <Card >
+            <CardHeader color="blue" contentPosition="none">
                 <div className="w-full flex items-center justify-between">
                     <h2 className="text-white text-2xl">Create Sector</h2>
 
@@ -65,9 +184,9 @@ export default function AddSectorForm() {
                                 type="text"
                                 color="purple"
                                 placeholder="District Name"
-                                name="districtName" value={districtName} onChange={handleChange}
+                                name="district_name" value={district_name} onChange={handleChange}
                             />
-                            {submitted && !districtName &&
+                            {submitted && !district_name &&
                                 <div className="mt-2 text-sm text-red-600">District Name is required</div>
                             }
                         </div>
@@ -87,9 +206,9 @@ export default function AddSectorForm() {
                                 type="text"
                                 color="purple"
                                 placeholder="Phone"
-                                name="phone" value={phone} onChange={handleChange}
+                                name="phone_number" value={phone_number} onChange={handleChange}
                             />
-                            {submitted && !phone &&
+                            {submitted && !phone_number &&
                                 <div className="mt-2 text-sm text-red-600">phone is required</div>
                             }
                         </div>
@@ -105,7 +224,7 @@ export default function AddSectorForm() {
                         </div>
                         <div className="row-span-3">
 
-                            <Button >
+                            <Button onClick={(e) => setShowModal(false)}>
                                 Cancel
                             </Button>
                         </div>
@@ -113,6 +232,9 @@ export default function AddSectorForm() {
                 </form>
             </CardBody>
         </Card>
+        </ModalBody>
+                   
+                   </Modal>
         // <div className="basis-1/2 md:basis-1/3">
         //     <form name="form" onSubmit={handleSubmit} className="basis-1/2 md:basis-1/3 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         //         <div className="mb-8">

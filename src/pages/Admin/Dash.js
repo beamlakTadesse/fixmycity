@@ -1,26 +1,23 @@
-// import PageVisitsCard from 'components/PageVisitsCard';
-// import StatusCard from 'components/StatusCard';
-// import TableCard from 'components/TableCard';
-
-
 
 import StatusCard from 'components/StatusCard';
-// import ChartLine from 'components/ChartLine';
 import ChartBar from 'components/admin/ChartBar';
-// import PageVisitsCard from 'components/PageVisitsCard';
-// import TrafficCard from 'components/TrafficCard';
 import SectorManage from 'components/admin/SectorManage';
 import React, { useEffect, useState, useRef} from 'react';
+import Loader from 'components/sector/shared/loader';
+import ErrorPage2 from 'components/sector/shared/errorPage2';
 
 export default function Dashboard() {
 
 
     const mounted = useRef(false);
 
-    const [data ,setData] = useState({});
-    const [data2, setData2] = useState({});
-    const [sectors, setSectors] = useState({});
+    const [data ,setData] = useState([]);
+    const [data2, setData2] = useState([]);
+    const [sectors, setSectors] = useState([]);
 
+    const [isLoading, setIsLoading] = useState(false);
+    const [isEmpty, setIsEmpty] = useState(true);
+    const [isError , setError] = useState(false);
     useEffect(() => {
         mounted.current = true;
 
@@ -30,6 +27,7 @@ export default function Dashboard() {
 
 
         const fetchData = async () => {
+            setIsLoading(true)
           try {
             const response = await fetch(url);
             const response2 = await fetch(url2);
@@ -42,13 +40,18 @@ export default function Dashboard() {
             setData(json);
             setData2(json2);
             setSectors(json3);
+
             console.log(json.banned);
             console.log(json2.water);
             console.log(json3[1])
 
           } catch (error) {
             console.log("error", error);
+            setError(true);
           }
+          setTimeout(() => {
+            setIsLoading(false);            
+        }, 1500);
         };
 
           fetchData();
@@ -58,6 +61,14 @@ export default function Dashboard() {
     var list2 = <ChartBar medata = {data2}/> 
   
     return (
+        (isLoading)?  <div class="flex justify-center items-center h-screen">
+                    <Loader/>   
+                </div>
+                :
+        (isError)?<ErrorPage2/>:
+        (!data.length>0 && !data2.length>0 && !sectors.length >0)? <div class="flex justify-center items-center h-screen">
+        <h2>No Record Found!!!!!!</h2>   
+    </div>:
         <>
             <div className="bg-light-blue-500 px-3 md:px-8 h-40" />
 
@@ -71,9 +82,6 @@ export default function Dashboard() {
                        
 
             {data &&
-                //   <div>
-
-
                 Object.keys(data).map((oneKey, i) => {
                     return (
                         <StatusCard
@@ -83,37 +91,44 @@ export default function Dashboard() {
                                 amount={data[oneKey][0]}
                                 date="Since yesterday"
                             />
-
                     )
                 }) 
                 
 
-            }
-
-                        {/* {list} */}
-                  
+            }                  
                     </div>
                 </div>
             
             
             </div>
 
+            
+            
                     <div className="grid grid-cols-1 xl:grid-cols-2 px-4 mb-14">
-                            {/* <ChartLine /> */}
+                        {data2.length>0 &&
                             <div className="xl:col-start-1 xl:col-end-4 px-4 mb-14">
                               <ChartBar medata = {data2}/>
                            
                         </div>
+}
+                        {(data2.length>0 && sectors.length>0)?  
                         <div className="xl:col-start-4 xl:col-end-6 px-4 mb-14">
                             <SectorManage sectorsCount = {sectors}/>
-                        </div>
-                            {/* <ChartBar /> */}
-                      
+                        </div>: <>
+                        {(sectors.length>0) && 
+                            <div className=" px-4 mb-14">
+                                <SectorManage sectorsCount = {sectors}/>
+                             </div>
+                            }
+                        </>
+                             
+                        }
+                     
                     </div>
+                    
                 </div>
             </div>
 
         </>
     );
 }
-

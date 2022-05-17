@@ -8,36 +8,43 @@ import CardBody from '@material-tailwind/react/CardBody';
 import AnnouncementCard from './mycard';
 import { useDispatch, useSelector } from 'react-redux';
 import { announcementActions } from 'actions';
-export default function AnnouncementList() {
+import Loader from '../shared/loader';
+export default function AnnouncementList({announcements}) {
 
 
-    const products = ['Custom users', 'Banned Users', 'Sectors'];
 
-    const list = products.map(product => <div className="xl:col-start-1 xl:col-end-4 px-4 mb-14 mr-8">
-        <AnnouncementCard />
-
-    </div>)
+    const [isLoading, setIsLoading]= useState(false);
+    const [isError, setError] = useState(false);
     const dispatch = useDispatch();
-    const announcements = useSelector(state => state.announcement);
-    useEffect(() => {
-        dispatch(announcementActions.getAll());
-    }, [])
-    console.log("announcement2", announcements['items']);
+    // const announcements = useSelector(state => state.announcement);
+
+   
+    // useEffect(() => {
+    //     dispatch(announcementActions.getAll());
+    // }, [])
+    // console.log("announcement2", announcements['items']);
 
     return (
-        <>
+        (isLoading)? <div class="flex justify-center items-center h-screen">
+        <Loader/>   
+        
+    </div>:<>
 
 
-            {announcements.items &&
+            {announcements && 
                 //   <div>
 
 
-                Object.keys(announcements.items).map((oneKey, i) => {
+                Object.keys(announcements).map((oneKey, i) => {
                     return (
                         <div className="xl:col-start-1 xl:col-end-4 px-4 mb-14 mr-8">
                             {/* <AnnouncementCard /> */}
-                            <AnnouncementCard image={announcements.items[oneKey].image} title={announcements.items[oneKey].title} description={announcements.items[oneKey].description} date={announcements.items[oneKey].date} />
-
+                            {
+                                announcements[oneKey]  &&
+                            
+                            <AnnouncementCard image={announcements[oneKey].image} title={announcements[oneKey].title} description={announcements[oneKey].description} date={announcements[oneKey].date} sector="Arada Subcity" address="Arada"/>
+                            // {announcements.items[oneKey].sector.district_name} address={announcements.items[oneKey].sector.address}/>
+                            }
                         </div>
 
                     )

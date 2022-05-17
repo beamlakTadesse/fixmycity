@@ -1,138 +1,127 @@
+import ErrorPage2 from 'components/sector/shared/errorPage2';
+import Loader from 'components/sector/shared/loader'
 import React, {useEffect, useState} from 'react'
 
-import Table, { AvatarCell, SelectColumnFilter, StatusPill } from './Table'  // new
+import Table, { phoneNumberCell,AvatarCell,LelaCell,PostedAtCell,StatePill,SpamStatus, ReportStatusColumnFilter, SelectColumnFilter, StatusPill, sectorCell } from './Table'  // new
+import { useLocation } from 'react-router-dom';
+import Card from '@material-tailwind/react/Card';
+import CardHeader from '@material-tailwind/react/CardHeader';
+import CardBody from '@material-tailwind/react/CardBody';
+import Image from '@material-tailwind/react/Image';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { reportActions } from '../../actions';
+import { Button } from '@material-tailwind/react';
+import { NavLink } from 'react-router-dom';
+// import ReportTableChart from 'components/sector/ReportTable';
 
 
-
-const getData = () => {
-    const data = [
-      {
-        id:1,
-        name: 'Jane Cooper',
-        email: 'jane.cooper@example.com',
-        title: 'Regional Paradigm Technician',
-        department: 'Optimization',
-        status: true,
-        role: 'Admin',
-        age: 27,
-        imgUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-      },
-      {
-        id:2,
-        name: 'Cody Fisher',
-        email: 'cody.fisher@example.com',
-        title: 'Product Directives Officer',
-        department: 'Intranet',
-        status: false,
-        role: 'Owner',
-        age: 43,
-        imgUrl: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-      },
-      {
-        id:3,
-        name: 'Esther Howard',
-        email: 'esther.howard@example.com',
-        title: 'Forward Response Developer',
-        department: 'Directives',
-        status: true,
-        role: 'Member',
-        age: 32,
-        imgUrl: 'https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-      },
-      {
-        id:4,
-        name: 'Jenny Wilson',
-        email: 'jenny.wilson@example.com',
-        title: 'Central Security Manager',
-        department: 'Program',
-        status: true,
-        role: 'Member',
-        age: 29,
-        imgUrl: 'https://images.unsplash.com/photo-1498551172505-8ee7ad69f235?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-      },
-      {
-        id:4,
-        name: 'Kristin Watson',
-        email: 'kristin.watson@example.com',
-        title: 'Lean Implementation Liaison',
-        department: 'Mobility',
-        status: true,
-        role: 'Admin',
-        age: 36,
-        imgUrl: 'https://images.unsplash.com/photo-1532417344469-368f9ae6d187?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-      },
-      {
-        id:5,
-        name: 'Cameron Williamson',
-        email: 'cameron.williamson@example.com',
-        title: 'Internal Applications Engineer',
-        department: 'Security',
-        status: false,
-        role: 'Member',
-        age: 24,
-        imgUrl: 'https://images.unsplash.com/photo-1566492031773-4f4e44671857?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-      },
-    ]
-    return [...data, ...data, ...data]
-  }
-  
 function ReportShow() {
-
     
+  const location = useLocation();
+
+    const [isLoading, setIsLoading] = useState(false);
+    const [isError, setError] = useState(false);
     const columns = React.useMemo(() => [
+      {
+        // Header: "Lela",
+        accessor: 'image',
+        Cell: LelaCell,
+        // imgAccessor: "user.ProfileImage",
+        // emailAccessor: "user.full_name",
+        
+        // idAccessor:"id",
+      },
       {
         Header: "Name",
         accessor: 'user.first_name',
         Cell: AvatarCell,
         imgAccessor: "user.ProfileImage",
-        emailAccessor: "user.first_name",
-        idAccessor:"id",
+        // stateAccessor : "state",
+        
+        idAccessor:["state","id",],
       },
       {
-        Header: "Sector",
+        Header: "Sector Name",
         accessor: 'sector.district_name',
+        idAccessor:['state',"sector.email"],
+        Cell:sectorCell,
       },
       {
-        Header: "Status",
-        accessor: 'state',
-        Cell: StatusPill,
-
-        Filter: SelectColumnFilter,  // new
-        // filter: 'includes',
+        Header: "Phone Number",
+        accessor: 'user.phone_number',
+        idAccessor:'state',
+        Cell:phoneNumberCell
       },
       {
-        Header: "Like Count",
-        accessor: 'like_count',
-      },
-      {
-        Header: "Address",
-        accessor: 'sector.address',
-
+        Header: "Posted At",
+        accessor: 'postedAt',
+        Cell:PostedAtCell,
+        idAccessor:'state',
+        
         // Filter: SelectColumnFilter,  // new
         // filter: 'includes',
       },
+      {
+        Header: "Status",
+        accessor: 'status',
+        Cell: StatusPill,
+        
+        Filter: ReportStatusColumnFilter,  // new
+        // filter: 'includes',
+      },
+   
+    
+   
+      {
+        id:"spamStatus",
+        Header: "spamStatus",
+        accessor: 'spamStatus',
+ 
+        Cell: SpamStatus,
+        Filter: SelectColumnFilter,  // new
+        // filter: 'includes',
+      },
+     
+      
     ], [])
   
 
 const [mydata ,setData]= useState([]);
+// setIsLoading(true);
 
 useEffect(() => {
   // mounted.current = true;
   const url = `http://localhost:8000/v1/report/`;
+  // 
+  // const url = `http://localhost:8000/v1/myreport/`;
 
 
   const fetchData = async () => {
+    setIsLoading(true);
     try {
       const response = await fetch(url);
      
       const json = await response.json();
-      const lela = []
+      // console.log("LOCATION:_"+location.pathname);
+      // const lela = []
+      if(json){
         setData(json);
        
-      console.log("Sectors: ", json[0].id);
+      }
+       
+       
+      console.log("Sectors: ", json);
     } catch (error) {
       console.log("error", error);
+      setError(true);
+    //   setTimeout(() => {
+    //     setIsLoading(false);            
+    // }, 1500)
     }
+    setTimeout(() => {
+      setIsLoading(false);            
+  }, 1500)
   };
 
     fetchData();
@@ -142,16 +131,51 @@ useEffect(() => {
     // const data = React.useMemo(() => mydata, [])
   
     return (
-      <div className="min-h-screen bg-gray-100 text-gray-900">
+        isLoading?(
+            <div class="flex justify-center items-center h-screen">
+                <Loader/>   
+                
+            </div>
+      
+          ):
+
+      (isError)?<ErrorPage2 pathname={location.pathname}/>:      
+      <Card className="mt-20" >
+      <CardHeader color="blue" contentPosition="left">
+          <div className="flex flex-row items-end">
+
+              <div className='items-end'>
+                  <NavLink to="/maps" exact> <Button >View in Map</Button></NavLink>
+              </div>
+
+          </div>
+      </CardHeader>
+      <CardBody>
+          <div className="overflow-x-auto">
+
+
+          <div className=" bg-gray-100 text-gray-900">
+        {
+          mydata &&
+        
         <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
-          {/* <div className="">
-            <h1 className="text-xl font-semibold">React Table + Tailwind CSS = ❤</h1>
-          </div> */}
+         
           <div className="mt-6">
-            <Table columns={columns} data={mydata} />
+            
+              <Table columns={columns} data={mydata} />
+            
+            
           </div>
         </main>
-      </div>
+}
+      </div>             
+          </div>
+      </CardBody>
+  </Card>
+
+
+
+
     );
   }
 

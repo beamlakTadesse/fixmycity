@@ -18,7 +18,7 @@ async function create(sector) {
         body: JSON.stringify(sector)
     };
 
-    const response = await fetch(`/sectors/create`, requestOptions);
+    const response = await fetch(`http://localhost:8000/v1/admins/sector/sector/ `, requestOptions);
     return handleResponse(response);
 }
 async function getAll() {

@@ -112,7 +112,7 @@ export default function ReportChart() {
 
     return (
         <Card>
-            <CardHeader color="orange" contentPosition="left">
+            <CardHeader color="blue" contentPosition="left">
                 <h6 className="uppercase text-gray-200 text-xs font-medium">
                     Overview
                 </h6>
