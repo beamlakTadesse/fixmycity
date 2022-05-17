@@ -44,7 +44,7 @@ export default function Sidebar() {
                                 <NavLink
                                     to="/admin/sectors"
                                     className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
-                                    activeClassName="bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-md"
+                                    activeClassName="bg-gradient-to-tr from-[#481F01] to-[#4A2511] text-white shadow-md"
                                 >
                                     <Icon name="settings" size="2xl" />
                                     Sector
