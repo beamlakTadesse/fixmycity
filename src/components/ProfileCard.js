@@ -47,7 +47,7 @@ export default function ProfileCard() {
             <CardBody>
             
                 <form>
-                    <h6 className="text-purple-500 text-sm mt-9 mb-6 font-bold uppercase">
+                    <h6 className="text-[#481F01] text-sm mt-9 mb-6 font-bold uppercase">
                         personal Information
                     </h6>
                     <div className="flex flex-wrap text-xs mt-10">
@@ -71,7 +71,7 @@ export default function ProfileCard() {
                         
                     </div>
 
-                    <h6 className="text-purple-500 text-sm my-6 font-bold uppercase">
+                    <h6 className="text-[#481F01] text-sm my-6 font-bold uppercase">
                         Sector Information
                     </h6>
                     <div className="flex flex-wrap text-xs mt-10">

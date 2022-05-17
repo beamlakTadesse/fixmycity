@@ -8,7 +8,9 @@ module.exports = {
             serif: ['"Roboto Slab"', 'serif'],
             body: ['Roboto', 'sans-serif'],
         },
-        extend: {},
+        extend: {
+            
+        },
     },
     variants: {
         extend: {},

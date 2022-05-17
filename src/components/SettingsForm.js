@@ -8,7 +8,7 @@ import Textarea from '@material-tailwind/react/Textarea';
 export default function SettingsForm() {
     return (
         <Card>
-            <CardHeader color="purple" contentPosition="none">
+            <CardHeader color="brown" contentPosition="none">
                 <div className="w-full flex items-center justify-between">
                     <h2 className="text-white text-2xl">My Account</h2>
                     <Button
@@ -23,7 +23,7 @@ export default function SettingsForm() {
             </CardHeader>
             <CardBody>
                 <form>
-                    <h6 className="text-purple-500 text-sm mt-3 mb-6 font-light uppercase">
+                    <h6 className="text-[#481F01] text-sm mt-3 mb-6 font-light uppercase">
                         User Information
                     </h6>
                     <div className="flex flex-wrap mt-10">
@@ -57,7 +57,7 @@ export default function SettingsForm() {
                         </div>
                     </div>
 
-                    <h6 className="text-purple-500 text-sm my-6 font-light uppercase">
+                    <h6 className="text-[#481F01] text-sm my-6 font-light uppercase">
                         Contact Information
                     </h6>
                     <div className="flex flex-wrap mt-10">
@@ -91,7 +91,7 @@ export default function SettingsForm() {
                         </div>
                     </div>
 
-                    <h6 className="text-purple-500 text-sm my-6 font-light uppercase">
+                    <h6 className="text-[#481F01] text-sm my-6 font-light uppercase">
                         About Me
                     </h6>
                     <div className="flex flex-wrap mt-10 font-light">
