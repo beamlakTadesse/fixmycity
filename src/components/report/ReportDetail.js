@@ -3,7 +3,7 @@ import React, {useState, useEffect} from "react";
 // import ReportInfo from "components/report/ReportInfo";
 import { useParams } from "react-router-dom";
 import Image1 from '../../assets/img/tick.jpg';
-import Image2 from '../../assets/img/profile.jpg';
+import Image2 from '../../assets/img/ann.png';
 import Done from '../../assets/img/done.png';
 import Active from '../../assets/img/active1.png';
 import Image3 from '../../assets/img/location.png';
@@ -256,7 +256,7 @@ function toDate(date) {
 }} >
     <h3 className="m-2 font-bold pl-1 text-lg text-[rgb(153,153,153)]">👍 {mydata.like_count}</h3></Button>
 }
-        {!mydata.state && !mydata.spamStatus &&
+        {mydata.status==="UNRESOLVED" && !mydata.spamStatus &&
 
         <Button className='ml-[30px] mt-[30px]' style={{backgroundColor: 'rgb(34,139,34)'}} 
          onClick={resolveReport}>
