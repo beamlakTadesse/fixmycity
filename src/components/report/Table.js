@@ -112,7 +112,7 @@ export function ReportStatusColumnFilter({
         {options.map((option, i) => (
           <option key={i} value={option}>
             
-            {option?"Resolved":"Active"}
+            {option.startsWith("RESOLVED")?"Resolved":(option.startsWith("UNRESOLVED")?"UnResolved":"Rejected")}
           </option>
         ))}
       </select>
