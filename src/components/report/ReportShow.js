@@ -159,9 +159,7 @@ useEffect(() => {
           mydata &&
         
         <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
-          {/* <div className="">
-            <h1 className="text-xl font-semibold">React Table + Tailwind CSS = ❤</h1>
-          </div> */}
+         
           <div className="mt-6">
             
               <Table columns={columns} data={mydata} />
