@@ -56,7 +56,7 @@ export default function AddSectorForm() {
             </CardHeader>
             <CardBody>
                 <form>
-                    <h6 className="text-purple-500 text-sm mt-3 mb-6 font-light uppercase">
+                    <h6 className="text-[#481F01] text-sm mt-3 mb-6 font-light uppercase">
                         District Information
                     </h6>
                     <div className="flex flex-wrap mt-10">
@@ -99,7 +99,7 @@ export default function AddSectorForm() {
                     </div>
                     <div className="grid grid-rows-3 grid-flow-col gap-1">
                         <div className="row-span-3">
-                            <Button onClick={(e) => handleSubmit(e)}>
+                            <Button color= 'brown' onClick={(e) => handleSubmit(e)}>
                                 Submit
                             </Button>
                         </div>
