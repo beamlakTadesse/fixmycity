@@ -30,28 +30,28 @@ export default function SettingsForm() {
                         <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">
                             <Input
                                 type="text"
-                                color="purple"
+                                color="amber"
                                 placeholder="Username"
                             />
                         </div>
                         <div className="w-full lg:w-6/12 pl-4 mb-10 font-light">
                             <Input
                                 type="email"
-                                color="purple"
+                                color="amber"
                                 placeholder="Email Address"
                             />
                         </div>
                         <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">
                             <Input
                                 type="text"
-                                color="purple"
+                                color="amber"
                                 placeholder="First Name"
                             />
                         </div>
                         <div className="w-full lg:w-6/12 pl-4 mb-10 font-light">
                             <Input
                                 type="email"
-                                color="purple"
+                                color="amber"
                                 placeholder="Last Name"
                             />
                         </div>
@@ -64,28 +64,28 @@ export default function SettingsForm() {
                         <div className="w-full lg:w-12/12 mb-10 font-light">
                             <Input
                                 type="text"
-                                color="purple"
+                                color="amber"
                                 placeholder="Address"
                             />
                         </div>
                         <div className="w-full lg:w-4/12 pr-4 mb-10 font-light">
                             <Input
                                 type="text"
-                                color="purple"
+                                color="amber"
                                 placeholder="City"
                             />
                         </div>
                         <div className="w-full lg:w-4/12 px-4 mb-10 font-light">
                             <Input
                                 type="text"
-                                color="purple"
+                                color="amber"
                                 placeholder="Country"
                             />
                         </div>
                         <div className="w-full lg:w-4/12 pl-4 mb-10 font-light">
                             <Input
                                 type="text"
-                                color="purple"
+                                color="amber"
                                 placeholder="Postal Code"
                             />
                         </div>
@@ -95,7 +95,7 @@ export default function SettingsForm() {
                         About Me
                     </h6>
                     <div className="flex flex-wrap mt-10 font-light">
-                        <Textarea color="purple" placeholder="About Me" />
+                        <Textarea color="amber" placeholder="About Me" />
                     </div>
                 </form>
             </CardBody>
