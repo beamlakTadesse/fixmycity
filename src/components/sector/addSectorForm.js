@@ -105,7 +105,7 @@ export default function AddSectorForm() {
                         </div>
                         <div className="row-span-3">
 
-                            <Button >
+                            <Button color = 'brown' >
                                 Cancel
                             </Button>
                         </div>
