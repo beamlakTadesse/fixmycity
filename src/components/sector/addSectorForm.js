@@ -48,7 +48,7 @@ export default function AddSectorForm() {
     const [startDate, setStartDate] = useState(new Date());
     return (
         <Card>
-            <CardHeader color="purple" contentPosition="none">
+            <CardHeader color="brown" contentPosition="none">
                 <div className="w-full flex items-center justify-between">
                     <h2 className="text-white text-2xl">Create Sector</h2>
 
