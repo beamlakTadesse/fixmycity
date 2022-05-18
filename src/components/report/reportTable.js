@@ -24,7 +24,7 @@ export default function ReportTable() {
                 <div className="flex flex-row items-end">
 
                     <div className='items-end'>
-                        <NavLink to="/maps" exact> <Button className = "bg-[#DEB887]">View in Map</Button></NavLink>
+                        <NavLink to="/maps" exact> <Button color="transparent" >View in Map</Button></NavLink>
                     </div>
 
                 </div>
