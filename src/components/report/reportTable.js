@@ -20,11 +20,11 @@ export default function ReportTable() {
     
     return (
         <Card>
-            <CardHeader color="purple" contentPosition="left">
+            <CardHeader color="brown" contentPosition="left">
                 <div className="flex flex-row items-end">
 
                     <div className='items-end'>
-                        <NavLink to="/maps" exact> <Button >View in Map</Button></NavLink>
+                        <NavLink to="/maps" exact> <Button className = "bg-[#DEB887]">View in Map</Button></NavLink>
                     </div>
 
                 </div>
