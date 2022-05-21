@@ -91,7 +91,7 @@ function App() {
           {isAuthenticat && (
             <Route exact path="/report_show/:id" element={<PageVisitsCard />} />
           )} */}
-          <Route exact path="/login" element={<LogIn />} />
+          <Route exact path="/login" element={<LogInSectorAdmin />} />
           <Route exact path="/sector/login" element={<LogInSectorAdmin />} />
           <Route exact path="/register/" element={<Register />} />
           <Route exact path="*" element={<LogIn />} />

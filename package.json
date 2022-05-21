@@ -16,6 +16,7 @@
     "@testing-library/user-event": "^12.1.10",
     "caniuse-lite": "^1.0.30001335",
     "chart.js": "2.9.4",
+    "cypress": "^9.6.1",
     "moment": "^2.29.2",
     "react": "^17.0.2",
     "react-datepicker": "^4.7.0",
@@ -38,7 +39,7 @@
     "start:react": "react-scripts start",
     "start": "npm-run-all -p watch:tailwind start:react",
     "build": "npm run build:tailwind && react-scripts build",
-    "test": "react-scripts test",
+    "test": "cypress open",
     "eject": "react-scripts eject",
     "npm:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",
     "yarn:clean": "rm -rf node_modules/ && rm -rf package-lock.json && yarn install && yarn start"

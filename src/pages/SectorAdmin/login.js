@@ -35,10 +35,7 @@ export default function LogInSectorAdmin() {
         body: JSON.stringify(inputs),
       };
       try {
-        fetch(
-          `http://localhost:8000/v1/admins/login_sectoradmin/`,
-          requestOptions
-        )
+        fetch(`http://localhost:8000/v1/admins/login_admin/`, requestOptions)
           .then((response) => response.json())
           .then((res) => {
             if (res.message) {
@@ -55,8 +52,6 @@ export default function LogInSectorAdmin() {
               localStorage.setItem("token", res.token.access);
 
               navigate(`/sectors/dashboard`);
-
-              // <Navigate to="/sectors/dashboard" state={{ from: location }} />;
             } else {
               setLoginState(false);
               setLoginMessage(res.detail);
@@ -103,6 +98,7 @@ export default function LogInSectorAdmin() {
                   placeholder="email"
                   onChange={handleChange}
                   value={email}
+                  data-cy="txt-lg-id-username"
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
                 />
               </div>
@@ -116,6 +112,7 @@ export default function LogInSectorAdmin() {
                   id="password"
                   name="password"
                   value={password}
+                  data-cy="txt-lg-id-password"
                   onChange={handleChange}
                   placeholder="Password"
                 />
@@ -127,6 +124,7 @@ export default function LogInSectorAdmin() {
                 onSubmit={handleSubmit}
                 type="submit"
                 value="Log In"
+                data-cy="btn-lg-id-login"
                 className="flex justify-center bg-purple text-lg hover:bg-gray-700 p-2 mt-8"
               >
                 LogIn
