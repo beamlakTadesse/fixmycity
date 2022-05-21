@@ -1,17 +1,15 @@
-import StatusCard from "components/StatusCard";
-import MapExample from "components/MapExample";
-import UserTable from "components/user/userTable";
-import TabsRender from "components/tabs";
-import ReportTable from "components/report/reportTable";
-import Sidebar from "components/Sidebar";
-import Footer from "components/Footer";
+import StatusCard from 'components/StatusCard';
+import MapExample from 'components/MapExample';
+import UserTable from 'components/user/userTable';
+import TabsRender from 'components/tabs'
+import ReportShow from 'components/report/ReportShow';
 export default function Report() {
-  return (
-    <>
-      <Sidebar />
-      <ReportTable />
-      <Footer />
-      {/* <UserTable /> */}
-    </>
-  );
+    return (
+        <>
+
+            <ReportShow />
+
+            {/* <UserTable /> */}
+        </>
+    );
 }

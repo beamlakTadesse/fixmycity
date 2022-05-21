@@ -7,11 +7,13 @@ import Input from '@material-tailwind/react/Input';
 import Textarea from '@material-tailwind/react/Textarea';
 import ProfilePicture from 'assets/img/team-1-800x800.jpg';
 import React, {useState, useEffect} from 'react';
-export default function ProfileCard() {
+export default function ProfileCard({editProfile, setEditProfile}) {
 
 
-    const [userId, setUserId] = useState(4);
+    const [userId, setUserId] = useState(2);
     const [users , setUsers] = useState({});
+    const [userRole, setUserRole] = useState(null);
+
     useEffect(() => {
         // mounted.current = true;
         const url = `http://localhost:8000/v1/admins/users/${userId}`;
@@ -24,6 +26,9 @@ export default function ProfileCard() {
             const json = await response.json();
             
             setUsers(json.user);
+            if (json.user){
+                setUserRole(json.user.role.id)
+            }
            
             // console.log("Sectors: ", json.sectors[0].district_name);
           } catch (error) {
@@ -34,6 +39,12 @@ export default function ProfileCard() {
           fetchData();
       
     }, []);
+
+    function EditProfile() {
+
+        setEditProfile(!editProfile);
+
+    }
     return (
         <>
         {users &&
@@ -47,31 +58,50 @@ export default function ProfileCard() {
             <CardBody>
             
                 <form>
-                    <h6 className="text-purple-500 text-sm mt-9 mb-6 font-bold uppercase">
+                    <h6 className="text-blue-500 text-sm mt-9 mb-6 font-bold uppercase">
                         personal Information
                     </h6>
                     <div className="flex flex-wrap text-xs mt-10">
+                        {users.first_name  && users.last_name &&
                         <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">
-                            <h1>Full name : </h1>
-                            <h1>{users.full_name}</h1>
+                            
+                            <h1>Full name  </h1>
+                            <h1>{users.first_name} {users.last_name}</h1>
                             
                         </div>
+                        }
+                        {
+                            users.username &&
+                        
                         <div className="w-full lg:w-6/12 pl-4 mb-10 font-light">
                             <h1>Username : </h1>
                             <h1>{users.username}</h1>
                         </div>
+                        }
+                         {
+                            users.email &&
+                        
+                        <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">
+                            <h1>Email : </h1>
+                            <h1>{users.email}</h1>
+                        </div>
+                        }
+                        {users.location &&
                         <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">
                             <h1>Location :</h1>
                             <h1> Addis Ababa / Ethiopia</h1>
                         </div>
+                        }
                         <div className="w-full lg:w-6/12 pl-4 mb-10 font-light">
                             <h1>Phone No. : </h1>
                             <h1>{users.phone_number}</h1>
                         </div>
                         
                     </div>
-
-                    <h6 className="text-purple-500 text-sm my-6 font-bold uppercase">
+                    {
+                        userRole===2 &&
+                    <>
+                    <h6 className="text-blue-500 text-sm my-6 font-bold uppercase">
                         Sector Information
                     </h6>
                     <div className="flex flex-wrap text-xs mt-10">
@@ -94,7 +124,8 @@ export default function ProfileCard() {
                         </div>
                         
                     </div>
-
+                            </>
+                    }
                     {/* <h6 className="text-purple-500 text-sm my-6 font-light uppercase">
                         About Me
                     </h6> */}
@@ -102,6 +133,17 @@ export default function ProfileCard() {
                         <Textarea color="purple" placeholder="About Me" />
                     </div> */}
                 </form>
+                {
+                    !editProfile &&
+                
+                <div className="grid grid-cols-1 xl:grid-cols-6">
+                        <Button className="xl:col-start-3 xl:col-end-6 px-4 mb-10" onClick={()=>{
+                                EditProfile();
+                        }}>
+                   
+                   Edit Profile</Button>
+                    </div>
+            }
             </CardBody>
         </Card>
                 }

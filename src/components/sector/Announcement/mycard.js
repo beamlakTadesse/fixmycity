@@ -11,19 +11,31 @@ import { FaPlay } from "react-icons/fa";
 import { MoonIcon } from "@heroicons/react/solid";
 import { SunIcon } from "@heroicons/react/solid";
 
-export default function AnnouncementCard({ title, description, image,date }) {
+export default function AnnouncementCard({ title, description, image,date , sector, address}) {
   function toDate(date) {
     return new Date(date).toDateString();
 }
 
   const [readMore, setReadMore] = useState(false);
-  const extraContent = <div>
+  const extraContent = sector && <div>
+    <div className='flex mt-[20px]'>
+      <span className='mr-[7px] text-[#424bb6]'>Posted BY: </span>
     <p className="extra-content">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, consectetur neque ab
-      porro quasi culpa nulla rerum quis minus voluptatibus sed hic ad quo sint, libero
-      commodi officia aliquam! Maxime.
+      {sector}
     </p>
+    
+      </div>
+    
+      <div className='flex mt-[20px]'>
+      <span className='mr-[7px] text-[#424bb6]'>Address: </span>
+        <p className="extra-content">
+          {address}
+        </p>
+    
+      </div>
+    
   </div>
+  
   const linkName = readMore ? <button className="md:m-2 m-auto mt-5 bg-[#5865F2] shadow-md shadow-[#5865f28a]  pt-2 pb-2 pl-6 pr-4 rounded-xl flex flex-row justify-center items-center hover:bg-[#424bb6] ease-linear duration-300">
     <FaPlay className="animate-ping" size={8} color="#fff" />
     <h1 className="text-white text-md font-semibold pl-2">
@@ -46,6 +58,7 @@ export default function AnnouncementCard({ title, description, image,date }) {
         {/* <div className=" text-white z-10 bg-[#5865F2] absolute pl-8 pr-8 pb-2 pt-2  rounded-tl-2xl rounded-br-2xl font-semibold">
           <h1>FREE</h1>
         </div> */}
+        {image &&
         <div className="h-full w-full relative border-2 border-white rounded-2xl">
           <Image
             src={image}
@@ -55,6 +68,7 @@ export default function AnnouncementCard({ title, description, image,date }) {
             className=" rounded-2xl"
           />
         </div>
+}
       </div>
 
       <div className=" h-full w-full mr-2 rounded-2xl ">
