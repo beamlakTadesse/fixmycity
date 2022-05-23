@@ -10,7 +10,7 @@ import UnAuthorized from 'components/sector/shared/unauthorized';
 export default function Announcement() {
 
       const [showModal, setShowModal] = React.useState(false);
-      
+     
     
       const [isLoading, setIsLoading]= useState(false);
       const [isError, setError] = useState(false);
@@ -31,13 +31,17 @@ export default function Announcement() {
              
               const json = await response.json();
               
-              if(json.status===401){
+              // if(json.status===401){
               setSectors(json.results);
-              }
+              // }
               console.log("Sectors: ", json.results);
             } catch (error) {
               console.log("error", error);
               setError(true);
+                     
+              console.log("Here");
+              // console.log(state);
+              console.log("hi");
             };
             setTimeout(() => {
               setIsLoading(false);            
@@ -46,6 +50,7 @@ export default function Announcement() {
           };
   
             fetchData();
+
         
       }, []);
 
@@ -53,7 +58,10 @@ export default function Announcement() {
         (isLoading)? <div class="flex justify-center items-center h-screen">
         <Loader/>   
         
-    </div>:(isError)?<ErrorPage2/>:<>
+    </div>:(isError)?<>
+             <ErrorPage2/>
+    </>
+   :<>
     {announcements.length===0?<UnAuthorized /> :
     <>
             <div className="bg-light-blue-500 px-3 md:px-8 h-10" />

@@ -2,6 +2,7 @@ import StatusCard from 'components/StatusCard';
 import SettingsForm from 'components/SettingsForm';
 import ProfileCard from 'components/ProfileCard';
 import { useState } from 'react';
+import Footer from 'components/Footer';
 
 export default function Dashboard() {
     const [editProfile, setEditProfile]= useState(false);

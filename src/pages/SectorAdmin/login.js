@@ -36,7 +36,7 @@ export default function LogInSectorAdmin() {
       };
       try {
         fetch(
-          `http://localhost:8000/v1/admins/login_sectoradmin/`,
+          `http://localhost:8000/v1/admins/login_admin/`,
           requestOptions
         )
           .then((response) => response.json())
