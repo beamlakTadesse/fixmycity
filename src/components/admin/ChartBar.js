@@ -124,7 +124,7 @@ export default function ChartBar({medata}) {
         
 
         <Card>
-            <CardHeader color="blue" contentPosition="left">
+            <CardHeader color="brown" contentPosition="left">
                 <h6 className="uppercase text-gray-200 text-xs font-medium">
                     {/* {mydata.tele[1]} */}
                 </h6>
