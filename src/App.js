@@ -50,7 +50,7 @@ function App() {
         <Routes>
           <Route element={<RequireAuth allowedRoles={[1]} />}>
             <Route exact path="/admin/sectors" element={<Sector />} />
-            <Route exact path="/admin/dashboard" element={<Dash />} />
+            <Route exact path="/admin/dashboard" element={<Dash />} /> 
           </Route>
           <Route element={<RequireAuth allowedRoles={[2]} />}>
             <Route exact path="/sector/dashboard" element={<SectorDash />} />
@@ -61,7 +61,7 @@ function App() {
             <Route exact path="/report_show/:id" element={<PageVisitsCard />} />
 
             <Route exact path="/sectors/dashboard" element={<SectorDash />} />
-            <Route exact path="/maps" element={<Maps />} />
+            <Route exact path="/maps" element={<Maps />} /> 
           </Route>
           <Route element={<RequireAuth allowedRoles={[1, 2]} />}>
             <Route path="/" element={<SectorDash />} />
@@ -78,6 +78,18 @@ function App() {
           <Route exact path="/register/" element={<Register />} />
           <Route exact path="*" element={<LogIn />} />
           {/* <Footer /> */}
+
+
+          <Route exact path="/announcement" element={<Announcement />} />
+            <Route exact path="/ayy" element={<AnnouncementList />} />
+            <Route exact path="/sector/reports" element={<Report />} />
+            <Route exact path="/report_show/:id" element={<PageVisitsCard />} />
+
+            <Route exact path="/sectors/dashboard" element={<SectorDash />} />
+            <Route exact path="/maps" element={<Maps />} />
+            <Route path="/" element={<Dash />} />
+            <Route exact path="/admin/sectors" element={<Sector />} />
+            <Route exact path="/admin/dashboard" element={<Dash />} />
         </Routes>
       </div>
       {/* </ThemeProvider> */}

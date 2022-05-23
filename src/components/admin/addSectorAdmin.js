@@ -127,7 +127,7 @@ export default function AddSectorAdminForm() {
   // );
   useEffect(() => {
     getSectors();
-  });
+  },[]);
 
   return (
     // <Card>

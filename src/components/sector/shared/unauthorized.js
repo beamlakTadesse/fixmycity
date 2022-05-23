@@ -1,20 +1,24 @@
 import React, { useState } from "react";
-import ErrorI from "assets/img/broken_pipe.jpg";
+import ErrorI from 'assets/img/broken_pipe.jpg';
+// import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+    // let history = useHistory();
 
-export default function UnAuthorized({ pathname }) {
-  // let history = useHistory();
-  const [url, setUrl] = useState("http://localhost:3000");
-  // if(pathname){
-  //   setUrl(url+pathname);
-  // }
-  return (
-    <>
-      <div class="flex items-center justify-center w-full h-screen">
-        <div class="px-4 lg:py-12">
-          <div class="lg:gap-4 lg:flex">
-            <div class="flex flex-col items-center justify-center md:py-24 lg:py-32">
-              <h1 class="font-bold text-black-600 text-9xl">401</h1>
-              {/* <p
+export default function UnAuthorized({pathname}){
+    // let history = useHistory();
+    const [url, setUrl] = useState("http://localhost:3000");
+    // if(pathname){
+    //   setUrl(url+pathname);
+    // }
+    return (
+        <>
+        <div class="flex items-center justify-center w-full h-screen">
+  <div class="px-4 lg:py-12">
+    <div class="lg:gap-4 lg:flex">
+      <div
+        class="flex flex-col items-center justify-center md:py-24 lg:py-32"
+      >
+        <h1 class="font-bold text-black-600 text-9xl">401</h1>
+        {/* <p
           class="mb-2 text-2xl font-bold text-center text-gray-800 md:text-3xl"
         >
           <span class="text-red-500">Oops!</span> Page not found

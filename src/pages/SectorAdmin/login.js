@@ -35,8 +35,10 @@ export default function LogInSectorAdmin() {
         body: JSON.stringify(inputs),
       };
       try {
-        console.log("bbbb...");
-        fetch(`http://localhost:8000/v1/admins/login_admin/`, requestOptions)
+        fetch(
+          `http://localhost:8000/v1/admins/login_admin/`,
+          requestOptions
+        )
           .then((response) => response.json())
           .then((res) => {
             if (res.message) {
