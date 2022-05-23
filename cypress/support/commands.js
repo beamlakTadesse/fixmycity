@@ -23,3 +23,44 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.Commands.add("login", (email, password, responce, message) => {
+  cy.intercept(
+    "POST",
+    "http://localhost:8000/v1/admins/login_admin/",
+    (req) => {
+      req.reply((res) => {
+        res.send(responce);
+      });
+    }
+  );
+  cy.get("[data-cy='txt-lg-id-username']").type(email);
+  cy.get("[data-cy='txt-lg-id-password']").type(password);
+  cy.get("[data-cy='btn-lg-id-login']").click();
+  cy.contains(message).should("be.visible");
+});
+Cypress.Commands.add("Valid_login", () => {
+  cy.intercept(
+    "POST",
+    "http://localhost:8000/v1/admins/login_admin/",
+    (req) => {
+      req.reply((res) => {});
+    }
+  );
+  cy.get("[data-cy='txt-lg-id-username']").type("beamlaktadesse5@gmail.com");
+  cy.get("[data-cy='txt-lg-id-password']").type("admin");
+  cy.get("[data-cy='btn-lg-id-login']").click();
+});
+
+Cypress.Commands.add("form_request", (url, formData) => {
+  return cy
+    .server()
+    .route("POST", url)
+    .as("formRequest")
+    .window()
+    .then((win) => {
+      var xhr = new win.XMLHttpRequest();
+      xhr.open(method, url);
+      xhr.send(formData);
+    })
+    .wait("@formRequest");
+});

@@ -1,0 +1,43 @@
+{
+"valid_up_login":{
+    "email":"beamlaktadesse5@gmail.com",
+    "password":"admin",
+    "responce":  {
+        "message": "Sign In Successfull",
+        "token": {
+          "refresh":
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2Nlc3MiOiJyZWZyZXNoIiwiZXhwIjoxNjU0NDM3Njc4LCJpYXQiOjE2NTMxNDE2NzgsImp0aSI6IjhmY2VmMzMzYjZkNDRmYzY4MjA3NGU0ODE1MTRmMmIwIiwidXNlcl9pZCI6Niwic2VjdG9yIjoiZ3VsZWxlIGVscGhhIiwiZW1haWwiOiJiZWFtbGFrdGFkZXNzZTVAZ21haWwuY29tIiwicm9sZSI6Mn0.jcAwyWhljzoC2gO9cjgaXa_-vilEyyVOd9QWaNj8fzs",
+          "access":
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2Nlc3MiOiJhY2Nlc3MiLCJleHAiOjE2NTMzMTQ0NzgsImlhdCI6MTY1MzE0MTY3OCwianRpIjoiMTllY2E5MGM0MGQyNDYyZmFkYmU3NWRlZTQ1YTlmM2MiLCJ1c2VyX2lkIjo2LCJzZWN0b3IiOiJndWxlbGUgZWxwaGEiLCJlbWFpbCI6ImJlYW1sYWt0YWRlc3NlNUBnbWFpbC5jb20iLCJyb2xlIjoyfQ.oBWzY6cRKZjhHLGqegcf2DhqVvcs7t4Vc7LqrnmP5ts"
+        }
+      },
+      "message":      "Report"
+
+},
+"invalid_e_login":{
+    "email":"try5@gmail.com",
+    "password":"admin",
+    "responce": {
+        "detail": "account_doesnt_exist",
+        "code": "authentication_failed"
+      },
+      "message":"account_doesnt_exist"
+},"invalid_p_login":{
+    "email":"beamlaktadesse5@gmail.com",
+    "password":"1234",
+    "responce":  {
+        "detail": "No active account found with the given credentials",
+       "code": "user_credentials_not_valid"
+      },
+      "message":"No active account found with the given credentials"
+},"invalid_ep_login":{
+    "email":"try5@gmail.com",
+    "password":"567890",
+
+   "responce": {
+        "detail": "account_doesnt_exist",
+        "code": "authentication_failed"
+      },
+      "message":"account_doesnt_exist"
+}
+}

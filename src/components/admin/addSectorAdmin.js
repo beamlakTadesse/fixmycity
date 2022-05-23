@@ -22,6 +22,8 @@ export default function AddSectorAdminForm() {
   const [sectors, setSectors] = useState([]);
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
+
   const [sectorId, setSectorId] = useState(1);
   const [submitted, setSubmitted] = useState(false);
   function handleEmailChange(e) {
@@ -52,13 +54,14 @@ export default function AddSectorAdminForm() {
     console.log("submit....");
     e.preventDefault();
     setSubmitted(true);
+    setSuccess(false);
+    setError("");
     let token = localStorage.getItem("token");
     if (email) {
       const inputs = {
         email: email,
         sector: sectorId,
       };
-      console.log(inputs);
       const requestOptions = {
         method: "POST",
 
@@ -71,13 +74,16 @@ export default function AddSectorAdminForm() {
       fetch(`http://localhost:8000/v1/admins/register/`, requestOptions).then(
         async (response) => {
           const data = await response.json();
+          console.log(data);
 
           // check for error response
           if (!response.ok) {
             console.log(data);
+
             setError(data.email);
             // get error message from body or default to response status
           } else {
+            setSuccess(true);
           }
 
           // console.log(data);
@@ -131,7 +137,12 @@ export default function AddSectorAdminForm() {
     //   </CardHeader>
     //   <CardBody>
     <div>
-      {error && <div className="mt-2 text-sm text-red-600">{error}</div>}
+      {error && !success && (
+        <div className="mt-2 text-sm text-red-600">{error}</div>
+      )}
+      {success && (
+        <div className="mt-2 text-sm text-green-600">Successfully created</div>
+      )}
       <form>
         <div className="flex flex-wrap mt-10">
           <div className="grid grid-rows-2 ">
@@ -148,6 +159,7 @@ export default function AddSectorAdminForm() {
             </div>
             <div className="w-full pl-4 mb-10 font-light">
               <Input
+                data-cy="txt-createAdmin-email"
                 type="email"
                 color="purple"
                 placeholder="Email Address"
@@ -165,7 +177,12 @@ export default function AddSectorAdminForm() {
         </div>
         <div className="grid grid-rows-3 grid-flow-col gap-1">
           <div className="row-span-3">
-            <Button onClick={(e) => handleSubmit(e)}>Submit</Button>
+            <Button
+              data-cy="btn-createAdmin-submit"
+              onClick={(e) => handleSubmit(e)}
+            >
+              Submit
+            </Button>
           </div>
           <div className="row-span-3">
             <Button>Cancel</Button>

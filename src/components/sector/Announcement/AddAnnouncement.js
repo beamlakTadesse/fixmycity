@@ -77,10 +77,16 @@ export default function AddAnnouncement({ isActive, setIsActive }) {
         formData.append("description", values.description);
         const requestOptions = {
           method: "POST",
-          // headers: {'Content-Type': 'multipart/form-data' },
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+
           body: formData,
           // body:JSON.stringify({'title':values.title,'description':values.description,"image":currentPic})
         };
+        console.log(requestOptions);
+        // console.log(formData.get("title"));
+        // console.log(formData.get("description"));
 
         await fetch(url, requestOptions)
           .then((response) => {
@@ -134,6 +140,7 @@ export default function AddAnnouncement({ isActive, setIsActive }) {
                     name="districtName"
                     value={values.title}
                     onChange={handleTitleInputChange}
+                    data-cy="txt-postann-title"
                   />
                   {submitted && !values.title && (
                     <div className="mt-2 text-sm text-red-600">
@@ -184,6 +191,7 @@ export default function AddAnnouncement({ isActive, setIsActive }) {
                     value={values.description}
                     onChange={handleDescriptionInputChange}
                     placeholder="Description"
+                    data-cy="txt-postann-description"
                   ></textarea>
 
                   {submitted && !values.description && (
@@ -195,12 +203,26 @@ export default function AddAnnouncement({ isActive, setIsActive }) {
               </div>
 
               <div>
-                <input type="file" name="file" onChange={changeHandler} />
+                <input
+                  type="file"
+                  name="file"
+                  onChange={changeHandler}
+                  data-cy="btn-postann-image"
+                />
               </div>
-
+              {submitted && !isSelected && (
+                <div className="mt-2 text-sm text-red-600">
+                  image is required
+                </div>
+              )}
               <div className="grid grid-rows-3 grid-flow-col gap-1 mt-4">
                 <div className="row-span-3">
-                  <Button onClick={(e) => handleSubmit(e)}>Submit</Button>
+                  <Button
+                    onClick={(e) => handleSubmit(e)}
+                    data-cy="btn-postann-submit"
+                  >
+                    Submit
+                  </Button>
                 </div>
                 <div className="row-span-3">
                   <Button>Cancel</Button>

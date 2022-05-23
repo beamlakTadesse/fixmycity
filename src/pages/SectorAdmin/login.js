@@ -35,6 +35,7 @@ export default function LogInSectorAdmin() {
         body: JSON.stringify(inputs),
       };
       try {
+        console.log("bbbb...");
         fetch(`http://localhost:8000/v1/admins/login_admin/`, requestOptions)
           .then((response) => response.json())
           .then((res) => {
@@ -45,8 +46,8 @@ export default function LogInSectorAdmin() {
               var decodedToken = jwt_decode(token);
               console.log(decodedToken);
               var roles = decodedToken.role;
-              localStorage.setItem("userId", decodedToken.user_id);
-              localStorage.setItem("role", roles);
+              // localStorage.setItem("userId", decodedToken.user_id);
+              // localStorage.setItem("role", roles);
 
               setAuth({ token, roles });
               localStorage.setItem("token", res.token.access);

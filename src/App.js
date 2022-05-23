@@ -22,6 +22,7 @@ import LogInSectorAdmin from "pages/SectorAdmin/login";
 import LogIn from "pages/Admin/login";
 import PageVisitsCard from "components/report/ReportDetail";
 import RequireAuth from "components/RequireAuth";
+import UnAuthorized from "components/sector/shared/unauthorized";
 // import { ThemeProvider, CSSReset } from "@chakra-ui/core";
 import {
   getRole,
@@ -61,37 +62,9 @@ function App() {
 
             <Route exact path="/settings" element={<Settings />} />
           </Route>
-          {/* {isAuthenticat && (
-            <Route exact path="/settings" element={<Settings />} />
-          )}
-          {isAuthenticat && <Route exact path="/tables" element={<Tables />} />}
-          {isAuthenticat && <Route exact path="/maps" element={<Maps />} />} */}
-          {/* {isAuthenticat && isAdmin && (
-            <Route exact path="/admin/sectors" element={<Sector />} />
-          )} */}
-          {/* {isAuthenticat && isAdmin && (
-            <Route exact path="/admin/dashboard" element={<Dash />} />
-          )} */}
-          {/* {isAuthenticat && !isAdmin && (
-            <Route exact path="/sectors/dashboard" element={<SectorDash />} />
-          )}
-          {isAuthenticat && (
-            <Route exact path="/announcement" element={<Announcement />} />
-          )}
-          {isAuthenticat && (
-            <Route exact path="/ayy" element={<AnnouncementList />} />
-          )}
-          {isAuthenticat && (
-            <Route exact path="/sectors" element={<Sector />} />
-          )}
-          {isAuthenticat && <Route exact path="/users" element={<User />} />}
-          {isAuthenticat && (
-            <Route exact path="/sector/reports" element={<Report />} />
-          )}
-          {isAuthenticat && (
-            <Route exact path="/report_show/:id" element={<PageVisitsCard />} />
-          )} */}
+
           <Route exact path="/login" element={<LogInSectorAdmin />} />
+          <Route exact path="/unauthorized" element={<UnAuthorized />} />
           <Route exact path="/sector/login" element={<LogInSectorAdmin />} />
           <Route exact path="/register/" element={<Register />} />
           <Route exact path="*" element={<LogIn />} />
