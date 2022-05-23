@@ -36,6 +36,12 @@ import jwt_decode from "jwt-decode";
 // import Authorization from "RequireAuth";
 
 function App() {
+  const [comp, setComp] = useState();
+  useEffect(() => {
+    const role = getRole();
+
+    role == 1 ? setComp(<Dash />) : setComp(<SectorDash />);
+  });
   return (
     <>
       {/* <Sidebar /> */}
@@ -43,11 +49,12 @@ function App() {
       <div className="md:ml-64">
         <Routes>
           <Route element={<RequireAuth allowedRoles={[1]} />}>
-            <Route path="/" element={<Dash />} />
             <Route exact path="/admin/sectors" element={<Sector />} />
             <Route exact path="/admin/dashboard" element={<Dash />} />
           </Route>
           <Route element={<RequireAuth allowedRoles={[2]} />}>
+            <Route exact path="/sector/dashboard" element={<SectorDash />} />
+
             <Route exact path="/announcement" element={<Announcement />} />
             <Route exact path="/ayy" element={<AnnouncementList />} />
             <Route exact path="/sector/reports" element={<Report />} />
@@ -57,6 +64,8 @@ function App() {
             <Route exact path="/maps" element={<Maps />} />
           </Route>
           <Route element={<RequireAuth allowedRoles={[1, 2]} />}>
+            <Route path="/" element={comp} />
+
             <Route exact path="/tables" element={<Tables />} />
             <Route exact path="/users" element={<User />} />
 

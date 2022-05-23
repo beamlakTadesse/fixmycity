@@ -42,6 +42,7 @@ export default function AddSectorAdminForm() {
         var res = await response.json();
         if (response.ok) {
           setSectors(res.results);
+          console.log("sector..");
         }
       });
     } catch (error) {
