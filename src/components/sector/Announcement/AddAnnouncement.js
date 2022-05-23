@@ -155,23 +155,6 @@ export default function AddAnnouncement({isActive, setIsActive}) {
                               }
                           </div>
 
-                          {/* <Modal size="lg" active={showModal} toggler={() => setShowModal(false)}>
-                                                <ModalTitle>
-                                                    <Heading5>
-                                                      Success Message
-                                                    </Heading5>
-                                                </ModalTitle>
-                                                <ModalBody>
-                                                    <p>
-                                                         You have Successfully created announcement!                                                 </p>
-                                                </ModalBody>
-                                                <ModalFooter>
-                                                    <Button onClick={() => setError(true)}
-                                                    >Ok</Button>
-                                                   
-                                                </ModalFooter>
-
-                                            </Modal> */}
                                             
                           <div className="w-full lg:w-full mb-5 font-light">
                            

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import ErrorI from 'assets/img/broken_pipe.jpg';
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+// import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
     // let history = useHistory();
 
 export default function UnAuthorized({pathname}){
-    let history = useHistory();
+    // let history = useHistory();
     const [url, setUrl] = useState("http://localhost:3000");
     // if(pathname){
     //   setUrl(url+pathname);
