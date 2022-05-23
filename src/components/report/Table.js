@@ -251,8 +251,9 @@ export function AvatarCell({ value, column, row }) {
     <div className="flex items-center">
       <div className="ml-4">
         <NavLink
-          to={`/sector/reportdetail/${row.original[column.idAccessor[1]]}`}
+          to={`/report_show/${row.original[column.idAccessor[1]]}`}
           exact
+          data-cy="a-report-detail"
         >
           {!row.original[column.idAccessor[0]] ? (
             <div className="text-sm font-normal  text-black-900">{value}</div>

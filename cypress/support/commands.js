@@ -51,6 +51,19 @@ Cypress.Commands.add("Valid_login", () => {
   cy.get("[data-cy='btn-lg-id-login']").click();
 });
 
+Cypress.Commands.add("Valid_SA_login", () => {
+  cy.intercept(
+    "POST",
+    "http://localhost:8000/v1/admins/login_admin/",
+    (req) => {
+      req.reply((res) => {});
+    }
+  );
+  cy.get("[data-cy='txt-lg-id-username']").type("fix@gmail.com");
+  cy.get("[data-cy='txt-lg-id-password']").type("1234");
+  cy.get("[data-cy='btn-lg-id-login']").click();
+});
+
 Cypress.Commands.add("form_request", (url, formData) => {
   return cy
     .server()
@@ -63,4 +76,13 @@ Cypress.Commands.add("form_request", (url, formData) => {
       xhr.send(formData);
     })
     .wait("@formRequest");
+});
+
+Cypress.Commands.add("createUser", (email, response) => {
+  cy.visit("http://localhost:3000/admin/dashboard");
+
+  cy.get("[data-cy='btn-dash-addSectorAdmin']").click();
+  cy.get("[data-cy='txt-createAdmin-email']").type(email);
+  cy.get("[data-cy='btn-createAdmin-submit']").click();
+  cy.contains(response).should("be.visible");
 });

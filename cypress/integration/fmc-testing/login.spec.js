@@ -5,7 +5,7 @@ before(() => {
     this.data = data;
   });
 });
-describe("fixmycity app", () => {
+describe("testing login", () => {
   beforeEach(() => {
     cy.visit("http://localhost:3000/login");
   });

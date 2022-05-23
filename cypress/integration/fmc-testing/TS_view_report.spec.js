@@ -30,7 +30,7 @@ describe("example to-do app", () => {
       .contains("admin1")
       .should("be.visible");
   });
-  it.only("check it filters only nonspam reports when non spam  is clicked", () => {
+  it("check it filters only nonspam reports when non spam  is clicked", () => {
     cy.get("[data-cy= 'select-spam']").select("Non_Spam");
     cy.get("[data-cy = 'tbl-reports']")
       .should("have.lengthOf", 5)

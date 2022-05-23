@@ -36,12 +36,12 @@ import jwt_decode from "jwt-decode";
 // import Authorization from "RequireAuth";
 
 function App() {
-  const [comp, setComp] = useState();
-  useEffect(() => {
-    const role = getRole();
+  // const [comp, setComp] = useState();
+  // useEffect(() => {
+  //   const role = getRole();
 
-    role == 1 ? setComp(<Dash />) : setComp(<SectorDash />);
-  });
+  //   role == 1 ? setComp(<Dash />) : setComp(<SectorDash />);
+  // });
   return (
     <>
       {/* <Sidebar /> */}
@@ -64,7 +64,7 @@ function App() {
             <Route exact path="/maps" element={<Maps />} />
           </Route>
           <Route element={<RequireAuth allowedRoles={[1, 2]} />}>
-            <Route path="/" element={comp} />
+            <Route path="/" element={<SectorDash />} />
 
             <Route exact path="/tables" element={<Tables />} />
             <Route exact path="/users" element={<User />} />

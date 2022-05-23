@@ -1,36 +1,31 @@
 /// <reference types="cypress" />
-
+import login from "../../fixtures/createUser.json";
 describe("check if the admin can create users", () => {
   beforeEach(() => {
+    cy.fixture("creatUser.json").then(function (data) {
+      this.data = data;
+    });
     cy.visit("http://localhost:3000/login");
     cy.Valid_login();
     // cy.visit("http://localhost:3000/admin/dashboard");
   });
 
-  it.only("check without entering email", () => {
-    cy.visit("http://localhost:3000/admin/dashboard");
-
-    cy.get("[data-cy='btn-dash-addSectorAdmin']").click();
-    cy.get("[data-cy='txt-createAdmin-email']").type("");
-    cy.get("[data-cy='btn-createAdmin-submit']").click();
-    cy.contains(" email is required").should("be.visible");
+  it("check without entering email", () => {
+    cy.fixture("createUser").then((data) => {
+      cy.createUser(data.email.noEmail, data.response.noEmail);
+    });
   });
-  it.only("check already existing email", () => {
-    cy.visit("http://localhost:3000/admin/dashboard");
-
-    cy.get("[data-cy='btn-dash-addSectorAdmin']").click();
-    cy.get("[data-cy='txt-createAdmin-email']").type(
-      "alreadyexistingemail@gmail.com"
-    );
-    cy.get("[data-cy='btn-createAdmin-submit']").click();
-    cy.contains("user with this email already exists.").should("be.visible");
+  it("check already existing email", () => {
+    cy.fixture("createUser").then((data) => {
+      cy.createUser(
+        data.email.alreadyTokenEmail,
+        data.response.alreadyTokenEmail
+      );
+    });
   });
-  it.only("check with valid email", () => {
-    cy.visit("http://localhost:3000/admin/dashboard");
-
-    cy.get("[data-cy='btn-dash-addSectorAdmin']").click();
-    cy.get("[data-cy='txt-createAdmin-email']").type("validEmail@gmail.com");
-    cy.get("[data-cy='btn-createAdmin-submit']").click();
-    cy.contains("Successfully created").should("be.visible");
+  it("check with valid email", () => {
+    cy.fixture("createUser").then((data) => {
+      cy.createUser(data.email.validEmail, data.response.validEmail);
+    });
   });
 });

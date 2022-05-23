@@ -54,12 +54,20 @@ export function setRole(token) {
   localStorage.setItem("role", decodedToken.role);
 }
 export function getRole() {
-  var decodedToken = jwt_decode(token);
-  console.log(decodedToken);
-  return decodedToken.role;
+  if (token) {
+    var decodedToken = jwt_decode(token);
+    console.log(decodedToken);
+    return decodedToken.role;
+  } else {
+    return "0";
+  }
 }
 export function getUserId() {
-  var decodedToken = jwt_decode(token);
-  console.log(decodedToken);
-  return decodedToken.user_id;
+  if (token) {
+    var decodedToken = jwt_decode(token);
+    console.log(decodedToken);
+    return decodedToken.user_id;
+  } else {
+    return "0";
+  }
 }
