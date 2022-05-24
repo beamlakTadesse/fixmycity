@@ -5,6 +5,8 @@ import ModalHeader from "@material-tailwind/react/ModalHeader";
 import ModalBody from "@material-tailwind/react/ModalBody";
 import { useNavigate } from "react-router-dom";
 
+const google = window.google = window.google ? window.google : {}
+
 export default function MapExample() {
   const url = `http://localhost:8000/v1/report/`;
   const navigate = useNavigate();
