@@ -49,7 +49,7 @@ export default function AnnouncementCard({
   ) : (
     <button
       color="brown"
-      className="md:m-2 m-auto mt-5  shadow-md shadow-[#5865f28a]  pt-2 pb-2 pl-6 pr-4 rounded-xl flex flex-row justify-center items-center hover:bg-[#DEB887] ease-linear duration-300"
+      className="md:m-2 m-auto mt-5 bg-[#4A2511] shadow-md shadow-[#5865f28a]  pt-2 pb-2 pl-6 pr-4 rounded-xl flex flex-row justify-center items-center hover:bg-[#DEB887] ease-linear duration-300"
     >
       <FaPlay className="animate-ping" size={8} color="#fff" />
       <h1 className="text-white text-md font-semibold pl-2">See Detail</h1>
@@ -82,13 +82,11 @@ export default function AnnouncementCard({
       <div className=" h-full w-full mr-2 rounded-2xl ">
         <div className=" pt-4 pr-2 pl-2 flex flex-row  flex-wrap">
           <div className="flex flex-row items-left m-2">
-            <p className="m-2 font-bold pl-1 text-lg text-[#5865F2]">
-              #weather
-            </p>
+            <p className="m-2 font-bold pl-1 text-lg text-brown">#weather</p>
           </div>
 
           <div className="flex flex-row items-left m-2">
-            <p className="m-2 font-bold pl-1 text-lg text-[#5865F2]">
+            <p className="m-2 font-bold pl-1 text-lg text-brown">
               #roadsauthority
             </p>
           </div>
