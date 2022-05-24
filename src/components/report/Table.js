@@ -134,7 +134,7 @@ export function ReportUser({ value }) {
   return (
     <span
       className={classNames(
-        "px-3 py-1 uppercase leading-wide font-bold text-xs rounded-full shadow-sm",
+        "px-3 py-1 camelcase leading-wide font-bold text-xs rounded-full shadow-sm",
         value.startsWith("RESOLVED") ? "bg-green-100 text-green-800" : null,
         value.startsWith("UNRESOLVED") ? "bg-yellow-100 text-yellow-800" : null,
         value.startsWith("REJECTED") ? "bg-red-100 text-red-800" : null
@@ -152,28 +152,28 @@ export function StatusPill({ value }) {
   return (
     <span
       className={classNames(
-        "px-3 py-1 uppercase leading-wide font-bold text-xs rounded-full shadow-sm",
+        "px-3 py-1 camelcase leading-wide font-bold text-xs rounded-full shadow-sm",
         value.startsWith("RESOLVED") ? "bg-green-100 text-green-800" : null,
-        value.startsWith("UNRESOLVED") ? "bg-yellow-100 text-yellow-800" : null,
+        value.startsWith("UNRESOLVED") ? "bg-black-100 text-black-800" : null,
         value.startsWith("REJECTED") ? "bg-red-100 text-red-800" : null
       )}
     >
-      <NavLink to={`/report_show/${value}`} exact>
-        {" "}
-        {value}
-      </NavLink>
+      {/* <NavLink to={`/report_show/${value}`} exact> */}
+      {/* {" "} */}
+      {value}
+      {/* </NavLink> */}
     </span>
   );
 }
 
 export function SpamStatus({ value }) {
-  const status = value ? "Spam" : "Non_Spam";
+  const status = value ? "Spam" : "Non Spam";
   return (
     <span
       className={classNames(
-        "px-3 py-1 uppercase leading-wide font-bold text-xs rounded-full shadow-sm",
+        "px-3 py-1 camelcase leading-wide font-bold text-xs rounded-full shadow-sm",
         status.startsWith("Spam") ? "bg-red-100 text-red-800" : null,
-        status.startsWith("Non_Spam") ? "bg-green-100 text-green-800" : null
+        status.startsWith("Non Spam") ? "bg-green-100 text-green-800" : null
       )}
     >
       {status}
@@ -183,13 +183,13 @@ export function SpamStatus({ value }) {
 }
 
 export function StatePill({ value }) {
-  const status = value ? "seen" : "unseen";
+  const status = value ? "Seen" : "unSeen";
   return (
     <span
       className={classNames(
-        "px-3 py-1 uppercase leading-wide font-bold text-xs rounded-full shadow-sm",
-        status.startsWith("unseen") ? "bg-green-100 text-green-800" : null,
-        status.startsWith("seen") ? "bg-yellow-100 text-yellow-800" : null
+        "px-3 py-1 camelcase leading-wide font-bold text-xs rounded-full shadow-sm",
+        status.startsWith("unSeen") ? "bg-green-100 text-green-800" : null,
+        status.startsWith("Seen") ? "bg-yellow-100 text-yellow-800" : null
       )}
     >
       {status}
@@ -251,7 +251,7 @@ export function AvatarCell({ value, column, row }) {
     <div className="flex items-center">
       <div className="ml-4">
         <NavLink
-          to={`/report_show/${row.original[column.idAccessor[1]]}`}
+          to={`/sector/reports/${row.original[column.idAccessor[1]]}`}
           exact
           data-cy="a-report-detail"
         >

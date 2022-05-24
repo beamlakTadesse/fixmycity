@@ -4,6 +4,7 @@ import AdminNavbar from "./AdminNavbar";
 import Icon from "@material-tailwind/react/Icon";
 import H6 from "@material-tailwind/react/Heading6";
 import { isSectorAdmin, isSuperAdmin } from "helpers/utils";
+import { getSectorName } from "helpers/utils";
 
 export default function Sidebar() {
   const [isAdmin, setAdmin] = useState(isSuperAdmin());
@@ -25,7 +26,11 @@ export default function Sidebar() {
             rel="noreferrer"
             className="mt-2 text-center w-full inline-block"
           >
-            <H6 color="gray">Telecommunication</H6>
+            {isAdmin ? (
+              <H6 color="gray">Fix My City</H6>
+            ) : (
+              <H6 color="gray">{getSectorName()}</H6>
+            )}
           </a>
           <div className="flex flex-col">
             <hr className="my-4 min-w-full" />
