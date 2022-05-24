@@ -146,12 +146,12 @@ function ReportShow() {
     <ErrorPage2 pathname={location.pathname} />
   ) : (
     <Card className="mt-20">
-      <CardHeader color="blue" contentPosition="left">
+      <CardHeader color="brown" contentPosition="left">
         <div className="flex flex-row items-end">
           <div className="items-end">
             <NavLink to="/maps" exact>
               {" "}
-              <Button>View in Map</Button>
+              <Button color="transparent">View in Map</Button>
             </NavLink>
           </div>
         </div>
