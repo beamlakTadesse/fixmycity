@@ -103,7 +103,7 @@ export default function LogIn() {
                 onSubmit={handleSubmit}
                 type="submit"
                 value="Log In"
-                className="flex justify-center bg-purple text-lg hover:bg-gray-700 p-2 mt-8"
+                className="flex justify-center bg-brown text-lg hover:bg-gray-700 p-2 mt-8"
               >
                 LogIn
               </Button>
