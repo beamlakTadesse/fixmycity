@@ -90,8 +90,8 @@ export default function AdminNavbar({ showSidebar, setShowSidebar }) {
                   color: "transparent",
                 }}
               >
-                <DropdownItem color="lightBlue">Help</DropdownItem>
-                <DropdownItem color="lightBlue" onClick={Logout}>
+                <DropdownItem color="brown">Help</DropdownItem>
+                <DropdownItem color="brown" onClick={Logout}>
                   Logout
                 </DropdownItem>
                 {/* <DropdownItem color="lightBlue">
