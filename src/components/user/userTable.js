@@ -90,7 +90,7 @@ export default function UserTable() {
     <ErrorPage2 />
   ) : (
     <Card>
-      <CardHeader color="blue" contentPosition="left">
+      <CardHeader color="brown" contentPosition="left">
         <h2 className="text-white text-2xl">Users</h2>
         {/* <Button onClick={() => setRegister(true)}>Register</Button> */}
       </CardHeader>
@@ -110,13 +110,13 @@ export default function UserTable() {
               <table className="items-center w-full bg-transparent border-collapse">
                 <thead>
                   <tr>
-                    <th className="px-2 text-purple-500 align-middle border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
+                    <th className="px-2 text-brown align-middle border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
                       First Name
                     </th>
-                    <th className="px-2 text-purple-500 align-middle border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
+                    <th className="px-2 text-brown align-middle border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
                       Last Name
                     </th>
-                    <th className="px-2 text-purple-500 align-middle border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
+                    <th className="px-2 text-brown align-middle border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
                       Phone
                     </th>
                   </tr>
