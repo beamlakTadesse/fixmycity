@@ -30,7 +30,7 @@ export default function Register() {
     setSubmitted(true);
     var token = getToken();
     console.log(token);
-    setInputs((inputs) => ({ ...inputs, token: token }));
+    setInputs((inputs) => ({ ...inputs, token: getToken() }));
     console.log(inputs);
     if (password === confirmPass) {
       if (username && password && last_name && first_name) {

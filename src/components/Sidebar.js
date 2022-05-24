@@ -4,6 +4,7 @@ import AdminNavbar from "./AdminNavbar";
 import Icon from "@material-tailwind/react/Icon";
 import H6 from "@material-tailwind/react/Heading6";
 import { isSectorAdmin, isSuperAdmin } from "helpers/utils";
+import { getSectorName } from "helpers/utils";
 
 export default function Sidebar() {
   const [isAdmin, setAdmin] = useState(isSuperAdmin());
@@ -25,7 +26,11 @@ export default function Sidebar() {
             rel="noreferrer"
             className="mt-2 text-center w-full inline-block"
           >
-            <H6 color="gray">Telecommunication</H6>
+            {isAdmin ? (
+              <H6 color="gray">Fix My City</H6>
+            ) : (
+              <H6 color="gray">{getSectorName()}</H6>
+            )}
           </a>
           <div className="flex flex-col">
             <hr className="my-4 min-w-full" />
@@ -70,6 +75,7 @@ export default function Sidebar() {
               )}
               <li className="rounded-lg mb-2 ">
                 <NavLink
+                  data-cy="nav-users"
                   to="/users"
                   className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
                   activeClassName="bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-md"
@@ -81,6 +87,7 @@ export default function Sidebar() {
 
               <li className="rounded-lg mb-2 text-gray-700">
                 <NavLink
+                  data-cy="nav-reports"
                   to="/sector/reports"
                   className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
                   activeClassName="bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-md"
@@ -95,6 +102,7 @@ export default function Sidebar() {
                   to="/settings"
                   className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
                   activeClassName="bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-md"
+                  data-cy="nav-profile"
                 >
                   <Icon name="settings" size="2xl" />
                   Profile
@@ -103,6 +111,7 @@ export default function Sidebar() {
               {!isAdmin && (
                 <li className="rounded-lg mb-2 ">
                   <NavLink
+                    data-cy="nav-announcement"
                     to="/announcement"
                     className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
                     activeClassName="bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-md"

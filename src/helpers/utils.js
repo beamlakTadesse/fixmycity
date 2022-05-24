@@ -15,9 +15,9 @@ export default function getQueryVariable(variable) {
   }
   return false;
 }
-
-let role = localStorage.getItem("role");
 let token = localStorage.getItem("token");
+let role = getRole(token);
+
 export function getToken() {
   return token;
 }
@@ -54,8 +54,29 @@ export function setRole(token) {
   localStorage.setItem("role", decodedToken.role);
 }
 export function getRole() {
-  return localStorage.getItem("role");
+  if (token) {
+    var decodedToken = jwt_decode(token);
+    console.log(decodedToken);
+    return decodedToken.role;
+  } else {
+    return "0";
+  }
 }
 export function getUserId() {
-  return localStorage.getItem("userId");
+  if (token) {
+    var decodedToken = jwt_decode(token);
+    console.log(decodedToken);
+    return decodedToken.user_id;
+  } else {
+    return "0";
+  }
+}
+export function getSectorName() {
+  if (token) {
+    var decodedToken = jwt_decode(token);
+    console.log(decodedToken);
+    return decodedToken.sector;
+  } else {
+    return "0";
+  }
 }

@@ -3,10 +3,7 @@ import CardHeader from "@material-tailwind/react/CardHeader";
 import CardBody from "@material-tailwind/react/CardBody";
 import Button from "@material-tailwind/react/Button";
 import Progress from "@material-tailwind/react/Progress";
-import Modal from "@material-tailwind/react/Modal";
-import ModalHeader from "@material-tailwind/react/ModalHeader";
-import ModalBody from "@material-tailwind/react/ModalBody";
-import AddSectorAdminForm from "./addSectorAdmin";
+
 import React, { useEffect, useState } from "react";
 
 export default function SectorManage({ sectorsCount }) {
@@ -26,22 +23,8 @@ export default function SectorManage({ sectorsCount }) {
             See More
           </Button>
         </div>
-        <div className="grid grid-rows-4 grid-flow-col gap-4">
-          <Button
-            size="lg"
-            style={{ padding: 0 }}
-            onClick={(e) => setShowModal(true)}
-          >
-            Add Sector Admin
-          </Button>
-        </div>
       </CardHeader>
       <CardBody>
-        <Modal size="lg" active={showModal} toggler={() => setShowModal(false)}>
-          <ModalBody>
-            <AddSectorAdminForm />
-          </ModalBody>
-        </Modal>
         <div className="overflow-x-auto">
           <table className="items-center w-full bg-transparent border-collapse">
             <thead className="thead-light">

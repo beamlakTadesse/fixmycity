@@ -1,10 +1,10 @@
 import { createContext, useState } from "react";
-
+import { getRole } from "helpers/utils";
 const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
   const token = localStorage.getItem("token");
-  const roles = parseInt(localStorage.getItem("role"));
+  const roles = parseInt(getRole(token));
   const [auth, setAuth] = useState({ token, roles });
   console.log(auth);
   return (
