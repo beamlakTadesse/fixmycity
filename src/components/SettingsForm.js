@@ -43,7 +43,7 @@ export default function SettingsForm({ editProfile, setEditProfile }) {
   }
   return (
     <Card>
-      <CardHeader color="blue" contentPosition="none">
+      <CardHeader color="brown" contentPosition="none">
         <div className="w-full flex items-center justify-between">
           <h2 className="text-white text-2xl">My Account</h2>
           <Button
@@ -58,7 +58,7 @@ export default function SettingsForm({ editProfile, setEditProfile }) {
       </CardHeader>
       <CardBody>
         <form>
-          <h6 className="text-blue-500 text-sm mt-3 mb-6 font-light uppercase">
+          <h6 className="text-brown text-sm mt-3 mb-6 font-light uppercase">
             User Information
           </h6>
           <div className="flex flex-wrap mt-10">
@@ -129,6 +129,7 @@ export default function SettingsForm({ editProfile, setEditProfile }) {
           <div className="grid grid-cols-1 xl:grid-cols-6">
             <Button
               className="xl:col-start-3 xl:col-end-6 px-4 mb-10"
+              color="brown"
               onClick={() => {
                 EditProfile();
               }}
