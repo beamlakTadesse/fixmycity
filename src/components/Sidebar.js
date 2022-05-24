@@ -54,7 +54,7 @@ export default function Sidebar() {
                   <NavLink
                     to="/sectors/dashboard"
                     className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
-                    activeClassName="bg-gradient-to-tr from-light-blue-600 to-light-blue-700 text-white shadow-md"
+                    activeClassName="text-red-100 hover:text-red-100 bg-red-700"
                   >
                     <Icon name="map" size="2xl" />
                     Sector Dashboard
