@@ -57,7 +57,7 @@ export default function ProfileCard({ editProfile, setEditProfile }) {
 
           <CardBody>
             <form>
-              <h6 className="text-blue-500 text-sm mt-9 mb-6 font-bold uppercase">
+              <h6 className="text-brown text-sm mt-9 mb-6 font-bold uppercase">
                 personal Information
               </h6>
               <div className="flex flex-wrap text-xs mt-10">
@@ -128,6 +128,7 @@ export default function ProfileCard({ editProfile, setEditProfile }) {
               <div className="grid grid-cols-1 xl:grid-cols-6">
                 <Button
                   className="xl:col-start-3 xl:col-end-6 px-4 mb-10"
+                  color="brown"
                   onClick={() => {
                     EditProfile();
                   }}
