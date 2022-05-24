@@ -1,0 +1,12 @@
+{
+  "email": {
+    "noEmail": "",
+    "alreadyTokenEmail": "alreadyexistingemail@gmail.com",
+    "validEmail": "Successfully created"
+  },
+  "response": {
+    "noEmail": " email is required",
+    "alreadyTokenEmail": "user with this email already exists.",
+    "validEmail": "Successfully created"
+  }
+}

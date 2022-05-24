@@ -23,20 +23,20 @@ export default function UnAuthorized({pathname}){
         >
           <span class="text-red-500">Oops!</span> Page not found
         </p> */}
-        <p class="mb-8 text-center text-gray-500 md:text-lg">
-            Authorization Required
-        </p>
-        <a
-          href={url}
-          class="px-6 py-2 text-sm font-semibold text-blue-800 bg-blue-100"
-          // onClick={history.push(url)}
-          >Go Back</a
-        >
+              <p class="mb-8 text-center text-gray-500 md:text-lg">
+                Authorization Required
+              </p>
+              <a
+                href={url}
+                class="px-6 py-2 text-sm font-semibold text-blue-800 bg-blue-100"
+                // onClick={history.push(url)}
+              >
+                Go Back
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
-     
-    </div>
-  </div>
-</div>
-        </>
-    )
+    </>
+  );
 }

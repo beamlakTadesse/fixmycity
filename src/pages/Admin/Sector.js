@@ -10,10 +10,12 @@ export default function Sector() {
   return (
     <>
       <Sidebar />
-      <div className="absolute w-full z-20">{/* <DefaultNavbar /> */}</div>
-      <main>
-        <SectorsSection />
-      </main>
+      <div className="absolute w-full z-20">
+        <main>
+          <SectorsSection />
+        </main>
+      </div>
+
       <Footer />
     </>
   );
