@@ -70,7 +70,7 @@ export function SelectColumnFilter({
         {options.map((option, i) => (
           <option key={i} value={option}>
             
-            {option?"Spam":"Non_Spam"}
+            {option?"Spam":"Non Spam"}
           </option>
         ))}
       </select>
@@ -112,7 +112,7 @@ export function ReportStatusColumnFilter({
         {options.map((option, i) => (
           <option key={i} value={option}>
             
-            {option.startsWith("RESOLVED")?"Resolved":(option.startsWith("UNRESOLVED")?"UnResolved":"Rejected")}
+            {option.startsWith("RESOLVED")?"Resolved":(option.startsWith("UNRESOLVED")?"Pending":"Rejected")}
           </option>
         ))}
       </select>
@@ -133,8 +133,9 @@ export function ReportUser({ value }) {
   
         )
       }
-    >                                   
-     <NavLink to={`/report_show/${value}`} exact> {value}</NavLink>
+    >                    
+    {value}               
+     {/* <NavLink to={`/report_show/${value}`} exact> {value}</NavLink> */}
   
     </span>
   );

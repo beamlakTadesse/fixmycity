@@ -4327,7 +4327,7 @@
   "resolved" "https://registry.npmjs.org/binary-extensions/-/binary-extensions-2.2.0.tgz"
   "version" "2.2.0"
 
-"bluebird@^3.5.5":
+"bluebird@^3.5.2", "bluebird@^3.5.5":
   "integrity" "sha512-XpNj6GDQzdfW+r2Wnn7xiSAd7TM3jzkxGXBGTtWKuSXv1xUV+azxAm8jdWZN06QTQk+2N2XB9jRDkvbmQmcRtg=="
   "resolved" "https://registry.npmjs.org/bluebird/-/bluebird-3.7.2.tgz"
   "version" "3.7.2"
@@ -10216,7 +10216,7 @@
   dependencies:
     "lodash.toarray" "^4.4.0"
 
-"node-fetch@2.6.1":
+"node-fetch@^2.6.0", "node-fetch@2.6.1":
   "integrity" "sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw=="
   "resolved" "https://registry.npmjs.org/node-fetch/-/node-fetch-2.6.1.tgz"
   "version" "2.6.1"
@@ -10225,6 +10225,14 @@
   "integrity" "sha512-PPmu8eEeG9saEUvI97fm4OYxXVB6bFvyNTyiUOBichBpFG8A1Ljw3bY62+5oOjDEMHRnd0Y7HQ+x7uzxOzC6JA=="
   "resolved" "https://registry.npmjs.org/node-forge/-/node-forge-0.10.0.tgz"
   "version" "0.10.0"
+
+"node-geocoder@^4.0.0":
+  "integrity" "sha512-/lD7tkVzP2B4rbcyKiNUr/tRgzAw3zowDy8LXOzUxeLnRIMxjQ5a04RhkbJq3RgeKVD0MDpe+FCDX/rJoAColQ=="
+  "resolved" "https://registry.npmjs.org/node-geocoder/-/node-geocoder-4.0.0.tgz"
+  "version" "4.0.0"
+  dependencies:
+    "bluebird" "^3.5.2"
+    "node-fetch" "^2.6.0"
 
 "node-gyp@^7.1.0", "node-gyp@^7.1.2":
   "integrity" "sha512-CbpcIo7C3eMu3dL1c3d0xw449fHIGALIJsRP4DDPHpyiW8vcriNY7ubh9TE4zEKfSxscY7PjeFnshE7h75ynjQ=="
