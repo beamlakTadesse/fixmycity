@@ -42,7 +42,7 @@ export default function Sidebar() {
                     to="/"
                     exact
                     className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
-                    activeClassName="bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-md"
+                    activeClassName="bg-gradient-to-tr from-[#4A2511] to-[#9A7B4F] text-white shadow-md"
                   >
                     <Icon name="dashboard" size="2xl" />
                     Dashboard
@@ -54,7 +54,7 @@ export default function Sidebar() {
                   <NavLink
                     to="/sectors/dashboard"
                     className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
-                    activeClassName="bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-md"
+                    activeClassName="bg-gradient-to-tr from-light-blue-600 to-light-blue-700 text-white shadow-md"
                   >
                     <Icon name="map" size="2xl" />
                     Sector Dashboard
@@ -62,11 +62,11 @@ export default function Sidebar() {
                 </li>
               )}
               {isAdmin && (
-                <li className="rounded-lg mb-2">
+                <li className="rounded-lg mb-2 ">
                   <NavLink
                     to="/admin/sectors"
                     className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
-                    activeClassName="bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-md"
+                    activeClassName="bg-gradient-to-tr from-light-blue to-light-blue text-white shadow-md"
                   >
                     <Icon name="settings" size="2xl" />
                     Sector
