@@ -79,7 +79,7 @@ export function SelectColumnFilter({
       >
         <option value="">All</option>
         {options.map((option, i) => (
-          <option key={i} value={option}>
+          <option key={i} value={option} bg-brown>
             {option ? "Spam" : "Non_Spam"}
           </option>
         ))}
