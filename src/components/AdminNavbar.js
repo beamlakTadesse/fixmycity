@@ -9,24 +9,17 @@ import { Logout } from "@mui/icons-material";
 import { useLocation, useNavigate } from "react-router-dom";
 import { isSectorAdmin } from "helpers/utils";
 import useAuth from "../hooks/auth";
+import { NavLink } from "react-router-dom";
 
 export default function AdminNavbar({ showSidebar, setShowSidebar }) {
   const location = useLocation().pathname;
   const navigate = useNavigate();
   const { setAuth } = useAuth();
   function Logout() {
-    const role = localStorage.getItem("role");
-    if (role == 2) {
-      navigate(`/sector/login`);
+    navigate(`/login`);
 
-      localStorage.removeItem("token");
-      localStorage.removeItem("role");
-    } else {
-      navigate(`/login`);
+    localStorage.removeItem("token");
 
-      localStorage.removeItem("token");
-      localStorage.removeItem("role");
-    }
     setAuth({});
 
     // setAuthTokens();
@@ -90,7 +83,9 @@ export default function AdminNavbar({ showSidebar, setShowSidebar }) {
                   color: "transparent",
                 }}
               >
-                <DropdownItem color="brown">Help</DropdownItem>
+                <DropdownItem color="brown">
+                  <NavLink to="/help">Help</NavLink>
+                </DropdownItem>
                 <DropdownItem color="brown" onClick={Logout}>
                   Logout
                 </DropdownItem>

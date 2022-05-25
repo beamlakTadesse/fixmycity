@@ -51,7 +51,7 @@ export default function LogInSectorAdmin() {
               setAuth({ token, roles });
               localStorage.setItem("token", res.token.access);
 
-              navigate(`/sectors/dashboard`);
+              navigate(`/`);
             } else {
               setLoginState(false);
               setLoginMessage(res.detail);

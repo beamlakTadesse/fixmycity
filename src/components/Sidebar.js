@@ -5,12 +5,13 @@ import Icon from "@material-tailwind/react/Icon";
 import H6 from "@material-tailwind/react/Heading6";
 import { isSectorAdmin, isSuperAdmin } from "helpers/utils";
 import { getSectorName } from "helpers/utils";
+import { getRole } from "helpers/utils";
 
 export default function Sidebar() {
-  const [isAdmin, setAdmin] = useState(isSuperAdmin());
+  const [isAdmin, setAdmin] = useState(getRole());
   const [showSidebar, setShowSidebar] = useState("-left-64");
   useEffect(() => {
-    setAdmin(isSuperAdmin());
+    setAdmin(getRole());
   }, [isAdmin]);
 
   return (
@@ -26,7 +27,7 @@ export default function Sidebar() {
             rel="noreferrer"
             className="mt-2 text-center w-full inline-block"
           >
-            {isAdmin ? (
+            {isAdmin === 1 ? (
               <H6 color="gray">Fix My City</H6>
             ) : (
               <H6 color="gray">{getSectorName()}</H6>
@@ -36,7 +37,7 @@ export default function Sidebar() {
             <hr className="my-4 min-w-full" />
 
             <ul className="flex-col min-w-full flex list-none">
-              {isAdmin && (
+              {isAdmin === 1 && (
                 <li className="rounded-lg mb-4">
                   <NavLink
                     to="/"
@@ -49,7 +50,7 @@ export default function Sidebar() {
                   </NavLink>
                 </li>
               )}
-              {!isAdmin && (
+              {isAdmin !== 1 && (
                 <li className="rounded-lg mb-2 text-gray-700">
                   <NavLink
                     to="/sectors/dashboard"
@@ -61,7 +62,7 @@ export default function Sidebar() {
                   </NavLink>
                 </li>
               )}
-              {isAdmin && (
+              {/* {isAdmin && (
                 <li className="rounded-lg mb-2 ">
                   <NavLink
                     to="/admin/sectors"
@@ -72,7 +73,7 @@ export default function Sidebar() {
                     Sector
                   </NavLink>
                 </li>
-              )}
+              )} */}
               <li className="rounded-lg mb-2 ">
                 <NavLink
                   data-cy="nav-users"
@@ -84,31 +85,44 @@ export default function Sidebar() {
                   Users
                 </NavLink>
               </li>
-
-              <li className="rounded-lg mb-2 text-gray-700">
-                <NavLink
-                  data-cy="nav-reports"
-                  to="/sector/reports"
-                  className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
-                  activeClassName="bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-md"
-                >
-                  <Icon name="map" size="2xl" />
-                  Report
-                </NavLink>
-              </li>
-
+              {isAdmin === 1 && (
+                <li className="rounded-lg mb-2 text-gray-700">
+                  <NavLink
+                    data-cy="nav-reports"
+                    to="/admin/report"
+                    className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
+                    activeClassName="bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-md"
+                  >
+                    <Icon name="map" size="2xl" />
+                    Report
+                  </NavLink>
+                </li>
+              )}{" "}
+              {isAdmin !== 1 && (
+                <li className="rounded-lg mb-2 text-gray-700">
+                  <NavLink
+                    data-cy="nav-reports"
+                    to="/sector/reports"
+                    className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
+                    activeClassName="bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-md"
+                  >
+                    <Icon name="map" size="2xl" />
+                    Report
+                  </NavLink>
+                </li>
+              )}
               <li className="rounded-lg mb-2">
                 <NavLink
-                  to="/settings"
+                  to="/profile"
                   className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
                   activeClassName="bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-md"
                   data-cy="nav-profile"
                 >
-                  <Icon name="settings" size="2xl" />
+                  <Icon name="circle" size="2xl" />
                   Profile
                 </NavLink>
               </li>
-              {!isAdmin && (
+              {isAdmin !== 1 && (
                 <li className="rounded-lg mb-2 ">
                   <NavLink
                     data-cy="nav-announcement"

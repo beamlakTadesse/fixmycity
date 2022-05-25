@@ -127,7 +127,7 @@ export default function AddSectorAdminForm() {
   // );
   useEffect(() => {
     getSectors();
-  },[]);
+  }, []);
 
   return (
     // <Card>
@@ -162,7 +162,7 @@ export default function AddSectorAdminForm() {
               <Input
                 data-cy="txt-createAdmin-email"
                 type="email"
-                color="purple"
+                color="brown"
                 placeholder="Email Address"
                 name="email"
                 value={email}
@@ -179,6 +179,7 @@ export default function AddSectorAdminForm() {
         <div className="grid grid-rows-3 grid-flow-col gap-1">
           <div className="row-span-3">
             <Button
+              color="brown"
               data-cy="btn-createAdmin-submit"
               onClick={(e) => handleSubmit(e)}
             >
@@ -186,7 +187,7 @@ export default function AddSectorAdminForm() {
             </Button>
           </div>
           <div className="row-span-3">
-            <Button>Cancel</Button>
+            <Button color="brown">Cancel</Button>
           </div>
         </div>
         {/* <Table columns={columns} data={sectors} /> */}

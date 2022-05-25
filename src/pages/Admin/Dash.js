@@ -9,6 +9,8 @@ import ModalHeader from "@material-tailwind/react/ModalHeader";
 import ModalBody from "@material-tailwind/react/ModalBody";
 import AddSectorAdminForm from "../../components/admin/addSectorAdmin";
 import Button from "@material-tailwind/react/Button";
+import Sidebar from "components/Sidebar";
+import Footer from "components/Footer";
 
 export default function Dashboard() {
   const mounted = useRef(false);
@@ -68,29 +70,30 @@ export default function Dashboard() {
   ) : (
     // (isError)?<ErrorPage2/>:
     <div>
-      <Button
-        data-cy="btn-dash-addSectorAdmin"
-        size="lg"
-        style={{ padding: 0 }}
-        onClick={(e) => setShowModal(true)}
-      >
-        Add Sector Admin
-      </Button>
-
       <Modal size="lg" active={showModal} toggler={() => setShowModal(false)}>
         <ModalBody>
           <AddSectorAdminForm />
         </ModalBody>
       </Modal>
 
-      {!data.length > 0 && !data2.length > 0 && !sectors.length > 0 ? (
-        <div className="flex justify-center items-center h-screen">
-          <h2>No Record Found!!!!!!</h2>
-        </div>
-      ) : (
-        <>
-          <div className="bg-light-blue-500 px-3 md:px-8 h-40" />
+      <>
+        <Sidebar />
 
+        <Button
+          data-cy="btn-dash-addSectorAdmin"
+          size="lg"
+          color="brown"
+          className=" mt-2.5 ml-20.5"
+          style={{ padding: 0 }}
+          onClick={(e) => setShowModal(true)}
+        >
+          Add Sector Admin
+        </Button>
+        {!data.length > 0 && !data2.length > 0 && !sectors.length > 0 ? (
+          <div className="flex justify-center items-center h-screen">
+            <h2>No Record Found!!!!!!</h2>
+          </div>
+        ) : (
           <div className="px-3 md:px-8 -mt-24">
             <div className="container mx-auto max-w-full">
               <div className="px-3 md:px-8">
@@ -134,8 +137,10 @@ export default function Dashboard() {
               </div>
             </div>
           </div>
-        </>
-      )}
+        )}
+      </>
+      {/* )} */}
+      <Footer />
     </div>
   );
 }

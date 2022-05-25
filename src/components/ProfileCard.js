@@ -8,6 +8,7 @@ import Textarea from "@material-tailwind/react/Textarea";
 import ProfilePicture from "assets/img/team-1-800x800.jpg";
 import React, { useState, useEffect } from "react";
 import { getUserId } from "helpers/utils";
+import { getRole } from "helpers/utils";
 export default function ProfileCard({ editProfile, setEditProfile }) {
   const [users, setUsers] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -28,8 +29,6 @@ export default function ProfileCard({ editProfile, setEditProfile }) {
         if (json) {
           setUsers(json.user);
         }
-
-        console.log("Sectors: ", json.user);
       } catch (error) {
         console.log("error", error);
         setError(true);
@@ -41,7 +40,7 @@ export default function ProfileCard({ editProfile, setEditProfile }) {
 
     fetchData();
   }, []);
-
+  console.log("Sectors: ", users);
   function EditProfile() {
     setEditProfile(!editProfile);
   }
@@ -92,31 +91,33 @@ export default function ProfileCard({ editProfile, setEditProfile }) {
                   <h1>{users.phone_number}</h1>
                 </div>
               </div>
-              {/* {userRole === 2 && (
+              {getRole() == 2 && (
                 <>
                   <h6 className="text-blue-500 text-sm my-6 font-bold uppercase">
                     Sector Information
                   </h6>
                   <div className="flex flex-wrap text-xs mt-10">
                     <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">
-                      <h1>Sector : ELPA</h1>
-                      <h1>ELPA</h1>
+                      <h1>Sector : {users.sector.district_name}</h1>
                     </div>
                     <div className="w-full lg:w-6/12 pl-4 mb-10 font-light">
-                      <h1>Location : </h1>
-                      <h1>Addis Ababa / Ethiopia</h1>
+                      <h1>
+                        Location : {users.sector.address}, Addis Ababa /
+                        Ethiopia
+                      </h1>
+                      {/* <h1></h1> */}
                     </div>
                     <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">
-                      <h1>Email : </h1>
-                      <h1> Elpa@gmail.com</h1>
+                      <h1>Email : {users.sector.email} </h1>
+                      {/* <h1> Elpa@gmail.com</h1> */}
                     </div>
                     <div className="w-full lg:w-6/12 pl-4 mb-10 font-light">
-                      <h1>Phone No. : </h1>
-                      <h1>+251 9867888899</h1>
+                      <h1>Phone No. : {users.sector.phone_number} </h1>
+                      {/* <h1> </h1> */}
                     </div>
                   </div>
                 </>
-              )} */}
+              )}
               {/* <h6 className="text-purple-500 text-sm my-6 font-light uppercase">
                         About Me
                     </h6> */}
