@@ -4,14 +4,14 @@ import AdminNavbar from "./AdminNavbar";
 import Icon from "@material-tailwind/react/Icon";
 import H6 from "@material-tailwind/react/Heading6";
 import { isSectorAdmin, isSuperAdmin } from "helpers/utils";
-import { getSectorName } from "helpers/utils";
-import { getRole } from "helpers/utils";
+import { getName } from "helpers/utils";
+import { getRol } from "helpers/utils";
 
 export default function Sidebar() {
-  const [isAdmin, setAdmin] = useState(getRole());
+  const [isAdmin, setAdmin] = useState(getRol(localStorage.getItem("token")));
   const [showSidebar, setShowSidebar] = useState("-left-64");
   useEffect(() => {
-    setAdmin(getRole());
+    setAdmin(getRol(localStorage.getItem("token")));
   }, [isAdmin]);
 
   return (
@@ -30,7 +30,7 @@ export default function Sidebar() {
             {isAdmin === 1 ? (
               <H6 color="gray">Fix My City</H6>
             ) : (
-              <H6 color="gray">{getSectorName()}</H6>
+              <H6 color="gray">{getName(localStorage.getItem("token"))}</H6>
             )}
           </a>
           <div className="flex flex-col">

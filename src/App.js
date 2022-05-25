@@ -27,7 +27,7 @@ import RequireAuth from "components/RequireAuth";
 import UnAuthorized from "components/sector/shared/unauthorized";
 // import { ThemeProvider, CSSReset } from "@chakra-ui/core";
 import {
-  getRole,
+  getRol,
   isAuthenticated,
   isSectorAdmin,
   isSuperAdmin,
@@ -39,11 +39,11 @@ import Help from "pages/help";
 // import Authorization from "RequireAuth";
 
 function App() {
-  const [role, setRol] = useState(getRole());
-  // useEffect(() => {
+  const [role, setRol] = useState(getRol(localStorage.getItem("token")));
+  // useEffect(() => {localStorage.getItem("token")
   //   setRol(getRole());
   // });
-  console.log(getRole());
+  // console.log(getRol());
   return (
     <>
       {/* <Sidebar /> */}

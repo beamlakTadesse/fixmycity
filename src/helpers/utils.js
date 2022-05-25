@@ -62,6 +62,15 @@ export function getRole() {
     return "0";
   }
 }
+export function getRol(token) {
+  if (token) {
+    var decodedToken = jwt_decode(token);
+    console.log(decodedToken);
+    return decodedToken.role;
+  } else {
+    return "0";
+  }
+}
 export function getUserId() {
   if (token) {
     var decodedToken = jwt_decode(token);
@@ -72,6 +81,15 @@ export function getUserId() {
   }
 }
 export function getSectorName() {
+  if (token) {
+    var decodedToken = jwt_decode(token);
+    console.log(decodedToken);
+    return decodedToken.sector;
+  } else {
+    return "0";
+  }
+}
+export function getName(token) {
   if (token) {
     var decodedToken = jwt_decode(token);
     console.log(decodedToken);
