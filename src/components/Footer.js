@@ -19,37 +19,18 @@ export default function Footer() {
             className="text-gray-700 hover:text-gray-900 font-medium block text-sm"
             target="_blank"
             rel="noreferrer"
-            href="https://www.creative-tim.com/presentation?ref=mtdk"
+            href=""
           >
             About Us
           </a>
         </li>
-        <li className="mr-6">
-          <a
-            className="text-gray-700 hover:text-gray-900 font-medium block text-sm"
-            target="_blank"
-            rel="noreferrer"
-            href="https://www.creative-tim.com/blog/?ref=mtdk"
-          >
-            Blog
-          </a>
-        </li>
-        <li className="mr-6">
-          <a
-            className="text-gray-700 hover:text-gray-900 font-medium block text-sm"
-            target="_blank"
-            rel="noreferrer"
-            href="https://github.com/creativetimofficial/material-tailwind-dashboard-react/blob/main/LICENSE?ref=mtdk"
-          >
-            MIT License
-          </a>
-        </li>
+
         <li>
           <a
             className="text-gray-700 hover:text-gray-900 font-medium block text-sm"
             target="_blank"
             rel="noreferrer"
-            href="https://creative-tim.com/contact-us?ref=mtdk"
+            href=""
           >
             Contact Us
           </a>

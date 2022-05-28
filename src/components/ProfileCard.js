@@ -8,7 +8,8 @@ import Textarea from "@material-tailwind/react/Textarea";
 import ProfilePicture from "assets/img/team-1-800x800.jpg";
 import React, { useState, useEffect } from "react";
 import { getUserId } from "helpers/utils";
-import { getRole } from "helpers/utils";
+import { getRol } from "helpers/utils";
+import { url } from "helpers/strings";
 export default function ProfileCard({ editProfile, setEditProfile }) {
   const [users, setUsers] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -18,11 +19,11 @@ export default function ProfileCard({ editProfile, setEditProfile }) {
   console.log(token);
   const userId = getUserId(token);
   useEffect(() => {
-    const url = `http://localhost:8000/v1/admins/users/` + userId;
+    const url1 = `${url}/v1/admins/users/` + userId;
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch(url);
+        const response = await fetch(url1);
 
         const json = await response.json();
 
@@ -91,7 +92,7 @@ export default function ProfileCard({ editProfile, setEditProfile }) {
                   <h1>{users.phone_number}</h1>
                 </div>
               </div>
-              {getRole() == 2 && (
+              {getRol(token) == 2 && users && users.sector && (
                 <>
                   <h6 className="text-blue-500 text-sm my-6 font-bold uppercase">
                     Sector Information
@@ -105,6 +106,7 @@ export default function ProfileCard({ editProfile, setEditProfile }) {
                         Location : {users.sector.address}, Addis Ababa /
                         Ethiopia
                       </h1>
+
                       {/* <h1></h1> */}
                     </div>
                     <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">

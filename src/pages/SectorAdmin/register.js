@@ -2,7 +2,7 @@ import { Input, Image, Button } from "@material-tailwind/react";
 import getQueryVariable from "helpers/utils";
 import { useState } from "react";
 import { useNavigate, Route, useLocation } from "react-router-dom";
-
+import { url } from "helpers/strings";
 export default function Register() {
   let location = useLocation();
   const navigate = useNavigate();
@@ -40,21 +40,20 @@ export default function Register() {
           body: JSON.stringify(inputs),
         };
         try {
-          fetch(
-            `http://localhost:8000/v1/admins/email-verify/`,
-            requestOptions
-          ).then(async (response) => {
-            const data = await response.json();
+          fetch(`${url}/v1/admins/email-verify/`, requestOptions).then(
+            async (response) => {
+              const data = await response.json();
 
-            // check for error response
-            if (!response.ok) {
-              console.log(data);
+              // check for error response
+              if (!response.ok) {
+                console.log(data);
 
-              // get error message from body or default to response status
-            } else {
-              navigate(`/sector/login`);
+                // get error message from body or default to response status
+              } else {
+                navigate(`/login`);
+              }
             }
-          });
+          );
         } catch (e) {}
       }
     } else {
@@ -155,6 +154,7 @@ export default function Register() {
                   <div className="text-red-400">check password</div>
                 )}
               <Button
+                color="brown"
                 onSubmit={handleSubmit}
                 type="submit"
                 value="Log In"

@@ -15,7 +15,7 @@ import User from "pages/userList";
 import Report from "pages/report";
 
 import "assets/styles/tailwind.css";
-import Sector from "pages/Admin/Sector";
+import AdminSector from "pages/Admin/Sector";
 import ReportAdmin from "pages/Admin/report";
 
 import ReportShow from "components/report/ReportShow";
@@ -39,11 +39,13 @@ import Help from "pages/help";
 // import Authorization from "RequireAuth";
 
 function App() {
-  const [role, setRol] = useState(getRol(localStorage.getItem("token")));
-  // useEffect(() => {localStorage.getItem("token")
-  //   setRol(getRole());
-  // });
-  // console.log(getRol());
+  const h = getRol(localStorage.getItem("token"));
+
+  const [role, setRol] = useState(h);
+  useEffect(() => {
+    setRol(getRol(localStorage.getItem("token")));
+  });
+  console.log(getRol());
   return (
     <>
       {/* <Sidebar /> */}
@@ -51,7 +53,7 @@ function App() {
       <div className="md:ml-64">
         <Routes>
           <Route element={<RequireAuth allowedRoles={[1]} />}>
-            <Route exact path="/admin/sectors" element={<Sector />} />
+            <Route exact path="/admin/sectors" element={<AdminSector />} />
             <Route exact path="/admin/dashboard" element={<Dash />} />
             <Route exact path="/admin/report" element={<ReportAdmin />} />
           </Route>
@@ -61,7 +63,11 @@ function App() {
             <Route exact path="/announcement" element={<Announcement />} />
             <Route exact path="/ayy" element={<AnnouncementList />} />
             <Route exact path="/sector/reports" element={<Report />} />
-            <Route exact path="/report_show/:id" element={<PageVisitsCard />} />
+            <Route
+              exact
+              path="/sector/reports/:id"
+              element={<PageVisitsCard />}
+            />
 
             <Route exact path="/sectors/dashboard" element={<SectorDash />} />
             <Route exact path="/maps" element={<Maps />} />

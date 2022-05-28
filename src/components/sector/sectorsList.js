@@ -14,6 +14,7 @@ import EmptyState from "./shared/emptyState";
 import AddSectorForm from "./addSectorForm";
 import ErrorPage from "./shared/errorPage";
 import ErrorPage2 from "./shared/errorPage2";
+import { url } from "helpers/strings";
 
 export default function SectorsSection() {
   // Add Sector
@@ -62,7 +63,7 @@ export default function SectorsSection() {
   const [sectors, setSectors] = useState({});
   useEffect(() => {
     // mounted.current = true;
-    const url = `http://localhost:8000/v1/admins/main_sectors/`;
+    const url = `${url}/v1/admins/main_sectors/`;
 
     const fetchData = async () => {
       setIsLoading(true);
@@ -104,7 +105,8 @@ export default function SectorsSection() {
             <div></div>
             <div></div>
             <Button
-              className="flex justify-center bg-blue"
+              color="brown"
+              className="flex justify-center bg-brown"
               onClick={(e) => setShowModal(true)}
             >
               Create Sector
@@ -123,7 +125,7 @@ export default function SectorsSection() {
                     return (
                       <Card className="xl:col-start-2 xl:col-end-1 px-4 mb-14">
                         <CardRow>
-                          <CardHeader iconOnly className="mb-0">
+                          <CardHeader color="brown" iconOnly className="mb-0">
                             <img src={sectors[oneKey].sector_logo} />
                           </CardHeader>
 
@@ -145,10 +147,11 @@ export default function SectorsSection() {
   ) : (
     <div class="grid grid-rows-4 justify-center  gap-4 h-screen">
       {/* <Loader/>    */}
-      <EmptyState title="Sector" />
+      {/* <EmptyState title="Sector" /> */}
 
       <Button
-        className="flex justify-center h-[60px] bg-blue bg-black text-white text-xl hover:bg-blue-300 transition-color duration-200 delay-200"
+        color="brown"
+        className="flex justify-center h-[60px] bg-brown bg-black text-white text-xl hover:bg-brown-300 transition-color duration-200 delay-200"
         onClick={(e) => setShowModal(true)}
       >
         Create Sector

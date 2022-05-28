@@ -7,6 +7,7 @@ import ErrorPage2 from "components/sector/shared/errorPage2";
 import UnAuthorized from "components/sector/shared/unauthorized";
 import Sidebar from "components/Sidebar";
 import Footer from "components/Footer";
+import { url } from "helpers/strings";
 
 export default function Announcement() {
   const [showModal, setShowModal] = React.useState(false);
@@ -19,7 +20,7 @@ export default function Announcement() {
 
   useEffect(() => {
     // mounted.current = true;
-    const url = `http://localhost:8000/v1/announcment/`;
+    const url1 = `${url}/v1/announcment/`;
 
     const fetchData = async () => {
       setIsLoading(true);
@@ -30,7 +31,7 @@ export default function Announcement() {
             Authorization: "Bearer " + localStorage.getItem("token"),
           },
         };
-        const response = await fetch(url, requestOptions);
+        const response = await fetch(url1, requestOptions);
 
         const json = await response.json();
 
@@ -53,13 +54,9 @@ export default function Announcement() {
     };
 
     fetchData();
-  }, []);
+  }, [announcements]);
 
-  return isLoading ? (
-    <div class="flex justify-center items-center h-screen">
-      <Loader />
-    </div>
-  ) : isError ? (
+  return isError ? (
     <ErrorPage2 />
   ) : unAuth ? (
     <UnAuthorized />
@@ -93,4 +90,9 @@ export default function Announcement() {
       {/* } */}
     </>
   );
+  // isLoading ? (
+  //   <div class="flex justify-center items-center h-screen">
+  //     <Loader />
+  //   </div>
+  // ) :
 }

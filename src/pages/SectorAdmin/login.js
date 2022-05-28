@@ -6,6 +6,7 @@ import { useNavigate, Route, useLocation } from "react-router-dom";
 import { setRole } from "helpers/utils";
 import jwt_decode from "jwt-decode";
 import useAuth from "../../hooks/auth";
+import { url } from "helpers/strings";
 
 export default function LogInSectorAdmin() {
   let location = useLocation();
@@ -35,7 +36,7 @@ export default function LogInSectorAdmin() {
         body: JSON.stringify(inputs),
       };
       try {
-        fetch(`http://localhost:8000/v1/admins/login_admin/`, requestOptions)
+        fetch(`${url}/v1/admins/login_admin/`, requestOptions)
           .then((response) => response.json())
           .then((res) => {
             if (res.message) {
@@ -141,12 +142,12 @@ export default function LogInSectorAdmin() {
           </div>
         </div>
 
-        <div className="w-1/2 shadow-2xl">
+        {/* <div className="w-1/2 shadow-2xl">
           <Image
             className="object-cover w-full h-screen hidden md:block"
             src={addis}
           />
-        </div>
+        </div> */}
       </div>
     </div>
   );

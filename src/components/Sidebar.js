@@ -25,12 +25,14 @@ export default function Sidebar() {
             // href="https://material-tailwind.com?ref=mtd"
             target="_blank"
             rel="noreferrer"
-            className="mt-2 text-center w-full inline-block"
+            className="mt-2 text-center w-full inline-block uppercase"
           >
             {isAdmin === 1 ? (
               <H6 color="gray">Fix My City</H6>
             ) : (
-              <H6 color="gray">{getName(localStorage.getItem("token"))}</H6>
+              <H6 color="gray" className="uppercase">
+                {getName(localStorage.getItem("token"))}
+              </H6>
             )}
           </a>
           <div className="flex flex-col">
@@ -40,7 +42,7 @@ export default function Sidebar() {
               {isAdmin === 1 && (
                 <li className="rounded-lg mb-4">
                   <NavLink
-                    to="/"
+                    to="/admin/dashboard"
                     exact
                     className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
                     activeClassName="bg-gradient-to-tr from-[#4A2511] to-[#9A7B4F] text-white shadow-md"
@@ -62,29 +64,32 @@ export default function Sidebar() {
                   </NavLink>
                 </li>
               )}
-              {/* {isAdmin && (
-                <li className="rounded-lg mb-2 ">
+              {isAdmin === 1 && (
+                <li className="rounded-lg mb-4">
                   <NavLink
                     to="/admin/sectors"
+                    exact
                     className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
-                    activeClassName="bg-gradient-to-tr from-light-blue to-light-blue text-white shadow-md"
+                    activeClassName="bg-gradient-to-tr from-[#4A2511] to-[#9A7B4F] text-white shadow-md"
                   >
-                    <Icon name="settings" size="2xl" />
+                    <Icon name="home" size="2xl" />
                     Sector
                   </NavLink>
                 </li>
-              )} */}
-              <li className="rounded-lg mb-2 ">
-                <NavLink
-                  data-cy="nav-users"
-                  to="/users"
-                  className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
-                  activeClassName="bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-md"
-                >
-                  <Icon name="toc" size="2xl" />
-                  Users
-                </NavLink>
-              </li>
+              )}
+              {isAdmin === 1 && (
+                <li className="rounded-lg mb-2 ">
+                  <NavLink
+                    data-cy="nav-users"
+                    to="/users"
+                    className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
+                    activeClassName="bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-md"
+                  >
+                    <Icon name="toc" size="2xl" />
+                    Users
+                  </NavLink>
+                </li>
+              )}
               {isAdmin === 1 && (
                 <li className="rounded-lg mb-2 text-gray-700">
                   <NavLink

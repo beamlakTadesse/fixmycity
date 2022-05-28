@@ -32,7 +32,7 @@ export default function LogIn() {
       };
       try {
         fetch(
-          `http://localhost:8000/v1/admins/login_superadmin/`,
+          `https://60b4-197-156-95-86.ngrok.io/v1/admins/login_superadmin/`,
           requestOptions
         )
           .then((response) => response.json())

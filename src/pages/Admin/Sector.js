@@ -6,17 +6,12 @@ import SectorsSection from "components/sector/sectorsList";
 import Sidebar from "../../components/Sidebar";
 import Footer from "../../components/Footer";
 
-export default function Sector() {
+export default function AdminSector() {
   return (
     <>
       <Sidebar />
-      <div className="absolute w-full z-20">
-        <main>
-          <SectorsSection />
-        </main>
-      </div>
 
-      <Footer />
+      <SectorsSection />
     </>
   );
 }

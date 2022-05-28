@@ -6,6 +6,7 @@ import Input from "@material-tailwind/react/Input";
 import Textarea from "@material-tailwind/react/Textarea";
 import { useState, useEffect } from "react";
 import { getUserId } from "helpers/utils";
+import { url } from "helpers/strings";
 
 export default function SettingsForm({ editProfile, setEditProfile }) {
   const [mydata, setData] = useState({});
@@ -13,11 +14,11 @@ export default function SettingsForm({ editProfile, setEditProfile }) {
   const [isError, setError] = useState(false);
   const id = getUserId(localStorage.getItem("token"));
   useEffect(() => {
-    const url = `http://localhost:8000/v1/admins/users/` + id;
+    const url1 = `${url}/v1/admins/users/` + id;
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch(url);
+        const response = await fetch(url1);
 
         const json = await response.json();
 
@@ -38,6 +39,54 @@ export default function SettingsForm({ editProfile, setEditProfile }) {
     fetchData();
   }, []);
 
+  const changeHandler = (event) => {
+    setSelectedFile(event.target.files[0]);
+    setIsFilePicked(true);
+  };
+  const [inputs, setInputs] = useState({
+    email: mydata.email,
+    firstname: mydata.first_name,
+    lastname: mydata.last_name,
+    phone: mydata.phone_number,
+  });
+  const { email, firstname, lastname, phone } = inputs;
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setInputs((inputs) => ({ ...inputs, [name]: value }));
+  }
+  const [selectedFile, setSelectedFile] = useState();
+  const [isSelected, setIsFilePicked] = useState(false);
+  function editProfile() {
+    const url2 = `${url}/v1/admins/edit_profile/`;
+    const formData = new FormData();
+
+    formData.append("image", selectedFile);
+    formData.append("email", inputs.email);
+    formData.append("first_name", inputs.firstname);
+    formData.append("last_name", inputs.lastname);
+    formData.append("phone_number", inputs.phone);
+
+    const requestOptions = {
+      method: "PATCH",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+
+      body: formData,
+      // body:JSON.stringify({'title':values.title,'description':values.description,"image":currentPic})
+    };
+    fetch(url2, requestOptions)
+      .then((response) => {
+        if (!response.ok) {
+          console.log(response.json());
+
+          throw new Error(response.status);
+        } else return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+      });
+  }
   function EditProfile() {
     setEditProfile(!editProfile);
   }
@@ -64,25 +113,58 @@ export default function SettingsForm({ editProfile, setEditProfile }) {
           <div className="flex flex-wrap mt-10">
             <div className="w-full lg:w-6/12 pl-4 mb-10 font-light">
               <lable>Email</lable>
-              <Input type="email" color="blue" placeholder={mydata.email} />
+              <Input
+                type="email"
+                value={email}
+                name="email"
+                color="blue"
+                onChange={handleChange}
+                placeholder={mydata.email}
+              />
             </div>
             <div className="w-full lg:w-6/12 pl-4 mb-10 font-light">
               <lable>First Name</lable>
-              <Input type="text" color="blue" placeholder={mydata.first_name} />
+              <Input
+                type="text"
+                value={firstname}
+                name="firstname"
+                color="blue"
+                onChange={handleChange}
+                placeholder={mydata.first_name}
+              />
             </div>
             <div className="w-full lg:w-6/12 pl-4 mb-10 font-light">
               <lable>Last Name</lable>
-              <Input type="email" color="blue" placeholder={mydata.last_name} />
+              <Input
+                type="text"
+                value={lastname}
+                name="lastname"
+                color="blue"
+                onChange={handleChange}
+                placeholder={mydata.last_name}
+              />
             </div>
             <div className="w-full lg:w-6/12 pl-4 mb-10 font-light">
               <lable>Phone Number</lable>
               <Input
                 type="text"
                 color="blue"
+                phone="phone"
+                value={phone}
+                onChange={handleChange}
                 placeholder={mydata.phone_number}
               />
             </div>
           </div>
+          <div>
+            <input
+              type="file"
+              name="file"
+              onChange={changeHandler}
+              data-cy="btn-postann-image"
+            />
+          </div>
+
           {/* 
                     <h6 className="text-blue-500 text-sm my-6 font-light uppercase">
                         Contact Information

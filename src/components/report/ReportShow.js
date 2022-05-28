@@ -24,6 +24,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { reportActions } from "../../actions";
 import { Button } from "@material-tailwind/react";
 import { NavLink } from "react-router-dom";
+import { url } from "helpers/strings";
 // import ReportTableChart from 'components/sector/ReportTable';
 
 function ReportShow() {
@@ -99,7 +100,7 @@ function ReportShow() {
 
   useEffect(() => {
     // mounted.current = true;
-    const url = `http://localhost:8000/v1/report/getreportbasedonSectorName/`;
+    const url1 = `${url}/v1/report/getreportbasedonSectorName/`;
     //
     // const url = `http://localhost:8000/v1/myreport/`;
     const requestOptions = {
@@ -111,7 +112,7 @@ function ReportShow() {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch(url, requestOptions);
+        const response = await fetch(url1, requestOptions);
 
         const json = await response.json();
         // console.log("LOCATION:_"+location.pathname);
@@ -134,15 +135,11 @@ function ReportShow() {
     };
 
     fetchData();
-  }, []);
+  }, [mydata]);
 
   // const data = React.useMemo(() => mydata, [])
 
-  return isLoading ? (
-    <div class="flex justify-center items-center h-screen">
-      <Loader />
-    </div>
-  ) : isError ? (
+  return isError ? (
     <ErrorPage2 pathname={location.pathname} />
   ) : (
     <Card className="mt-20">
@@ -171,6 +168,11 @@ function ReportShow() {
       </CardBody>
     </Card>
   );
+  // isLoading ? (
+  //   <div class="flex justify-center items-center h-screen">
+  //     <Loader />
+  //   </div>
+  // ) :
 }
 
 export default ReportShow;

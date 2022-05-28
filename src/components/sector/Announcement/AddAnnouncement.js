@@ -14,6 +14,7 @@ import Input from "@material-tailwind/react/Input";
 import "react-datepicker/dist/react-datepicker.css";
 import { useDispatch, useSelector } from "react-redux";
 import userDetailContext from "../../../pages/SectorAdmin/Announcement";
+import { url } from "helpers/strings";
 export default function AddAnnouncement({ isActive, setIsActive }) {
   const [showModal, setShowModal] = useState(false);
 
@@ -61,7 +62,7 @@ export default function AddAnnouncement({ isActive, setIsActive }) {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    const url = `http://localhost:8000/v1/announcment/`;
+    const url1 = `${url}/v1/announcment/`;
     setSubmitted(true);
 
     try {
@@ -88,7 +89,7 @@ export default function AddAnnouncement({ isActive, setIsActive }) {
         // console.log(formData.get("title"));
         // console.log(formData.get("description"));
 
-        await fetch(url, requestOptions)
+        await fetch(url1, requestOptions)
           .then((response) => {
             if (!response.ok) {
               setStatus(response.status);
@@ -121,21 +122,22 @@ export default function AddAnnouncement({ isActive, setIsActive }) {
     <Modal size="lg" active={isActive} toggler={() => setIsActive(false)}>
       <ModalBody>
         <Card>
-          <CardHeader color="blue" contentPosition="none">
+          <CardHeader color="brown" contentPosition="none">
             <div className="w-full flex items-center justify-between">
               <h2 className="text-white text-2xl">Post Announcement</h2>
             </div>
           </CardHeader>
           <CardBody>
             <form encType="multipart/form-data">
-              <h6 className="text-purple-500 text-sm mt-1 mb-6 font-light uppercase">
+              <h6 className="text-brwno-500 text-sm mt-1 mb-6 font-light uppercase">
                 Title
               </h6>
               <div className="flex flex-wrap mt-4">
                 <div className="w-full lg:w-full pr-4 mb-8 font-light">
                   <Input
                     type="text"
-                    color="purple"
+                    color="bro"
+                    wn
                     placeholder="District Name"
                     name="districtName"
                     value={values.title}
@@ -169,7 +171,7 @@ export default function AddAnnouncement({ isActive, setIsActive }) {
 
                 <div className="w-full lg:w-full mb-5 font-light">
                   <textarea
-                    class="
+                    className="
                             form-control
                             block
                             w-full
@@ -218,6 +220,7 @@ export default function AddAnnouncement({ isActive, setIsActive }) {
               <div className="grid grid-rows-3 grid-flow-col gap-1 mt-4">
                 <div className="row-span-3">
                   <Button
+                    color="brown"
                     onClick={(e) => handleSubmit(e)}
                     data-cy="btn-postann-submit"
                   >
@@ -225,7 +228,7 @@ export default function AddAnnouncement({ isActive, setIsActive }) {
                   </Button>
                 </div>
                 <div className="row-span-3">
-                  <Button>Cancel</Button>
+                  <Button color="brown">Cancel</Button>
                 </div>
               </div>
             </form>

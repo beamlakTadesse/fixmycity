@@ -4,7 +4,10 @@ import Card from "@material-tailwind/react/Card";
 import CardHeader from "@material-tailwind/react/CardHeader";
 import CardBody from "@material-tailwind/react/CardBody";
 
-export default function ReportChart() {
+export default function ReportChart({ resolved, spam, unresolved }) {
+  var data_resolved = resolved;
+  var data_unresolved = unresolved;
+  var data_spam = spam;
   useEffect(() => {
     var config = {
       type: "line",
@@ -17,13 +20,19 @@ export default function ReportChart() {
           "May",
           "June",
           "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
         ],
         datasets: [
           {
             label: "Resolved Reports",
             backgroundColor: "#03a9f4",
             borderColor: "#03a9f4",
-            data: [65, 78, 66, 44, 56, 67, 75],
+            // data: [65, 78, 66, 44, 56, 67, 75],
+            data: data_resolved,
             fill: false,
           },
           {
@@ -31,7 +40,8 @@ export default function ReportChart() {
             fill: false,
             backgroundColor: "#ff9800",
             borderColor: "#ff9800",
-            data: [40, 68, 86, 74, 56, 60, 87],
+            data: data_unresolved,
+            // data: [40, 68, 86, 74, 56, 60, 87],
           },
         ],
       },

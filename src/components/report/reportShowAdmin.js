@@ -24,6 +24,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { reportActions } from "../../actions";
 import { Button } from "@material-tailwind/react";
 import { NavLink } from "react-router-dom";
+import { url } from "helpers/strings";
 // import ReportTableChart from 'components/sector/ReportTable';
 
 function ReportShowAdmin() {
@@ -99,7 +100,7 @@ function ReportShowAdmin() {
 
   useEffect(() => {
     // mounted.current = true;
-    const url = `http://localhost:8000/v1/report/`;
+    const url1 = `${url}/v1/report/`;
     //
     // const url = `http://localhost:8000/v1/myreport/`;
     const requestOptions = {
@@ -111,7 +112,7 @@ function ReportShowAdmin() {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch(url, requestOptions);
+        const response = await fetch(url1, requestOptions);
 
         const json = await response.json();
         // console.log("LOCATION:_"+location.pathname);
