@@ -9,31 +9,24 @@ import { Logout } from "@mui/icons-material";
 import { useLocation, useNavigate } from "react-router-dom";
 import { isSectorAdmin } from "helpers/utils";
 import useAuth from "../hooks/auth";
+import { NavLink } from "react-router-dom";
 
 export default function AdminNavbar({ showSidebar, setShowSidebar }) {
   const location = useLocation().pathname;
   const navigate = useNavigate();
   const { setAuth } = useAuth();
   function Logout() {
-    const role = localStorage.getItem("role");
-    if (role == 2) {
-      navigate(`/sector/login`);
+    navigate(`/login`);
 
-      localStorage.removeItem("token");
-      localStorage.removeItem("role");
-    } else {
-      navigate(`/login`);
+    localStorage.removeItem("token");
 
-      localStorage.removeItem("token");
-      localStorage.removeItem("role");
-    }
     setAuth({});
 
     // setAuthTokens();
     // setRol();
   }
   return (
-    <nav className="bg-light-blue-500  py-6 px-3">
+    <nav className="bg-[#DEB887]  py-6 px-3">
       <div className="container max-w-full mx-auto flex items-center justify-between md:pr-8 md:pl-10">
         <div className="md:hidden">
           <Button
@@ -90,8 +83,10 @@ export default function AdminNavbar({ showSidebar, setShowSidebar }) {
                   color: "transparent",
                 }}
               >
-                <DropdownItem color="lightBlue">Help</DropdownItem>
-                <DropdownItem color="lightBlue" onClick={Logout}>
+                <DropdownItem color="brown">
+                  <NavLink to="/help">Help</NavLink>
+                </DropdownItem>
+                <DropdownItem color="brown" onClick={Logout}>
                   Logout
                 </DropdownItem>
                 {/* <DropdownItem color="lightBlue">

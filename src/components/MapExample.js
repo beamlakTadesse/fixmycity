@@ -4,11 +4,12 @@ import Modal from "@material-tailwind/react/Modal";
 import ModalHeader from "@material-tailwind/react/ModalHeader";
 import ModalBody from "@material-tailwind/react/ModalBody";
 import { useNavigate } from "react-router-dom";
+import { url } from "helpers/strings";
 
 const google = window.google = window.google ? window.google : {}
 
 export default function MapExample() {
-  const url = `http://localhost:8000/v1/report/`;
+  const url = `${url}/v1/report/`;
   const navigate = useNavigate();
 
   const [loc, setLocations] = useState([]);
@@ -33,7 +34,7 @@ export default function MapExample() {
 
   useEffect(() => {
     // mounted.current = true;
-    const url = `http://localhost:8000/v1/report/`;
+    const url = `${url}/v1/report/`;
     //
     // const url = `http://localhost:8000/v1/myreport/`;
 

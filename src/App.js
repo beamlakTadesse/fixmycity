@@ -15,7 +15,9 @@ import User from "pages/userList";
 import Report from "pages/report";
 
 import "assets/styles/tailwind.css";
-import Sector from "pages/Admin/Sector";
+import AdminSector from "pages/Admin/Sector";
+import ReportAdmin from "pages/Admin/report";
+
 import ReportShow from "components/report/ReportShow";
 import Register from "pages/SectorAdmin/register";
 import LogInSectorAdmin from "pages/SectorAdmin/login";
@@ -25,7 +27,7 @@ import RequireAuth from "components/RequireAuth";
 import UnAuthorized from "components/sector/shared/unauthorized";
 // import { ThemeProvider, CSSReset } from "@chakra-ui/core";
 import {
-  getRole,
+  getRol,
   isAuthenticated,
   isSectorAdmin,
   isSuperAdmin,
@@ -33,15 +35,17 @@ import {
 } from "./helpers/utils";
 
 import jwt_decode from "jwt-decode";
+import Help from "pages/help";
 // import Authorization from "RequireAuth";
 
 function App() {
-  // const [comp, setComp] = useState();
-  // useEffect(() => {
-  //   const role = getRole();
+  const h = getRol(localStorage.getItem("token"));
 
-  //   role == 1 ? setComp(<Dash />) : setComp(<SectorDash />);
-  // });
+  const [role, setRol] = useState(h);
+  useEffect(() => {
+    setRol(getRol(localStorage.getItem("token")));
+  });
+  console.log(getRol());
   return (
     <>
       {/* <Sidebar /> */}
@@ -49,8 +53,9 @@ function App() {
       <div className="md:ml-64">
         <Routes>
           <Route element={<RequireAuth allowedRoles={[1]} />}>
-            <Route exact path="/admin/sectors" element={<Sector />} />
+            <Route exact path="/admin/sectors" element={<AdminSector />} />
             <Route exact path="/admin/dashboard" element={<Dash />} />
+            <Route exact path="/admin/report" element={<ReportAdmin />} />
           </Route>
           <Route element={<RequireAuth allowedRoles={[2]} />}>
             <Route exact path="/sector/dashboard" element={<SectorDash />} />
@@ -68,35 +73,24 @@ function App() {
             <Route exact path="/maps" element={<Maps />} />
           </Route>
           <Route element={<RequireAuth allowedRoles={[1, 2]} />}>
-            <Route path="/" element={<SectorDash />} />
+            {role == 1 ? (
+              <Route path="/" element={<Dash />} />
+            ) : (
+              <Route path="/" element={<SectorDash />} />
+            )}
 
             <Route exact path="/tables" element={<Tables />} />
             <Route exact path="/users" element={<User />} />
 
-            <Route exact path="/settings" element={<Settings />} />
+            <Route exact path="/profile" element={<Settings />} />
           </Route>
-
+          <Route exact path="/help" element={<Help />} />
           <Route exact path="/login" element={<LogInSectorAdmin />} />
           <Route exact path="/unauthorized" element={<UnAuthorized />} />
-          <Route exact path="/sector/login" element={<LogInSectorAdmin />} />
+
           <Route exact path="/register/" element={<Register />} />
           <Route exact path="*" element={<LogIn />} />
           {/* <Footer /> */}
-
-          <Route exact path="/announcement" element={<Announcement />} />
-          <Route exact path="/ayy" element={<AnnouncementList />} />
-          <Route exact path="/sector/reports" element={<Report />} />
-          <Route
-            exact
-            path="/sector/reports/:id"
-            element={<PageVisitsCard />}
-          />
-
-          <Route exact path="/sectors/dashboard" element={<SectorDash />} />
-          <Route exact path="/maps" element={<Maps />} />
-          <Route path="/" element={<Dash />} />
-          <Route exact path="/admin/sectors" element={<Sector />} />
-          <Route exact path="/admin/dashboard" element={<Dash />} />
         </Routes>
       </div>
       {/* </ThemeProvider> */}

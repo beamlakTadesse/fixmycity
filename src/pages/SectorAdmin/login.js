@@ -6,6 +6,7 @@ import { useNavigate, Route, useLocation } from "react-router-dom";
 import { setRole } from "helpers/utils";
 import jwt_decode from "jwt-decode";
 import useAuth from "../../hooks/auth";
+import { url } from "helpers/strings";
 
 export default function LogInSectorAdmin() {
   let location = useLocation();
@@ -35,10 +36,7 @@ export default function LogInSectorAdmin() {
         body: JSON.stringify(inputs),
       };
       try {
-        fetch(
-          `http://localhost:8000/v1/admins/login_admin/`,
-          requestOptions
-        )
+        fetch(`${url}/v1/admins/login_admin/`, requestOptions)
           .then((response) => response.json())
           .then((res) => {
             if (res.message) {
@@ -54,7 +52,7 @@ export default function LogInSectorAdmin() {
               setAuth({ token, roles });
               localStorage.setItem("token", res.token.access);
 
-              navigate(`/sectors/dashboard`);
+              navigate(`/`);
             } else {
               setLoginState(false);
               setLoginMessage(res.detail);
@@ -128,7 +126,8 @@ export default function LogInSectorAdmin() {
                 type="submit"
                 value="Log In"
                 data-cy="btn-lg-id-login"
-                className="flex justify-center bg-purple text-lg hover:bg-gray-700 p-2 mt-8"
+                color="brown"
+                className="flex justify-center bg-[#DEB887] text-lg hover:bg-[#DEB887] p-2 mt-8"
               >
                 LogIn
               </Button>
@@ -143,12 +142,12 @@ export default function LogInSectorAdmin() {
           </div>
         </div>
 
-        <div className="w-1/2 shadow-2xl">
+        {/* <div className="w-1/2 shadow-2xl">
           <Image
             className="object-cover w-full h-screen hidden md:block"
             src={addis}
           />
-        </div>
+        </div> */}
       </div>
     </div>
   );

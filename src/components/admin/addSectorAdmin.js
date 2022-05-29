@@ -10,6 +10,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { sectorActions, userActions } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 import Table from "components/report/Table";
+import { url } from "helpers/strings";
 
 export default function AddSectorAdminForm() {
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ export default function AddSectorAdminForm() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
 
-  const [sectorId, setSectorId] = useState(1);
+  const [sectorId, setSectorId] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   function handleEmailChange(e) {
     e.preventDefault();
@@ -36,15 +37,15 @@ export default function AddSectorAdminForm() {
   }
   function getSectors() {
     try {
-      const response = fetch(
-        `http://localhost:8000/v1/admins/sector/sector/`
-      ).then(async (response) => {
-        var res = await response.json();
-        if (response.ok) {
-          setSectors(res.results);
-          console.log("sector..");
+      const response = fetch(`${url}/v1/admins/sector/sector/`).then(
+        async (response) => {
+          var res = await response.json();
+          if (response.ok) {
+            setSectors(res.results);
+            console.log("sector..");
+          }
         }
-      });
+      );
     } catch (error) {
       setSectors([]);
       console.log("error", error);
@@ -58,11 +59,13 @@ export default function AddSectorAdminForm() {
     setSuccess(false);
     setError("");
     let token = localStorage.getItem("token");
-    if (email) {
+    if (email && sectorId != 0) {
       const inputs = {
         email: email,
         sector: sectorId,
       };
+      console.log(sectorId);
+      console.log(inputs);
       const requestOptions = {
         method: "POST",
 
@@ -72,7 +75,7 @@ export default function AddSectorAdminForm() {
         },
         body: JSON.stringify(inputs),
       };
-      fetch(`http://localhost:8000/v1/admins/register/`, requestOptions).then(
+      fetch(`${url}/v1/admins/register/`, requestOptions).then(
         async (response) => {
           const data = await response.json();
           console.log(data);
@@ -127,7 +130,7 @@ export default function AddSectorAdminForm() {
   // );
   useEffect(() => {
     getSectors();
-  },[]);
+  }, []);
 
   return (
     // <Card>
@@ -149,7 +152,12 @@ export default function AddSectorAdminForm() {
           <div className="grid grid-rows-2 ">
             <div>
               <lable className="font-light">Select Sector </lable>
-              <select value={sectorId} onChange={handleChange}>
+              <select
+                value={sectorId}
+                onChange={(e) => {
+                  handleChange(e);
+                }}
+              >
                 {sectors &&
                   sectors.map(function (sector) {
                     return (
@@ -162,11 +170,13 @@ export default function AddSectorAdminForm() {
               <Input
                 data-cy="txt-createAdmin-email"
                 type="email"
-                color="purple"
+                color="brown"
                 placeholder="Email Address"
                 name="email"
                 value={email}
-                onChange={handleEmailChange}
+                onChange={(e) => {
+                  handleEmailChange(e);
+                }}
               />
               {submitted && !email && (
                 <div className="mt-2 text-sm text-red-600">
@@ -179,6 +189,7 @@ export default function AddSectorAdminForm() {
         <div className="grid grid-rows-3 grid-flow-col gap-1">
           <div className="row-span-3">
             <Button
+              color="brown"
               data-cy="btn-createAdmin-submit"
               onClick={(e) => handleSubmit(e)}
             >
@@ -186,7 +197,7 @@ export default function AddSectorAdminForm() {
             </Button>
           </div>
           <div className="row-span-3">
-            <Button>Cancel</Button>
+            <Button color="brown">Cancel</Button>
           </div>
         </div>
         {/* <Table columns={columns} data={sectors} /> */}

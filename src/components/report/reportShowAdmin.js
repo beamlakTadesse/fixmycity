@@ -27,7 +27,7 @@ import { NavLink } from "react-router-dom";
 import { url } from "helpers/strings";
 // import ReportTableChart from 'components/sector/ReportTable';
 
-function ReportShow() {
+function ReportShowAdmin() {
   const location = useLocation();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -100,7 +100,7 @@ function ReportShow() {
 
   useEffect(() => {
     // mounted.current = true;
-    const url1 = `${url}/v1/report/getreportbasedonSectorName/`;
+    const url1 = `${url}/v1/report/`;
     //
     // const url = `http://localhost:8000/v1/myreport/`;
     const requestOptions = {
@@ -135,11 +135,15 @@ function ReportShow() {
     };
 
     fetchData();
-  }, [mydata]);
+  }, []);
 
   // const data = React.useMemo(() => mydata, [])
 
-  return isError ? (
+  return isLoading ? (
+    <div class="flex justify-center items-center h-screen">
+      <Loader />
+    </div>
+  ) : isError ? (
     <ErrorPage2 pathname={location.pathname} />
   ) : (
     <Card className="mt-20">
@@ -168,11 +172,6 @@ function ReportShow() {
       </CardBody>
     </Card>
   );
-  // isLoading ? (
-  //   <div class="flex justify-center items-center h-screen">
-  //     <Loader />
-  //   </div>
-  // ) :
 }
 
-export default ReportShow;
+export default ReportShowAdmin;

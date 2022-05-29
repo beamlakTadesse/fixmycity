@@ -20,6 +20,7 @@ import Sidebar from "../Sidebar";
 import Footer from "../Footer";
 
 import { createPopper } from "@popperjs/core";
+import { url } from "helpers/strings";
 
 export default function ReportDet() {
   let color = "gray";
@@ -47,20 +48,27 @@ export default function ReportDet() {
     : (bgColor = "bg-" + color + "-500");
 
   // ###########################  DROPDOWN #######
-  const url = `http://localhost:8000/v1/report/${id}/`;
+  const url1 = `${url}/v1/report/${id}/`;
 
   useEffect(() => {
     // mounted.current = true;
     // const url = `http://localhost:8000/v1/report/${id}`;
 
     const fetchData = async () => {
+      const requestOptions = {
+        method: "GET",
+        headers: { ...authHeader(), "Content-Type": "application/json" },
+      };
+      // JSON.stringify(announcement)
+
       try {
-        const response = await fetch(url);
+        const response = await fetch(url1, requestOptions);
 
         const json = await response.json();
         setData(json);
+        console.log(mydata);
         if (!json.state) {
-          ReadReport(url);
+          ReadReport(url1);
         }
         if (json.status === "RESOLVED") {
           setReject(true);
@@ -74,7 +82,11 @@ export default function ReportDet() {
         console.log("error", error);
       }
     };
-
+    {
+      mydata.sector &&
+        mydata.sector.sector_type &&
+        console.log(mydata.sector.sector_type);
+    }
     fetchData();
   }, []);
   const [submitted, setSubmitted] = useState(false);
@@ -98,7 +110,7 @@ export default function ReportDet() {
         // JSON.stringify(announcement)
       };
 
-      const response = await fetch(url, requestOptions);
+      const response = await fetch(url1, requestOptions);
       const json = await response.json();
       setData(json.report);
 
@@ -117,7 +129,7 @@ export default function ReportDet() {
         // JSON.stringify(announcement)
       };
 
-      const response = await fetch(url, requestOptions);
+      const response = await fetch(url1, requestOptions);
       const json = await response.json();
       setData(json.report);
       setRejectSubmitted(false);
@@ -136,7 +148,7 @@ export default function ReportDet() {
         body: JSON.stringify({ spamStatus: true }),
       };
 
-      const response = await fetch(url, requestOptions);
+      const response = await fetch(url1, requestOptions);
 
       const json = await response.json();
       if (json) {
@@ -178,7 +190,7 @@ export default function ReportDet() {
         body: JSON.stringify({ spamStatus: false }),
       };
 
-      const response = await fetch(url, requestOptions);
+      const response = await fetch(url1, requestOptions);
 
       const json = await response.json();
       setData(json.report);
@@ -203,7 +215,7 @@ export default function ReportDet() {
           <div className=" bg-white w-[700px]  ml-5 drop-shadow-2xl mt-[30px] h-screen">
             <div
               className=" w-[700px] h-[100px] rounded-2xl] -mt-[50px] drop-shadow-3xl"
-              style={{ backgroundColor: "rgb(135,206,235)" }}
+              style={{ backgroundColor: "rgb(99, 69, 59)" }}
             >
               <h1 className="text-[25px] ml-[30px] pt-[30px] text-white ]">
                 Reported Issue
@@ -428,12 +440,16 @@ export default function ReportDet() {
         </ModalBody>
         <ModalFooter>
           <Button
+            color="brown"
             onClick={() => addToSpamReport()}
             data-cy="btn-report-detail-confirm-spam"
           >
             Confirm
           </Button>
-          <Button onClick={() => handleDeleteCancel()}> Cancel</Button>
+          <Button color="brown" onClick={() => handleDeleteCancel()}>
+            {" "}
+            Cancel
+          </Button>
         </ModalFooter>
       </Modal>
 
@@ -454,10 +470,14 @@ export default function ReportDet() {
           <Button
             onClick={() => removeSpamReport()}
             data-cy="btn-report-detail-confirm-remove-spam"
+            color="brown"
           >
             Confirm
           </Button>
-          <Button onClick={() => handleDeleteCancel()}> Cancel</Button>
+          <Button color="brown" onClick={() => handleDeleteCancel()}>
+            {" "}
+            Cancel
+          </Button>
         </ModalFooter>
       </Modal>
 
@@ -467,14 +487,20 @@ export default function ReportDet() {
           <Heading5>Transfer Report to other Sector</Heading5>
         </ModalTitle>
         <ModalBody>
-          <TransferRadio
-            report={mydata.id}
-            submitted={submitted}
-            setSubmitted={setSubmitted}
-          />
+          {mydata.sector && mydata.sector.sector_type && (
+            <TransferRadio
+              sector_type={mydata.sector.sector_type}
+              report={mydata.id}
+              submitted={submitted}
+              setSubmitted={setSubmitted}
+            />
+          )}
         </ModalBody>
         <ModalFooter>
-          <Button onClick={() => handleDeleteCancel()}> Cancel</Button>
+          {/* <Button color="brown" onClick={() => handleDeleteCancel()}>
+            {" "}
+            Cancel
+          </Button> */}
         </ModalFooter>
       </Modal>
 
@@ -491,8 +517,13 @@ export default function ReportDet() {
           <p>Are you sure you want to Reject this report</p>
         </ModalBody>
         <ModalFooter>
-          <Button onClick={() => rejectReport()}>Confirm</Button>
-          <Button onClick={() => handleDeleteCancel()}> Cancel</Button>
+          <Button color="brown" onClick={() => rejectReport()}>
+            Confirm
+          </Button>
+          <Button color="brown" onClick={() => handleDeleteCancel()}>
+            {" "}
+            Cancel
+          </Button>
         </ModalFooter>
       </Modal>
 

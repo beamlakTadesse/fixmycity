@@ -18,6 +18,7 @@ import Modal from "@material-tailwind/react/Modal";
 import RegisterPage from "./register";
 import Loader from "components/sector/shared/loader";
 import ErrorPage2 from "components/sector/shared/errorPage2";
+import { url } from "helpers/strings";
 
 export default function UserTable() {
   // const users = useSelector(state => state.users);
@@ -31,13 +32,19 @@ export default function UserTable() {
   const [users, setUsers] = useState([]);
   useEffect(() => {
     // mounted.current = true;
-    const url = `http://localhost:8000/v1/admins/users/`;
+    const url1 = `${url}/v1/admins/users/`;
 
     const fetchData = async () => {
       setIsLoading(true);
-
+      const requestOptions = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      };
       try {
-        const response = await fetch(url);
+        const response = await fetch(url1, requestOptions);
 
         const json = await response.json();
         console.log(json.user);
@@ -61,6 +68,23 @@ export default function UserTable() {
       setIsLoading(false);
     }, 1500);
   }, []);
+  const activateUser = async (id) => {
+    const requestOptions = {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    };
+    const response = await fetch(
+      // TODO change url
+      `${url}/customUser/removeban/${id}`,
+      requestOptions
+    );
+    const json = await response.json();
+    console.log(json);
+    console.log(response);
+  };
   const [msg, setMsg] = useState("");
   async function handleDeleteUser(id) {
     const requestOptions = {
@@ -69,7 +93,7 @@ export default function UserTable() {
     };
     console.log(id);
     const response = await fetch(
-      `http://localhost:8000/v1/admins/custom_users/${id}`,
+      `${url}/v1/admins/custom_users/${id}`,
       requestOptions
     );
     const json = await response.json();
@@ -90,7 +114,7 @@ export default function UserTable() {
     <ErrorPage2 />
   ) : (
     <Card>
-      <CardHeader color="blue" contentPosition="left">
+      <CardHeader color="brown" contentPosition="left">
         <h2 className="text-white text-2xl">Users</h2>
         {/* <Button onClick={() => setRegister(true)}>Register</Button> */}
       </CardHeader>
@@ -110,14 +134,17 @@ export default function UserTable() {
               <table className="items-center w-full bg-transparent border-collapse">
                 <thead>
                   <tr>
-                    <th className="px-2 text-purple-500 align-middle border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
+                    <th className="px-2 text-brown align-middle border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
                       First Name
                     </th>
-                    <th className="px-2 text-purple-500 align-middle border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
+                    <th className="px-2 text-brown align-middle border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
                       Last Name
                     </th>
-                    <th className="px-2 text-purple-500 align-middle border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
+                    <th className="px-2 text-brown align-middle border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
                       Phone
+                    </th>
+                    <th className="px-2 text-brown align-middle border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
+                      User State
                     </th>
                   </tr>
                 </thead>
@@ -125,16 +152,37 @@ export default function UserTable() {
                   return (
                     <tbody data-cy="tbl-user">
                       <tr>
-                        <th className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
-                          {users[oneKey].first_name}
-                        </th>
-                        <th className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
-                          {users[oneKey].last_name}
-                        </th>
-                        <th className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
-                          <i className="fas fa-circle fa-sm text-orange-500 mr-2"></i>{" "}
-                          {users[oneKey].phone_number}
-                        </th>
+                        {users[oneKey].first_name && users[oneKey].last_name && (
+                          <>
+                            <th className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
+                              {users[oneKey].first_name}
+                            </th>
+                            <th className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
+                              {users[oneKey].last_name}
+                            </th>
+                            <th className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
+                              <i className="fas fa-circle fa-sm text-orange-500 mr-2"></i>{" "}
+                              {users[oneKey].phone_number}
+                            </th>
+                            <th className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
+                              <i className="fas fa-circle fa-sm text-orange-500 mr-2"></i>{" "}
+                              {users[oneKey].is_banned ? (
+                                <>
+                                  <Button
+                                    color="green"
+                                    onClick={() => {
+                                      activateUser(users[oneKey].id);
+                                    }}
+                                  >
+                                    Activate
+                                  </Button>
+                                </>
+                              ) : (
+                                <p>Active</p>
+                              )}
+                            </th>
+                          </>
+                        )}
                       </tr>
                     </tbody>
                   );
