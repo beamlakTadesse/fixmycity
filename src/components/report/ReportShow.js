@@ -52,18 +52,18 @@ function ReportShow() {
 
         idAccessor: ["state", "id"],
       },
-      {
-        Header: "Sector Name",
-        accessor: "sector.district_name",
-        idAccessor: ["state", "sector.email"],
-        Cell: sectorCell,
-      },
-      {
-        Header: "Phone Number",
-        accessor: "user.phone_number",
-        idAccessor: "state",
-        Cell: phoneNumberCell,
-      },
+      // {
+      //   Header: "Sector Name",
+      //   accessor: "sector.district_name",
+      //   idAccessor: ["state", "sector.email"],
+      //   Cell: sectorCell,
+      // },
+      // {
+      //   Header: "Phone Number",
+      //   accessor: "user.phone_number",
+      //   idAccessor: "state",
+      //   Cell: phoneNumberCell,
+      // },
       {
         Header: "Posted At",
         accessor: "postedAt",
@@ -74,6 +74,7 @@ function ReportShow() {
         // filter: 'includes',
       },
       {
+        idAccessor: "status",
         Header: "Status",
         accessor: "status",
         Cell: StatusPill,
@@ -88,8 +89,16 @@ function ReportShow() {
         accessor: "spamStatus",
 
         Cell: SpamStatus,
-        Filter: SelectColumnFilter, // new
+        // Filter: SelectColumnFilter, // new
+        filter: 'includes',
+
         // filter: 'includes',
+      },
+      {
+        Header: "Like Count",
+        accessor: "like_count",
+        idAccessor: "like_count",
+        // Cell: phoneNumberCell,
       },
     ],
     []
@@ -135,7 +144,7 @@ function ReportShow() {
     };
 
     fetchData();
-  }, [mydata]);
+  }, []);
 
   // const data = React.useMemo(() => mydata, [])
 
