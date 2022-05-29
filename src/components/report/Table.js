@@ -118,10 +118,10 @@ export function ReportStatusColumnFilter({
         <option value="">All</option>
         {options.map((option, i) => (
           <option key={i} value={option}>
-            {option.startsWith("RESOLVED")
-              ? "Resolved"
-              : option.startsWith("UNRESOLVED")
+            {option===("UNRESOLVED")
               ? "UnResolved"
+              : option === ("RESOLVED")
+              ? "Resolved"
               : "Rejected"}
           </option>
         ))}
@@ -367,7 +367,7 @@ function Table({ columns, data }) {
                                       <SortUpIcon className="w-4 h-4 text-gray-400" />
                                     )
                                   ) : (
-                                    <SortIcon className="w-4 h-4 text-gray-400 opacity-0 group-hover:opacity-100" />
+                                    <SortIcon className="w-4 h-4 text-gray-400 opacity-100 group-hover:opacity-100" />
                                   )}
                                 </span>
                               </div>
