@@ -542,7 +542,7 @@ export default function ReportDet() {
       {/* </div> */}
 
       {/* <ReportInfo data={mydata}/> */}
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
