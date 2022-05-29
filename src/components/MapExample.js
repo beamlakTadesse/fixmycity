@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { url } from "helpers/strings";
 
 export default function MapExample() {
-  const url = `${url}/v1/report/`;
+  const url2 = `${url}/v1/report/`;
   const navigate = useNavigate();
 
   const [loc, setLocations] = useState([]);
@@ -23,8 +23,9 @@ export default function MapExample() {
     ],
   });
   function routeChange(id) {
+    if(id!==null){
     navigate(`/sector/reports/${id}`);
-    console.log("ID IS:" + id);
+    console.log("ID IS:" + id);}
   }
 
   const [mydata, setData] = useState([]);
@@ -32,14 +33,19 @@ export default function MapExample() {
 
   useEffect(() => {
     // mounted.current = true;
-    const url = `${url}/v1/report/`;
+    const url2 = `${url}/v1/report/`;
     //
     // const url = `http://localhost:8000/v1/myreport/`;
-
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    };
     const fetchData = async () => {
       // setIsLoading(true);
       try {
-        const response = await fetch(url);
+        const response = await fetch(url2,requestOptions);
 
         const json = await response.json();
         // console.log("LOCATION:_"+location.pathname);
