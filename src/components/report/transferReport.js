@@ -15,6 +15,7 @@ import { useNavigate, Redirect } from "react-router-dom";
 import { url } from "helpers/strings";
 
 function TransferRadio({ sector_type, report, submitted, setSubmitted }) {
+  console.log("hhhhhhhhhhhhh");
   const schema = Yup;
   const navigate = useNavigate();
   let lelaSelected = 0;
@@ -29,6 +30,7 @@ function TransferRadio({ sector_type, report, submitted, setSubmitted }) {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   console.log(sector_type);
   const [mydata, setData] = useState({});
   const [mes, setMes] = useState();

@@ -37,19 +37,19 @@ export default function SettingsForm({ editProfile, setEditProfile }) {
     };
 
     fetchData();
-  }, []);
+  }, [mydata]);
 
   const changeHandler = (event) => {
     setSelectedFile(event.target.files[0]);
     setIsFilePicked(true);
   };
   const [inputs, setInputs] = useState({
-    email: mydata.email,
-    firstname: mydata.first_name,
-    lastname: mydata.last_name,
-    phone: mydata.phone_number,
+    // email: mydata.email,
+    firstname: "",
+    lastname: "",
+    phone_number: "",
   });
-  const { email, firstname, lastname, phone } = inputs;
+  const { firstname, lastname, phone_number } = inputs;
   function handleChange(e) {
     const { name, value } = e.target;
     setInputs((inputs) => ({ ...inputs, [name]: value }));
@@ -59,12 +59,18 @@ export default function SettingsForm({ editProfile, setEditProfile }) {
   function editProfile() {
     const url2 = `${url}/v1/admins/edit_profile/`;
     const formData = new FormData();
-
-    formData.append("image", selectedFile);
-    formData.append("email", inputs.email);
-    formData.append("first_name", inputs.firstname);
-    formData.append("last_name", inputs.lastname);
-    formData.append("phone_number", inputs.phone);
+    if (inputs.firstname) {
+      formData.append("first_name", inputs.firstname);
+    }
+    if (selectedFile) {
+      formData.append("image", selectedFile);
+    }
+    if (inputs.lastname) {
+      formData.append("last_name", inputs.lastname);
+    }
+    if (inputs.phone_number) {
+      formData.append("phone_number", inputs.phone_number);
+    }
 
     const requestOptions = {
       method: "PATCH",
@@ -78,8 +84,6 @@ export default function SettingsForm({ editProfile, setEditProfile }) {
     fetch(url2, requestOptions)
       .then((response) => {
         if (!response.ok) {
-          console.log(response.json());
-
           throw new Error(response.status);
         } else return response.json();
       })
@@ -89,7 +93,9 @@ export default function SettingsForm({ editProfile, setEditProfile }) {
   }
   function EditProfile() {
     setEditProfile(!editProfile);
+    editProfile();
   }
+
   return (
     <Card>
       <CardHeader color="brown" contentPosition="none">
@@ -111,7 +117,7 @@ export default function SettingsForm({ editProfile, setEditProfile }) {
             User Information
           </h6>
           <div className="flex flex-wrap mt-10">
-            <div className="w-full lg:w-6/12 pl-4 mb-10 font-light">
+            {/* <div className="w-full lg:w-6/12 pl-4 mb-10 font-light">
               <lable>Email</lable>
               <Input
                 type="email"
@@ -121,7 +127,7 @@ export default function SettingsForm({ editProfile, setEditProfile }) {
                 onChange={handleChange}
                 placeholder={mydata.email}
               />
-            </div>
+            </div> */}
             <div className="w-full lg:w-6/12 pl-4 mb-10 font-light">
               <lable>First Name</lable>
               <Input
@@ -148,9 +154,9 @@ export default function SettingsForm({ editProfile, setEditProfile }) {
               <lable>Phone Number</lable>
               <Input
                 type="text"
-                color="blue"
-                phone="phone"
-                value={phone}
+                value={phone_number}
+                name="phone_number"
+                color="brown"
                 onChange={handleChange}
                 placeholder={mydata.phone_number}
               />

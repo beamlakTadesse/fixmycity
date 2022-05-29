@@ -55,8 +55,14 @@ export default function ReportDet() {
     // const url = `http://localhost:8000/v1/report/${id}`;
 
     const fetchData = async () => {
+      const requestOptions = {
+        method: "GET",
+        headers: { ...authHeader(), "Content-Type": "application/json" },
+      };
+      // JSON.stringify(announcement)
+
       try {
-        const response = await fetch(url1);
+        const response = await fetch(url1, requestOptions);
 
         const json = await response.json();
         setData(json);
@@ -76,7 +82,11 @@ export default function ReportDet() {
         console.log("error", error);
       }
     };
-
+    {
+      mydata.sector &&
+        mydata.sector.sector_type &&
+        console.log(mydata.sector.sector_type);
+    }
     fetchData();
   }, []);
   const [submitted, setSubmitted] = useState(false);

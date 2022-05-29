@@ -110,16 +110,18 @@ export default function Dashboard() {
                             />
                           );
                         })}
-                      <Button
-                        data-cy="btn-dash-addSectorAdmin"
-                        size="lg"
-                        color="brown"
-                        className=" mt-2.5 ml-20.5"
-                        style={{ padding: 0 }}
-                        onClick={(e) => setShowModal(true)}
-                      >
-                        Add Sector Admin
-                      </Button>
+                      <div className=" mt-2.5 ml-20.5 mb-2">
+                        <Button
+                          data-cy="btn-dash-addSectorAdmin"
+                          size="lg"
+                          color="brown"
+                          className=" mt-2.5 ml-20.5"
+                          style={{ padding: 0 }}
+                          onClick={(e) => setShowModal(true)}
+                        >
+                          Add Sector Admin
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </div>

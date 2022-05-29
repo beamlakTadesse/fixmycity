@@ -11,6 +11,7 @@ import Sidebar from "components/Sidebar";
 import Footer from "components/Footer";
 import { getRol } from "helpers/utils";
 import { url } from "helpers/strings";
+import { getUserId } from "helpers/utils";
 
 export default function Dashboard() {
   const [sectors, setSectors] = useState({});
@@ -26,15 +27,21 @@ export default function Dashboard() {
   useEffect(() => {
     setRol(getRol(localStorage.getItem("token")));
     // mounted.current = true;
-    var id = 4;
+    var id = getUserId();
     // const url = `http://localhost:8000/v1/report_status/${id}/`;
-    const url1 = `${url}/v1/report_status/6/`;
+    const url1 = `${url}/v1/report_status/`;
     const url2 = `${url}/v1/report/getReportChartView/`;
 
     const fetchData = async () => {
       setIsLoading(true);
+      const requestOptions = {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      };
       try {
-        const response2 = await fetch(url2);
+        const response2 = await fetch(url2, requestOptions);
         var data_r = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         var data_sp = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         var data_unr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -74,7 +81,7 @@ export default function Dashboard() {
           setIsEmpty(true);
         }
 
-        const response = await fetch(url1);
+        const response = await fetch(url1, requestOptions);
 
         const json = await response.json();
 

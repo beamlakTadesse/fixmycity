@@ -63,13 +63,13 @@ export default function SectorsSection() {
   const [sectors, setSectors] = useState({});
   useEffect(() => {
     // mounted.current = true;
-    const url = `${url}/v1/admins/main_sectors/`;
+    const url1 = `${url}/v1/admins/main_sectors/`;
 
     const fetchData = async () => {
       setIsLoading(true);
 
       try {
-        const response = await fetch(url);
+        const response = await fetch(url1);
 
         const json = await response.json();
 

@@ -83,6 +83,7 @@ export default function UserTable() {
     );
     const json = await response.json();
     console.log(json);
+    console.log(response);
   };
   const [msg, setMsg] = useState("");
   async function handleDeleteUser(id) {
@@ -165,17 +166,19 @@ export default function UserTable() {
                             </th>
                             <th className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
                               <i className="fas fa-circle fa-sm text-orange-500 mr-2"></i>{" "}
-                              {users[oneKey].active ? (
-                                <>Active</>
-                              ) : (
+                              {users[oneKey].is_banned ? (
                                 <>
                                   <Button
                                     color="green"
-                                    onClick={activateUser(users[oneKey].id)}
+                                    onClick={() => {
+                                      activateUser(users[oneKey].id);
+                                    }}
                                   >
                                     Activate
                                   </Button>
                                 </>
+                              ) : (
+                                <p>Active</p>
                               )}
                             </th>
                           </>
