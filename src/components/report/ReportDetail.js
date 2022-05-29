@@ -461,7 +461,7 @@ export default function ReportDet() {
         toggler={() => setRemoveSubmitted(false)}
       >
         <ModalTitle>
-          <Heading5>Confirm Delete</Heading5>
+          <Heading5>Confirm Removal</Heading5>
         </ModalTitle>
         <ModalBody>
           <p>Are you sure you want to remove this report to spam</p>

@@ -44,8 +44,8 @@ export default function Sidebar() {
                   <NavLink
                     to="/admin/dashboard"
                     exact
-                    className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
-                    activeClassName="bg-gradient-to-tr from-[#4A2511] to-[#9A7B4F] text-white shadow-md"
+                    className="hover:text-red-100 bg-[#63453b] flex bg-[#471f1f]  items-center gap-4 text-sm text-white-700 font-light px-4 py-3 rounded-lg"
+                    activeClassName="text-white-100  bg-[#471f1f]  hover:text-red-100 bg-red-700"
                   >
                     <Icon name="dashboard" size="2xl" />
                     Dashboard
@@ -56,8 +56,8 @@ export default function Sidebar() {
                 <li className="rounded-lg mb-2 text-gray-700">
                   <NavLink
                     to="/sectors/dashboard"
-                    className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
-                    activeClassName="text-red-100 hover:text-red-100 bg-red-700"
+                    className="hover:text-red-100 bg-[#63453b] flex bg-[#471f1f]  items-center gap-4 text-sm text-white-700 font-light px-4 py-3 rounded-lg"
+                    activeClassName="text-white-100  bg-[#471f1f]  hover:text-red-100 bg-red-700"
                   >
                     <Icon name="map" size="2xl" />
                     Sector Dashboard
@@ -69,9 +69,8 @@ export default function Sidebar() {
                   <NavLink
                     to="/admin/sectors"
                     exact
-                    className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
-                    activeClassName="bg-gradient-to-tr from-[#4A2511] to-[#9A7B4F] text-white shadow-md"
-                  >
+                    className="hover:text-red-100 bg-[#63453b] flex bg-[#471f1f]  items-center gap-4 text-sm text-white-700 font-light px-4 py-3 rounded-lg"
+                    activeClassName="text-white-100  bg-[#471f1f]  hover:text-red-100 bg-red-700">
                     <Icon name="home" size="2xl" />
                     Sector
                   </NavLink>
@@ -82,8 +81,8 @@ export default function Sidebar() {
                   <NavLink
                     data-cy="nav-users"
                     to="/users"
-                    className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
-                    activeClassName="bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-md"
+                    className="hover:text-red-100 bg-[#63453b] flex bg-[#471f1f]  items-center gap-4 text-sm text-white-700 font-light px-4 py-3 rounded-lg"
+                    activeClassName="text-white-100  bg-[#471f1f]  hover:text-red-100 bg-red-700"
                   >
                     <Icon name="toc" size="2xl" />
                     Users
@@ -95,8 +94,8 @@ export default function Sidebar() {
                   <NavLink
                     data-cy="nav-reports"
                     to="/admin/report"
-                    className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
-                    activeClassName="bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-md"
+                    className="hover:text-red-100 bg-[#63453b] flex bg-[#471f1f]  items-center gap-4 text-sm text-white-700 font-light px-4 py-3 rounded-lg"
+                    activeClassName="text-white-100  bg-[#471f1f]  hover:text-red-100 bg-red-700"
                   >
                     <Icon name="map" size="2xl" />
                     Report
@@ -108,8 +107,8 @@ export default function Sidebar() {
                   <NavLink
                     data-cy="nav-reports"
                     to="/sector/reports"
-                    className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
-                    activeClassName="bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-md"
+                    className="hover:text-red-100 bg-[#63453b] flex bg-[#471f1f]  items-center gap-4 text-sm text-white-700 font-light px-4 py-3 rounded-lg"
+                    activeClassName="text-white-100  bg-[#471f1f]  hover:text-red-100 bg-red-700"
                   >
                     <Icon name="map" size="2xl" />
                     Report
@@ -119,8 +118,8 @@ export default function Sidebar() {
               <li className="rounded-lg mb-2">
                 <NavLink
                   to="/profile"
-                  className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
-                  activeClassName="bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-md"
+                  className="hover:text-red-100 bg-[#63453b] flex bg-[#471f1f]  items-center gap-4 text-sm text-white-700 font-light px-4 py-3 rounded-lg"
+                  activeClassName="text-white-100  bg-[#471f1f]  hover:text-red-100 bg-red-700"
                   data-cy="nav-profile"
                 >
                   <Icon name="circle" size="2xl" />
@@ -132,8 +131,8 @@ export default function Sidebar() {
                   <NavLink
                     data-cy="nav-announcement"
                     to="/announcement"
-                    className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
-                    activeClassName="bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-md"
+                    className="hover:text-red-100 bg-[#63453b] flex bg-[#471f1f]  items-center gap-4 text-sm text-white-700 font-light px-4 py-3 rounded-lg"
+                    activeClassName="text-white-100  bg-[#471f1f]  hover:text-red-100 bg-red-700"
                   >
                     <Icon name="toc" size="2xl" />
                     Announcement

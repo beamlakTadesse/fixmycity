@@ -3,44 +3,72 @@ import Image from "@material-tailwind/react/Image";
 import CardHeader from "@material-tailwind/react/CardHeader";
 import CardBody from "@material-tailwind/react/CardBody";
 import Button from "@material-tailwind/react/Button";
+
 import Input from "@material-tailwind/react/Input";
 import Textarea from "@material-tailwind/react/Textarea";
 import ProfilePicture from "assets/img/team-1-800x800.jpg";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback,useRef,useMemo } from "react";
 import { getUserId } from "helpers/utils";
 import { getRol } from "helpers/utils";
 import { url } from "helpers/strings";
+import { isEqual } from 'lodash'
 export default function ProfileCard({ editProfile, setEditProfile }) {
   const [users, setUsers] = useState({});
+  const [u, setU] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setError] = useState(false);
   const id = localStorage.getItem("userId");
   const token = localStorage.getItem("token");
+  const [image, setImage] = useState("");
+
   console.log(token);
   const userId = getUserId(token);
-  useEffect(() => {
-    const url1 = `${url}/v1/admins/users/` + userId;
-    const fetchData = async () => {
-      setIsLoading(true);
-      try {
-        const response = await fetch(url1);
+  const url1 = `${url}/v1/admins/users/` + userId;
+  const fetchData = async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetch(url1);
 
-        const json = await response.json();
+      const json = await response.json();
 
-        if (json) {
-          setUsers(json.user);
-        }
-      } catch (error) {
-        console.log("error", error);
-        setError(true);
+      if (json) {
+      //  setU(json.user)
+        // if(!isEqual(users,u)){
+           setUsers(json.user);
+          setImage(
+            `http://res.cloudinary.com/shetechs/${json.user.ProfileImage}`
+          );
+        // }
+       
       }
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 1500);
-    };
-
+    } catch (error) {
+      console.log("error", error);
+      setError(true);
+    }
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+    console.log("wert7687oilkcgxfdtrytuyiu");
+  };
+ 
+  const loadUserFromServer = useCallback(async () => {
     fetchData();
-  }, []);
+  }, []); //
+
+  // const person = useMemo(
+  //   () => { fetchData();},
+  //   [] //no dependencies so the value doesn't change
+  // );
+
+  // const { current: user } = useRef(users);
+  useEffect(() => {
+    // if(users !== u){
+    //   setUsers(u)
+     loadUserFromServer();
+
+    // }
+    // fetchData();
+  }, [loadUserFromServer]);
   console.log("Sectors: ", users);
   function EditProfile() {
     setEditProfile(!editProfile);
@@ -51,7 +79,7 @@ export default function ProfileCard({ editProfile, setEditProfile }) {
         <Card>
           <div className="flex flex-wrap justify-center">
             <div className="w-48 px-4 -mt-24">
-              <Image src={users.image} rounded raised />
+              <Image src={image} rounded raised />
             </div>
           </div>
 
@@ -60,6 +88,7 @@ export default function ProfileCard({ editProfile, setEditProfile }) {
               <h6 className="text-brown text-sm mt-9 mb-6 font-bold uppercase">
                 personal Information
               </h6>
+
               <div className="flex flex-wrap text-xs mt-10">
                 {users.first_name && users.last_name && (
                   <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">

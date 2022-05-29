@@ -135,7 +135,7 @@ function ReportShow() {
     };
 
     fetchData();
-  }, [mydata]);
+  }, []);
 
   // const data = React.useMemo(() => mydata, [])
 

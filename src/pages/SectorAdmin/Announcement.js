@@ -20,7 +20,7 @@ export default function Announcement() {
 
   useEffect(() => {
     // mounted.current = true;
-    const url1 = `${url}/v1/announcment/`;
+    const url1 = `${url}/v1/announcment/getOwnAnnouncment/`;
 
     const fetchData = async () => {
       setIsLoading(true);
@@ -36,14 +36,16 @@ export default function Announcement() {
         const json = await response.json();
 
         if (response.ok) {
-          setAnn(json.results);
-          console.log(announcements.length);
+
+            console.log(json);
+          setAnn(json);
+          // console.log(announcements.length);
         }
 
         if (json.status === 401) {
           setAnuth(true);
         }
-        console.log("announcements: ", json.results);
+        // console.log("announcements: ", json.results);
       } catch (error) {
         console.log("error", error);
         setError(true);
@@ -54,12 +56,10 @@ export default function Announcement() {
     };
 
     fetchData();
-  }, [announcements]);
+  }, []);
 
   return isError ? (
     <ErrorPage2 />
-  ) : unAuth ? (
-    <UnAuthorized />
   ) : (
     <>
       <>
