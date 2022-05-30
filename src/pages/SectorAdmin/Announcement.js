@@ -16,11 +16,13 @@ export default function Announcement() {
   const [isError, setError] = useState(false);
   const [unAuth, setAnuth] = useState(false);
 
-  const [announcements, setAnn] = useState([]);
+  const [announcements, setAnn] = useState({});
 
   useEffect(() => {
     // mounted.current = true;
+
     const url1 = `${url}/v1/announcment/getOwnAnnouncment/`;
+
 
     const fetchData = async () => {
       setIsLoading(true);
@@ -37,9 +39,9 @@ export default function Announcement() {
 
         if (response.ok) {
 
-            console.log(json);
           setAnn(json);
-          // console.log(announcements.length);
+          console.log(announcements.length);
+
         }
 
         if (json.status === 401) {
@@ -77,8 +79,8 @@ export default function Announcement() {
                 Post Announcement
               </Button>
             </div>
-            <AddAnnouncement isActive={showModal} setIsActive={setShowModal} />
-            {announcements.length === 0 ? (
+             <AddAnnouncement isActive={showModal} setIsActive={setShowModal} />
+            {announcements && announcements.length === 0 ? (
               <div>No Data</div>
             ) : (
               <AnnouncementList announcements={announcements} />
