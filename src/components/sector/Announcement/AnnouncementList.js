@@ -42,7 +42,7 @@ export default function AnnouncementList({announcements}) {
                             {
                                 announcements[oneKey]  &&
                             
-                            <AnnouncementCard image={announcements[oneKey].image} title={announcements[oneKey].title} description={announcements[oneKey].description} date={announcements[oneKey].createdAt} sector="Arada Subcity" address="Arada"/>
+                            <AnnouncementCard image={announcements[oneKey].image} title={announcements[oneKey].title} description={announcements[oneKey].description} date={announcements[oneKey].createdAt} id={announcements[oneKey].id} sector="Arada Subcity" address="Arada"/>
                             // {announcements.items[oneKey].sector.district_name} address={announcements.items[oneKey].sector.address}/>
                             }
                         </div>

@@ -10,11 +10,19 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { isSectorAdmin } from "helpers/utils";
 import useAuth from "../hooks/auth";
 import { NavLink } from "react-router-dom";
+import { url } from "helpers/strings";
+import { useState, useEffect,useCallback } from "react";
+import { getUserId } from "helpers/utils";
 
 export default function AdminNavbar({ showSidebar, setShowSidebar }) {
   const location = useLocation().pathname;
   const navigate = useNavigate();
   const { setAuth } = useAuth();
+  const [users, setUsers] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setError] = useState(false);
+  const [image, setImage] = useState("");
+
   function Logout() {
     navigate(`/login`);
 
@@ -25,8 +33,43 @@ export default function AdminNavbar({ showSidebar, setShowSidebar }) {
     // setAuthTokens();
     // setRol();
   }
+  const token = localStorage.getItem("token");
+  console.log(token);
+  const userId = getUserId(token);
+  const url1 = `${url}/v1/admins/users/` + userId;
+  const fetchData = async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetch(url1);
+
+      const json = await response.json();
+
+      if (json) {
+        setUsers(json.user);
+        setImage(
+          `http://res.cloudinary.com/shetechs/${json.user.ProfileImage}`
+        );
+      }
+    } catch (error) {
+      console.log("error", error);
+      setError(true);
+    }
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+    console.log("wert7687oilkcgxfdtrytuyiu");
+  };
+
+  const loadUserFromServer = useCallback(async () => {
+    fetchData();
+  }, []); //
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
-    <nav className="bg-[#DEB887]  py-6 px-3">
+    <nav className="bg-[#471f1f]  py-6 px-3">
       <div className="container max-w-full mx-auto flex items-center justify-between md:pr-8 md:pl-10">
         <div className="md:hidden">
           <Button
@@ -74,7 +117,11 @@ export default function AdminNavbar({ showSidebar, setShowSidebar }) {
                 color="transparent"
                 buttonText={
                   <div className="w-12">
-                    <Image src={ProfilePicture} rounded />
+                    {users.ProfileImage ? (
+                      <Image src={image} rounded />
+                    ) : (
+                      <Image src={ProfilePicture} rounded />
+                    )}
                   </div>
                 }
                 rounded
