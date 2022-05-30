@@ -13,6 +13,8 @@ export default function SettingsForm({ editProfile, setEditProfile }) {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setError] = useState(false);
   const id = getUserId(localStorage.getItem("token"));
+  const [selectedFile, setSelectedFile] = useState();
+  const [isSelected, setIsFilePicked] = useState(false);
   useEffect(() => {
     const url1 = `${url}/v1/admins/users/` + id;
     const fetchData = async () => {
@@ -37,11 +39,12 @@ export default function SettingsForm({ editProfile, setEditProfile }) {
     };
 
     fetchData();
-  }, [mydata]);
+  }, []);
 
   const changeHandler = (event) => {
     setSelectedFile(event.target.files[0]);
     setIsFilePicked(true);
+    console.log(selectedFile);
   };
   const [inputs, setInputs] = useState({
     // email: mydata.email,
@@ -54,8 +57,7 @@ export default function SettingsForm({ editProfile, setEditProfile }) {
     const { name, value } = e.target;
     setInputs((inputs) => ({ ...inputs, [name]: value }));
   }
-  const [selectedFile, setSelectedFile] = useState();
-  const [isSelected, setIsFilePicked] = useState(false);
+
   function editProfile() {
     const url2 = `${url}/v1/admins/edit_profile/`;
     const formData = new FormData();
@@ -63,7 +65,7 @@ export default function SettingsForm({ editProfile, setEditProfile }) {
       formData.append("first_name", inputs.firstname);
     }
     if (selectedFile) {
-      formData.append("image", selectedFile);
+      formData.append("ProfileImage", selectedFile);
     }
     if (inputs.lastname) {
       formData.append("last_name", inputs.lastname);

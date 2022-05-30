@@ -10,20 +10,59 @@ import { VscChecklist } from "react-icons/vsc";
 import { FaPlay } from "react-icons/fa";
 import { MoonIcon } from "@heroicons/react/solid";
 import { SunIcon } from "@heroicons/react/solid";
+import Button from "@material-tailwind/react/Button";
+import {url} from "helpers/strings"
+import { authHeader } from "helpers";
+import {  Heading5, ModalFooter } from "@material-tailwind/react";
+
+import ModalBody from "@material-tailwind/react/ModalBody";
+import ModalTitle from "@material-tailwind/react/ModalHeader";
+import Modal from "@material-tailwind/react/Modal";
+import EditAnnouncement from "./editAnnouncement"
 
 export default function AnnouncementCard({
   title,
   description,
   image,
   date,
+  id,
   sector,
   address,
+
 }) {
+  console.log(id)
+  const deleteAnn = async (id) => {
+  const url1 = `${url}/v1/announcment/${id}/`;
+
+    try {
+      const requestOptions = {
+        method: "DELETE",
+        headers: { Authorization: "Bearer " + localStorage.getItem("token") , "Content-Type": "application/json" },
+      
+      };
+
+      const response = await fetch(url1, requestOptions);
+if(response.ok){
+  // const json = await response.json();
+      
+
+      // console.log("Spam Report: ", json);
+}
+    
+      
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
   function toDate(date) {
     return new Date(date).toDateString();
   }
+  const [showModal, setShowModal] = useState(false);
 
   const [readMore, setReadMore] = useState(false);
+  const [delet, setDelete] = useState(false);
+
   const extraContent = sector && (
     <div>
       <div className="flex mt-[20px]">
@@ -75,6 +114,8 @@ export default function AnnouncementCard({
               objectFit="cover"
               className=" rounded-2xl"
             />
+
+          
           </div>
         )}
       </div>
@@ -82,13 +123,13 @@ export default function AnnouncementCard({
       <div className=" h-full w-full mr-2 rounded-2xl ">
         <div className=" pt-4 pr-2 pl-2 flex flex-row  flex-wrap">
           <div className="flex flex-row items-left m-2">
-            <p className="m-2 font-bold pl-1 text-lg text-brown">#weather</p>
+            {/* <p className="m-2 font-bold pl-1 text-lg text-brown">#weather</p> */}
           </div>
 
           <div className="flex flex-row items-left m-2">
-            <p className="m-2 font-bold pl-1 text-lg text-brown">
+            {/* <p className="m-2 font-bold pl-1 text-lg text-brown">
               #roadsauthority
-            </p>
+            </p> */}
           </div>
 
           {/* <div className="flex flex-row items-left m-2">
@@ -98,7 +139,8 @@ export default function AnnouncementCard({
 
         <h2 className="m-2 text-4xl font-bold dark:text-white">{title}</h2>
         <p className="m-2  font-normal dark:text-white">{description}</p>
-
+<div className="flex flex-row items-left m-2">
+  <div>
         {readMore && extraContent}
         <a
           className="read-more-link"
@@ -108,7 +150,26 @@ export default function AnnouncementCard({
         >
           <h2>{linkName}</h2>
         </a>
-
+        </div>
+        <div>
+        <Button onClick={()=>{setDelete(!delet)}} color="red"
+      className="md:m-2 m-auto mt-5 bg-[#5865F2] shadow-md shadow-[#5865f28a]  pt-2 pb-2 pl-6 pr-4 rounded-xl flex flex-row justify-center items-center hover:bg-[#DEB887] ease-linear duration-300"
+        
+        >
+              Delete
+              </Button>
+              </div>
+              <div>
+              <Button
+                className="flex justify-center"
+                onClick={(e) => setShowModal(true)}
+                color="brown"
+              >
+                updatedAt Announcement
+              </Button>
+              </div>
+              <EditAnnouncement isActive={showModal} setIsActive={setShowModal}title={title} description={description} id={id} />
+</div>
         <div className="grid grid-cols-1 xl:grid-cols-1">
           <div className="xl:col-start-2 xl:col-end-2 px-3 mb-14 mr-8">
             {/* <AiOutlineClockCircle size={20} className="dark:text-white" /> */}
@@ -116,6 +177,31 @@ export default function AnnouncementCard({
           </div>
         </div>
       </div>
+      <Modal
+        size="lg"
+        active={delet}
+        toggler={() => setDelete(false)}
+      >
+        <ModalTitle>
+          <Heading5>Confirm Delete</Heading5>
+        </ModalTitle>
+        <ModalBody>
+          <p>Are you sure you want to remove this Announcement</p>
+        </ModalBody>
+        <ModalFooter>
+          <Button
+            onClick={() => deleteAnn(id)}
+            data-cy="btn-report-detail-confirm-remove-spam"
+            color="brown"
+          >
+            Confirm
+          </Button>
+          <Button color="brown" onClick={() =>{}}>
+            {" "}
+            Cancel
+          </Button>
+        </ModalFooter>
+      </Modal>
     </div>
   );
 }
