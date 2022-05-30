@@ -18,6 +18,7 @@ import TransferRadio from "./transferReport";
 import DropdownRender from "./shared/dropDown";
 import Sidebar from "../Sidebar";
 import Footer from "../Footer";
+import { getRol } from "helpers/utils";
 
 import { createPopper } from "@popperjs/core";
 import { url } from "helpers/strings";
@@ -25,6 +26,9 @@ import { url } from "helpers/strings";
 export default function ReportDet() {
   let color = "gray";
   let { id } = useParams();
+
+  const [isAdmin, setAdmin] = useState(getRol(localStorage.getItem("token")));
+
   const [mydata, setData] = useState({});
   const [rejected, setReject] = useState(false);
 
@@ -53,6 +57,7 @@ export default function ReportDet() {
   useEffect(() => {
     // mounted.current = true;
     // const url = `http://localhost:8000/v1/report/${id}`;
+    setAdmin(getRol(localStorage.getItem("token")));
 
     const fetchData = async () => {
       const requestOptions = {
@@ -88,7 +93,7 @@ export default function ReportDet() {
         console.log(mydata.sector.sector_type);
     }
     fetchData();
-  }, []);
+  }, [isAdmin]);
   const [submitted, setSubmitted] = useState(false);
   const [spamSubmitted, setSpamSubmitted] = useState(false);
   const [removeSubmitted, setRemoveSubmitted] = useState(false);
@@ -207,9 +212,11 @@ export default function ReportDet() {
   }
 
   return (
+   
+      id &&
     <>
       <Sidebar />
-
+      
       {mydata && (
         <div className="flex  mb-5 ">
           <div className=" bg-white w-[700px]  ml-5 drop-shadow-2xl mt-[30px] h-screen">
@@ -232,7 +239,10 @@ export default function ReportDet() {
                 <p className="m-[30px] w-[350px]">{mydata.description}</p>
                 {mydata.tag && (
                   <div className="flex">
-                    {Object.keys(mydata.tag).map((oneKey, i) => {
+                    <h3 className="m-2 font-bold pl-1 text-lg text-[#5865F2]">
+                            <a href="#">&#35;{mydata.tag}</a>
+                          </h3>
+                    {/* {Object.keys(mydata.tag).map((oneKey, i) => {
                       return (
                         <>
                           <h3 className="m-2 font-bold pl-1 text-lg text-[#5865F2]">
@@ -240,7 +250,7 @@ export default function ReportDet() {
                           </h3>
                         </>
                       );
-                    })}
+                    })} */}
                   </div>
                 )}
               </div>
@@ -332,7 +342,7 @@ export default function ReportDet() {
             </div>
 
             {/* ########### DROPDOWN ######### */}
-
+            {isAdmin!==1 &&
             <div className="flex flex-wrap mt-[40px] ml-[20px]">
               <div className="w-full sm:w-6/12 md:w-4/12 px-4">
                 <div className="absolute inline-flex align-middle w-full">
@@ -420,6 +430,7 @@ export default function ReportDet() {
                 </div>
               </div>
             </div>
+}
           </div>
         </div>
       )}
@@ -531,7 +542,7 @@ export default function ReportDet() {
       {/* </div> */}
 
       {/* <ReportInfo data={mydata}/> */}
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

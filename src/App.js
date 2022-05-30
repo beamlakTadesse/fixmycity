@@ -56,6 +56,9 @@ function App() {
             <Route exact path="/admin/sectors" element={<AdminSector />} />
             <Route exact path="/admin/dashboard" element={<Dash />} />
             <Route exact path="/admin/report" element={<ReportAdmin />} />
+            {/* <Route exact path="/sector/reports" element={<Report />} /> */}
+          
+
           </Route>
           <Route element={<RequireAuth allowedRoles={[2]} />}>
             <Route exact path="/sector/dashboard" element={<SectorDash />} />
@@ -63,11 +66,7 @@ function App() {
             <Route exact path="/announcement" element={<Announcement />} />
             <Route exact path="/ayy" element={<AnnouncementList />} />
             <Route exact path="/sector/reports" element={<Report />} />
-            <Route
-              exact
-              path="/sector/reports/:id"
-              element={<PageVisitsCard />}
-            />
+          
 
             <Route exact path="/sectors/dashboard" element={<SectorDash />} />
             <Route exact path="/maps" element={<Maps />} />
@@ -78,7 +77,11 @@ function App() {
             ) : (
               <Route path="/" element={<SectorDash />} />
             )}
-
+            <Route
+              exact
+              path="/sector/reports/:id"
+              element={<PageVisitsCard />}
+            />
             <Route exact path="/tables" element={<Tables />} />
             <Route exact path="/users" element={<User />} />
 
