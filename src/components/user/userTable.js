@@ -19,6 +19,7 @@ import RegisterPage from "./register";
 import Loader from "components/sector/shared/loader";
 import ErrorPage2 from "components/sector/shared/errorPage2";
 import { url } from "helpers/strings";
+import { NavLink } from "react-router-dom";
 
 export default function UserTable() {
   // const users = useSelector(state => state.users);
@@ -155,7 +156,10 @@ export default function UserTable() {
                         {users[oneKey].first_name && users[oneKey].last_name && (
                           <>
                             <th className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
-                              {users[oneKey].first_name}
+                              <NavLink to={`/users/${users[oneKey].id}`} exact>
+                                {" "}
+                                {users[oneKey].first_name}
+                              </NavLink>
                             </th>
                             <th className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
                               {users[oneKey].last_name}

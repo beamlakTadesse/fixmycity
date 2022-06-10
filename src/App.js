@@ -25,6 +25,7 @@ import LogIn from "pages/Admin/login";
 import PageVisitsCard from "components/report/ReportDetail";
 import RequireAuth from "components/RequireAuth";
 import UnAuthorized from "components/sector/shared/unauthorized";
+import Notification from "pages/notification";
 // import { ThemeProvider, CSSReset } from "@chakra-ui/core";
 import {
   getRol,
@@ -36,6 +37,8 @@ import {
 
 import jwt_decode from "jwt-decode";
 import Help from "pages/help";
+import MapSingle from "components/report/singleReportMap";
+import UserDetail from "components/user/userDetail";
 // import Authorization from "RequireAuth";
 
 function App() {
@@ -46,6 +49,10 @@ function App() {
     setRol(getRol(localStorage.getItem("token")));
   });
   console.log(getRol());
+  const locations = {
+    lat: 9.038,
+    lng: 38.7618,
+  };
   return (
     <>
       {/* <Sidebar /> */}
@@ -56,6 +63,7 @@ function App() {
             <Route exact path="/admin/sectors" element={<AdminSector />} />
             <Route exact path="/admin/dashboard" element={<Dash />} />
             <Route exact path="/admin/report" element={<ReportAdmin />} />
+            <Route exact path="/users/:id" element={<UserDetail />} />
           </Route>
           <Route element={<RequireAuth allowedRoles={[2]} />}>
             <Route exact path="/sector/dashboard" element={<SectorDash />} />
@@ -63,11 +71,6 @@ function App() {
             <Route exact path="/announcement" element={<Announcement />} />
             <Route exact path="/ayy" element={<AnnouncementList />} />
             <Route exact path="/sector/reports" element={<Report />} />
-            <Route
-              exact
-              path="/sector/reports/:id"
-              element={<PageVisitsCard />}
-            />
 
             <Route exact path="/sectors/dashboard" element={<SectorDash />} />
             <Route exact path="/maps" element={<Maps />} />
@@ -78,7 +81,11 @@ function App() {
             ) : (
               <Route path="/" element={<SectorDash />} />
             )}
-
+            <Route
+              exact
+              path="/sector/reports/:id"
+              element={<PageVisitsCard />}
+            />
             <Route exact path="/tables" element={<Tables />} />
             <Route exact path="/users" element={<User />} />
 
@@ -87,7 +94,12 @@ function App() {
           <Route exact path="/help" element={<Help />} />
           <Route exact path="/login" element={<LogInSectorAdmin />} />
           <Route exact path="/unauthorized" element={<UnAuthorized />} />
-
+          <Route exact path="/notification" element={<Notification />} />
+          <Route
+            exact
+            path="/single"
+            element={<MapSingle id={1} location={locations} />}
+          />
           <Route exact path="/register/" element={<Register />} />
           <Route exact path="*" element={<LogIn />} />
           {/* <Footer /> */}

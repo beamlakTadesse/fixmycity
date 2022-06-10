@@ -54,47 +54,51 @@ export default function AddSectorAdminForm() {
 
   function handleSubmit(e) {
     console.log("submit....");
+    console.log("submit....");
     e.preventDefault();
     setSubmitted(true);
     setSuccess(false);
     setError("");
     let token = localStorage.getItem("token");
-    if (email && sectorId != 0) {
-      const inputs = {
-        email: email,
-        sector: sectorId,
-      };
-      console.log(sectorId);
-      console.log(inputs);
-      const requestOptions = {
-        method: "POST",
+    // if (email && sectorId != 0) {
+    const inputs = {
+      email: email,
+      sector: 2,
+    };
+    console.log(sectorId);
+    console.log(inputs);
+    const requestOptions = {
+      method: "POST",
 
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + token,
-        },
-        body: JSON.stringify(inputs),
-      };
-      fetch(`${url}/v1/admins/register/`, requestOptions).then(
-        async (response) => {
-          const data = await response.json();
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+      body: JSON.stringify(inputs),
+    };
+    console.log(inputs);
+    fetch(`${url}/v1/admins/register/`, requestOptions).then(
+      async (response) => {
+        console.log(response);
+
+        const data = await response.json();
+        console.log(data);
+
+        // check for error response
+        if (!response.ok) {
           console.log(data);
 
-          // check for error response
-          if (!response.ok) {
-            console.log(data);
-
-            setError(data.email);
-            // get error message from body or default to response status
-          } else {
-            setSuccess(true);
-          }
-
-          // console.log(data);
+          setError(data.email);
+          // get error message from body or default to response status
+        } else {
+          setSuccess(true);
         }
-      );
-      // setEmail("");
-    }
+
+        // console.log(data);
+      }
+    );
+    // setEmail("");
+    // }
   }
   // const columns = React.useMemo(
   //   () => [
@@ -142,7 +146,9 @@ export default function AddSectorAdminForm() {
     //   <CardBody>
     <div>
       {error && !success && (
-        <div className="mt-2 text-sm text-red-600">{error}</div>
+        <div data-cy="create-api-error" className="mt-2 text-sm text-red-600">
+          {error}
+        </div>
       )}
       {success && (
         <div className="mt-2 text-sm text-green-600">Successfully created</div>
@@ -179,7 +185,7 @@ export default function AddSectorAdminForm() {
                 }}
               />
               {submitted && !email && (
-                <div className="mt-2 text-sm text-red-600">
+                <div data-cy="email-req" className="mt-2 text-sm text-red-600">
                   email is required
                 </div>
               )}

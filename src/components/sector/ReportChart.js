@@ -130,7 +130,7 @@ export default function ReportChart({ resolved, spam, unresolved }) {
       </CardHeader>
       <CardBody>
         <div className="relative h-96">
-          <canvas id="line-chart"></canvas>
+          <canvas data-cy="canvas" id="line-chart"></canvas>
         </div>
       </CardBody>
     </Card>

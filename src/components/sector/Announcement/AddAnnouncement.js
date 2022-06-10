@@ -73,7 +73,7 @@ export default function AddAnnouncement({ isActive, setIsActive }) {
 
         const formData = new FormData();
 
-        formData.append("image", selectedFile);
+        // formData.append("image", selectedFile);
         formData.append("title", values.title);
         formData.append("description", values.description);
         const requestOptions = {
@@ -96,7 +96,10 @@ export default function AddAnnouncement({ isActive, setIsActive }) {
               setShowModal(true);
 
               throw new Error(response.status);
-            } else return response.json();
+            } else {
+              alert("Poseted succesfully!");
+              console.log(response.json);
+            }
           })
           .then((data) => {
             setData(data);
@@ -136,8 +139,7 @@ export default function AddAnnouncement({ isActive, setIsActive }) {
                 <div className="w-full lg:w-full pr-4 mb-8 font-light">
                   <Input
                     type="text"
-                    color="bro"
-                    wn
+                    color="brown"
                     placeholder="District Name"
                     name="districtName"
                     value={values.title}

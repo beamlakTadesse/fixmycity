@@ -5,7 +5,7 @@ export default function getQueryVariable(variable) {
   var query = window.location.search.substring(1);
   console.log(query);
   var vars = query.split("&");
-  console.log(vars);
+
   for (var i = 0; i < vars.length; i++) {
     var pair = vars[i].split("=");
     console.log(pair);
@@ -49,14 +49,14 @@ export function isSectorAdmin() {
 
 export function setRole(token) {
   var decodedToken = jwt_decode(token.access);
-  console.log(decodedToken);
+
   localStorage.setItem("userId", decodedToken.user_id);
   localStorage.setItem("role", decodedToken.role);
 }
 export function getRole() {
   if (token) {
     var decodedToken = jwt_decode(token);
-    console.log(decodedToken);
+
     return decodedToken.role;
   } else {
     return "0";
@@ -65,7 +65,7 @@ export function getRole() {
 export function getRol(token) {
   if (token) {
     var decodedToken = jwt_decode(token);
-    console.log(decodedToken);
+
     return decodedToken.role;
   } else {
     return "0";
@@ -74,7 +74,7 @@ export function getRol(token) {
 export function getUserId() {
   if (token) {
     var decodedToken = jwt_decode(token);
-    console.log(decodedToken);
+
     return decodedToken.user_id;
   } else {
     return "0";
@@ -83,7 +83,7 @@ export function getUserId() {
 export function getSectorName() {
   if (token) {
     var decodedToken = jwt_decode(token);
-    console.log(decodedToken);
+
     return decodedToken.sector;
   } else {
     return "0";
@@ -92,7 +92,7 @@ export function getSectorName() {
 export function getName(token) {
   if (token) {
     var decodedToken = jwt_decode(token);
-    console.log(decodedToken);
+
     return decodedToken.sector;
   } else {
     return "0";

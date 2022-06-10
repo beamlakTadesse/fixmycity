@@ -9,7 +9,7 @@ describe("example to-do app", () => {
 
   it("check if all reports are visible", () => {
     cy.get("[data-cy = 'tbl-reports']")
-      .should("have.lengthOf", 5)
+      .should("have.lengthOf", 2)
       .last()
       .contains("admin1")
       .should("be.visible");
@@ -17,7 +17,7 @@ describe("example to-do app", () => {
   it("check if it filteres when unresolved is clicked", () => {
     cy.get("[ data-cy='select-status']").select("UnResolved");
     cy.get("[data-cy = 'tbl-reports']")
-      .should("have.lengthOf", 4)
+      .should("have.lengthOf", 2)
       .last()
       .contains("admin1")
       .should("be.visible");
@@ -25,15 +25,16 @@ describe("example to-do app", () => {
   it("check if it filteres when resolved is clicked", () => {
     cy.get("[ data-cy='select-status']").select("Resolved");
     cy.get("[data-cy = 'tbl-reports']")
-      .should("have.lengthOf", 1)
+      .should("have.lengthOf", 3)
       .last()
       .contains("admin1")
       .should("be.visible");
   });
-  it("check it filters only nonspam reports when non spam  is clicked", () => {
-    cy.get("[data-cy= 'select-spam']").select("Non_Spam");
+  it("check it filters only nonspam reports when spam  is clicked", () => {
+    cy.wait(2000);
+    cy.get("[data-cy= 'select-spam']").select("Spam");
     cy.get("[data-cy = 'tbl-reports']")
-      .should("have.lengthOf", 5)
+      .should("have.lengthOf", 3)
       .last()
       .contains("admin1")
       .should("be.visible");

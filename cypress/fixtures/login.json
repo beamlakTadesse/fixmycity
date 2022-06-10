@@ -1,15 +1,15 @@
 {
   "valid_up_login": {
     "email": "beamlaktadesse5@gmail.com",
-    "password": "admin",
+    "password": "admin1222",
     "responce": {
       "message": "Sign In Successfull",
       "token": {
         "refresh": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2Nlc3MiOiJyZWZyZXNoIiwiZXhwIjoxNjU0NDM3Njc4LCJpYXQiOjE2NTMxNDE2NzgsImp0aSI6IjhmY2VmMzMzYjZkNDRmYzY4MjA3NGU0ODE1MTRmMmIwIiwidXNlcl9pZCI6Niwic2VjdG9yIjoiZ3VsZWxlIGVscGhhIiwiZW1haWwiOiJiZWFtbGFrdGFkZXNzZTVAZ21haWwuY29tIiwicm9sZSI6Mn0.jcAwyWhljzoC2gO9cjgaXa_-vilEyyVOd9QWaNj8fzs",
-        "access": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2Nlc3MiOiJhY2Nlc3MiLCJleHAiOjE2NTM0NTAzMzIsImlhdCI6MTY1MzI3NzUzMiwianRpIjoiMWUxMzg0MzRkMGVlNDM2MmFhYjI2NGY2NzFjYmRmYzgiLCJ1c2VyX2lkIjo2LCJzZWN0b3IiOiJndWxlbGUgZWxwaGEiLCJlbWFpbCI6ImJlYW1sYWt0YWRlc3NlNUBnbWFpbC5jb20iLCJyb2xlIjoyfQ.W4L1F9SkKK7_DVmCxVas1v2etHU1m-dEkoLOZQvp4KY"
+        "access": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2Nlc3MiOiJhY2Nlc3MiLCJleHAiOjE2NTQwMjg3NjQsImlhdCI6MTY1Mzg1NTk2NCwianRpIjoiN2I1Y2JjMzgyMGJiNDYzZGJjYjE5NWY0MTZmMmNjOWMiLCJ1c2VyX2lkIjoxNiwic2VjdG9yIjoiVGVsZSIsImVtYWlsIjoiYmVhbWxha3RhZGVzc2U1QGdtYWlsLmNvbSIsInJvbGUiOjJ9._yYl2HGw2WhSIPeRIaCAYrS0yf4vlJ9Ns6aUjk6x0L4"
       }
     },
-    "message": "Report"
+    "message": "DASHBOARD"
   },
   "invalid_e_login": {
     "email": "try5@gmail.com",

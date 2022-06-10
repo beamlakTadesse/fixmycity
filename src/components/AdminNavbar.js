@@ -11,8 +11,9 @@ import { isSectorAdmin } from "helpers/utils";
 import useAuth from "../hooks/auth";
 import { NavLink } from "react-router-dom";
 import { url } from "helpers/strings";
-import { useState, useEffect,useCallback } from "react";
+import React, { useState, useEffect, useCallback, useContext } from "react";
 import { getUserId } from "helpers/utils";
+import { UserContext, UserDispatchContext } from "context/userProvider";
 
 export default function AdminNavbar({ showSidebar, setShowSidebar }) {
   const location = useLocation().pathname;
@@ -33,8 +34,12 @@ export default function AdminNavbar({ showSidebar, setShowSidebar }) {
     // setAuthTokens();
     // setRol();
   }
+
+  const userDetails = useContext(UserContext);
+  const setUserDetails = useContext(UserDispatchContext);
+
   const token = localStorage.getItem("token");
-  console.log(token);
+
   const userId = getUserId(token);
   const url1 = `${url}/v1/admins/users/` + userId;
   const fetchData = async () => {
@@ -49,6 +54,12 @@ export default function AdminNavbar({ showSidebar, setShowSidebar }) {
         setImage(
           `http://res.cloudinary.com/shetechs/${json.user.ProfileImage}`
         );
+        setUserDetails({
+          firstname: users.firstname,
+          lastname: users.lastname,
+          phone_number: users.phone_number,
+          ProfileImage: image,
+        });
       }
     } catch (error) {
       console.log("error", error);
@@ -69,7 +80,7 @@ export default function AdminNavbar({ showSidebar, setShowSidebar }) {
   }, []);
 
   return (
-    <nav className="bg-[#471f1f]  py-6 px-3">
+    <nav className="bg-gray-800  py-6 px-3">
       <div className="container max-w-full mx-auto flex items-center justify-between md:pr-8 md:pl-10">
         <div className="md:hidden">
           <Button
@@ -117,7 +128,7 @@ export default function AdminNavbar({ showSidebar, setShowSidebar }) {
                 color="transparent"
                 buttonText={
                   <div className="w-12">
-                    {users.ProfileImage ? (
+                    {image ? (
                       <Image src={image} rounded />
                     ) : (
                       <Image src={ProfilePicture} rounded />

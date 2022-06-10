@@ -24,6 +24,8 @@ export default function Dashboard() {
   const [data_resolved, setDataResolved] = useState(null);
   const [data_spam, setSpamData] = useState(null);
   const [data_unresolved, setUnresolved] = useState(null);
+  const [res, setRes] = useState(null);
+
   useEffect(() => {
     setRol(getRol(localStorage.getItem("token")));
     // mounted.current = true;
@@ -47,9 +49,11 @@ export default function Dashboard() {
         var data_unr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
         const json2 = await response2.json();
+        console.log(json2.response);
+        setRes(json2.response);
         if (!(json2.response === null)) {
           setIsEmpty(false);
-          console.log("Response HEre", json2.response.month_5.unresolved);
+          console.log("Response HEre", json2.response);
 
           for (let i = 0; i < 12; i++) {
             var lak = i + 1;
@@ -150,8 +154,15 @@ export default function Dashboard() {
                       unresolved={data_unresolved}
                     />
                   )}
-                  {/* <ReportChart /> */}
+                  {res && res.month_5 && res.month_5.resolved && (
+                    <div data-cy="ann-data">
+                      <p>Number of resolved : {res.month_5.resolved}</p>
+                      <p>Number of unresolved : {res.month_5.unresolved}</p>
+                      <p>Number of spam : {res.month_5.spam_status}</p>
+                    </div>
+                  )}
                 </div>
+
                 {/* <div className="xl:col-start-4 xl:col-end-6 px-4 mb-14">
                       <PageVisitsCard />
                   </div> */}

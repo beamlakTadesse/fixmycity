@@ -80,7 +80,7 @@ export function SelectColumnFilter({
         <option value="">All</option>
         {options.map((option, i) => (
           <option color="brown" key={i} value={option}>
-            {option ? "Spam" : "Non_Spam"}
+            {option ? "Spam" : "Non Spam"}
           </option>
         ))}
       </select>
@@ -118,10 +118,10 @@ export function ReportStatusColumnFilter({
         <option value="">All</option>
         {options.map((option, i) => (
           <option key={i} value={option}>
-            {option.startsWith("RESOLVED")
-              ? "Resolved"
-              : option.startsWith("UNRESOLVED")
+            {option === "UNRESOLVED"
               ? "UnResolved"
+              : option === "RESOLVED"
+              ? "Resolved"
               : "Rejected"}
           </option>
         ))}
@@ -167,6 +167,7 @@ export function StatusPill({ value }) {
 }
 
 export function SpamStatus({ value }) {
+  console.log("Value", value);
   const status = value ? "Spam" : "Non Spam";
   return (
     <span
@@ -306,7 +307,7 @@ function Table({ columns, data }) {
       columns,
       data,
       initialState: {
-        // hiddenColumns: ['spamStatus']
+        hiddenColumns: ["spamStatus"],
       },
     },
     useFilters, // useFilters!
@@ -367,7 +368,7 @@ function Table({ columns, data }) {
                                       <SortUpIcon className="w-4 h-4 text-gray-400" />
                                     )
                                   ) : (
-                                    <SortIcon className="w-4 h-4 text-gray-400 opacity-0 group-hover:opacity-100" />
+                                    <SortIcon className="w-4 h-4 text-gray-400 opacity-100 group-hover:opacity-100" />
                                   )}
                                 </span>
                               </div>

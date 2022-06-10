@@ -1,0 +1,14 @@
+{
+  "email": {
+    "noEmail": "",
+    "alreadyTokenEmail": "fix@gmail.com",
+    "invalidEmail": "Successfully created",
+    "validEmail": "beamlaktadess4@gmail.com"
+  },
+  "response": {
+    "noEmail": "email is required",
+    "alreadyTokenEmail": "user with this email already exists",
+    "invalidEmailResponce": "Enter a valid email address.",
+    "validEmail": "Successfully created"
+  }
+}

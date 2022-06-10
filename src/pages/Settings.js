@@ -4,6 +4,8 @@ import ProfileCard from "components/ProfileCard";
 import { useState } from "react";
 import Sidebar from "components/Sidebar";
 import Footer from "components/Footer";
+import ChangePasswordCard from "components/changePassword";
+
 export default function Dashboard() {
   const [editProfile, setEditProfile] = useState(false);
 
@@ -21,6 +23,7 @@ export default function Dashboard() {
                 setEditProfile={setEditProfile}
               />
             </div>
+
             {editProfile && (
               <div className="xl:col-start-4 xl:col-end-7 px-4 mb-16 ">
                 <SettingsForm
@@ -29,6 +32,9 @@ export default function Dashboard() {
                 />
               </div>
             )}
+            <div className="xl:col-start-1 xl:col-end-4 px-4 mb-16">
+              <ChangePasswordCard />
+            </div>
           </div>
         </div>
       </div>

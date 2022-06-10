@@ -58,12 +58,7 @@ function ReportShowAdmin() {
         idAccessor: ["state", "sector.email"],
         Cell: sectorCell,
       },
-      {
-        Header: "Phone Number",
-        accessor: "user.phone_number",
-        idAccessor: "state",
-        Cell: phoneNumberCell,
-      },
+
       {
         Header: "Posted At",
         accessor: "postedAt",
@@ -89,7 +84,7 @@ function ReportShowAdmin() {
 
         Cell: SpamStatus,
         Filter: SelectColumnFilter, // new
-        // filter: 'includes',
+        filter: "includes",
       },
     ],
     []

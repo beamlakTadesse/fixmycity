@@ -11,14 +11,14 @@ import { FaPlay } from "react-icons/fa";
 import { MoonIcon } from "@heroicons/react/solid";
 import { SunIcon } from "@heroicons/react/solid";
 import Button from "@material-tailwind/react/Button";
-import {url} from "helpers/strings"
+import { url } from "helpers/strings";
 import { authHeader } from "helpers";
-import {  Heading5, ModalFooter } from "@material-tailwind/react";
+import { Heading5, ModalFooter } from "@material-tailwind/react";
 
 import ModalBody from "@material-tailwind/react/ModalBody";
 import ModalTitle from "@material-tailwind/react/ModalHeader";
 import Modal from "@material-tailwind/react/Modal";
-import EditAnnouncement from "./editAnnouncement"
+import EditAnnouncement from "./editAnnouncement";
 
 export default function AnnouncementCard({
   title,
@@ -28,28 +28,25 @@ export default function AnnouncementCard({
   id,
   sector,
   address,
-
 }) {
-  console.log(id)
+  console.log(id);
   const deleteAnn = async (id) => {
-  const url1 = `${url}/v1/announcment/${id}/`;
+    const url1 = `${url}/v1/announcment/${id}/`;
 
     try {
       const requestOptions = {
         method: "DELETE",
-        headers: { Authorization: "Bearer " + localStorage.getItem("token") , "Content-Type": "application/json" },
-      
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+          "Content-Type": "application/json",
+        },
       };
 
       const response = await fetch(url1, requestOptions);
-if(response.ok){
-  // const json = await response.json();
-      
-
-      // console.log("Spam Report: ", json);
-}
-    
-      
+      if (response.ok) {
+        // const json = await response.json();
+        // console.log("Spam Report: ", json);
+      }
     } catch (error) {
       console.log("error", error);
     }
@@ -91,7 +88,9 @@ if(response.ok){
       className="md:m-2 m-auto mt-5 bg-[#4A2511] shadow-md shadow-[#5865f28a]  pt-2 pb-2 pl-6 pr-4 rounded-xl flex flex-row justify-center items-center hover:bg-[#DEB887] ease-linear duration-300"
     >
       <FaPlay className="animate-ping" size={8} color="#fff" />
-      <h1 className="text-white text-md font-semibold pl-2">See Detail</h1>
+      <h1 cy-date="btn-see" className="text-white text-md font-semibold pl-2">
+        See Detail
+      </h1>
     </button>
   );
 
@@ -114,8 +113,6 @@ if(response.ok){
               objectFit="cover"
               className=" rounded-2xl"
             />
-
-          
           </div>
         )}
       </div>
@@ -139,37 +136,46 @@ if(response.ok){
 
         <h2 className="m-2 text-4xl font-bold dark:text-white">{title}</h2>
         <p className="m-2  font-normal dark:text-white">{description}</p>
-<div className="flex flex-row items-left m-2">
-  <div>
-        {readMore && extraContent}
-        <a
-          className="read-more-link"
-          onClick={() => {
-            setReadMore(!readMore);
-          }}
-        >
-          <h2>{linkName}</h2>
-        </a>
-        </div>
-        <div>
-        <Button onClick={()=>{setDelete(!delet)}} color="red"
-      className="md:m-2 m-auto mt-5 bg-[#5865F2] shadow-md shadow-[#5865f28a]  pt-2 pb-2 pl-6 pr-4 rounded-xl flex flex-row justify-center items-center hover:bg-[#DEB887] ease-linear duration-300"
-        
-        >
+        <div className="flex flex-row items-left m-2">
+          <div>
+            {readMore && extraContent}
+            <a
+              className="read-more-link"
+              onClick={() => {
+                setReadMore(!readMore);
+              }}
+            >
+              <h2>{linkName}</h2>
+            </a>
+          </div>
+          <div>
+            <Button
+              onClick={() => {
+                setDelete(!delet);
+              }}
+              color="red"
+              className="md:m-2 m-auto mt-5 bg-[#5865F2] shadow-md shadow-[#5865f28a]  pt-2 pb-2 pl-6 pr-4 rounded-xl flex flex-row justify-center items-center hover:bg-[#DEB887] ease-linear duration-300"
+            >
               Delete
-              </Button>
-              </div>
-              <div>
-              <Button
-                className="flex justify-center"
-                onClick={(e) => setShowModal(true)}
-                color="brown"
-              >
-                updatedAt Announcement
-              </Button>
-              </div>
-              <EditAnnouncement isActive={showModal} setIsActive={setShowModal}title={title} description={description} id={id} />
-</div>
+            </Button>
+          </div>
+          <div>
+            <Button
+              className="read-more-link"
+              onClick={(e) => setShowModal(true)}
+              color="brown"
+            >
+              updatedAt
+            </Button>
+          </div>
+          <EditAnnouncement
+            isActive={showModal}
+            setIsActive={setShowModal}
+            title={title}
+            description={description}
+            id={id}
+          />
+        </div>
         <div className="grid grid-cols-1 xl:grid-cols-1">
           <div className="xl:col-start-2 xl:col-end-2 px-3 mb-14 mr-8">
             {/* <AiOutlineClockCircle size={20} className="dark:text-white" /> */}
@@ -177,11 +183,7 @@ if(response.ok){
           </div>
         </div>
       </div>
-      <Modal
-        size="lg"
-        active={delet}
-        toggler={() => setDelete(false)}
-      >
+      <Modal size="lg" active={delet} toggler={() => setDelete(false)}>
         <ModalTitle>
           <Heading5>Confirm Delete</Heading5>
         </ModalTitle>
@@ -196,7 +198,7 @@ if(response.ok){
           >
             Confirm
           </Button>
-          <Button color="brown" onClick={() =>{}}>
+          <Button color="brown" onClick={() => {}}>
             {" "}
             Cancel
           </Button>

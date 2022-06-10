@@ -80,7 +80,11 @@ export default function LogInSectorAdmin() {
       <div className="w-full flex flex-wrap">
         <div className="w-full md:w-1/2 flex flex-col">
           <div className="flex justify-center pt-8">
-            {submitted && <div className="text-red-400">{loginMessage}</div>}
+            {submitted && (
+              <div data-cy="login-message" className="text-red-400">
+                {loginMessage}
+              </div>
+            )}
           </div>
           <div className="flex justify-center pt-12 md:pl-12 md:-mb-24">
             <Image src={logo}></Image>

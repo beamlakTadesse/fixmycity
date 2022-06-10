@@ -36,7 +36,8 @@ Cypress.Commands.add("login", (email, password, responce, message) => {
   cy.get("[data-cy='txt-lg-id-username']").type(email);
   cy.get("[data-cy='txt-lg-id-password']").type(password);
   cy.get("[data-cy='btn-lg-id-login']").click();
-  cy.contains(message).should("be.visible");
+  cy.wait(3000);
+  cy.get("[data-cy='login-message']").contains(message).should("be.visible");
 });
 Cypress.Commands.add("Valid_login", () => {
   cy.intercept(
@@ -47,8 +48,12 @@ Cypress.Commands.add("Valid_login", () => {
     }
   );
   cy.get("[data-cy='txt-lg-id-username']").type("beamlaktadesse5@gmail.com");
-  cy.get("[data-cy='txt-lg-id-password']").type("admin");
+  cy.get("[data-cy='txt-lg-id-password']").type("admin1222");
   cy.get("[data-cy='btn-lg-id-login']").click();
+  cy.wait(6000);
+  // cy.get("[data-cy='nav-dashboard']")
+  //   .contains("Dashboard")
+  //   .should("be.visible");
 });
 
 Cypress.Commands.add("Valid_SA_login", () => {
@@ -79,10 +84,30 @@ Cypress.Commands.add("form_request", (url, formData) => {
 });
 
 Cypress.Commands.add("createUser", (email, response) => {
-  cy.visit("http://localhost:3000/admin/dashboard");
+  // cy.visit("http://localhost:3000/");
+  cy.wait(7000);
 
+  cy.get("[data-cy='nav-sa-dashboard']").click();
+  cy.wait(4000);
   cy.get("[data-cy='btn-dash-addSectorAdmin']").click();
   cy.get("[data-cy='txt-createAdmin-email']").type(email);
   cy.get("[data-cy='btn-createAdmin-submit']").click();
+  cy.wait(7000);
   cy.contains(response).should("be.visible");
+  // data-cy="create-api-error"
+});
+
+Cypress.Commands.add("createUserNoEmail", (response) => {
+  // cy.visit("http://localhost:3000/");
+  cy.wait(7000);
+
+  cy.get("[data-cy='nav-sa-dashboard']").click();
+  cy.wait(7000);
+  cy.get("[data-cy='btn-dash-addSectorAdmin']").click();
+
+  cy.get("[data-cy='btn-createAdmin-submit']").click();
+  cy.wait(1000);
+  cy.get("[data-cy='email-req']")
+    .contains("email is required")
+    .should("be.visible");
 });

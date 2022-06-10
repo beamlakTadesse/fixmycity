@@ -15,7 +15,13 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useDispatch, useSelector } from "react-redux";
 import userDetailContext from "../../../pages/SectorAdmin/Announcement";
 import { url } from "helpers/strings";
-export default function EditAnnouncement({ isActive, setIsActive,title,description,id }) {
+export default function EditAnnouncement({
+  isActive,
+  setIsActive,
+  title,
+  description,
+  id,
+}) {
   const [showModal, setShowModal] = useState(false);
 
   const [submitted, setSubmitted] = useState(false);
@@ -59,59 +65,63 @@ export default function EditAnnouncement({ isActive, setIsActive,title,descripti
   const dispatch = useDispatch();
 
   const [mydata, setData] = useState(null);
-  console.log(id)
- 
+  console.log(id);
+
   async function handleSubmit(id) {
     const url1 = `${url}/v1/announcment/${id}/`;
-   
+
     setSubmitted(true);
 
     try {
       // const response = await fetch(url);
 
-      
-        console.log("hello form is submmitted");
+      console.log("hello form is submmitted");
 
-        const formData = new FormData();
-if(selectedFile){ formData.append("image", selectedFile);}
-       
-     if("title", values.title){ formData.append("title", values.title);}  
-   if(values.description){formData.append("description", values.description);}
-   const requestOptions = {     
-          method: "PATCH",
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token") 
-          },
+      const formData = new FormData();
+      if (selectedFile) {
+        formData.append("image", selectedFile);
+      }
 
-          body: formData,
-          // body:JSON.stringify({'title':values.title,'description':values.description,"image":currentPic})
-        };
-        console.log(requestOptions);
-        // console.log(formData.get("title"));
-        // console.log(formData.get("description"));
+      if (("title", values.title)) {
+        formData.append("title", values.title);
+      }
+      if (values.description) {
+        formData.append("description", values.description);
+      }
+      const requestOptions = {
+        method: "PATCH",
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
 
-        await fetch(url1, requestOptions)
-          .then((response) => {
-            if (!response.ok) {
-              setStatus(response.status);
-              setShowModal(true);
+        body: formData,
+        // body:JSON.stringify({'title':values.title,'description':values.description,"image":currentPic})
+      };
+      console.log(requestOptions);
+      // console.log(formData.get("title"));
+      console.log(formData.get("image"));
 
-              throw new Error(response.status);
-            } else return response.json();
-          })
-          .then((data) => {
-            setData(data);
-            // this.setState({ isLoading: false, downlines: data.response });
-            console.log("DATA STORED");
-            setShowModal(false);
-            setIsActive(false);
-          })
-          .catch((error) => {
-            console.log("error: " + error);
-            setErrorMessage("Please try Again");
-            setError(true);
-          });
-      
+      await fetch(url1, requestOptions)
+        .then((response) => {
+          if (!response.ok) {
+            setStatus(response.status);
+            setShowModal(true);
+
+            throw new Error(response.status);
+          } else return response.json();
+        })
+        .then((data) => {
+          setData(data);
+          // this.setState({ isLoading: false, downlines: data.response });
+          console.log("DATA STORED");
+          setShowModal(false);
+          setIsActive(false);
+        })
+        .catch((error) => {
+          console.log("error: " + error);
+          setErrorMessage("Please try Again");
+          setError(true);
+        });
     } catch (error) {
       console.log("error", error);
     }
@@ -143,7 +153,7 @@ if(selectedFile){ formData.append("image", selectedFile);}
                     name="districtName"
                     value={values.title}
                     onChange={handleTitleInputChange}
-                    data-cy="txt-postann-title"
+                    data-cy="txt-postann-title-edit"
                   />
                   {/* {submitted && !values.title && (
                     <div className="mt-2 text-sm text-red-600">
@@ -194,7 +204,7 @@ if(selectedFile){ formData.append("image", selectedFile);}
                     value={values.description}
                     onChange={handleDescriptionInputChange}
                     placeholder={description}
-                    data-cy="txt-postann-description"
+                    data-cy="txt-postann-description-edit"
                   ></textarea>
 
                   {/* {submitted && !values.description && (
@@ -223,7 +233,7 @@ if(selectedFile){ formData.append("image", selectedFile);}
                   <Button
                     color="brown"
                     onClick={(e) => handleSubmit(id)}
-                    data-cy="btn-postann-submit"
+                    data-cy="btn-postann-edit-submit"
                   >
                     Submit
                   </Button>

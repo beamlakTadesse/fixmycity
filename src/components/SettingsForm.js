@@ -7,6 +7,7 @@ import Textarea from "@material-tailwind/react/Textarea";
 import { useState, useEffect } from "react";
 import { getUserId } from "helpers/utils";
 import { url } from "helpers/strings";
+import { phonenumber, nameValidation } from "helpers/validation";
 
 export default function SettingsForm({ editProfile, setEditProfile }) {
   const [mydata, setData] = useState({});
@@ -15,6 +16,9 @@ export default function SettingsForm({ editProfile, setEditProfile }) {
   const id = getUserId(localStorage.getItem("token"));
   const [selectedFile, setSelectedFile] = useState();
   const [isSelected, setIsFilePicked] = useState(false);
+  const [phoneError, setPhoneError] = useState(null);
+  const [nameError, setNameError] = useState(null);
+
   useEffect(() => {
     const url1 = `${url}/v1/admins/users/` + id;
     const fetchData = async () => {
@@ -62,16 +66,25 @@ export default function SettingsForm({ editProfile, setEditProfile }) {
     const url2 = `${url}/v1/admins/edit_profile/`;
     const formData = new FormData();
     if (inputs.firstname) {
-      formData.append("first_name", inputs.firstname);
+      setNameError(nameValidation(inputs.firstname));
+      if (nameError === null) {
+        formData.append("first_name", inputs.firstname);
+      }
     }
     if (selectedFile) {
       formData.append("ProfileImage", selectedFile);
     }
     if (inputs.lastname) {
-      formData.append("last_name", inputs.lastname);
+      setNameError(nameValidation(inputs.lastname));
+      if (nameError === null) {
+        formData.append("first_name", inputs.lastname);
+      }
     }
     if (inputs.phone_number) {
-      formData.append("phone_number", inputs.phone_number);
+      setPhoneError(phonenumber(inputs.phone_number));
+      if (phoneError === null) {
+        formData.append("phone_number", inputs.phone_number);
+      }
     }
 
     const requestOptions = {
@@ -83,15 +96,15 @@ export default function SettingsForm({ editProfile, setEditProfile }) {
       body: formData,
       // body:JSON.stringify({'title':values.title,'description':values.description,"image":currentPic})
     };
-    fetch(url2, requestOptions)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(response.status);
-        } else return response.json();
-      })
-      .then((data) => {
-        console.log(data);
-      });
+    // fetch(url2, requestOptions)
+    //   .then((response) => {
+    //     if (!response.ok) {
+    //       throw new Error(response.status);
+    //     } else return response.json();
+    //   })
+    //   .then((data) => {
+    //     console.log(data);
+    //   });
   }
   function EditProfile() {
     setEditProfile(!editProfile);
@@ -136,6 +149,7 @@ export default function SettingsForm({ editProfile, setEditProfile }) {
                 type="text"
                 value={firstname}
                 name="firstname"
+                data-cy="input_fname"
                 color="blue"
                 onChange={handleChange}
                 placeholder={mydata.first_name}
@@ -147,6 +161,7 @@ export default function SettingsForm({ editProfile, setEditProfile }) {
                 type="text"
                 value={lastname}
                 name="lastname"
+                data-cy="input_lName"
                 color="blue"
                 onChange={handleChange}
                 placeholder={mydata.last_name}
@@ -158,11 +173,13 @@ export default function SettingsForm({ editProfile, setEditProfile }) {
                 type="text"
                 value={phone_number}
                 name="phone_number"
+                data-cy="input_pNUmber"
                 color="brown"
                 onChange={handleChange}
                 placeholder={mydata.phone_number}
               />
             </div>
+            {phoneError && <p>{phoneError}</p>}
           </div>
           <div>
             <input
@@ -219,6 +236,7 @@ export default function SettingsForm({ editProfile, setEditProfile }) {
           <div className="grid grid-cols-1 xl:grid-cols-6">
             <Button
               className="xl:col-start-3 xl:col-end-6 px-4 mb-10"
+              data-cy="btn-editProfile"
               color="brown"
               onClick={() => {
                 EditProfile();

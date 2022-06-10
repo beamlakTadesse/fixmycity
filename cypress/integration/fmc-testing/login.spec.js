@@ -10,7 +10,7 @@ describe("testing login", () => {
     cy.visit("http://localhost:3000/login");
   });
 
-  it.only("test login with invalid username and invalid password", () => {
+  it("test login with invalid username and invalid password", () => {
     cy.fixture("login").then((data) => {
       cy.login(
         data.invalid_ep_login.email,
@@ -21,7 +21,7 @@ describe("testing login", () => {
     });
   });
 
-  it.only("test login with valid username and invalid password", () => {
+  it("test login with valid username and invalid password", () => {
     cy.fixture("login").then((data) => {
       cy.login(
         data.invalid_p_login.email,
@@ -32,7 +32,7 @@ describe("testing login", () => {
     });
   });
 
-  it.only("test login with invalid username and valid password", () => {
+  it("test login with invalid username and valid password", () => {
     cy.fixture("login").then((data) => {
       cy.login(
         data.invalid_p_login.email,
@@ -43,20 +43,21 @@ describe("testing login", () => {
     });
   });
 
-  it.only("test login with valid username and valid password", () => {
-    cy.fixture("login").then((data) => {
-      cy.login(
-        data.valid_up_login.email,
-        data.valid_up_login.password,
-        data.valid_up_login.reponce,
-        data.valid_up_login.message
-      );
-    });
+  it("test login with empty username and empty password", () => {
+    cy.get("[data-cy='btn-lg-id-login']").click();
+    cy.contains("password is required").should("be.visible");
+    cy.contains("email is required").should("be.visible");
   });
 
-  // it("test login with valid username and valid password", () => {
-  //   cy.get("[data-cy='btn-lg-id-login']").click();
-  //   cy.contains("password is required").should("be.visible");
-  //   cy.contains("email is required").should("be.visible");
-  // });
+  it("test login with valid username and valid password", () => {
+    cy.Valid_login();
+    // cy.fixture("login").then((data) => {
+    //   cy.login(
+    //     data.valid_up_login.email,
+    //     data.valid_up_login.password,
+    //     data.valid_up_login.reponce,
+    //     data.valid_up_login.message
+    //   );
+    // });
+  });
 });

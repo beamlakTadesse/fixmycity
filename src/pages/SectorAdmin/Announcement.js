@@ -16,7 +16,7 @@ export default function Announcement() {
   const [isError, setError] = useState(false);
   const [unAuth, setAnuth] = useState(false);
 
-  const [announcements, setAnn] = useState([]);
+  const [announcements, setAnn] = useState({});
 
   useEffect(() => {
     // mounted.current = true;
@@ -36,8 +36,7 @@ export default function Announcement() {
         const json = await response.json();
 
         if (response.ok) {
-
-            console.log(json);
+          console.log(json);
           setAnn(json);
           // console.log(announcements.length);
         }
@@ -78,7 +77,7 @@ export default function Announcement() {
               </Button>
             </div>
             <AddAnnouncement isActive={showModal} setIsActive={setShowModal} />
-            {announcements.length === 0 ? (
+            {announcements && announcements.length === 0 ? (
               <div>No Data</div>
             ) : (
               <AnnouncementList announcements={announcements} />

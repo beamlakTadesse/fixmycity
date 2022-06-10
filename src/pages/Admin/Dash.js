@@ -91,6 +91,16 @@ export default function Dashboard() {
           {!data.length > 0 && !data2.length > 0 && !sectors.length > 0 ? (
             <div className="flex justify-center items-center h-screen">
               <h2>No Record Found!!!!!!</h2>
+              <Button
+                data-cy="btn-dash-addSectorAdmin"
+                size="lg"
+                color="brown"
+                className=" mt-2.5 ml-20.5"
+                style={{ padding: 0 }}
+                onClick={(e) => setShowModal(true)}
+              >
+                Add Sector Admin
+              </Button>
             </div>
           ) : (
             <div className="px-3 md:px-8 -mt-110">
@@ -111,7 +121,7 @@ export default function Dashboard() {
                           );
                         })}
                       <div className=" mt-2.5 ml-20.5 mb-2">
-                        <Button
+                        {/* <Button
                           data-cy="btn-dash-addSectorAdmin"
                           size="lg"
                           color="brown"
@@ -120,7 +130,7 @@ export default function Dashboard() {
                           onClick={(e) => setShowModal(true)}
                         >
                           Add Sector Admin
-                        </Button>
+                        </Button> */}
                       </div>
                     </div>
                   </div>
