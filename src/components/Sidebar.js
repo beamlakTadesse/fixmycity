@@ -62,7 +62,7 @@ export default function Sidebar() {
                     className="bg-brown hover:text-red-100 bg-brown flex bg-brown items-center gap-4 text-sm text-white-700 font-light px-4 py-3 rounded-lg"
                     activeClassName="text-white-100  bg-brown  hover:text-red-100 bg-red-700"
                   >
-                    <Icon name="map" size="2xl" />
+                    <Icon name="dashboard" size="2xl" />
                     <Trans i18nKey="sidebar.sectorDashboard">
                       Sector Dashboard
                     </Trans>
@@ -128,7 +128,7 @@ export default function Sidebar() {
                   className="hover:text-red-100 bg-brown flex bg-brown  items-center gap-4 text-sm text-white-700 font-light px-4 py-3 rounded-lg"
                   activeClassName="text-white-100  bg-brown  hover:text-red-100 bg-red-700"
                 >
-                  <Icon name="map" size="2xl" />
+                  <Icon name="settings" size="2xl" />
                   <Trans i18nKey="sidebar.profile">Profile</Trans>
                 </NavLink>
               </li>

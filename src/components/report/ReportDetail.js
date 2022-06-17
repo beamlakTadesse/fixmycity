@@ -3,9 +3,9 @@ import React, { useState, useEffect } from "react";
 // import ReportInfo from "components/report/ReportInfo";
 import { NavLink, useParams } from "react-router-dom";
 import Image1 from "../../assets/img/tick.jpg";
-import Image2 from "../../assets/img/ann.png";
-import Done from "../../assets/img/done.png";
-import Active from "../../assets/img/active1.png";
+import Image2 from "../../assets/img/profile.png";
+import Done from "../../assets/img/right.png";
+import Active from "../../assets/img/active2.png";
 import Image3 from "../../assets/img/location.png";
 // import { Button } from "./shared/Button";
 import { authHeader } from "helpers";
@@ -221,8 +221,11 @@ export default function ReportDet() {
       <>
         <Sidebar />
 
+                <div className="container mx-auto max-w-full">
+
         {mydata && (
-          <div className="flex  mb-5 ">
+          
+          <div className="flex mb-5 ">
             <div>
               <MapSingle location={mydata.location} id={mydata.id} />
             </div>
@@ -242,7 +245,7 @@ export default function ReportDet() {
                 {mydata.image && (
                   <img
                     src={mydata.image}
-                    className="ml-[30px] mt-[30px] item-center w-[300px]"
+                    className="ml-[30px] mt-[30px] item-center w-[300px] h-[300px]"
                   />
                 )}
                 <div>
@@ -325,7 +328,7 @@ export default function ReportDet() {
               </div>
             </div>
 
-            <div className="w-[500px] ml-7 mt-[40px]">
+            <div className="w-[500px]  mt-[40px]">
               <div className="bg-white  w-[300px] h-[80px] mt-[40px] ml-[20px] rounded-xl flex border-1 border-solid">
                 {mydata.status === "UNRESOLVED" ? (
                   <img src={Active} className=" w-[80px]   rounded-xl" />
@@ -397,7 +400,7 @@ export default function ReportDet() {
                     <div className="absolute inline-flex align-middle w-full">
                       <button
                         className={
-                          "text-white font-bold text-sm px-6 py-3 camelcase rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 bg-black"
+                          "text-white font-bold text-sm px-6 py-3 camelcase rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 bg-[#371D10]"
                         }
                         type="button"
                         ref={btnDropdownRef}
@@ -647,7 +650,9 @@ export default function ReportDet() {
         {/* </div> */}
 
         {/* <ReportInfo data={mydata}/> */}
-        {/* <Footer /> */}
+        </div>
+        {/* </div> */}
+         <Footer /> 
       </>
     )
   );
