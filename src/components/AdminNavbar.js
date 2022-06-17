@@ -51,6 +51,7 @@ export default function AdminNavbar({ showSidebar, setShowSidebar }) {
 
       if (json) {
         setUsers(json.user);
+        console.log(json.user.ProfileImage);
         setImage(
           `http://res.cloudinary.com/shetechs/${json.user.ProfileImage}`
         );
@@ -80,7 +81,7 @@ export default function AdminNavbar({ showSidebar, setShowSidebar }) {
   }, []);
 
   return (
-    <nav className="bg-gray-800  py-6 px-3">
+    <nav className="bg-[#DEB887]  py-6 px-3">
       <div className="container max-w-full mx-auto flex items-center justify-between md:pr-8 md:pl-10">
         <div className="md:hidden">
           <Button
@@ -114,7 +115,7 @@ export default function AdminNavbar({ showSidebar, setShowSidebar }) {
         </div>
 
         <div className="flex justify-between items-center w-full">
-          <h4 className="uppercase text-white text-sm tracking-wider mt-1">
+          <h4 className="uppercase text-white font-bold text-sm tracking-wider mt-1">
             {location === "/"
               ? "DASHBOARD"
               : location.toUpperCase().replace("/", "")}
@@ -128,7 +129,7 @@ export default function AdminNavbar({ showSidebar, setShowSidebar }) {
                 color="transparent"
                 buttonText={
                   <div className="w-12">
-                    {image ? (
+                    {users.ProfileImage ? (
                       <Image src={image} rounded />
                     ) : (
                       <Image src={ProfilePicture} rounded />

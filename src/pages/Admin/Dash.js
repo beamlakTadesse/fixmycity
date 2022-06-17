@@ -67,8 +67,10 @@ export default function Dashboard() {
   var list2 = <ChartBar medata={data2} />;
 
   return isLoading ? (
-    <div class="flex justify-center items-center h-screen">
-      <Loader />
+    <div class="ml-32  ">
+      <div class="md:ml-64 flex items-center h-screen ">
+        <Loader />
+      </div>
     </div>
   ) : (
     // (isError)?<ErrorPage2/>:

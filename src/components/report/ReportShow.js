@@ -25,6 +25,7 @@ import { reportActions } from "../../actions";
 import { Button } from "@material-tailwind/react";
 import { NavLink } from "react-router-dom";
 import { url } from "helpers/strings";
+import { Trans } from "react-i18next";
 // import ReportTableChart from 'components/sector/ReportTable';
 
 function ReportShow() {
@@ -159,7 +160,9 @@ function ReportShow() {
           <div className="items-end">
             <NavLink to="/maps" exact>
               {" "}
-              <Button color="transparent">View in Map</Button>
+              <Button color="transparent">
+                <Trans i18nKey="report.map">View in Map</Trans>
+              </Button>
             </NavLink>
           </div>
         </div>

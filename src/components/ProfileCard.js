@@ -117,7 +117,7 @@ export default function ProfileCard({ editProfile, setEditProfile }) {
               </div>
               {getRol(token) == 2 && users && users.sector && (
                 <>
-                  <h6 className="text-blue-500 text-sm my-6 font-bold uppercase">
+                  <h6 className="text-brown text-sm my-6 font-bold uppercase">
                     Sector Information
                   </h6>
                   <div className="flex flex-wrap text-xs mt-10">

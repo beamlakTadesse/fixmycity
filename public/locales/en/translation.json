@@ -1,0 +1,44 @@
+{
+  "settings": {
+    "changeLanguage": "Change Language"
+  },
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "sectorDashboard": "Sector Dashboard",
+    "sector": "Sector",
+    "users": "Users",
+    "report": "Report",
+    "profile": "Profile",
+    "announcement": "Announcement"
+  },
+  "sectorDashboard": {},
+  "report": {
+    "map": "Show In Map",
+    "page": "Page",
+    "of": "of",
+    "show": "Show"
+  },
+  "reportDetail": {
+    "reportedIssue": " Reported Issue",
+    "resolve": " Resolve",
+    "location": "Location",
+    "addis": "Addis Ababa",
+    "otherOption": "Other Option",
+    "transfer": "Transfer",
+    "rejectReport": "Reject Report",
+    "confirmDelete": "Confirm Delete",
+    "confirmToSpam": "Confirm To Spam",
+    "confirmToSpamMsg": "Are you sure you want to add this report to spam",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "confirmRemoval": "Confirm Removal",
+    "confirmRemovalMsg": "Are you sure you want to remove this report to spam",
+    "transferTo": "Transfer Report to other Sector",
+    "rejectMsg": "Are you sure you want to Reject this report",
+    "addToSpam": "Add To Spam",
+    "removeSpam": "Remove Spam",
+    "resolved": "Resolved",
+    "Active": "Active",
+    "Rejected": "Rejected"
+  }
+}

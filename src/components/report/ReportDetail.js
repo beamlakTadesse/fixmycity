@@ -23,6 +23,7 @@ import MapExample from "components/MapExample";
 import { createPopper } from "@popperjs/core";
 import { url } from "helpers/strings";
 import MapSingle from "./singleReportMap";
+import { Trans } from "react-i18next";
 
 export default function ReportDet() {
   let color = "gray";
@@ -222,13 +223,19 @@ export default function ReportDet() {
 
         {mydata && (
           <div className="flex  mb-5 ">
+            <div>
+              <MapSingle location={mydata.location} id={mydata.id} />
+            </div>
             <div className=" bg-white w-[700px]  ml-5 drop-shadow-2xl mt-[30px] ">
               <div
                 className=" w-[700px] h-[100px] rounded-2xl] -mt-[50px] drop-shadow-3xl"
                 style={{ backgroundColor: "rgb(99, 69, 59)" }}
               >
                 <h1 className="text-[25px] ml-[30px] pt-[30px] text-white ]">
-                  Reported Issue
+                  <Trans i18nKey="reportDetail.reportedIssue">
+                    {" "}
+                    Reported Issue
+                  </Trans>
                 </h1>
               </div>
               <div className="flex">
@@ -280,7 +287,7 @@ export default function ReportDet() {
                   data-cy="btn-reportdetail-resolve"
                 >
                   <h3 className="m-2 font-bold pl-1 text-lg text-[#ffffff]">
-                    Resolve
+                    <Trans i18nKey="reportDetail.resolve"> Resolve</Trans>
                   </h3>
                 </Button>
               )}
@@ -371,10 +378,12 @@ export default function ReportDet() {
               <div className="bg-white  w-[300px] h-[80px] mt-[40px] ml-[20px] rounded-xl flex">
                 <img src={Image3} className=" w-[80px]   rounded-xl" />
                 <div>
-                  <p className="ml-[40px] mt-4 text-xl font-light">Location</p>
+                  <p className="ml-[40px] mt-4 text-xl font-light">
+                    <Trans i18nKey="reportDetail.location">Location</Trans>{" "}
+                  </p>
                   <hr className="border-1 ml-7"></hr>
                   <p className="ml-[95px] mt-2 font-light text-sm">
-                    Arada, Addis Ababa
+                    <Trans i18nKey="addis"> Addis Ababa</Trans>
                   </p>
                 </div>
               </div>
@@ -397,7 +406,9 @@ export default function ReportDet() {
                         }}
                         data-cy="btn-report-detail-otherOption"
                       >
-                        Other Option
+                        <Trans i18nKey="reportDetail.otherOption">
+                          Other Option
+                        </Trans>
                         {/* {color === "white" ? "White Dropdown" : color + " Dropdown"} */}
                       </button>
                       <div
@@ -424,7 +435,9 @@ export default function ReportDet() {
                           }}
                           data-cy="btn-report-detail-transfer"
                         >
-                          Transfer
+                          <Trans i18nKey="reportDetail.transfer">
+                            Transfer
+                          </Trans>
                         </div>
 
                         <div
@@ -448,9 +461,15 @@ export default function ReportDet() {
                           }
                           data-cy="btn-report-detail-spam"
                         >
-                          {!mydata.spamStatus
-                            ? "Add to Spam"
-                            : "Remove From Spam"}
+                          {!mydata.spamStatus ? (
+                            <Trans i18nKey="reportDetail.addToSpam">
+                              Add to Spam
+                            </Trans>
+                          ) : (
+                            <Trans i18nKey="reportDetail.removeSpam">
+                              Remove From Spam
+                            </Trans>
+                          )}
                         </div>
 
                         {!rejected ? (
@@ -467,7 +486,10 @@ export default function ReportDet() {
                               closeDropdownPopover();
                             }}
                           >
-                            Reject Report
+                            <Trans i18nKey="reportDetail.rejectReport">
+                              {" "}
+                              Reject Report
+                            </Trans>
                           </div>
                         ) : (
                           <></>
@@ -490,10 +512,20 @@ export default function ReportDet() {
           toggler={() => setSpamSubmitted(false)}
         >
           <ModalTitle>
-            <Heading5>Confirm Delete</Heading5>
+            <Heading5>
+              <Trans i18nKey="reportDetail.confirmToSpam">
+                {" "}
+                Confirm To Spam
+              </Trans>
+            </Heading5>
           </ModalTitle>
           <ModalBody>
-            <p>Are you sure you want to add this report to spam</p>
+            <p>
+              <Trans i18nKey="reportDetail.confirmToSpamMsg">
+                {" "}
+                Are you sure you want to add this report to spam
+              </Trans>
+            </p>
           </ModalBody>
           <ModalFooter>
             <Button
@@ -501,11 +533,11 @@ export default function ReportDet() {
               onClick={() => addToSpamReport()}
               data-cy="btn-report-detail-confirm-spam"
             >
-              Confirm
+              <Trans i18nKey="reportDetail.confirm"> Confirm</Trans>
             </Button>
             <Button color="brown" onClick={() => handleDeleteCancel()}>
               {" "}
-              Cancel
+              <Trans i18nKey="reportDetail.cancel"> Cancel</Trans>
             </Button>
           </ModalFooter>
         </Modal>
@@ -518,10 +550,22 @@ export default function ReportDet() {
           toggler={() => setRemoveSubmitted(false)}
         >
           <ModalTitle>
-            <Heading5>Confirm Removal</Heading5>
+            <Heading5>
+              {" "}
+              <Trans i18nKey="reportDetail.confirmRemoval">
+                {" "}
+                Confirm Removal{" "}
+              </Trans>
+            </Heading5>
           </ModalTitle>
           <ModalBody>
-            <p>Are you sure you want to remove this report to spam</p>
+            <p>
+              {" "}
+              <Trans i18nKey="reportDetail.confirmRemovalMsg">
+                {" "}
+                Are you sure you want to remove this report to spam
+              </Trans>
+            </p>
           </ModalBody>
           <ModalFooter>
             <Button
@@ -529,11 +573,11 @@ export default function ReportDet() {
               data-cy="btn-report-detail-confirm-remove-spam"
               color="brown"
             >
-              Confirm
+              <Trans i18nKey="reportDetail.confirm"> Confirm</Trans>
             </Button>
             <Button color="brown" onClick={() => handleDeleteCancel()}>
               {" "}
-              Cancel
+              <Trans i18nKey="reportDetail.cancel"> Cancel</Trans>
             </Button>
           </ModalFooter>
         </Modal>
@@ -541,7 +585,11 @@ export default function ReportDet() {
         {/* ############ 3 */}
         <Modal size="lg" active={submitted} toggler={() => setSubmitted(false)}>
           <ModalTitle>
-            <Heading5>Transfer Report to other Sector</Heading5>
+            <Heading5>
+              <Trans i18nKey="transferTo">
+                Transfer Report to other Sector
+              </Trans>{" "}
+            </Heading5>
           </ModalTitle>
           <ModalBody>
             {mydata.sector && mydata.sector.sector_type && (
@@ -568,18 +616,27 @@ export default function ReportDet() {
           toggler={() => setRejectSubmitted(false)}
         >
           <ModalTitle>
-            <Heading5>Confirm Delete</Heading5>
+            <Heading5>
+              {" "}
+              <Trans i18nKey="reportDetail.confirm"> Confirm </Trans>
+              <Trans i18nKey="reportDetail.transfer">Transfer</Trans>
+            </Heading5>
           </ModalTitle>
           <ModalBody>
-            <p>Are you sure you want to Reject this report</p>
+            <p>
+              <Trans i18nKey="reportDetail.rejectMsg">
+                {" "}
+                Are you sure you want to Reject this report
+              </Trans>
+            </p>
           </ModalBody>
           <ModalFooter>
             <Button color="brown" onClick={() => rejectReport()}>
-              Confirm
+              <Trans i18nKey="reportDetail.confirm">Confirm</Trans>
             </Button>
             <Button color="brown" onClick={() => handleDeleteCancel()}>
               {" "}
-              Cancel
+              <Trans i18nKey="reportDetail.cancel">cancel</Trans>
             </Button>
           </ModalFooter>
         </Modal>

@@ -96,15 +96,15 @@ export default function SettingsForm({ editProfile, setEditProfile }) {
       body: formData,
       // body:JSON.stringify({'title':values.title,'description':values.description,"image":currentPic})
     };
-    // fetch(url2, requestOptions)
-    //   .then((response) => {
-    //     if (!response.ok) {
-    //       throw new Error(response.status);
-    //     } else return response.json();
-    //   })
-    //   .then((data) => {
-    //     console.log(data);
-    //   });
+    fetch(url2, requestOptions)
+      .then((response) => {
+        if (!response.ok) {
+          console.log(response.status);
+        } else return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+      });
   }
   function EditProfile() {
     setEditProfile(!editProfile);

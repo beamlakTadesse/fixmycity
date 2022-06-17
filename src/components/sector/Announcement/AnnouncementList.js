@@ -20,8 +20,10 @@ export default function AnnouncementList({ announcements }) {
   // console.log("announcement2", announcements['items']);
 
   return isLoading ? (
-    <div class="flex justify-center items-center h-screen">
-      <Loader />
+    <div class="ml-32  ">
+      <div class="md:ml-64 flex items-center h-screen ">
+        <Loader />
+      </div>
     </div>
   ) : (
     <div cy-data="annList">

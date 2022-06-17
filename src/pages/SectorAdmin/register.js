@@ -1,6 +1,6 @@
 import { Input, Image, Button } from "@material-tailwind/react";
 import getQueryVariable from "helpers/utils";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Route, useLocation } from "react-router-dom";
 import { url } from "helpers/strings";
 export default function Register() {
@@ -62,7 +62,43 @@ export default function Register() {
   function getToken() {
     return getQueryVariable("token");
   }
+  const [mains, setMains] = useState([]);
+  const [myEmpty, setIsEmpty] = useState(true);
+  const [sectors, setSectors] = useState([]);
+  useEffect(() => {
+    // mounted.current = true;
+    const url1 = `${url}/v1/admins/sector/sector`;
 
+    const fetchData = async () => {
+      try {
+        const response = await fetch(url1);
+
+        const json = await response.json();
+
+        if (json.results.length === 0) {
+          setIsEmpty(true);
+        } else {
+          setSectors(json.results);
+
+          setIsEmpty(false);
+        }
+        setMains([
+          "EthioTelecom",
+          "Water and Sewage",
+          "Roads Authority",
+          "ELPA",
+        ]);
+        // console.log("Sectors: ", json.sectors[0].district_name);
+      } catch (error) {
+        console.log("error", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+  const [checkedList, setCheckedList] = useState(sectors);
+  const [checked, setChecked] = useState(false);
+  const changeList = (id, checked) => {};
   const { username, password, first_name, last_name } = inputs;
   return (
     <div className=" font-family-karla">
@@ -153,6 +189,26 @@ export default function Register() {
                 confirmPass !== password && (
                   <div className="text-red-400">check password</div>
                 )}
+
+              <div>
+                <h2>Select Sector</h2>
+                {sectors &&
+                  Object.keys(sectors).map((oneKey, i) => {
+                    return (
+                      <div>
+                        <input
+                          className="accent-emerald-100"
+                          type="radio"
+                          name="options"
+                          value={sectors[oneKey].id}
+                          checked={checked}
+                          onChange={(e) => setChecked(e.target.checked)}
+                        />
+                        <lable>{sectors[oneKey].district_name}</lable>
+                      </div>
+                    );
+                  })}
+              </div>
               <Button
                 color="brown"
                 onSubmit={handleSubmit}

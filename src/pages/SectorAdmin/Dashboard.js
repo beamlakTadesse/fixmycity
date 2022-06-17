@@ -107,8 +107,10 @@ export default function Dashboard() {
   const iconName = ["trending_up", "groups", "poll", "groups"];
   const iconColor = ["pink", "blue", "green", "red"];
   return isLoading ? (
-    <div class="flex justify-center items-center h-screen">
-      <Loader />
+    <div class="ml-32  ">
+      <div class="md:ml-64 flex items-center h-screen ">
+        <Loader />
+      </div>
     </div>
   ) : isError ? (
     <ErrorPage2 />
@@ -154,13 +156,13 @@ export default function Dashboard() {
                       unresolved={data_unresolved}
                     />
                   )}
-                  {res && res.month_5 && res.month_5.resolved && (
+                  {/* {res && res.month_5 && res.month_5.resolved && (
                     <div data-cy="ann-data">
                       <p>Number of resolved : {res.month_5.resolved}</p>
                       <p>Number of unresolved : {res.month_5.unresolved}</p>
                       <p>Number of spam : {res.month_5.spam_status}</p>
                     </div>
-                  )}
+                  )} */}
                 </div>
 
                 {/* <div className="xl:col-start-4 xl:col-end-6 px-4 mb-14">

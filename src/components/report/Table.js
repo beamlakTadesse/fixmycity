@@ -17,6 +17,7 @@ import { Button, PageButton } from "./shared/Button";
 import { classNames } from "./shared/Utils";
 import { SortIcon, SortUpIcon, SortDownIcon } from "./shared/Icons";
 import { NavLink } from "react-router-dom";
+import { Trans } from "react-i18next";
 
 // Define a default UI for filtering
 function GlobalFilter({
@@ -433,8 +434,9 @@ function Table({ columns, data }) {
             <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
               <div className="flex gap-x-2 items-baseline">
                 <span className="text-sm text-gray-700">
-                  Page{" "}
-                  <span className="font-medium">{state.pageIndex + 1}</span> of{" "}
+                  <Trans i18nKey="page">Page</Trans>{" "}
+                  <span className="font-medium">{state.pageIndex + 1}</span>{" "}
+                  <Trans i18nKey="of">of</Trans>{" "}
                   <span className="font-medium">{pageOptions.length}</span>
                 </span>
                 <label>
@@ -448,8 +450,9 @@ function Table({ columns, data }) {
                   >
                     {[5, 10, 20].map((pageSize) => (
                       <option key={pageSize} value={pageSize}>
-                        Show {pageSize}
+                        {pageSize}
                       </option>
+                      // <Trans i18nKey="show">Show</Trans>
                     ))}
                   </select>
                 </label>

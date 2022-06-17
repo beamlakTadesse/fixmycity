@@ -150,6 +150,15 @@ export default function AnnouncementCard({
           </div>
           <div>
             <Button
+              className="md:m-2 m-auto mt-5 bg-[#5865F2] shadow-md shadow-[#5865f28a]  pt-2 pb-2 pl-6 pr-4 rounded-xl flex flex-row justify-center items-center hover:bg-[#DEB887] ease-linear duration-300"
+              onClick={(e) => setShowModal(true)}
+              color="brown"
+            >
+              updated
+            </Button>
+          </div>
+          <div>
+            <Button
               onClick={() => {
                 setDelete(!delet);
               }}
@@ -159,15 +168,7 @@ export default function AnnouncementCard({
               Delete
             </Button>
           </div>
-          <div>
-            <Button
-              className="read-more-link"
-              onClick={(e) => setShowModal(true)}
-              color="brown"
-            >
-              updatedAt
-            </Button>
-          </div>
+
           <EditAnnouncement
             isActive={showModal}
             setIsActive={setShowModal}

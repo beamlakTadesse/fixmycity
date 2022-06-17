@@ -5,8 +5,15 @@ import { useState } from "react";
 import Sidebar from "components/Sidebar";
 import Footer from "components/Footer";
 import ChangePasswordCard from "components/changePassword";
+import { Button } from "components/report/shared/Button";
+import { useTranslation, Trans } from "react-i18next";
 
 export default function Dashboard() {
+  const lngs = {
+    en: { nativeName: "English" },
+    am: { nativeName: "Amharic" },
+  };
+  const { t, i18n } = useTranslation();
   const [editProfile, setEditProfile] = useState(false);
 
   return (
@@ -34,6 +41,26 @@ export default function Dashboard() {
             )}
             <div className="xl:col-start-1 xl:col-end-4 px-4 mb-16">
               <ChangePasswordCard />
+            </div>
+            <div>
+              <Trans i18nKey="settings.changeLanguage">
+                <h2>Change Language</h2>
+              </Trans>
+
+              {Object.keys(lngs).map((lng) => (
+                <button
+                  key={lng}
+                  style={{
+                    fontWeight: i18n.language === lng ? "bold" : "normal",
+                  }}
+                  type="submit"
+                  onClick={() => {
+                    i18n.changeLanguage(lng);
+                  }}
+                >
+                  {lngs[lng].nativeName}
+                </button>
+              ))}
             </div>
           </div>
         </div>
