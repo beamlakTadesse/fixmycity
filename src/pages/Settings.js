@@ -7,6 +7,9 @@ import Footer from "components/Footer";
 import ChangePasswordCard from "components/changePassword";
 import { Button } from "components/report/shared/Button";
 import { useTranslation, Trans } from "react-i18next";
+import Card from "@material-tailwind/react/Card";
+import CardHeader from "@material-tailwind/react/CardHeader";
+import CardBody from "@material-tailwind/react/CardBody";
 
 export default function Dashboard() {
   const lngs = {
@@ -43,24 +46,33 @@ export default function Dashboard() {
               <ChangePasswordCard />
             </div>
             <div>
-              <Trans i18nKey="settings.changeLanguage">
-                <h2>Change Language</h2>
-              </Trans>
-
-              {Object.keys(lngs).map((lng) => (
-                <button
-                  key={lng}
-                  style={{
-                    fontWeight: i18n.language === lng ? "bold" : "normal",
-                  }}
-                  type="submit"
-                  onClick={() => {
-                    i18n.changeLanguage(lng);
-                  }}
-                >
-                  {lngs[lng].nativeName}
-                </button>
-              ))}
+              <Card>
+                <CardHeader color="brown" contentPosition="none">
+                  <div className="w-full flex items-center justify-between">
+                    <h2 className="text-white text-2xl">
+                      <Trans i18nKey="settings.changeLanguage">
+                        Change Language
+                      </Trans>
+                    </h2>
+                  </div>
+                </CardHeader>
+                <CardBody>
+                  {Object.keys(lngs).map((lng) => (
+                    <button
+                      key={lng}
+                      style={{
+                        fontWeight: i18n.language === lng ? "bold" : "normal",
+                      }}
+                      type="submit"
+                      onClick={() => {
+                        i18n.changeLanguage(lng);
+                      }}
+                    >
+                      {lngs[lng].nativeName}
+                    </button>
+                  ))}
+                </CardBody>
+              </Card>
             </div>
           </div>
         </div>

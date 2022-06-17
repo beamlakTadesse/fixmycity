@@ -11,11 +11,20 @@
     "profile": "መገለጫ",
     "announcement": "ማስታወቂያ"
   },
+
+  "sectorDashboard": {
+    "Overview": " አጠቃላይ እይታ",
+    "ReportStatus": "ሁኔታ ሪፖርት ",
+    "SectorAdmin": "ዘርፍ አስተዳዳሪ",
+    "BranchName": "የቅርንጫፉ ስም"
+  },
   "report": {
     "map": "በካርታው ላይ ይመልከቱ",
     "page": "ገጽ",
     "of": "የ",
-    "show": "አሳይ"
+    "show": "አሳይ",
+    "Search": "ፈልግ",
+    "ShowSpamStatus": "የአይፈለጌ መልእክት ሁኔታን አሳይ"
   },
   "reportDetail": {
     "reportedIssue": " ሪፖርት የተደረገ ጉዳይ",
@@ -35,6 +44,87 @@
     "transferTo": "ሪፖርትን ወደ ሌላ ዘርፍ ያስተላልፉ",
     "rejectMsg": "እርግጠኛ ነዎት ይህን ሪፖርት ውድቅ ማድረግ ይፈልጋሉ",
     "addToSpam": "ወደ አይፈለጌ አክል",
-    "removeSpam": "አይፈለጌ ያስወግዱ"
+    "removeSpam": "አይፈለጌ ያስወግዱ",
+    "resolved": "ተፈትቷል",
+    "active": "ንቁ",
+    "rejected": "ውድቅ ተደርጓል"
+  },
+  "profile": {
+    "editProfile": "መገለጫ አርትዕ",
+    "personalInformation": "የግል መረጃ",
+    "fullname": "ሙሉ ስም",
+    "username": "የተጠቃሚ ስም",
+    "email": "ኢሜይል",
+    "ethiopia": "ኢትዮጵያ",
+    "phone": "ስልክ ቁጥር",
+    "sectorInformation": "የሴክተር መረጃ",
+    "myAccount": "አካውንቴ",
+    "settings": " ቅንብሮች",
+    "firstName": " የመጀመሪያ ስም",
+    "lastName": "ያባት ስም",
+    "changePassword": "የሚስጥር ቁልፍ ይቀይሩ",
+    "oldpassword": "የድሮ የይለፍ ቃል",
+    "passwordmissmatch": " የይለፍ ቃል አለመዛመድ",
+    "newpassword": "አዲስ የይለፍ ቃል",
+    "confirmpassword": "የይለፍ ቃል አረጋግጥ",
+    "help": "እገዛ",
+    "logout": "ውጣ"
+  },
+  "announcement": {
+    "postAnnouncement": "ፖስት ማስታወቂያ",
+    "seeLess": "ያነሰ ይመልከቱ",
+    "seeDetail": "ዝርዝር ይመልከቱ",
+    "updated": "ተዘምኗል",
+    "delete": " ሰርዝ",
+    "confDelete": "እርግጠኛ ነዎት ይህን ማስታወቂያ ማስወገድ ይፈልጋሉ",
+    "postedBY": "የለጠፈው ",
+    "address": "አድራሻ",
+    "title": "ርዕስ",
+    "districtName": "የአውራጃ ስም",
+    "description": "መግለጫ",
+    "submit": "አስገባ",
+    "editAnnouncement": "ማስታወቂያ አርትዕ"
+  },
+  "help": {
+    " FixMyCity": " Fix My City",
+    "userManual": "የተጠቃሚ መመሪያ",
+    "moto": "ከተማችንን የተሻለ ያድርግልን!!!",
+    "SectorDashboard": "ዘርፍ ዳሽቦርድ",
+    "msg1": "የሪፖርቶችን አጠቃላይ ትንታኔ ያሳያል",
+    "msg2": "ሁሉንም ሪፖርቶች በሰንጠረዥ ውስጥ ያሳያል ከዚያም ሪፖርቶቹን ከተፈቱ እና ካልተፈቱ ሁኔታ ጋር ማጣራት እንችላለን፣ እንዲሁም አይፈለጌ መልዕክት እና አይፈለጌ መልዕክት ያልሆኑ ሪፖርቶችን ማጣራት እንችላለን። የአንድ የተወሰነ ሪፖርት ዝርዝር ለማየት ከፈለግን የዚያን ዘገባ ስም ጠቅ ማድረግ እንችላለን።",
+    "transfersReport": "የዝውውር ሪፖርት",
+    "msg3": " የዝርዝር ገጽን ሪፖርት ካደረግን በኋላ ሌሎች አማራጮችን ጠቅ ማድረግ እንችላለን፣ አማራጮቹ ሲመጡ የማስተላለፊያ ቁልፍን ጠቅ ማድረግ እንችላለን። ማስተላለፍን ጠቅ ካደረግን በኋላ እንዲዛወር የምንፈልገውን ሴክተር መምረጥ እንችላለን ከዚያም ወደ ሌሎች ሴክተሮች ሪፖርት ማድረግ እንችላለን.",
+    "AddtoSpamReport": "ወደ አይፈለጌ መልእክት ሪፖርት ያክሉ",
+    "msg4": "የዝርዝር ገጽን ከገለፅን በኋላ ሌሎች አማራጮችን ጠቅ ማድረግ እንችላለን ፣ አማራጮቹ ሲመጡ ሪፖርትን ውድቅ የሚለውን ቁልፍ ጠቅ ማድረግ እንችላለን ። አዝራሩን ጠቅ ካደረጉ በኋላ ውድቅነቱን ማረጋገጥ እንችላለን.",
+    "msg5": "የዝርዝር ገጽን ከመዘገብን በኋላ ሌሎች አማራጮችን ጠቅ ማድረግ እንችላለን፣ አማራጮቹ ሲመጡ ወደ አይፈለጌ መልእክት ሪፖርት አክል የሚለውን ቁልፍ ጠቅ ማድረግ እንችላለን። አዝራሩን ጠቅ ካደረጉ በኋላ ማዘዋወሩን ማረጋገጥ እንችላለን."
+  },
+  "sectorAdmin": {
+    "ActiveSectorsAdmin": "ንቁ ዘርፎች አስተዳዳሪ",
+    "SeeMore": "ተጨማሪ ይመልከቱ",
+    "Visitors": "ጎብኝዎች",
+    "NumberofSectors'Branch": "የሴክተሮች ቅርንጫፍ ቁጥር"
+  },
+  "users": {
+    "Users": "ተጠቃሚዎች",
+    "nodata": "ምንም የሚታይ ውሂብ የለም",
+    "UserState": "የተጠቃሚ ግዛት",
+    "activate": "አግብር",
+    "Active": "ንቁ",
+    "Image": "ምስል",
+    "Description": "መግለጫ",
+    "SpamStatus": "የአይፈለጌ መልእክት ሁኔታ",
+    "ReportStatus": "ሁኔታን ሪፖርት አድርግ",
+    "PostedDate": "የተለጠፈበት ቀን",
+    "NoReportyet": "እስካሁን ምንም ሪፖርት የለም"
+  },
+  "sector": {
+    "CreateSector": "ዘርፍ ፍጠር",
+    "Sectors": "ዘርፎች",
+    "DistrictType": "የዲስትሪክት ዓይነት",
+    "NoDatatoDisplay": "ምንም የሚታይ ውሂብ የለም"
+  },
+  "adminDash": {
+    "AddSectorAdmin": "ሴክተር አስተዳዳሪን ጨምር",
+    "SelectSector": "ዘርፍ ይምረጡ"
   }
 }

@@ -20,6 +20,7 @@ import Loader from "components/sector/shared/loader";
 import ErrorPage2 from "components/sector/shared/errorPage2";
 import { url } from "helpers/strings";
 import { NavLink } from "react-router-dom";
+import { Trans } from "react-i18next";
 
 export default function UserTable() {
   // const users = useSelector(state => state.users);
@@ -111,12 +112,12 @@ export default function UserTable() {
     <div class="flex justify-center items-center h-screen">
       <Loader />
     </div>
-  ) : isError ? (
-    <ErrorPage2 />
   ) : (
     <Card>
       <CardHeader color="brown" contentPosition="left">
-        <h2 className="text-white text-2xl">Users</h2>
+        <h2 className="text-white text-2xl">
+          <Trans i18nKey="users.Users">Users</Trans>{" "}
+        </h2>
         {/* <Button onClick={() => setRegister(true)}>Register</Button> */}
       </CardHeader>
       <CardBody>
@@ -126,7 +127,9 @@ export default function UserTable() {
               data-cy="txt-user-nodata"
               className="flex justify-center items-center mt-10"
             >
-              <h3>No Data to Display</h3>
+              <h3>
+                <Trans i18nKey="users.nodata">No Data to Display</Trans>
+              </h3>
             </div>
           </div>
         ) : (
@@ -136,16 +139,16 @@ export default function UserTable() {
                 <thead>
                   <tr>
                     <th className="px-2 text-brown align-middle border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
-                      First Name
+                      <Trans i18nKey="profile.firstName"> First Name</Trans>
                     </th>
                     <th className="px-2 text-brown align-middle border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
-                      Last Name
+                      <Trans i18nKey="profile.lastName"> Last Name</Trans>
                     </th>
                     <th className="px-2 text-brown align-middle border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
-                      Phone
+                      <Trans i18nKey="profile.phone"> Phone</Trans>
                     </th>
                     <th className="px-2 text-brown align-middle border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
-                      User State
+                      <Trans i18nKey="users.UserState"> User State</Trans>
                     </th>
                   </tr>
                 </thead>
@@ -178,11 +181,13 @@ export default function UserTable() {
                                       activateUser(users[oneKey].id);
                                     }}
                                   >
-                                    Activate
+                                    <Trans i18nKey="activate">Activate</Trans>
                                   </Button>
                                 </>
                               ) : (
-                                <p>Active</p>
+                                <p>
+                                  <Trans i18nKey="Active">Active</Trans>
+                                </p>
                               )}
                             </th>
                           </>

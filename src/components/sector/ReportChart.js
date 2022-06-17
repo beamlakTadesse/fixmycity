@@ -3,6 +3,7 @@ import Chart from "chart.js";
 import Card from "@material-tailwind/react/Card";
 import CardHeader from "@material-tailwind/react/CardHeader";
 import CardBody from "@material-tailwind/react/CardBody";
+import { Trans } from "react-i18next";
 
 export default function ReportChart({ resolved, spam, unresolved }) {
   var data_resolved = resolved;
@@ -124,9 +125,12 @@ export default function ReportChart({ resolved, spam, unresolved }) {
     <Card>
       <CardHeader color="brown" contentPosition="left">
         <h6 className="uppercase text-gray-200 text-xs font-medium">
-          Overview
+          <Trans i18nKey="sectorDashboard.Overview"> Overview</Trans>
         </h6>
-        <h2 className="text-white text-2xl">Report Status</h2>
+        <h2 className="text-white text-2xl">
+          {" "}
+          <Trans i18nKey="sectorDashboard.ReportStatus">Report Status</Trans>
+        </h2>
       </CardHeader>
       <CardBody>
         <div className="relative h-96">

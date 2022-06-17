@@ -15,6 +15,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useDispatch, useSelector } from "react-redux";
 import userDetailContext from "../../../pages/SectorAdmin/Announcement";
 import { url } from "helpers/strings";
+import { Trans } from "react-i18next";
 export default function EditAnnouncement({
   isActive,
   setIsActive,
@@ -135,13 +136,17 @@ export default function EditAnnouncement({
         <Card>
           <CardHeader color="brown" contentPosition="none">
             <div className="w-full flex items-center justify-between">
-              <h2 className="text-white text-2xl">Edit Announcement</h2>
+              <h2 className="text-white text-2xl">
+                <Trans i18nKey="announcement.editAnnouncement">
+                  Edit Announcement
+                </Trans>{" "}
+              </h2>
             </div>
           </CardHeader>
           <CardBody>
             <form encType="multipart/form-data">
               <h6 className="text-brwno-500 text-sm mt-1 mb-6 font-light uppercase">
-                Title
+                <Trans i18nKey="announcement.title">Title</Trans>
               </h6>
               <div className="flex flex-wrap mt-4">
                 <div className="w-full lg:w-full pr-4 mb-8 font-light">
@@ -235,11 +240,13 @@ export default function EditAnnouncement({
                     onClick={(e) => handleSubmit(id)}
                     data-cy="btn-postann-edit-submit"
                   >
-                    Submit
+                    <Trans i18nKey="announcement.submit">Submit</Trans>
                   </Button>
                 </div>
                 <div className="row-span-3">
-                  <Button color="brown">Cancel</Button>
+                  <Button color="brown">
+                    <Trans i18nKey="reportDetail.cancel"> Cancel</Trans>{" "}
+                  </Button>
                 </div>
               </div>
             </form>

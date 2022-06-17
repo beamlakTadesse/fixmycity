@@ -14,6 +14,7 @@ import { url } from "helpers/strings";
 import React, { useState, useEffect, useCallback, useContext } from "react";
 import { getUserId } from "helpers/utils";
 import { UserContext, UserDispatchContext } from "context/userProvider";
+import { Trans } from "react-i18next";
 
 export default function AdminNavbar({ showSidebar, setShowSidebar }) {
   const location = useLocation().pathname;
@@ -143,10 +144,12 @@ export default function AdminNavbar({ showSidebar, setShowSidebar }) {
                 }}
               >
                 <DropdownItem color="brown">
-                  <NavLink to="/help">Help</NavLink>
+                  <NavLink to="/help">
+                    <Trans i18nKey="profile.help"> Help</Trans>
+                  </NavLink>
                 </DropdownItem>
                 <DropdownItem color="brown" onClick={Logout}>
-                  Logout
+                  <Trans i18nKey="profile.logout"> Logout</Trans>
                 </DropdownItem>
                 {/* <DropdownItem color="lightBlue">
                                     Something Else

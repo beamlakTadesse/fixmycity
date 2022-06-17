@@ -15,6 +15,7 @@ import AddSectorForm from "./addSectorForm";
 import ErrorPage from "./shared/errorPage";
 import ErrorPage2 from "./shared/errorPage2";
 import { url } from "helpers/strings";
+import { Trans } from "react-i18next";
 
 export default function SectorsSection() {
   // Add Sector
@@ -109,7 +110,7 @@ export default function SectorsSection() {
               className="flex justify-center bg-brown"
               onClick={(e) => setShowModal(true)}
             >
-              Create Sector
+              <Trans i18nKey="sector.CreateSector">Create Sector</Trans>
             </Button>
           </div>
         </div>
@@ -154,7 +155,7 @@ export default function SectorsSection() {
         className="flex justify-center h-[60px] bg-brown bg-black text-white text-xl hover:bg-brown-300 transition-color duration-200 delay-200"
         onClick={(e) => setShowModal(true)}
       >
-        Create Sector
+        <Trans i18nKey="sector.CreateSector">Create Sector</Trans>
       </Button>
 
       <AddSectorForm isActive={showModal} setIsActive={setShowModal} />

@@ -19,6 +19,7 @@ import ModalBody from "@material-tailwind/react/ModalBody";
 import ModalTitle from "@material-tailwind/react/ModalHeader";
 import Modal from "@material-tailwind/react/Modal";
 import EditAnnouncement from "./editAnnouncement";
+import { Trans } from "react-i18next";
 
 export default function AnnouncementCard({
   title,
@@ -63,12 +64,16 @@ export default function AnnouncementCard({
   const extraContent = sector && (
     <div>
       <div className="flex mt-[20px]">
-        <span className="mr-[7px] text-[#424bb6]">Posted BY: </span>
+        <span className="mr-[7px] text-[#424bb6]">
+          <Trans i18nKey="announcement.postedBY">Posted BY</Trans>:{" "}
+        </span>
         <p className="extra-content">{sector}</p>
       </div>
 
       <div className="flex mt-[20px]">
-        <span className="mr-[7px] text-[#424bb6]">Address: </span>
+        <span className="mr-[7px] text-[#424bb6]">
+          <Trans i18nKey="announcement.address">Address</Trans>:{" "}
+        </span>
         <p className="extra-content">{address}</p>
       </div>
     </div>
@@ -80,7 +85,9 @@ export default function AnnouncementCard({
       className="md:m-2 m-auto mt-5 bg-[#5865F2] shadow-md shadow-[#5865f28a]  pt-2 pb-2 pl-6 pr-4 rounded-xl flex flex-row justify-center items-center hover:bg-[#DEB887] ease-linear duration-300"
     >
       <FaPlay className="animate-ping" size={8} color="#fff" />
-      <h1 className="text-white text-md font-semibold pl-2">See Less</h1>
+      <h1 className="text-white text-md font-semibold pl-2">
+        <Trans i18nKey="announcement.seeLess">See Less</Trans>{" "}
+      </h1>
     </button>
   ) : (
     <button
@@ -89,7 +96,7 @@ export default function AnnouncementCard({
     >
       <FaPlay className="animate-ping" size={8} color="#fff" />
       <h1 cy-date="btn-see" className="text-white text-md font-semibold pl-2">
-        See Detail
+        <Trans i18nKey="announcement.seeDetail">See Detail</Trans>
       </h1>
     </button>
   );
@@ -154,7 +161,8 @@ export default function AnnouncementCard({
               onClick={(e) => setShowModal(true)}
               color="brown"
             >
-              updated
+              {" "}
+              <Trans i18nKey="announcement.updated">Updated</Trans>
             </Button>
           </div>
           <div>
@@ -165,7 +173,7 @@ export default function AnnouncementCard({
               color="red"
               className="md:m-2 m-auto mt-5 bg-[#5865F2] shadow-md shadow-[#5865f28a]  pt-2 pb-2 pl-6 pr-4 rounded-xl flex flex-row justify-center items-center hover:bg-[#DEB887] ease-linear duration-300"
             >
-              Delete
+              <Trans i18nKey="announcement.delete"> Delete</Trans>
             </Button>
           </div>
 
@@ -186,10 +194,17 @@ export default function AnnouncementCard({
       </div>
       <Modal size="lg" active={delet} toggler={() => setDelete(false)}>
         <ModalTitle>
-          <Heading5>Confirm Delete</Heading5>
+          <Heading5>
+            <Trans i18nKey="reportDetail.confirmDelete"> Confirm Delete</Trans>
+          </Heading5>
         </ModalTitle>
         <ModalBody>
-          <p>Are you sure you want to remove this Announcement</p>
+          <p>
+            {" "}
+            <Trans i18nKey="announcement.confDelete">
+              Are you sure you want to remove this Announcement
+            </Trans>
+          </p>
         </ModalBody>
         <ModalFooter>
           <Button
@@ -197,11 +212,11 @@ export default function AnnouncementCard({
             data-cy="btn-report-detail-confirm-remove-spam"
             color="brown"
           >
-            Confirm
+            <Trans i18nKey="reportDetail.confirm">Confirm</Trans>
           </Button>
           <Button color="brown" onClick={() => {}}>
             {" "}
-            Cancel
+            <Trans i18nKey="reportDetail.cancel">Cancel</Trans>
           </Button>
         </ModalFooter>
       </Modal>

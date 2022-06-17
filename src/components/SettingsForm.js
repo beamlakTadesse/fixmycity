@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import { getUserId } from "helpers/utils";
 import { url } from "helpers/strings";
 import { phonenumber, nameValidation } from "helpers/validation";
+import { Trans } from "react-i18next";
 
 export default function SettingsForm({ editProfile, setEditProfile }) {
   const [mydata, setData] = useState({});
@@ -115,21 +116,25 @@ export default function SettingsForm({ editProfile, setEditProfile }) {
     <Card>
       <CardHeader color="brown" contentPosition="none">
         <div className="w-full flex items-center justify-between">
-          <h2 className="text-white text-2xl">My Account</h2>
-          <Button
+          <h2 className="text-white text-2xl">
+            <Trans i18nKey="profile.myAccount"> My Account</Trans>
+          </h2>
+          {/* <Button
             color="transparent"
             buttonType="link"
             size="lg"
             style={{ padding: 0 }}
           >
-            Settings
-          </Button>
+            <Trans i18nKey="profile.settings"> Settings</Trans>
+          </Button> */}
         </div>
       </CardHeader>
       <CardBody>
         <form>
           <h6 className="text-brown text-sm mt-3 mb-6 font-light uppercase">
-            User Information
+            <Trans i18nKey="profile.personalInformation">
+              personal Information
+            </Trans>{" "}
           </h6>
           <div className="flex flex-wrap mt-10">
             {/* <div className="w-full lg:w-6/12 pl-4 mb-10 font-light">
@@ -144,7 +149,9 @@ export default function SettingsForm({ editProfile, setEditProfile }) {
               />
             </div> */}
             <div className="w-full lg:w-6/12 pl-4 mb-10 font-light">
-              <lable>First Name</lable>
+              <lable>
+                <Trans i18nKey="profile.firstName"> First Name </Trans>
+              </lable>
               <Input
                 type="text"
                 value={firstname}
@@ -156,7 +163,9 @@ export default function SettingsForm({ editProfile, setEditProfile }) {
               />
             </div>
             <div className="w-full lg:w-6/12 pl-4 mb-10 font-light">
-              <lable>Last Name</lable>
+              <lable>
+                <Trans i18nKey="profile.lastName"> Last Name</Trans>{" "}
+              </lable>
               <Input
                 type="text"
                 value={lastname}
@@ -168,7 +177,10 @@ export default function SettingsForm({ editProfile, setEditProfile }) {
               />
             </div>
             <div className="w-full lg:w-6/12 pl-4 mb-10 font-light">
-              <lable>Phone Number</lable>
+              <lable>
+                {" "}
+                <Trans i18nKey="profile.phone"> Phone No.</Trans>
+              </lable>
               <Input
                 type="text"
                 value={phone_number}
@@ -242,7 +254,7 @@ export default function SettingsForm({ editProfile, setEditProfile }) {
                 EditProfile();
               }}
             >
-              Edit Profile
+              <Trans i18nKey="profile.editProfile"> Edit Profile</Trans>
             </Button>
           </div>
         )}

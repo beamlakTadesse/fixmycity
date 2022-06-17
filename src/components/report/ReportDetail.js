@@ -337,11 +337,13 @@ export default function ReportDet() {
                 )}
                 <div>
                   <p className="ml-[40px] mt-4 text-xl font-light">
-                    {mydata.status === "RESOLVED"
-                      ? "Resolved"
-                      : mydata.status === "UNRESOLVED"
-                      ? "Active"
-                      : "Rejected"}
+                    {mydata.status === "RESOLVED" ? (
+                      <Trans i18nKey="reportDetail.resolved">Resolved</Trans>
+                    ) : mydata.status === "UNRESOLVED" ? (
+                      <Trans i18nKey="reportDetail.active">Active</Trans>
+                    ) : (
+                      <Trans i18nKey="reportDetail.rejected">Rejected</Trans>
+                    )}
                   </p>
                   <hr className="border-1 ml-7"></hr>
                   {mydata.status == "UNRESOLVED" ? (
@@ -383,7 +385,7 @@ export default function ReportDet() {
                   </p>
                   <hr className="border-1 ml-7"></hr>
                   <p className="ml-[95px] mt-2 font-light text-sm">
-                    <Trans i18nKey="addis"> Addis Ababa</Trans>
+                    <Trans i18nKey="reportDetail.addis"> Addis Ababa</Trans>
                   </p>
                 </div>
               </div>

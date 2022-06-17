@@ -33,7 +33,9 @@ function GlobalFilter({
 
   return (
     <label className="flex gap-x-2 items-baseline">
-      <span className="text-gray-700">Search: </span>
+      <span className="text-gray-700">
+        <Trans i18nKey="report.Search">Search</Trans> :{" "}
+      </span>
       <input
         type="text"
         className="rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
@@ -67,7 +69,9 @@ export function SelectColumnFilter({
   // Render a multi-select box
   return (
     <label className="flex gap-x-2 items-baseline">
-      <span className="text-gray-700">ShowSpamStatus: </span>
+      <span className="text-gray-700">
+        <Trans i18nKey="report.ShowSpamStatus">Show Spam Status</Trans> : :{" "}
+      </span>
       <select
         className="rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
         name={id}

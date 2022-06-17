@@ -112,8 +112,6 @@ export default function Dashboard() {
         <Loader />
       </div>
     </div>
-  ) : isError ? (
-    <ErrorPage2 />
   ) : (
     <>
       <Sidebar />

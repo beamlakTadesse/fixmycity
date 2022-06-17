@@ -8,6 +8,7 @@ import UnAuthorized from "components/sector/shared/unauthorized";
 import Sidebar from "components/Sidebar";
 import Footer from "components/Footer";
 import { url } from "helpers/strings";
+import { Trans } from "react-i18next";
 
 export default function Announcement() {
   const [showModal, setShowModal] = React.useState(false);
@@ -73,7 +74,9 @@ export default function Announcement() {
                 data-cy="btn-add-announcement"
                 color="brown"
               >
-                Post Announcement
+                <Trans i18nKey="announcement.postAnnouncement">
+                  Post Announcement
+                </Trans>{" "}
               </Button>
             </div>
             <AddAnnouncement isActive={showModal} setIsActive={setShowModal} />

@@ -1,5 +1,6 @@
 import Footer from "components/Footer";
 import Sidebar from "components/Sidebar";
+import { Trans } from "react-i18next";
 
 export default function Help() {
   return (
@@ -21,13 +22,13 @@ export default function Help() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="lg:text-center">
               <h2 className="text-base text-brown-600 font-semibold tracking-wide uppercase">
-                Fix My City
+                <Trans i18nKey="help.FixMyCity">Fix My City</Trans>
               </h2>
               <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-                User Manual
+                <Trans i18nKey="help.userManual"> User Manual</Trans>
               </p>
               <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-                Make Our City Better!!!
+                <Trans i18nKey="help.moto"> Make Our City Better!!!</Trans>
               </p>
             </div>
 
@@ -53,11 +54,17 @@ export default function Help() {
                       </svg>
                     </div>
                     <p className="ml-16 text-lg leading-6 font-medium text-gray-900">
-                      Sector Dashboard
+                      <Trans i18nKey="help.SectorDashboard">
+                        {" "}
+                        Sector Dashboard
+                      </Trans>
                     </p>
                   </dt>
                   <dd className="mt-2 ml-16 text-base text-gray-500">
-                    Shows the general analitics of reports
+                    <Trans i18nKey="help.msg1">
+                      {" "}
+                      Shows the general analitics of reports
+                    </Trans>
                   </dd>
                 </div>
 
@@ -81,15 +88,17 @@ export default function Help() {
                       </svg>
                     </div>
                     <p className="ml-16 text-lg leading-6 font-medium text-gray-900">
-                      Report
+                      <Trans i18nKey="sidebar.report">Report</Trans>
                     </p>
                   </dt>
                   <dd className="mt-2 ml-16 text-base text-gray-500">
-                    It shows all reports in a table then we can filter the
-                    reports with status of resolved and un resolved, and also we
-                    can filter spam and non spam reports. If we want to see the
-                    details of a speific report we can click the name of that
-                    report.
+                    <Trans i18nKey="help.msg2">
+                      It shows all reports in a table then we can filter the
+                      reports with status of resolved and un resolved, and also
+                      we can filter spam and non spam reports. If we want to see
+                      the details of a speific report we can click the name of
+                      that report.
+                    </Trans>
                   </dd>
                 </div>
 
@@ -113,15 +122,20 @@ export default function Help() {
                       </svg>
                     </div>
                     <p className="ml-16 text-lg leading-6 font-medium text-gray-900">
-                      Transfers Report
+                      <Trans i18nKey="help.transfersReport">
+                        {" "}
+                        Transfers Report
+                      </Trans>
                     </p>
                   </dt>
                   <dd className="mt-2 ml-16 text-base text-gray-500">
-                    After going to report detail page we can click the other
-                    options then, when the options arive we can click transfer
-                    button. After clicking transfer we can the choose the sector
-                    we want it to be tranferd to, then we can transfer a report
-                    to other sectors.
+                    <Trans i18nKey="help.msg3">
+                      After going to report detail page we can click the other
+                      options then, when the options arive we can click transfer
+                      button. After clicking transfer we can the choose the
+                      sector we want it to be tranferd to, then we can transfer
+                      a report to other sectors.
+                    </Trans>
                   </dd>
                 </div>
 
@@ -145,14 +159,19 @@ export default function Help() {
                       </svg>
                     </div>
                     <p className="ml-16 text-lg leading-6 font-medium text-gray-900">
-                      Reject Report
+                      <Trans i18nKey="reportDetail.rejectReport">
+                        {" "}
+                        Reject Report
+                      </Trans>
                     </p>
                   </dt>
                   <dd className="mt-2 ml-16 text-base text-gray-500">
-                    After going to report detail page we can click the other
-                    options then, when the options arive we can click reject
-                    report button. After clicking the button we can confirm the
-                    rejection.
+                    <Trans i18nKey="help.msg4">
+                      After going to report detail page we can click the other
+                      options then, when the options arive we can click reject
+                      report button. After clicking the button we can confirm
+                      the rejection.
+                    </Trans>
                   </dd>
                 </div>
                 <div className="relative">
@@ -175,14 +194,19 @@ export default function Help() {
                       </svg>
                     </div>
                     <p className="ml-16 text-lg leading-6 font-medium text-gray-900">
-                      Add to Spam Report
+                      <Trans i18nKey="help.AddtoSpamReport">
+                        {" "}
+                        Add to Spam Report
+                      </Trans>
                     </p>
                   </dt>
                   <dd className="mt-2 ml-16 text-base text-gray-500">
-                    After going to report detail page we can click the other
-                    options then, when the options arive we can click add to
-                    spam report button. After clicking the button we can confirm
-                    the the tranfer.
+                    <Trans i18nKey="help.msg5">
+                      After going to report detail page we can click the other
+                      options then, when the options arive we can click add to
+                      spam report button. After clicking the button we can
+                      confirm the the tranfer.
+                    </Trans>
                   </dd>
                 </div>
               </dl>

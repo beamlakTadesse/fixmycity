@@ -13,6 +13,9 @@ import Button from "@material-tailwind/react/Button";
 import { url } from "helpers/strings";
 import { getUserId } from "helpers/utils";
 import { useParams } from "react-router-dom";
+import { Trans } from "react-i18next";
+import ProfilePicture from "assets/img/profile.jpg";
+
 export default function UserDetail() {
   let { id } = useParams();
   const [editProfile, setEditProfile] = useState(false);
@@ -83,7 +86,11 @@ export default function UserDetail() {
                   <Card>
                     <div className="flex flex-wrap justify-center">
                       <div className="w-48 px-4 -mt-24">
-                        <Image src={image} rounded raised />
+                        {users.ProfileImage ? (
+                          <Image src={image} rounded />
+                        ) : (
+                          <Image src={ProfilePicture} rounded />
+                        )}
                       </div>
                     </div>
 
@@ -92,13 +99,19 @@ export default function UserDetail() {
                         data-cy="profile-info"
                         className="text-brown text-sm mt-9 mb-6 font-bold uppercase"
                       >
-                        personal Information
+                        <Trans i18nKey="profile.personalInformation">
+                          personal Information
+                        </Trans>
                       </h6>
 
                       <div className="flex flex-wrap text-xs mt-10">
                         {users.first_name && users.last_name && (
                           <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">
-                            <h1>Full name </h1>
+                            <h1>
+                              <Trans i18nKey="profile.fullname">
+                                Full name{" "}
+                              </Trans>
+                            </h1>
                             <h1>
                               {users.first_name} {users.last_name}
                             </h1>
@@ -106,24 +119,48 @@ export default function UserDetail() {
                         )}
                         {users.username && (
                           <div className="w-full lg:w-6/12 pl-4 mb-10 font-light">
-                            <h1>Username : </h1>
+                            <h1>
+                              {" "}
+                              <Trans i18nKey="profile.username">
+                                Username
+                              </Trans>{" "}
+                              :{" "}
+                            </h1>
                             <h1>{users.username}</h1>
                           </div>
                         )}
                         {users.email && (
                           <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">
-                            <h1>Email : </h1>
+                            <h1>
+                              <Trans i18nKey="profile.email">Email </Trans>:{" "}
+                            </h1>
                             <h1>{users.email}</h1>
                           </div>
                         )}
                         {users.location && (
                           <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">
-                            <h1>Location :</h1>
-                            <h1> Addis Ababa / Ethiopia</h1>
+                            <h1>
+                              <Trans i18nKey="reportDetail.location">
+                                Location
+                              </Trans>{" "}
+                              :
+                            </h1>
+                            <h1>
+                              <Trans i18nKey="reportDetail.addis">
+                                {" "}
+                                Addis Ababa
+                              </Trans>{" "}
+                              /
+                              <Trans i18nKey="profile.ethiopia">
+                                Ethiopia
+                              </Trans>{" "}
+                            </h1>
                           </div>
                         )}
                         <div className="w-full lg:w-6/12 pl-4 mb-10 font-light">
-                          <h1>Phone No. : </h1>
+                          <h1>
+                            <Trans i18nKey="profile.phone">Phone No.</Trans> :{" "}
+                          </h1>
                           <h1>{users.phone_number}</h1>
                         </div>
                       </div>
@@ -147,22 +184,24 @@ export default function UserDetail() {
                   <thead className="border-b bg-gray-800">
                     <tr>
                       <th className="px-2 text-white align-middle border-r border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
-                        Image
+                        <Trans i18nKey="users.Image">Image</Trans>
                       </th>
                       <th className="px-2 text-white align-middle border-r border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
-                        Description
+                        <Trans i18nKey="users.Description">Description</Trans>
                       </th>
                       <th className="px-2 text-white align-middle border-r border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
-                        Sector
+                        <Trans i18nKey="sidebar.sector">Sector</Trans>
                       </th>
                       <th className="px-2 text-white align-middle border-r border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
-                        Spam Status
+                        <Trans i18nKey="users.SpamStatus">Spam Status</Trans>
                       </th>
                       <th className="px-2 text-white align-middle border-r border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
-                        Report Status
+                        <Trans i18nKey="users.ReportStatus">
+                          Report Status
+                        </Trans>
                       </th>
                       <th className="px-2 text-white align-middle border-r  border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
-                        Posted Date
+                        <Trans i18nKey="users.PostedDate">Posted Date</Trans>
                       </th>
                     </tr>
                   </thead>
@@ -228,7 +267,9 @@ export default function UserDetail() {
                   })}
                 </table>
               ) : (
-                <p className="flex justify-center">No Report yet</p>
+                <p className="flex justify-center">
+                  <Trans i18nKey="users.NoReportyet">No Report yet</Trans>{" "}
+                </p>
               )}
             </div>
           </div>

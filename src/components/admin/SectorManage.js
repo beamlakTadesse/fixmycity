@@ -5,6 +5,7 @@ import Button from "@material-tailwind/react/Button";
 import Progress from "@material-tailwind/react/Progress";
 
 import React, { useEffect, useState } from "react";
+import { Trans } from "react-i18next";
 
 export default function SectorManage({ sectorsCount }) {
   const [showModal, setShowModal] = useState(false);
@@ -13,14 +14,19 @@ export default function SectorManage({ sectorsCount }) {
     <Card>
       <CardHeader color="brown" contentPosition="none">
         <div className="w-full flex items-center justify-between">
-          <h2 className="text-white text-2xl">Active Sectors Admin</h2>
+          <h2 className="text-white text-2xl">
+            <Trans i18nKey="sectorAdmin.ActiveSectorsAdmin">
+              {" "}
+              Active Sectors Admin
+            </Trans>
+          </h2>
           <Button
             color="transparent"
             buttonType="link"
             size="lg"
             style={{ padding: 0 }}
           >
-            See More
+            <Trans i18nKey="sectorAdmin.SeeMore">See More</Trans>
           </Button>
         </div>
       </CardHeader>
@@ -30,10 +36,10 @@ export default function SectorManage({ sectorsCount }) {
             <thead className="thead-light">
               <tr>
                 <th className="px-2 text-brown-500 align-middle border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
-                  Sector
+                  <Trans i18nKey="sidebar.sector">Sector</Trans>
                 </th>
                 <th className="px-2 text-brown-500 align-middle border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
-                  Visitors
+                  <Trans i18nKey="sectorAdmin.Visitors">Visitors</Trans>
                 </th>
                 <th className="px-2 text-brown-500 align-middle border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left w-56"></th>
               </tr>

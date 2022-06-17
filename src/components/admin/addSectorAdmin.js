@@ -11,6 +11,7 @@ import { sectorActions, userActions } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 import Table from "components/report/Table";
 import { url } from "helpers/strings";
+import { Trans } from "react-i18next";
 
 export default function AddSectorAdminForm() {
   const dispatch = useDispatch();
@@ -157,7 +158,9 @@ export default function AddSectorAdminForm() {
         <div className="flex flex-wrap mt-10">
           <div className="grid grid-rows-2 ">
             <div>
-              <lable className="font-light">Select Sector </lable>
+              <lable className="font-light">
+                <Trans i18nKey="adminDash.SelectSector"> Select Sector</Trans>{" "}
+              </lable>
               <select
                 value={sectorId}
                 onChange={(e) => {
@@ -177,7 +180,7 @@ export default function AddSectorAdminForm() {
                 data-cy="txt-createAdmin-email"
                 type="email"
                 color="brown"
-                placeholder="Email Address"
+                placeholder={<Trans i18nKey="profile.email">email</Trans>}
                 name="email"
                 value={email}
                 onChange={(e) => {
@@ -199,11 +202,13 @@ export default function AddSectorAdminForm() {
               data-cy="btn-createAdmin-submit"
               onClick={(e) => handleSubmit(e)}
             >
-              Submit
+              <Trans i18nKey="announcement.submit"> Submit</Trans>
             </Button>
           </div>
           <div className="row-span-3">
-            <Button color="brown">Cancel</Button>
+            <Button color="brown">
+              <Trans i18nKey="reportDetail.cancel"> Cancel</Trans>
+            </Button>
           </div>
         </div>
         {/* <Table columns={columns} data={sectors} /> */}

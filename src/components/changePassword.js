@@ -20,6 +20,7 @@ import { getRol } from "helpers/utils";
 import { url } from "helpers/strings";
 import { isEqual } from "lodash";
 import { ChangePassword } from "helpers/validation";
+import { Trans } from "react-i18next";
 
 export default function ChangePasswordCard() {
   const [conf_new_password, setConf] = useState();
@@ -92,13 +93,15 @@ export default function ChangePasswordCard() {
       <Card>
         <CardHeader color="brown">
           <h6 className="text-brown text-sm mt-9 mb-6 font-bold uppercase">
-            Change Password
+            <Trans i18nKey="profile.changePassword">Change Password</Trans>
           </h6>
         </CardHeader>
         <CardBody>
           <form>
             <div className="w-full lg:w-6/12 pl-4 mb-10 font-light">
-              <lable> </lable>
+              <lable>
+                <Trans i18nKey="profile.oldpassword">Old password</Trans>{" "}
+              </lable>
               <Input
                 type="text"
                 value={o_password}
@@ -106,11 +109,13 @@ export default function ChangePasswordCard() {
                 data-cy="input_old_password"
                 color="blue"
                 onChange={(e) => setOldPass(e.target.value)}
-                placeholder="old password"
+                placeholder={
+                  <Trans i18nKey="profile.oldpassword">Old password</Trans>
+                }
               />
             </div>
             <div className="w-full lg:w-6/12 pl-4 mb-10 font-light">
-              <lable>Last Name</lable>
+              <Trans i18nKey="profile.newpassword">new password</Trans>{" "}
               <Input
                 type="text"
                 value={n_password}
@@ -118,11 +123,13 @@ export default function ChangePasswordCard() {
                 data-cy="input_new_password"
                 color="blue"
                 onChange={(e) => setNewpassword(e.target.value)}
-                placeholder="new password"
+                placeholder={
+                  <Trans i18nKey="profile.newpassword">new password</Trans>
+                }
               />
             </div>
             <div className="w-full lg:w-6/12 pl-4 mb-10 font-light">
-              <lable>Last Name</lable>
+              <Trans i18nKey="profile.confirmpassword">confirm password</Trans>{" "}
               <Input
                 type="text"
                 value={conf_new_password}
@@ -130,13 +137,20 @@ export default function ChangePasswordCard() {
                 data-cy="input_conf_new_password"
                 color="blue"
                 onChange={(e) => setConf(e.target.value)}
-                placeholder="confirm password"
+                placeholder={
+                  <Trans i18nKey="profile.confirmpassword">
+                    confirm password
+                  </Trans>
+                }
               />
             </div>
           </form>
           {n_password != conf_new_password && (
             <p data-cy="missmatch-error" className="text-red-400">
-              Password missmatch
+              <Trans i18nKey="profile.passwordmissmatch">
+                {" "}
+                Password missmatch
+              </Trans>{" "}
             </p>
           )}
 
@@ -149,7 +163,7 @@ export default function ChangePasswordCard() {
               }}
               data-cy="btn-changePassword"
             >
-              Change Password
+              <Trans i18nKey="profile.changePassword">Change Password</Trans>
             </Button>
           </div>
         </CardBody>

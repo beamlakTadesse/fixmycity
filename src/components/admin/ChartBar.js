@@ -4,6 +4,7 @@ import Card from "@material-tailwind/react/Card";
 import CardHeader from "@material-tailwind/react/CardHeader";
 import CardBody from "@material-tailwind/react/CardBody";
 import { url } from "helpers/strings";
+import { Trans } from "react-i18next";
 
 export default function ChartBar({ medata }) {
   const [mydata, setData] = useState({});
@@ -111,7 +112,11 @@ export default function ChartBar({ medata }) {
           <h6 className="uppercase text-gray-200 text-xs font-medium">
             {/* {mydata.tele[1]} */}
           </h6>
-          <h2 className="text-white text-2xl">Number of Sectors' Branch</h2>
+          <h2 className="text-white text-2xl">
+            <Trans i18nKey="sectorAdmin.NumberofSectors'Branch">
+              Number of Sectors' Branch
+            </Trans>{" "}
+          </h2>
         </CardHeader>
         <CardBody>
           <div className="relative h-96">

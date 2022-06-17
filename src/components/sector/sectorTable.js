@@ -11,6 +11,7 @@ import Team4 from "assets/img/team-4-470x470.png";
 import { useDispatch, useSelector } from "react-redux";
 import { sectorActions } from "../../actions";
 import { url } from "helpers/strings";
+import { Trans } from "react-i18next";
 
 export default function SectorTable({ isEmpty }) {
   // const sectors = useSelector(state => state.sectors);
@@ -60,7 +61,9 @@ export default function SectorTable({ isEmpty }) {
   ) : (
     <Card>
       <CardHeader color="brown" contentPosition="left">
-        <h2 className="text-white text-2xl">Sectors</h2>
+        <h2 className="text-white text-2xl">
+          <Trans i18nKey="sector.Sectors">Sectors</Trans>{" "}
+        </h2>
       </CardHeader>
       <CardBody>
         {sectors.length > 0 ? (
@@ -69,16 +72,18 @@ export default function SectorTable({ isEmpty }) {
               <thead>
                 <tr>
                   <th className="px-2 text-brown-500 align-middle border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
-                    District Name
+                    <Trans i18nKey="announcement.districtName">
+                      District Name
+                    </Trans>
                   </th>
                   <th className="px-2 text-brown-500 align-middle border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
-                    Email
+                    <Trans i18nKey="profile.email"> Email</Trans>
                   </th>
                   <th className="px-2 text-brown-500 align-middle border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
-                    Phone
+                    <Trans i18nKey="profile.phone"> Phone</Trans>
                   </th>
                   <th className="px-2 text-brown-500 align-middle border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
-                    District Type
+                    <Trans i18nKey="profile.phone"> District Type</Trans>
                   </th>
                 </tr>
               </thead>
@@ -112,7 +117,11 @@ export default function SectorTable({ isEmpty }) {
           <div>
             <div class="flex justify-center items-center mt-10">
               {/* <Loader/>    */}
-              <h3>No Data to Display</h3>
+              <h3>
+                <Trans i18nKey="sector.NoDatatoDisplay">
+                  No Data to Display
+                </Trans>{" "}
+              </h3>
             </div>
           </div>
         )}

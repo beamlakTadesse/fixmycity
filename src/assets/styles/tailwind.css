@@ -1565,10 +1565,6 @@ video {
 	--tw-text-opacity: 1;
 	color: rgba(30, 64, 175, var(--tw-text-opacity));
 }
-.text-indigo-600{
-	--tw-text-opacity: 1;
-	color: rgba(79, 70, 229, var(--tw-text-opacity));
-}
 .underline{
 	text-decoration: underline;
 }

@@ -7,12 +7,15 @@ import Team1 from "assets/img/team-1-800x800.jpg";
 import Team2 from "assets/img/team-2-800x800.jpg";
 import Team3 from "assets/img/team-3-800x800.jpg";
 import Team4 from "assets/img/team-4-470x470.png";
+import { Trans } from "react-i18next";
 
 export default function CardTable({ sectors }) {
   return (
     <Card>
       <CardHeader color="brown" contentPosition="left">
-        <h2 className="text-white text-2xl">Sector Admin</h2>
+        <h2 className="text-white text-2xl">
+          <Trans i18nKey="sectorDashboard.SectorAdmin"> Sector Admin</Trans>
+        </h2>
       </CardHeader>
       <CardBody>
         {sectors && (
@@ -21,19 +24,22 @@ export default function CardTable({ sectors }) {
               <thead>
                 <tr>
                   <th className="px-2 text-brown align-middle border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
-                    Branch Name
+                    <Trans i18nKey="sectorDashboard.BranchName">
+                      {" "}
+                      Branch Name
+                    </Trans>
                   </th>
                   <th className="px-2 text-brown align-middle border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
-                    Companies Email
+                    <Trans i18nKey="profile.email"> Email</Trans>
                   </th>
                   <th className="px-2 text-brown align-middle border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
-                    PhoneNumber
+                    <Trans i18nKey="profile.phone"> Phone</Trans>
                   </th>
                   {/* <th className="px-2 text-purple-500 align-middle border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
                                     user profile
                                 </th> */}
                   <th className="px-2 text-brown align-middle border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
-                    Location
+                    <Trans i18nKey="reportDetail.location"> Location</Trans>
                   </th>
                 </tr>
               </thead>

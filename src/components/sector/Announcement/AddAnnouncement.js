@@ -15,6 +15,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useDispatch, useSelector } from "react-redux";
 import userDetailContext from "../../../pages/SectorAdmin/Announcement";
 import { url } from "helpers/strings";
+import { Trans } from "react-i18next";
 export default function AddAnnouncement({ isActive, setIsActive }) {
   const [showModal, setShowModal] = useState(false);
 
@@ -127,20 +128,27 @@ export default function AddAnnouncement({ isActive, setIsActive }) {
         <Card>
           <CardHeader color="brown" contentPosition="none">
             <div className="w-full flex items-center justify-between">
-              <h2 className="text-white text-2xl">Post Announcement</h2>
+              <h2 className="text-white text-2xl">
+                <Trans i18nKey="announcement.postAnnouncement">
+                  {" "}
+                  Post Announcement
+                </Trans>
+              </h2>
             </div>
           </CardHeader>
           <CardBody>
             <form encType="multipart/form-data">
               <h6 className="text-brwno-500 text-sm mt-1 mb-6 font-light uppercase">
-                Title
+                <Trans i18nKey="announcement.title">Title</Trans>
               </h6>
               <div className="flex flex-wrap mt-4">
                 <div className="w-full lg:w-full pr-4 mb-8 font-light">
                   <Input
                     type="text"
                     color="brown"
-                    placeholder="District Name"
+                    placeholder={
+                      <Trans i18nKey="announcement.title">Title</Trans>
+                    }
                     name="districtName"
                     value={values.title}
                     onChange={handleTitleInputChange}
@@ -194,7 +202,11 @@ export default function AddAnnouncement({ isActive, setIsActive }) {
                     rows="3"
                     value={values.description}
                     onChange={handleDescriptionInputChange}
-                    placeholder="Description"
+                    placeholder={
+                      <Trans i18nKey="announcement.description">
+                        Description
+                      </Trans>
+                    }
                     data-cy="txt-postann-description"
                   ></textarea>
 
@@ -226,11 +238,13 @@ export default function AddAnnouncement({ isActive, setIsActive }) {
                     onClick={(e) => handleSubmit(e)}
                     data-cy="btn-postann-submit"
                   >
-                    Submit
+                    <Trans i18nKey="announcement.submit">Submit</Trans>
                   </Button>
                 </div>
                 <div className="row-span-3">
-                  <Button color="brown">Cancel</Button>
+                  <Button color="brown">
+                    <Trans i18nKey="reportDetail.cancel">Cancel</Trans>{" "}
+                  </Button>
                 </div>
               </div>
             </form>

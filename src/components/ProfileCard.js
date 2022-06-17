@@ -6,7 +6,7 @@ import Button from "@material-tailwind/react/Button";
 
 import Input from "@material-tailwind/react/Input";
 import Textarea from "@material-tailwind/react/Textarea";
-import ProfilePicture from "assets/img/team-1-800x800.jpg";
+import ProfilePicture from "assets/img/profile.jpg";
 import React, {
   useState,
   useEffect,
@@ -18,6 +18,7 @@ import { getUserId } from "helpers/utils";
 import { getRol } from "helpers/utils";
 import { url } from "helpers/strings";
 import { isEqual } from "lodash";
+import { Trans } from "react-i18next";
 export default function ProfileCard({ editProfile, setEditProfile }) {
   const [users, setUsers] = useState({});
   const token = localStorage.getItem("token");
@@ -70,7 +71,11 @@ export default function ProfileCard({ editProfile, setEditProfile }) {
         <Card>
           <div className="flex flex-wrap justify-center">
             <div className="w-48 px-4 -mt-24">
-              <Image src={image} rounded raised />
+              {users.ProfileImage ? (
+                <Image src={image} rounded />
+              ) : (
+                <Image src={ProfilePicture} rounded />
+              )}
             </div>
           </div>
 
@@ -80,13 +85,17 @@ export default function ProfileCard({ editProfile, setEditProfile }) {
                 data-cy="profile-info"
                 className="text-brown text-sm mt-9 mb-6 font-bold uppercase"
               >
-                personal Information
+                <Trans i18nKey="profile.personalInformation">
+                  personal Information
+                </Trans>
               </h6>
 
               <div className="flex flex-wrap text-xs mt-10">
                 {users.first_name && users.last_name && (
                   <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">
-                    <h1>Full name </h1>
+                    <h1>
+                      <Trans i18nKey="profile.fullname">Full name</Trans>
+                    </h1>
                     <h1>
                       {users.first_name} {users.last_name}
                     </h1>
@@ -94,50 +103,77 @@ export default function ProfileCard({ editProfile, setEditProfile }) {
                 )}
                 {users.username && (
                   <div className="w-full lg:w-6/12 pl-4 mb-10 font-light">
-                    <h1>Username : </h1>
+                    <h1>
+                      <Trans i18nKey="profile.username"> Username</Trans>:{" "}
+                    </h1>
                     <h1>{users.username}</h1>
                   </div>
                 )}
                 {users.email && (
                   <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">
-                    <h1>Email : </h1>
+                    <h1>
+                      <Trans i18nKey="profile.email"> Email</Trans>:{" "}
+                    </h1>
                     <h1>{users.email}</h1>
                   </div>
                 )}
                 {users.location && (
                   <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">
-                    <h1>Location :</h1>
-                    <h1> Addis Ababa / Ethiopia</h1>
+                    <h1>
+                      <Trans i18nKey="reportDetail.location">Location</Trans> :
+                    </h1>
+                    <h1>
+                      <Trans i18nKey="reportDetail.addis"> Addis Ababa</Trans> /
+                      <Trans i18nKey="profile.ethiopia">Ethiopia</Trans>{" "}
+                    </h1>
                   </div>
                 )}
                 <div className="w-full lg:w-6/12 pl-4 mb-10 font-light">
-                  <h1>Phone No. : </h1>
+                  <Trans i18nKey="profile.ethiopia">Ethiopia</Trans>{" "}
+                  <h1>
+                    <Trans i18nKey="profile.phone">Phone No.</Trans> :{" "}
+                  </h1>
                   <h1>{users.phone_number}</h1>
                 </div>
               </div>
               {getRol(token) == 2 && users && users.sector && (
                 <>
                   <h6 className="text-brown text-sm my-6 font-bold uppercase">
-                    Sector Information
+                    <Trans i18nKey="profile.sectorInformation">
+                      Sector Information
+                    </Trans>
                   </h6>
                   <div className="flex flex-wrap text-xs mt-10">
                     <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">
-                      <h1>Sector : {users.sector.district_name}</h1>
+                      <h1>
+                        <Trans i18nKey="sidebar.sector">Sector</Trans> :{" "}
+                        {users.sector.district_name}
+                      </h1>
                     </div>
                     <div className="w-full lg:w-6/12 pl-4 mb-10 font-light">
                       <h1>
-                        Location : {users.sector.address}, Addis Ababa /
-                        Ethiopia
+                        <Trans i18nKey="reportDetail.location">Location</Trans>{" "}
+                        : {users.sector.address},
+                        <Trans i18nKey="reportDetail.addis"> Addis Ababa</Trans>{" "}
+                        /<Trans i18nKey="profile.ethiopia">Ethiopia</Trans>{" "}
                       </h1>
 
                       {/* <h1></h1> */}
                     </div>
                     <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">
-                      <h1>Email : {users.sector.email} </h1>
+                      <h1>
+                        {" "}
+                        <Trans i18nKey="profile.email"> Email</Trans>:{" "}
+                        {users.sector.email}{" "}
+                      </h1>
                       {/* <h1> Elpa@gmail.com</h1> */}
                     </div>
                     <div className="w-full lg:w-6/12 pl-4 mb-10 font-light">
-                      <h1>Phone No. : {users.sector.phone_number} </h1>
+                      <h1>
+                        {" "}
+                        <Trans i18nKey="profile.phone">Phone No.</Trans> : :{" "}
+                        {users.sector.phone_number}{" "}
+                      </h1>
                       {/* <h1> </h1> */}
                     </div>
                   </div>
@@ -160,7 +196,7 @@ export default function ProfileCard({ editProfile, setEditProfile }) {
                     EditProfile();
                   }}
                 >
-                  Edit Profile
+                  <Trans i18nKey="profile.editProfile">Edit Profile</Trans>
                 </Button>
               </div>
             )}

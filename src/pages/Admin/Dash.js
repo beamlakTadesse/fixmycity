@@ -13,6 +13,7 @@ import Sidebar from "components/Sidebar";
 import Footer from "components/Footer";
 import { getRol } from "helpers/utils";
 import { url } from "helpers/strings";
+import { Trans } from "react-i18next";
 
 export default function Dashboard() {
   const mounted = useRef(false);
@@ -92,17 +93,25 @@ export default function Dashboard() {
           </div>
           {!data.length > 0 && !data2.length > 0 && !sectors.length > 0 ? (
             <div className="flex justify-center items-center h-screen">
-              <h2>No Record Found!!!!!!</h2>
-              <Button
-                data-cy="btn-dash-addSectorAdmin"
-                size="lg"
-                color="brown"
-                className=" mt-2.5 ml-20.5"
-                style={{ padding: 0 }}
-                onClick={(e) => setShowModal(true)}
-              >
-                Add Sector Admin
-              </Button>
+              <h2>
+                <Trans i18nKey="sector.NoDatatoDisplay">
+                  No Record Found!!!!!!{" "}
+                </Trans>{" "}
+              </h2>
+              <div className="flex justify-center items-center">
+                <Button
+                  data-cy="btn-dash-addSectorAdmin"
+                  size="lg"
+                  color="brown"
+                  className=" mt-2.5 ml-20.5"
+                  style={{ padding: 0 }}
+                  onClick={(e) => setShowModal(true)}
+                >
+                  <Trans i18nKey="adminDash.AddSectorAdmin">
+                    Add Sector Admin
+                  </Trans>
+                </Button>
+              </div>
             </div>
           ) : (
             <div className="px-3 md:px-8 -mt-110">
