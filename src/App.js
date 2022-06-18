@@ -13,6 +13,7 @@ import Maps from "pages/Maps";
 import Footer from "components/Footer";
 import User from "pages/userList";
 import Report from "pages/report";
+import Contact from "pages/contactUs";
 
 import "assets/styles/tailwind.css";
 import AdminSector from "pages/Admin/Sector";
@@ -101,6 +102,8 @@ function App() {
             element={<MapSingle id={1} location={locations} />}
           />
           <Route exact path="/register/" element={<Register />} />
+          <Route exact path="/contact/" element={<Contact />} />
+
           <Route exact path="*" element={<LogIn />} />
           {/* <Footer /> */}
         </Routes>

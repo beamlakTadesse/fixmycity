@@ -58,9 +58,7 @@ export default function Announcement() {
     fetchData();
   }, []);
 
-  return isError ? (
-    <ErrorPage2 />
-  ) : (
+  return (
     <>
       <>
         <Sidebar />

@@ -68,7 +68,9 @@
     "newpassword": "አዲስ የይለፍ ቃል",
     "confirmpassword": "የይለፍ ቃል አረጋግጥ",
     "help": "እገዛ",
-    "logout": "ውጣ"
+    "logout": "ውጣ",
+    "Message": "መልእክት",
+    "send": "ላከው"
   },
   "announcement": {
     "postAnnouncement": "ፖስት ማስታወቂያ",

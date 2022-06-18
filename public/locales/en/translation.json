@@ -67,7 +67,9 @@
     "newpassword": "new password",
     "confirmpassword": "confirm password",
     "help": "Help",
-    "logout": "Logout"
+    "logout": "Logout",
+    "Message": "Message",
+    "send": "Send"
   },
   "announcement": {
     "postAnnouncement": "Post Announcement",
