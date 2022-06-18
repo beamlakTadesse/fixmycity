@@ -1,20 +1,17 @@
-
 // import DefaultFooter from '../components/DefaultFooter';
 // import DefaultNavbar from '../components/DefaultNavbar';
 
 // import SectorsSection from '../../components/sector/sectorsList';
 import SectorsSection from "components/sector/sectorsList";
-export default function Sector() {
-    return (
-        <>
-            <div className="absolute w-full z-20">
-                {/* <DefaultNavbar /> */}
-            </div>
-            <main>
-                <SectorsSection />
-            </main>
-            {/* <DefaultFooter /> */}
-        </>
-    );
-}
+import Sidebar from "../../components/Sidebar";
+import Footer from "../../components/Footer";
 
+export default function AdminSector() {
+  return (
+    <>
+      <Sidebar />
+
+      <SectorsSection />
+    </>
+  );
+}

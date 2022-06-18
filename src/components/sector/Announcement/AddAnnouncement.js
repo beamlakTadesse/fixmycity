@@ -1,90 +1,187 @@
-import React, {useState} from 'react';
-import { Button } from '@material-tailwind/react';
+import React, { useState } from "react";
+import { Button } from "@material-tailwind/react";
 import Modal from "@material-tailwind/react/Modal";
 import ModalHeader from "@material-tailwind/react/ModalHeader";
 import ModalBody from "@material-tailwind/react/ModalBody";
+import { Heading5, ModalFooter } from "@material-tailwind/react";
 
-import AddSectorForm from '../addSectorForm';
-import AnnouncementCard from './mycard';
+import ModalTitle from "@material-tailwind/react/ModalHeader";
 
-
-import Card from '@material-tailwind/react/Card';
-import CardHeader from '@material-tailwind/react/CardHeader';
-import CardBody from '@material-tailwind/react/CardBody';
-import Input from '@material-tailwind/react/Input';
-import Textarea from '@material-tailwind/react/Textarea';
-import DatePicker from "react-datepicker";
+import Card from "@material-tailwind/react/Card";
+import CardHeader from "@material-tailwind/react/CardHeader";
+import CardBody from "@material-tailwind/react/CardBody";
+import Input from "@material-tailwind/react/Input";
 import "react-datepicker/dist/react-datepicker.css";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
+import userDetailContext from "../../../pages/SectorAdmin/Announcement";
+import { url } from "helpers/strings";
+import { Trans } from "react-i18next";
+export default function AddAnnouncement({ isActive, setIsActive }) {
+  const [showModal, setShowModal] = useState(false);
 
-export default function AddAnnouncement() {
+  const [submitted, setSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setError] = useState(false);
+  // const [isError, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(false);
+  const [statusCode, setStatus] = useState(null);
 
-  
-      const dispatch = useDispatch();
-      function componentDidMount() {
-          navigator.geolocation.getCurrentPosition(function (position) {
-              console.log("Latitude is :", position.coords.latitude);
-              console.log("Longitude is :", position.coords.longitude);
+  const [values, setValues] = useState({
+    title: "",
+    description: "",
+  });
+  const handleTitleInputChange = (event) => {
+    event.persist();
+    setValues((values) => ({
+      ...values,
+      title: event.target.value,
+    }));
+  };
+
+  const handleDescriptionInputChange = (event) => {
+    event.persist();
+    setValues((values) => ({
+      ...values,
+      description: event.target.value,
+    }));
+  };
+
+  //   componentDidMount() {
+
+  // }
+  const [selectedFile, setSelectedFile] = useState();
+  const [isSelected, setIsFilePicked] = useState(false);
+
+  const changeHandler = (event) => {
+    setSelectedFile(event.target.files[0]);
+    setIsFilePicked(true);
+  };
+
+  const dispatch = useDispatch();
+
+  const [mydata, setData] = useState(null);
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    const url1 = `${url}/v1/announcment/`;
+    setSubmitted(true);
+
+    try {
+      // const response = await fetch(url);
+
+      if (values.title && values.description && isSelected) {
+        console.log("hello form is submmitted");
+
+        const formData = new FormData();
+
+        // formData.append("image", selectedFile);
+        formData.append("title", values.title);
+        formData.append("description", values.description);
+        const requestOptions = {
+          method: "POST",
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+
+          body: formData,
+          // body:JSON.stringify({'title':values.title,'description':values.description,"image":currentPic})
+        };
+        console.log(requestOptions);
+        // console.log(formData.get("title"));
+        // console.log(formData.get("description"));
+
+        await fetch(url1, requestOptions)
+          .then((response) => {
+            if (!response.ok) {
+              setStatus(response.status);
+              setShowModal(true);
+
+              throw new Error(response.status);
+            } else {
+              alert("Poseted succesfully!");
+              console.log(response.json);
+            }
+          })
+          .then((data) => {
+            setData(data);
+            // this.setState({ isLoading: false, downlines: data.response });
+            console.log("DATA STORED");
+            setShowModal(false);
+            setIsActive(false);
+          })
+          .catch((error) => {
+            console.log("error: " + error);
+            setErrorMessage("Please try Again");
+            setError(true);
           });
       }
-  
-      const [inputs, setInputs] = useState({
-          title: '',
-          description: '',
-          // detaile: '',
-  
-      });
-      const [submitted, setSubmitted] = useState(false);
-      const { title, description } = inputs;
-      function handleChange(e) {
-          const { name, value } = e.target;
-          setInputs(inputs => ({ ...inputs, [name]: value }));
-      }
-  
-      function handleSubmit(e) {
-          e.preventDefault();
-  
-          setSubmitted(true);
-          if (title && description) {
-              console.log('hello form is submmitted')
-              // dispatch(sectorActions.create(inputs));
-              // dispatch(sectorActions.getAll());
-          }
-      }
-  
-  
-  
-      const [startDate, setStartDate] = useState(new Date());
-      return (
-          <Card>
-              <CardHeader color="blue" contentPosition="none">
-                  <div className="w-full flex items-center justify-between">
-                      <h2 className="text-white text-2xl">Post Announcement</h2>
-  
-                  </div>
-              </CardHeader>
-              <CardBody>
-                  <form>
-                      <h6 className="text-purple-500 text-sm mt-3 mb-6 font-light uppercase">
-                          Title
-                      </h6>
-                      <div className="flex flex-wrap mt-10">
-                          <div className="w-full lg:w-full pr-4 mb-10 font-light">
-                              <Input
-                                  type="text"
-                                  color="purple"
-                                  placeholder="District Name"
-                                  name="districtName" 
-                                  // value={title} onChange={handleChange}
-                              />
-                              {submitted && !title &&
-                                  <div className="mt-2 text-sm text-red-600">Announcement title is required</div>
-                              }
-                          </div>
-                          <div className="w-full lg:w-full mb-10 font-light">
-                           
-                        <textarea
-                          class="
+    } catch (error) {
+      console.log("error", error);
+    }
+
+    //   setSubmitted(true);
+  }
+
+  return (
+    <Modal size="lg" active={isActive} toggler={() => setIsActive(false)}>
+      <ModalBody>
+        <Card>
+          <CardHeader color="brown" contentPosition="none">
+            <div className="w-full flex items-center justify-between">
+              <h2 className="text-white text-2xl">
+                <Trans i18nKey="announcement.postAnnouncement">
+                  {" "}
+                  Post Announcement
+                </Trans>
+              </h2>
+            </div>
+          </CardHeader>
+          <CardBody>
+            <form encType="multipart/form-data">
+              <h6 className="text-brwno-500 text-sm mt-1 mb-6 font-light uppercase">
+                <Trans i18nKey="announcement.title">Title</Trans>
+              </h6>
+              <div className="flex flex-wrap mt-4">
+                <div className="w-full lg:w-full pr-4 mb-8 font-light">
+                  <Input
+                    type="text"
+                    color="brown"
+                    placeholder={
+                      <Trans i18nKey="announcement.title">Title</Trans>
+                    }
+                    name="districtName"
+                    value={values.title}
+                    onChange={handleTitleInputChange}
+                    data-cy="txt-postann-title"
+                  />
+                  {submitted && !values.title && (
+                    <div className="mt-2 text-sm text-red-600">
+                      Announcement title is required
+                    </div>
+                  )}
+                </div>
+
+                {/* <Modal size="lg" active={showModal} toggler={() => setShowModal(false)}>
+                                                <ModalTitle>
+                                                    <Heading5>
+                                                      Success Message
+                                                    </Heading5>
+                                                </ModalTitle>
+                                                <ModalBody>
+                                                    <p>
+                                                         You have Successfully created announcement!                                                 </p>
+                                                </ModalBody>
+                                                <ModalFooter>
+                                                    <Button onClick={() => setError(true)}
+                                                    >Ok</Button>
+                                                   
+                                                </ModalFooter>
+
+                                            </Modal> */}
+
+                <div className="w-full lg:w-full mb-5 font-light">
+                  <textarea
+                    className="
                             form-control
                             block
                             w-full
@@ -101,69 +198,59 @@ export default function AddAnnouncement() {
                             m-0
                             focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
                           "
-                          id="announcement_description"
-                          rows="3"
-                          // value={description} onChange={handleChange}
-                          placeholder="Description"
-                        ></textarea>
+                    id="announcement_description"
+                    rows="3"
+                    value={values.description}
+                    onChange={handleDescriptionInputChange}
+                    placeholder={
+                      <Trans i18nKey="announcement.description">
+                        Description
+                      </Trans>
+                    }
+                    data-cy="txt-postann-description"
+                  ></textarea>
 
-                                {submitted && !description &&
-                                  <div className="mt-2 text-sm text-red-600">description is required</div>
-                              }
-                          </div>
-                        
-                          
-                      </div>
+                  {submitted && !values.description && (
+                    <div className="mt-2 text-sm text-red-600">
+                      description is required
+                    </div>
+                  )}
+                </div>
+              </div>
 
-
-
-                      <div class="flex justify-center mt-8">
-                      <div class="rounded-lg shadow-xl bg-gray-50 lg:w-1/2">
-                          <div class="m-4">
-                              <label class="inline-block mb-2 text-gray-500">Upload
-                                  Image(jpg,png,svg,jpeg)</label>
-                              <div class="flex items-center justify-center w-full">
-                                  <label class="flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
-                                      <div class="flex flex-col items-center justify-center pt-7">
-                                          <svg xmlns="http://www.w3.org/2000/svg"
-                                              class="w-12 h-12 text-gray-400 group-hover:text-gray-600" viewBox="0 0 20 20"
-                                              fill="currentColor">
-                                              <path fill-rule="evenodd"
-                                                  d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
-                                                  clip-rule="evenodd" />
-                                          </svg>
-                                          <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
-                                              Select a photo</p>
-                                      </div>
-                                      <input type="file" class="opacity-0" />
-                                  </label>
-                              </div>
-                          </div>
-                          {/* <div class="flex p-2 space-x-4">
-                              <button class="px-4 py-2 text-white bg-red-500 rounded shadow-xl">Cannel</button>
-                              <button class="px-4 py-2 text-white bg-green-500 rounded shadow-xl">Create</button>
-                          </div> */}
-                      </div>
-                  </div>
-
-
-                  <div className="grid grid-rows-3 grid-flow-col gap-1 mt-4">
-                          <div className="row-span-3">
-                              <Button onClick={(e) => handleSubmit(e)}>
-                                  Submit
-                              </Button>
-                          </div>
-                          <div className="row-span-3">
-  
-                              <Button >
-                                  Cancel
-                              </Button>
-                          </div>
-                      </div>
-                  </form>
-              </CardBody>
-          </Card>
-        
-      );
-  }
-  
+              <div>
+                <input
+                  type="file"
+                  name="file"
+                  onChange={changeHandler}
+                  data-cy="btn-postann-image"
+                />
+              </div>
+              {submitted && !isSelected && (
+                <div className="mt-2 text-sm text-red-600">
+                  image is required
+                </div>
+              )}
+              <div className="grid grid-rows-3 grid-flow-col gap-1 mt-4">
+                <div className="row-span-3">
+                  <Button
+                    color="brown"
+                    onClick={(e) => handleSubmit(e)}
+                    data-cy="btn-postann-submit"
+                  >
+                    <Trans i18nKey="announcement.submit">Submit</Trans>
+                  </Button>
+                </div>
+                <div className="row-span-3">
+                  <Button color="brown">
+                    <Trans i18nKey="reportDetail.cancel">Cancel</Trans>{" "}
+                  </Button>
+                </div>
+              </div>
+            </form>
+          </CardBody>
+        </Card>
+      </ModalBody>
+    </Modal>
+  );
+}

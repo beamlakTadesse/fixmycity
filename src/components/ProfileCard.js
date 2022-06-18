@@ -1,80 +1,208 @@
-import Card from '@material-tailwind/react/Card';
-import CardBody from '@material-tailwind/react/CardBody';
-import CardFooter from '@material-tailwind/react/CardFooter';
-import Image from '@material-tailwind/react/Image';
-import H5 from '@material-tailwind/react/Heading5';
-import Icon from '@material-tailwind/react/Icon';
-import LeadText from '@material-tailwind/react/LeadText';
-import Button from '@material-tailwind/react/Button';
-import ProfilePicture from 'assets/img/team-1-800x800.jpg';
+import Card from "@material-tailwind/react/Card";
+import Image from "@material-tailwind/react/Image";
+import CardHeader from "@material-tailwind/react/CardHeader";
+import CardBody from "@material-tailwind/react/CardBody";
+import Button from "@material-tailwind/react/Button";
 
-export default function ProfileCard() {
-    return (
+import Input from "@material-tailwind/react/Input";
+import Textarea from "@material-tailwind/react/Textarea";
+import ProfilePicture from "assets/img/profile.jpg";
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+  useMemo,
+} from "react";
+import { getUserId } from "helpers/utils";
+import { getRol } from "helpers/utils";
+import { url } from "helpers/strings";
+import { isEqual } from "lodash";
+import { Trans } from "react-i18next";
+export default function ProfileCard({ editProfile, setEditProfile }) {
+  const [users, setUsers] = useState({});
+  const token = localStorage.getItem("token");
+  const [image, setImage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setError] = useState(false);
+  console.log(token);
+  const userId = getUserId(token);
+  const url1 = `${url}/v1/admins/users/` + 6;
+  const fetchData = async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetch(url1);
+
+      const json = await response.json();
+
+      if (json) {
+        //  setU(json.user)
+        // if(!isEqual(users,u)){
+        setUsers(json.user);
+        setImage(
+          `http://res.cloudinary.com/shetechs/${json.user.ProfileImage}`
+        );
+        // }
+      }
+    } catch (error) {
+      console.log("error", error);
+      setError(true);
+    }
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+    console.log("wert7687oilkcgxfdtrytuyiu");
+  };
+
+  const loadUserFromServer = useCallback(async () => {
+    fetchData();
+  }, []); //
+
+  useEffect(() => {
+    loadUserFromServer();
+  }, []);
+
+  function EditProfile() {
+    setEditProfile(!editProfile);
+  }
+  return (
+    <>
+      {users && (
         <Card>
-            <div className="flex flex-wrap justify-center">
-                <div className="w-48 px-4 -mt-24">
-                    <Image src={ProfilePicture} rounded raised />
-                </div>
-                <div className="w-full flex justify-center py-4 lg:pt-4 pt-8">
-                    <div className="p-4 text-center">
-                        <span className="text-xl font-medium block uppercase tracking-wide text-gray-900">
-                            22
-                        </span>
-                        <span className="text-sm text-gray-700">Friends</span>
-                    </div>
-                    <div className="p-4 text-center">
-                        <span className="text-xl font-medium block uppercase tracking-wide text-gray-900">
-                            89
-                        </span>
-                        <span className="text-sm text-gray-700">Comments</span>
-                    </div>
-                    <div className="p-4 text-center">
-                        <span className="text-xl font-medium block uppercase tracking-wide text-gray-900">
-                            10
-                        </span>
-                        <span className="text-sm text-gray-700">Photos</span>
-                    </div>
-                </div>
+          <div className="flex flex-wrap justify-center">
+            <div className="w-48 px-4 -mt-24">
+              {users.ProfileImage ? (
+                <Image src={image} rounded />
+              ) : (
+                <Image src={ProfilePicture} rounded />
+              )}
             </div>
-            <div className="text-center">
-                <H5 color="gray">John Smith</H5>
-                <div className="mt-0 mb-2 text-gray-700 flex items-center justify-center gap-2">
-                    <Icon name="place" size="xl" />
-                    Los Angeles, California
+          </div>
+
+          <CardBody>
+            <form>
+              <h6
+                data-cy="profile-info"
+                className="text-brown text-sm mt-9 mb-6 font-bold uppercase"
+              >
+                <Trans i18nKey="profile.personalInformation">
+                  personal Information
+                </Trans>
+              </h6>
+
+              <div className="flex flex-wrap text-xs mt-10">
+                {users.first_name && users.last_name && (
+                  <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">
+                    <h1>
+                      <Trans i18nKey="profile.fullname">Full name</Trans>
+                    </h1>
+                    <h1>
+                      {users.first_name} {users.last_name}
+                    </h1>
+                  </div>
+                )}
+                {users.username && (
+                  <div className="w-full lg:w-6/12 pl-4 mb-10 font-light">
+                    <h1>
+                      <Trans i18nKey="profile.username"> Username</Trans>:{" "}
+                    </h1>
+                    <h1>{users.username}</h1>
+                  </div>
+                )}
+                {users.email && (
+                  <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">
+                    <h1>
+                      <Trans i18nKey="profile.email"> Email</Trans>:{" "}
+                    </h1>
+                    <h1>{users.email}</h1>
+                  </div>
+                )}
+                {users.location && (
+                  <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">
+                    <h1>
+                      <Trans i18nKey="reportDetail.location">Location</Trans> :
+                    </h1>
+                    <h1>
+                      <Trans i18nKey="reportDetail.addis"> Addis Ababa</Trans> /
+                      <Trans i18nKey="profile.ethiopia">Ethiopia</Trans>{" "}
+                    </h1>
+                  </div>
+                )}
+                <div className="w-full lg:w-6/12 pl-4 mb-10 font-light">
+                  <Trans i18nKey="profile.ethiopia">Ethiopia</Trans>{" "}
+                  <h1>
+                    <Trans i18nKey="profile.phone">Phone No.</Trans> :{" "}
+                  </h1>
+                  <h1>{users.phone_number}</h1>
                 </div>
-                <div className="mb-2 text-gray-700 mt-10 flex items-center justify-center gap-2">
-                    <Icon name="work" size="xl" />
-                    Solution Manager - Creative Tim Officer
-                </div>
-                <div className="mb-2 text-gray-700 flex items-center justify-center gap-2">
-                    <Icon name="account_balance" size="xl" />
-                    University of Computer Science
-                </div>
-            </div>
-            <CardBody>
-                <div className="border-t border-lightBlue-200 text-center px-2 ">
-                    <LeadText color="blueGray">
-                        An artist of considerable range, Jenna the name taken by
-                        Melbourne-raised, Brooklyn-based Nick Murphy writes,
-                        performs and records all of his own music, giving it a
-                        warm, intimate feel with a solid groove structure. An
-                        artist of considerable range.
-                    </LeadText>
-                </div>
-            </CardBody>
-            <CardFooter>
-                <div className="w-full flex justify-center -mt-8">
-                    <a
-                        href="#pablo"
-                        className="mt-5"
-                        onClick={(e) => e.preventDefault()}
-                    >
-                        <Button color="purple" buttonType="link" ripple="dark">
-                            Show more
-                        </Button>
-                    </a>
-                </div>
-            </CardFooter>
+              </div>
+              {getRol(token) == 2 && users && users.sector && (
+                <>
+                  <h6 className="text-brown text-sm my-6 font-bold uppercase">
+                    <Trans i18nKey="profile.sectorInformation">
+                      Sector Information
+                    </Trans>
+                  </h6>
+                  <div className="flex flex-wrap text-xs mt-10">
+                    <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">
+                      <h1>
+                        <Trans i18nKey="sidebar.sector">Sector</Trans> :{" "}
+                        {users.sector.district_name}
+                      </h1>
+                    </div>
+                    <div className="w-full lg:w-6/12 pl-4 mb-10 font-light">
+                      <h1>
+                        <Trans i18nKey="reportDetail.location">Location</Trans>{" "}
+                        : {users.sector.address},
+                        <Trans i18nKey="reportDetail.addis"> Addis Ababa</Trans>{" "}
+                        /<Trans i18nKey="profile.ethiopia">Ethiopia</Trans>{" "}
+                      </h1>
+
+                      {/* <h1></h1> */}
+                    </div>
+                    <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">
+                      <h1>
+                        {" "}
+                        <Trans i18nKey="profile.email"> Email</Trans>:{" "}
+                        {users.sector.email}{" "}
+                      </h1>
+                      {/* <h1> Elpa@gmail.com</h1> */}
+                    </div>
+                    <div className="w-full lg:w-6/12 pl-4 mb-10 font-light">
+                      <h1>
+                        {" "}
+                        <Trans i18nKey="profile.phone">Phone No.</Trans> : :{" "}
+                        {users.sector.phone_number}{" "}
+                      </h1>
+                      {/* <h1> </h1> */}
+                    </div>
+                  </div>
+                </>
+              )}
+              {/* <h6 className="text-purple-500 text-sm my-6 font-light uppercase">
+                        About Me
+                    </h6> */}
+              {/* <div className="flex flex-wrap mt-10 font-light">
+                        <Textarea color="purple" placeholder="About Me" />
+                    </div> */}
+            </form>
+            {!editProfile && (
+              <div className="grid grid-cols-1 xl:grid-cols-6">
+                <Button
+                  className="xl:col-start-3 xl:col-end-6 px-4 mb-10"
+                  data-cy="btn-editProfile"
+                  color="brown"
+                  onClick={() => {
+                    EditProfile();
+                  }}
+                >
+                  <Trans i18nKey="profile.editProfile">Edit Profile</Trans>
+                </Button>
+              </div>
+            )}
+          </CardBody>
         </Card>
-    );
+      )}
+    </>
+  );
 }

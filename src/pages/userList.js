@@ -1,16 +1,15 @@
-import UserTable from '../components/user/userTable'
-
+import UserTable from "../components/user/userTable";
+import Sidebar from "../components/Sidebar";
+import Footer from "../components/Footer";
 export default function User() {
-    return (
-        <>
-            <div className="absolute w-full z-20">
-
-            </div>
-            <main>
-                <UserTable />
-            </main>
-
-        </>
-    );
+  return (
+    <>
+      <Sidebar />
+      <div className="absolute w-full z-20"></div>
+      <main>
+        <UserTable />
+      </main>
+      <Footer />
+    </>
+  );
 }
-

@@ -11,7 +11,7 @@ export const reportService = {
 };
 
 
-function getAll() {
+async function getAll() {
     console.log('getAll')
     const requestOptions = {
         method: 'GET',
@@ -19,7 +19,8 @@ function getAll() {
         // headers: { "Access-Control-Allow-Origin": "*" }
     };
 
-    return fetch('https://7677-197-156-86-169.ngrok.io/v1/report/', requestOptions).then(handleResponse);
+    const response = await fetch('http://localhost:8000/v1/report/', requestOptions);
+    return handleResponse(response);
 }
 
 // function getById(id) {

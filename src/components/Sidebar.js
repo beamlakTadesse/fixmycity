@@ -1,146 +1,167 @@
-import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import AdminNavbar from './AdminNavbar';
-import Icon from '@material-tailwind/react/Icon';
-import H6 from '@material-tailwind/react/Heading6';
+import { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
+import AdminNavbar from "./AdminNavbar";
+import Icon from "@material-tailwind/react/Icon";
+import H6 from "@material-tailwind/react/Heading6";
+import { isSectorAdmin, isSuperAdmin } from "helpers/utils";
+import { getName } from "helpers/utils";
+import { getRol } from "helpers/utils";
+import { Trans } from "react-i18next";
 
 export default function Sidebar() {
-    const [showSidebar, setShowSidebar] = useState('-left-64');
-    return (
-        <>
-            <AdminNavbar
-                showSidebar={showSidebar}
-                setShowSidebar={setShowSidebar}
-            />
-            <div
-                className={`h-screen fixed top-0 md:left-0 ${showSidebar} overflow-y-auto flex-row flex-nowrap overflow-hidden shadow-xl bg-white w-64 z-10 py-4 px-6 transition-all duration-300`}
-            >
-                <div className="flex-col items-stretch min-h-full flex-nowrap px-0 relative">
-                    <a
-                        // href="https://material-tailwind.com?ref=mtd"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="mt-2 text-center w-full inline-block"
-                    >
-                        <H6 color="gray">Telecommunication</H6>
-                    </a>
-                    <div className="flex flex-col">
-                        <hr className="my-4 min-w-full" />
+  const [isAdmin, setAdmin] = useState(getRol(localStorage.getItem("token")));
+  const [showSidebar, setShowSidebar] = useState("-left-64");
+  useEffect(() => {
+    setAdmin(getRol(localStorage.getItem("token")));
+  }, [isAdmin]);
 
-                        <ul className="flex-col min-w-full flex list-none">
-                            <li className="rounded-lg mb-4">
-                                <NavLink
-                                    to="/"
-                                    exact
-                                    className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
-                                    activeClassName="bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-md"
-                                >
-                                    <Icon name="dashboard" size="2xl" />
-                                    Dashboard
-                                </NavLink>
-                            </li>
-                            {/* <li className="rounded-lg mb-2">
-                                <NavLink
-                                    to="/settings"
-                                    className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
-                                    activeClassName="bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-md"
-                                >
-                                    <Icon name="settings" size="2xl" />
-                                    Settings
-                                </NavLink>
-                            </li> */}
-                            <li className="rounded-lg mb-2">
-                                <NavLink
-                                    to="/sectors"
-                                    className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
-                                    activeClassName="bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-md"
-                                >
-                                    <Icon name="settings" size="2xl" />
-                                    Sector
-                                </NavLink>
-                            </li>
-                            <li className="rounded-lg mb-2 ">
-                                <NavLink
-                                    to="/users"
-                                    className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
-                                    activeClassName="bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-md"
-                                >
-                                    <Icon name="toc" size="2xl" />
-                                    Users
-                                </NavLink>
-                            </li>
-                            {/* <li className="rounded-lg mb-2 ">
-                                <NavLink
-                                    to="/tables"
-                                    className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
-                                    activeClassName="bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-md"
-                                >
-                                    <Icon name="toc" size="2xl" />
-                                    Tables
-                                </NavLink>
-                            </li> */}
-                            <li className="rounded-lg mb-2 text-gray-700">
-                                <NavLink
-                                    to="/reports"
-                                    className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
-                                    activeClassName="bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-md"
-                                >
-                                    <Icon name="map" size="2xl" />
-                                    Report
-                                </NavLink>
-                            </li>
-                            {/* <li className="px-4 rounded-lg mb-2 text-gray-700">
-                                <a
-                                    // href="https://demos.creative-tim.com/material-tailwind-kit-react/#/login"
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    className="flex items-center gap-4 text-sm font-light py-3"
-                                >
-                                    <Icon name="fingerprint" size="2xl" />
-                                    Login
-                                </a>
-                            </li> */}
-                            {/* <li className="px-4 rounded-lg mb-2 text-gray-700">
-                                <a
-                                    // href="https://demos.creative-tim.com/material-tailwind-kit-react/#/register"
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    className="flex items-center gap-4 text-sm font-light py-3"
-                                >
-                                    <Icon name="list_alt" size="2xl" />
-                                    Register
-                                </a>
-                            </li> */}
-                            {/* <li className="px-4 rounded-lg mb-2 text-gray-700">
-                                <a
-                                    // href="https://demos.creative-tim.com/material-tailwind-kit-react/#/landing"
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    className="flex items-center gap-4 text-sm font-light py-3"
-                                >
-                                    <Icon name="web" size="2xl" />
-                                    Landing Page
-                                </a>
-                            </li> */}
-                            <li className="px-4 rounded-lg mb-2 text-gray-700">
-                                <a
-                                    // href="https://demos.creative-tim.com/material-tailwind-kit-react/#/profile"
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    className="flex items-center gap-4 text-sm font-light py-3"
-                                >
-                                    <Icon name="account_circle" size="2xl" />
-                                    Profile Page
-                                </a>
-                            </li>
-                        </ul>
+  return (
+    <>
+      <AdminNavbar showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
+      <div
+        className={`h-screen fixed top-0 md:left-0 ${showSidebar} overflow-y-auto flex-row flex-nowrap overflow-hidden shadow-xl bg-white w-64 z-10 py-4 px-6 transition-all duration-300`}
+      >
+        <div className="flex-col items-stretch min-h-full flex-nowrap px-0 relative">
+          <a
+            // href="https://material-tailwind.com?ref=mtd"
+            target="_blank"
+            rel="noreferrer"
+            className="mt-2 text-center w-full inline-block uppercase"
+          >
+            {isAdmin === 1 ? (
+              <H6 color="gray">Fix My City</H6>
+            ) : (
+              <H6 color="gray" className="uppercase">
+                {getName(localStorage.getItem("token"))}
+              </H6>
+            )}
+          </a>
+          <div className="flex flex-col">
+            <hr className="my-4 min-w-full" />
 
+            <ul className="flex-col min-w-full flex list-none">
+              {isAdmin === 1 && (
+                <li className="rounded-lg mb-4">
+                  <NavLink
+                    data-cy="nav-sa-dashboard"
+                    to="/admin/dashboard"
+                    exact
+                    className="hover:text-red-100 bg-brown flex bg-brown items-center gap-4 text-sm text-white-700 font-light px-4 py-3 rounded-lg"
+                    activeClassName="text-white-100  bg-brown hover:text-red-100 bg-red-700"
+                  >
+                    <Icon name="dashboard" size="2xl" />
+                    <Trans i18nKey="sidebar.dashboard">Dashboard</Trans>
+                  </NavLink>
+                </li>
+              )}
+              {isAdmin !== 1 && (
+                <li className="rounded-lg mb-2 text-gray-700">
+                  <NavLink
+                    data-cy="nav-dashboard"
+                    to="/sectors/dashboard"
+                    className="bg-brown hover:text-red-100 bg-brown flex bg-brown items-center gap-4 text-sm text-white-700 font-light px-4 py-3 rounded-lg"
+                    activeClassName="text-white-100  bg-brown  hover:text-red-100 bg-red-700"
+                  >
+                    <Icon name="dashboard" size="2xl" />
+                    <Trans i18nKey="sidebar.sectorDashboard">
+                      Sector Dashboard
+                    </Trans>
+                  </NavLink>
+                </li>
+              )}
+              {isAdmin === 1 && (
+                <li className="rounded-lg mb-4">
+                  <NavLink
+                    to="/admin/sectors"
+                    exact
+                    className="hover:text-red-100 bg-brown flex bg-brown  items-center gap-4 text-sm text-white-700 font-light px-4 py-3 rounded-lg"
+                    activeClassName="text-white-100  bg-brown  hover:text-red-100 bg-red-700"
+                  >
+                    <Icon name="home" size="2xl" />
+                    <Trans i18nKey="sidebar.sector">Sector</Trans>
+                  </NavLink>
+                </li>
+              )}
+              {isAdmin === 1 && (
+                <li className="rounded-lg mb-2 ">
+                  <NavLink
+                    data-cy="nav-users"
+                    to="/users"
+                    className="hover:text-red-100 bg-brown flex bg-brown  items-center gap-4 text-sm text-white-700 font-light px-4 py-3 rounded-lg"
+                    activeClassName="text-white-100  bg-brown  hover:text-red-100 bg-red-700"
+                  >
+                    <Icon name="toc" size="2xl" />
+                    <Trans i18nKey="sidebar.users">Users</Trans>
+                  </NavLink>
+                </li>
+              )}
+              {isAdmin === 1 && (
+                <li className="rounded-lg mb-2 text-gray-700">
+                  <NavLink
+                    data-cy="nav-reports"
+                    to="/admin/report"
+                    className="hover:text-red-100bg-brown flex bg-brown  items-center gap-4 text-sm text-white-700 font-light px-4 py-3 rounded-lg"
+                    activeClassName="text-white-100  bg-brown  hover:text-red-100 bg-red-700"
+                  >
+                    <Icon name="map" size="2xl" />
+                    <Trans i18nKey="sidebar.report">Report</Trans>
+                  </NavLink>
+                </li>
+              )}{" "}
+              {isAdmin !== 1 && (
+                <li className="rounded-lg mb-2 text-gray-700">
+                  <NavLink
+                    data-cy="nav-reports"
+                    to="/sector/reports"
+                    className="hover:text-red-100 bg-brown flex bg-brown  items-center gap-4 text-sm text-white-700 font-light px-4 py-3 rounded-lg"
+                    activeClassName="text-white-100 bg-brown-800  hover:text-red-100 bg-red-700"
+                  >
+                    <Icon name="map" size="2xl" />
+                    <Trans i18nKey="sidebar.report">Report</Trans>
+                  </NavLink>
+                </li>
+              )}
+              <li className="rounded-lg mb-2 text-gray-700">
+                <NavLink
+                  data-cy="nav-dashboard"
+                  to="/profile"
+                  className="hover:text-red-100 bg-brown flex bg-brown  items-center gap-4 text-sm text-white-700 font-light px-4 py-3 rounded-lg"
+                  activeClassName="text-white-100  bg-brown  hover:text-red-100 bg-red-700"
+                >
+                  <Icon name="settings" size="2xl" />
+                  <Trans i18nKey="sidebar.profile">Profile</Trans>
+                </NavLink>
+              </li>
+              {isAdmin !== 1 && (
+                <li className="rounded-lg mb-2 ">
+                  <NavLink
+                    data-cy="nav-announcement"
+                    to="/announcement"
+                    className="hover:text-red-100 bg-brown flex bg-brown  items-center gap-4 text-sm text-white-700 font-light px-4 py-3 rounded-lg"
+                    activeClassName="text-white-100  bg-brown hover:text-red-100 bg-red-700"
+                  >
+                    <Icon name="toc" size="2xl" />
+                    <Trans i18nKey="sidebar.announcement"> Announcement</Trans>
+                  </NavLink>
+                </li>
+              )}
+              {/* <li className="rounded-lg mb-2 ">
+                <NavLink
+                  data-cy="nav-notif"
+                  to="/notification"
+                  className="hover:text-red-100 bg-[#63453b] flex bg-[#471f1f]  items-center gap-4 text-sm text-white-700 font-light px-4 py-3 rounded-lg"
+                  activeClassName="text-white-100  bg-[#471f1f]  hover:text-red-100 bg-red-700"
+                >
+                  <Icon name="toc" size="2xl" />
+                  Notification
+                </NavLink>
+              </li> */}
+            </ul>
+          </div>
+        </div>
+      </div>
 
-
-
-                    </div>
-                </div>
-            </div>
-        </>
-    );
+      {/* </div> */}
+    </>
+  );
 }
