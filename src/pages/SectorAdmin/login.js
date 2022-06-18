@@ -1,7 +1,7 @@
 import { Input, Image, Button } from "@material-tailwind/react";
 import logo from "../../assets/img/fix.jpg";
 import addis from "../../assets/img/addis.jpg";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, Route, useLocation } from "react-router-dom";
 import { setRole } from "helpers/utils";
 import jwt_decode from "jwt-decode";
@@ -39,8 +39,10 @@ export default function LogInSectorAdmin() {
         fetch(`${url}/v1/admins/login_admin/`, requestOptions)
           .then((response) => response.json())
           .then((res) => {
+            setShow(true);
             if (res.message) {
               setLoginState(true);
+
               setLoginMessage(res.message);
               const token = res.token.access;
               var decodedToken = jwt_decode(token);
@@ -58,6 +60,11 @@ export default function LogInSectorAdmin() {
               setLoginMessage(res.detail);
             }
             console.log(res);
+            setTimeout(() => {
+              setShow(false);
+            }, 3000);
+
+            // clearTimeout(timeId);
           });
       } catch (e) {
         setServErr(e);
@@ -67,6 +74,8 @@ export default function LogInSectorAdmin() {
     }
   }
   const [servErr, setServErr] = useState("");
+  const [show, setShow] = useState(true);
+  useEffect(() => {}, []);
 
   const { email, password } = inputs;
 
@@ -74,22 +83,22 @@ export default function LogInSectorAdmin() {
     // <div class="ml-32  ">
     <div class="md:ml-60 flex items-center h-screen ">
       <div className="bg-white font-family-karla">
-        {servErr && (
+        {servErr && show && (
           <div>
             <alert message={servErr}></alert>
           </div>
         )}
         {/* <div className="w-full flex flex-wrap">
           <div className="w-full md:w-1/2 flex flex-col"> */}
-        <div className="flex justify-center pt-8">
-          {submitted && (
+        <div className="flex justify-center pt-12 ">
+          <Image src={logo}></Image>
+        </div>
+        <div className="flex justify-center ml-8 ">
+          {submitted && show && (
             <div data-cy="login-message" className="text-red-400">
               {loginMessage}
             </div>
           )}
-        </div>
-        <div className="flex justify-center pt-12 md:pl-12 md:-mb-24">
-          <Image src={logo}></Image>
         </div>
 
         <div className="flex flex-col justify-center md:justify-start my-auto pt-8 md:pt-0 px-8 md:px-24 lg:px-32">

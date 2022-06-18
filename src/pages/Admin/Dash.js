@@ -118,6 +118,26 @@ export default function Dashboard() {
               <div className="container mx-auto max-w-full">
                 <div className="px-3 md:px-8">
                   <div className="container mx-auto max-w-full">
+                    <div className="grid grid-cols-4 gap-4  content-end">
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div className="flex justify-center items-center mb-8 ">
+                        <Button
+                          data-cy="btn-dash-addSectorAdmin"
+                          size="lg"
+                          color="brown"
+                          className=" mt-2.5 ml-20.5"
+                          style={{ padding: 8 }}
+                          onClick={(e) => setShowModal(true)}
+                        >
+                          <Trans i18nKey="adminDash.AddSectorAdmin">
+                            Add Sector Admin
+                          </Trans>
+                        </Button>
+                      </div>
+                    </div>
+
                     <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 mb-4">
                       {data &&
                         Object.keys(data).map((oneKey) => {
@@ -127,7 +147,6 @@ export default function Dashboard() {
                               icon="group"
                               title={data[oneKey][1]}
                               amount={data[oneKey][0]}
-                              date="Since yesterday"
                             />
                           );
                         })}
