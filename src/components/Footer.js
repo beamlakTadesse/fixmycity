@@ -2,14 +2,14 @@ import { NavLink } from "react-router-dom";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#FFF8DC] py-6 px-16 border-t border-gray-200 font-light flex flex-col lg:flex-row justify-between items-center">
-      <p className="text-gray-700 mb-6 lg:mb-0">
+    <footer className="bg-[#a08679] py-6 px-16 border-t border-gray-200 font-light flex flex-col lg:flex-row justify-between items-center">
+      <p className="text-white mb-6 lg:mb-0">
         Copyright &copy; {new Date().getFullYear()}{" "}
         <a
           href="#"
           target="_blank"
           rel="noreferrer"
-          className="text-[#481F01] hover:text-[#8B4513]"
+          className="text-white hover:text-[#8B4513]"
         >
           Creative Tim
         </a>

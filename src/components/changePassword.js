@@ -103,7 +103,7 @@ export default function ChangePasswordCard() {
                 <Trans i18nKey="profile.oldpassword">Old password</Trans>{" "}
               </lable>
               <Input
-                type="text"
+                type="password"
                 value={o_password}
                 name="old_password"
                 data-cy="input_old_password"
@@ -117,7 +117,7 @@ export default function ChangePasswordCard() {
             <div className="w-full lg:w-6/12 pl-4 mb-10 font-light">
               <Trans i18nKey="profile.newpassword">new password</Trans>{" "}
               <Input
-                type="text"
+                type="password"
                 value={n_password}
                 name="new_password"
                 data-cy="input_new_password"
@@ -131,7 +131,7 @@ export default function ChangePasswordCard() {
             <div className="w-full lg:w-6/12 pl-4 mb-10 font-light">
               <Trans i18nKey="profile.confirmpassword">confirm password</Trans>{" "}
               <Input
-                type="text"
+                type="password"
                 value={conf_new_password}
                 name="conf_new_password"
                 data-cy="input_conf_new_password"

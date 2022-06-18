@@ -27,7 +27,7 @@ export default function ProfileCard({ editProfile, setEditProfile }) {
   const [isError, setError] = useState(false);
   console.log(token);
   const userId = getUserId(token);
-  const url1 = `${url}/v1/admins/users/` + 6;
+  const url1 = `${url}/v1/admins/users/` + userId;
   const fetchData = async () => {
     setIsLoading(true);
     try {

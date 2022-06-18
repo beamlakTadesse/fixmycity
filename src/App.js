@@ -40,6 +40,9 @@ import jwt_decode from "jwt-decode";
 import Help from "pages/help";
 import MapSingle from "components/report/singleReportMap";
 import UserDetail from "components/user/userDetail";
+import PasswordReset from "pages/passwordreset";
+import ChangePassword from "pages/changePass";
+import ChangePasswordR from "pages/changePass";
 // import Authorization from "RequireAuth";
 
 function App() {
@@ -103,6 +106,12 @@ function App() {
           />
           <Route exact path="/register/" element={<Register />} />
           <Route exact path="/contact/" element={<Contact />} />
+          <Route exact path="/password-reset/" element={<PasswordReset />} />
+          <Route
+            exact
+            path="/password-reset-confirm/"
+            element={<ChangePasswordR />}
+          />
 
           <Route exact path="*" element={<LogIn />} />
           {/* <Footer /> */}

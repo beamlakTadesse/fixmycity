@@ -62,7 +62,7 @@ export default function Announcement() {
     <>
       <>
         <Sidebar />
-        <div className="bg-[#DEB887] px-3 md:px-8 h-10" />
+        <div className="bg-[#a08679] px-3 md:px-8 h-10" />
         <div className="container mt-10 max-w-full ">
           <div className="grid grid-cols-1 xl:grid-cols-1">
             <div className="xl:col-start-2 xl:col-end-2 px-3 mb-14 mr-8">

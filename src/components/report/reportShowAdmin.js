@@ -92,6 +92,7 @@ function ReportShowAdmin() {
   );
 
   const [mydata, setData] = useState([]);
+  const [nodata, setNoData] = useState(true);
   // setIsLoading(true);
 
   useEffect(() => {
@@ -114,16 +115,16 @@ function ReportShowAdmin() {
         // console.log("LOCATION:_"+location.pathname);
         // const lela = []
         if (json) {
+          if (json.length != 0) {
+            setNoData(false);
+          }
           setData(json);
         }
-
+        console.log(nodata);
         console.log("Sectors: ", json);
       } catch (error) {
         console.log("error", error);
         setError(true);
-        //   setTimeout(() => {
-        //     setIsLoading(false);
-        // }, 1500)
       }
       setTimeout(() => {
         setIsLoading(false);
@@ -139,9 +140,7 @@ function ReportShowAdmin() {
     <div class="flex justify-center items-center h-screen">
       <Loader />
     </div>
-  ) : isError ? (
-    <ErrorPage2 pathname={location.pathname} />
-  ) : (
+  ) : !nodata ? (
     <Card className="mt-20">
       <CardHeader color="brown" contentPosition="left">
         <div className="flex flex-row items-end">
@@ -170,6 +169,20 @@ function ReportShowAdmin() {
         </div>
       </CardBody>
     </Card>
+  ) : (
+    <div className="flex flex-center">
+      <div className="flex items-center justify-center w-screen h-screen">
+        <div className="px-4 lg:py-12">
+          <div className="lg:gap-4 lg:flex">
+            <div className="flex flex-col items-center justify-center md:py-24 lg:py-32">
+              <p className="mb-2 text-2xl font-bold text-center text-gray-800 md:text-3xl">
+                <span className="text-red-500">Oops!</span> No Data Found
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 

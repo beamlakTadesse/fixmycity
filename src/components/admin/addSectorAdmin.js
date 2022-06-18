@@ -64,7 +64,7 @@ export default function AddSectorAdminForm() {
     // if (email && sectorId != 0) {
     const inputs = {
       email: email,
-      sector: 2,
+      sector: sectorId,
     };
     console.log(sectorId);
     console.log(inputs);

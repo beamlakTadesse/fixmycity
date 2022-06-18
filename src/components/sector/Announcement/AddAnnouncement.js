@@ -74,7 +74,7 @@ export default function AddAnnouncement({ isActive, setIsActive }) {
 
         const formData = new FormData();
 
-        // formData.append("image", selectedFile);
+        formData.append("image", selectedFile);
         formData.append("title", values.title);
         formData.append("description", values.description);
         const requestOptions = {

@@ -23,6 +23,7 @@ export default function EditAnnouncement({
   description,
   id,
 }) {
+  const annId = id;
   const [showModal, setShowModal] = useState(false);
 
   const [submitted, setSubmitted] = useState(false);
@@ -68,8 +69,9 @@ export default function EditAnnouncement({
   const [mydata, setData] = useState(null);
   console.log(id);
 
-  async function handleSubmit(id) {
-    const url1 = `${url}/v1/announcment/${id}/`;
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const url1 = `${url}/v1/announcment/${annId}/`;
 
     setSubmitted(true);
 
@@ -107,14 +109,16 @@ export default function EditAnnouncement({
           if (!response.ok) {
             setStatus(response.status);
             setShowModal(true);
-
+            alert("not updated");
             throw new Error(response.status);
           } else return response.json();
         })
         .then((data) => {
           setData(data);
+
           // this.setState({ isLoading: false, downlines: data.response });
           console.log("DATA STORED");
+          alert("updated sucesfully");
           setShowModal(false);
           setIsActive(false);
         })
@@ -237,7 +241,7 @@ export default function EditAnnouncement({
                 <div className="row-span-3">
                   <Button
                     color="brown"
-                    onClick={(e) => handleSubmit(id)}
+                    onClick={(e) => handleSubmit(e)}
                     data-cy="btn-postann-edit-submit"
                   >
                     <Trans i18nKey="announcement.submit">Submit</Trans>

@@ -117,7 +117,7 @@ export default function Dashboard() {
       <Sidebar />
       {role == 2 && (
         <>
-          <div className="bg-[#DEB887] px-3 md:px-8 h-40" />
+          <div className="bg-[#a08679]  px-3 md:px-8 h-40" />
 
           <div className="px-3 md:px-8 -mt-24">
             <div className="px-3 md:px-8">

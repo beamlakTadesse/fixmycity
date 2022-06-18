@@ -91,16 +91,19 @@ export default function SettingsForm({ editProfile, setEditProfile }) {
     const requestOptions = {
       method: "PATCH",
       headers: {
+        "Access-Control-Allow-Origin": "*",
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
 
       body: formData,
       // body:JSON.stringify({'title':values.title,'description':values.description,"image":currentPic})
     };
+    console.log(formData.get("ProfileImage"));
     fetch(url2, requestOptions)
       .then((response) => {
         if (!response.ok) {
-          console.log(response.status);
+          alert("update failed. Try again");
+          return null;
         } else return response.json();
       })
       .then((data) => {

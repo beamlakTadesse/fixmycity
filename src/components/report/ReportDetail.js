@@ -108,6 +108,7 @@ export default function ReportDet() {
     setSubmitted(false);
     setRemoveSubmitted(false);
     setSpamSubmitted(false);
+
     setRejectSubmitted(false);
   }
 
@@ -221,41 +222,39 @@ export default function ReportDet() {
       <>
         <Sidebar />
 
-                <div className="container mx-auto max-w-full">
-
-        {mydata && (
-          
-          <div className="flex mb-5 ">
-            <div>
-              <MapSingle location={mydata.location} id={mydata.id} />
-            </div>
-            <div className=" bg-white w-[700px]  ml-5 drop-shadow-2xl mt-[30px] ">
-              <div
-                className=" w-[700px] h-[100px] rounded-2xl] -mt-[50px] drop-shadow-3xl"
-                style={{ backgroundColor: "rgb(99, 69, 59)" }}
-              >
-                <h1 className="text-[25px] ml-[30px] pt-[30px] text-white ]">
-                  <Trans i18nKey="reportDetail.reportedIssue">
-                    {" "}
-                    Reported Issue
-                  </Trans>
-                </h1>
+        <div className="container mx-auto max-w-full">
+          {mydata && (
+            <div className="flex mb-5 ">
+              <div>
+                <MapSingle location={mydata.location} id={mydata.id} />
               </div>
-              <div className="flex">
-                {mydata.image && (
-                  <img
-                    src={mydata.image}
-                    className="ml-[30px] mt-[30px] item-center w-[300px] h-[300px]"
-                  />
-                )}
-                <div>
-                  <p className="m-[30px] w-[350px]">{mydata.description}</p>
-                  {mydata.tag && (
-                    <div className="flex">
-                      <h3 className="m-2 font-bold pl-1 text-lg text-[#5865F2]">
-                        <a href="#">&#35;{mydata.tag}</a>
-                      </h3>
-                      {/* {Object.keys(mydata.tag).map((oneKey, i) => {
+              <div className=" bg-white w-[700px]  ml-5 drop-shadow-2xl mt-[30px] ">
+                <div
+                  className=" w-[700px] h-[100px] rounded-2xl] -mt-[50px] drop-shadow-3xl"
+                  style={{ backgroundColor: "rgb(99, 69, 59)" }}
+                >
+                  <h1 className="text-[25px] ml-[30px] pt-[30px] text-white ]">
+                    <Trans i18nKey="reportDetail.reportedIssue">
+                      {" "}
+                      Reported Issue
+                    </Trans>
+                  </h1>
+                </div>
+                <div className="flex">
+                  {mydata.image && (
+                    <img
+                      src={mydata.image}
+                      className="ml-[30px] mt-[30px] item-center w-[300px] h-[300px]"
+                    />
+                  )}
+                  <div>
+                    <p className="m-[30px] w-[350px]">{mydata.description}</p>
+                    {mydata.tag && (
+                      <div className="flex">
+                        <h3 className="m-2 font-bold pl-1 text-lg text-[#5865F2]">
+                          <a href="#">&#35;{mydata.tag}</a>
+                        </h3>
+                        {/* {Object.keys(mydata.tag).map((oneKey, i) => {
                       return (
                         <>
                           <h3 className="m-2 font-bold pl-1 text-lg text-[#5865F2]">
@@ -264,37 +263,37 @@ export default function ReportDet() {
                         </>
                       );
                     })} */}
-                    </div>
-                  )}
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
 
-              {mydata.like_count && (
-                <Button
-                  className="ml-[30px] mt-[30px]"
-                  style={{
-                    backgroundColor: "rgb(255,255,255)",
-                    opacity: "0.9",
-                  }}
-                >
-                  <h3 className="m-2 font-bold pl-1 text-lg text-[rgb(153,153,153)]">
-                    👍 {mydata.like_count}
-                  </h3>
-                </Button>
-              )}
-              {mydata.status === "UNRESOLVED" && !mydata.spamStatus && (
-                <Button
-                  className="ml-[30px] mt-[30px]"
-                  style={{ backgroundColor: "rgb(34,139,34)" }}
-                  onClick={resolveReport}
-                  data-cy="btn-reportdetail-resolve"
-                >
-                  <h3 className="m-2 font-bold pl-1 text-lg text-[#ffffff]">
-                    <Trans i18nKey="reportDetail.resolve"> Resolve</Trans>
-                  </h3>
-                </Button>
-              )}
-              {/* <NavLink to>
+                {mydata.like_count && (
+                  <Button
+                    className="ml-[30px] mt-[30px]"
+                    style={{
+                      backgroundColor: "rgb(255,255,255)",
+                      opacity: "0.9",
+                    }}
+                  >
+                    <h3 className="m-2 font-bold pl-1 text-lg text-[rgb(153,153,153)]">
+                      👍 {mydata.like_count}
+                    </h3>
+                  </Button>
+                )}
+                {mydata.status === "UNRESOLVED" && !mydata.spamStatus && (
+                  <Button
+                    className="ml-[30px] mt-[30px]"
+                    style={{ backgroundColor: "rgb(34,139,34)" }}
+                    onClick={resolveReport}
+                    data-cy="btn-reportdetail-resolve"
+                  >
+                    <h3 className="m-2 font-bold pl-1 text-lg text-[#ffffff]">
+                      <Trans i18nKey="reportDetail.resolve"> Resolve</Trans>
+                    </h3>
+                  </Button>
+                )}
+                {/* <NavLink to>
                 <Button
                   className="ml-[30px] mt-[30px]"
                   // style={{ backgroundColor: "rgb(34,139,34)" }}
@@ -306,178 +305,128 @@ export default function ReportDet() {
                   </h3>
                 </Button>
               </NavLink> */}
-              <div>
-                <MapSingle id={mydata.id} location={mydata.locations} />
-                {/* <div className="relative  rounded-xl shadow-lg"> */}
-                {/* <LoadScript googleMapsApiKey="AIzaSyBORpRsZyByiZOhgM_KcZswJty7pSz6DLs">
-                  <GoogleMap
-                    mapContainerClassName="w-full h-full rounded-xl"
-                    zoom={13}
-                    center={defaultCenter}
-                  >
-                    <Marker
-                      // onClick={() => {
-                      //   routeChange(state.reports[oneKey].id);
-                      // }}
-                      key={"location" + mydata.id}
-                      position={mydata.locations}
-                    />
-                  </GoogleMap>
-                </LoadScript> */}
-                {/* </div> */}
-              </div>
-            </div>
-
-            <div className="w-[500px]  mt-[40px]">
-              <div className="bg-white  w-[300px] h-[80px] mt-[40px] ml-[20px] rounded-xl flex border-1 border-solid">
-                {mydata.status === "UNRESOLVED" ? (
-                  <img src={Active} className=" w-[80px]   rounded-xl" />
-                ) : (
-                  <img
-                    src={mydata.status === "RESOLVED" ? Done : Active}
-                    className=" w-[80px]   rounded-xl"
-                  />
-                )}
                 <div>
-                  <p className="ml-[40px] mt-4 text-xl font-light">
-                    {mydata.status === "RESOLVED" ? (
-                      <Trans i18nKey="reportDetail.resolved">Resolved</Trans>
-                    ) : mydata.status === "UNRESOLVED" ? (
-                      <Trans i18nKey="reportDetail.active">Active</Trans>
-                    ) : (
-                      <Trans i18nKey="reportDetail.rejected">Rejected</Trans>
-                    )}
-                  </p>
-                  <hr className="border-1 ml-7"></hr>
-                  {mydata.status == "UNRESOLVED" ? (
-                    <p className="ml-[100px] mt-2 font-light text-sm">
-                      {toDate(mydata.postedAt)}
-                    </p>
-                  ) : (
-                    <p className="ml-[100px] mt-2 font-light text-sm">
-                      {toDate(mydata.updatedAt)}
-                    </p>
-                  )}
+                  <MapSingle id={mydata.id} location={mydata.locations} />
                 </div>
               </div>
 
-              {mydata.user && (
-                <div className="bg-white  w-[300px] h-[100px] mt-[40px] ml-[20px] rounded-xl flex">
-                  <img
-                    src={mydata.user.image ? mydata.user.image : Image2}
-                    className=" w-[80px]   rounded-xl"
-                  />
-
+              <div className="w-[500px]  mt-[40px]">
+                <div className="bg-white  w-[300px] h-[80px] mt-[40px] ml-[20px] rounded-xl flex border-1 border-solid">
+                  {mydata.status === "UNRESOLVED" ? (
+                    <img src={Active} className=" w-[80px]   rounded-xl" />
+                  ) : (
+                    <img
+                      src={mydata.status === "RESOLVED" ? Done : Active}
+                      className=" w-[80px]   rounded-xl"
+                    />
+                  )}
                   <div>
                     <p className="ml-[40px] mt-4 text-xl font-light">
-                      {mydata.user.first_name} &nbsp;{mydata.user.last_name}
+                      {mydata.status === "RESOLVED" ? (
+                        <Trans i18nKey="reportDetail.resolved">Resolved</Trans>
+                      ) : mydata.status === "UNRESOLVED" ? (
+                        <Trans i18nKey="reportDetail.active">Active</Trans>
+                      ) : (
+                        <Trans i18nKey="reportDetail.rejected">Rejected</Trans>
+                      )}
                     </p>
-                    {/* &nbsp;{mydata.user.last_name} </p> */}
                     <hr className="border-1 ml-7"></hr>
-                    <p className="ml-[100px] mt-2 font-light text-sm">
-                      {mydata.user.phone_number}
+                    {mydata.status == "UNRESOLVED" ? (
+                      <p className="ml-[100px] mt-2 font-light text-sm">
+                        {toDate(mydata.postedAt)}
+                      </p>
+                    ) : (
+                      <p className="ml-[100px] mt-2 font-light text-sm">
+                        {toDate(mydata.updatedAt)}
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+                {mydata.user && (
+                  <div className="bg-white  w-[300px] h-[100px] mt-[40px] ml-[20px] rounded-xl flex">
+                    <img
+                      src={mydata.user.image ? mydata.user.image : Image2}
+                      className=" w-[80px]   rounded-xl"
+                    />
+
+                    <div>
+                      <p className="ml-[40px] mt-4 text-xl font-light">
+                        {mydata.user.first_name} &nbsp;{mydata.user.last_name}
+                      </p>
+                      {/* &nbsp;{mydata.user.last_name} </p> */}
+                      <hr className="border-1 ml-7"></hr>
+                      <p className="ml-[100px] mt-2 font-light text-sm">
+                        {mydata.user.phone_number}
+                      </p>
+                    </div>
+                  </div>
+                )}
+                <div className="bg-white  w-[300px] h-[80px] mt-[40px] ml-[20px] rounded-xl flex">
+                  <img src={Image3} className=" w-[80px]   rounded-xl" />
+                  <div>
+                    <p className="ml-[40px] mt-4 text-xl font-light">
+                      <Trans i18nKey="reportDetail.location">Location</Trans>{" "}
+                    </p>
+                    <hr className="border-1 ml-7"></hr>
+                    <p className="ml-[95px] mt-2 font-light text-sm">
+                      <Trans i18nKey="reportDetail.addis"> Addis Ababa</Trans>
                     </p>
                   </div>
                 </div>
-              )}
-              <div className="bg-white  w-[300px] h-[80px] mt-[40px] ml-[20px] rounded-xl flex">
-                <img src={Image3} className=" w-[80px]   rounded-xl" />
-                <div>
-                  <p className="ml-[40px] mt-4 text-xl font-light">
-                    <Trans i18nKey="reportDetail.location">Location</Trans>{" "}
-                  </p>
-                  <hr className="border-1 ml-7"></hr>
-                  <p className="ml-[95px] mt-2 font-light text-sm">
-                    <Trans i18nKey="reportDetail.addis"> Addis Ababa</Trans>
-                  </p>
-                </div>
-              </div>
 
-              {/* ########### DROPDOWN ######### */}
-              {isAdmin !== 1 && (
-                <div className="flex flex-wrap mt-[40px] ml-[20px]">
-                  <div className="w-full sm:w-6/12 md:w-4/12 px-4">
-                    <div className="absolute inline-flex align-middle w-full">
-                      <button
-                        className={
-                          "text-white font-bold text-sm px-6 py-3 camelcase rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 bg-[#371D10]"
-                        }
-                        type="button"
-                        ref={btnDropdownRef}
-                        onClick={() => {
-                          dropdownPopoverShow
-                            ? closeDropdownPopover()
-                            : openDropdownPopover();
-                        }}
-                        data-cy="btn-report-detail-otherOption"
-                      >
-                        <Trans i18nKey="reportDetail.otherOption">
-                          Other Option
-                        </Trans>
-                        {/* {color === "white" ? "White Dropdown" : color + " Dropdown"} */}
-                      </button>
-                      <div
-                        ref={popoverDropdownRef}
-                        className={
-                          (dropdownPopoverShow ? "block " : "hidden ") +
-                          (color === "gray" ? "bg-black " : bgColor + " ") +
-                          "text-base z-50 float-left py-2 list-none text-left rounded shadow-lg mt-1"
-                        }
-                        style={{ minWidth: "12rem" }}
-                      >
-                        <div
-                          style={{ cursor: "pointer" }}
-                          // href="#pablo"
+                {/* ########### DROPDOWN ######### */}
+                {isAdmin !== 1 && (
+                  <div className="flex flex-wrap mt-[40px] ml-[20px]">
+                    <div className="w-full sm:w-6/12 md:w-4/12 px-4">
+                      <div className="absolute inline-flex align-middle w-full">
+                        <button
                           className={
-                            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent " +
-                            (color === "white"
-                              ? " text-slate-700"
-                              : "text-white")
+                            "text-white font-bold text-sm px-6 py-3 camelcase rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 bg-[#371D10]"
                           }
+                          type="button"
+                          ref={btnDropdownRef}
                           onClick={() => {
-                            setSubmitted(!submitted);
-                            closeDropdownPopover();
+                            dropdownPopoverShow
+                              ? closeDropdownPopover()
+                              : openDropdownPopover();
                           }}
-                          data-cy="btn-report-detail-transfer"
+                          data-cy="btn-report-detail-otherOption"
                         >
-                          <Trans i18nKey="reportDetail.transfer">
-                            Transfer
+                          <Trans i18nKey="reportDetail.otherOption">
+                            Other Option
                           </Trans>
-                        </div>
-
+                          {/* {color === "white" ? "White Dropdown" : color + " Dropdown"} */}
+                        </button>
                         <div
-                          style={{ cursor: "pointer" }}
+                          ref={popoverDropdownRef}
                           className={
-                            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent " +
-                            (color === "white"
-                              ? " text-slate-700"
-                              : "text-white")
+                            (dropdownPopoverShow ? "block " : "hidden ") +
+                            (color === "gray" ? "bg-black " : bgColor + " ") +
+                            "text-base z-50 float-left py-2 list-none text-left rounded shadow-lg mt-1"
                           }
-                          onClick={
-                            !mydata.spamStatus
-                              ? () => {
-                                  setSpamSubmitted(!spamSubmitted);
-                                  closeDropdownPopover();
-                                }
-                              : () => {
-                                  setRemoveSubmitted(!removeSubmitted);
-                                  closeDropdownPopover();
-                                }
-                          }
-                          data-cy="btn-report-detail-spam"
+                          style={{ minWidth: "12rem" }}
                         >
-                          {!mydata.spamStatus ? (
-                            <Trans i18nKey="reportDetail.addToSpam">
-                              Add to Spam
+                          <div
+                            style={{ cursor: "pointer" }}
+                            // href="#pablo"
+                            className={
+                              "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent " +
+                              (color === "white"
+                                ? " text-slate-700"
+                                : "text-white")
+                            }
+                            onClick={() => {
+                              setSubmitted(!submitted);
+                              closeDropdownPopover();
+                            }}
+                            data-cy="btn-report-detail-transfer"
+                          >
+                            <Trans i18nKey="reportDetail.transfer">
+                              Transfer
                             </Trans>
-                          ) : (
-                            <Trans i18nKey="reportDetail.removeSpam">
-                              Remove From Spam
-                            </Trans>
-                          )}
-                        </div>
+                          </div>
 
-                        {!rejected ? (
                           <div
                             style={{ cursor: "pointer" }}
                             className={
@@ -486,173 +435,210 @@ export default function ReportDet() {
                                 ? " text-slate-700"
                                 : "text-white")
                             }
-                            onClick={() => {
-                              setRejectSubmitted(!rejectSubmitted);
-                              closeDropdownPopover();
-                            }}
+                            onClick={
+                              !mydata.spamStatus
+                                ? () => {
+                                    setSpamSubmitted(!spamSubmitted);
+                                    closeDropdownPopover();
+                                  }
+                                : () => {
+                                    setRemoveSubmitted(!removeSubmitted);
+                                    closeDropdownPopover();
+                                  }
+                            }
+                            data-cy="btn-report-detail-spam"
                           >
-                            <Trans i18nKey="reportDetail.rejectReport">
-                              {" "}
-                              Reject Report
-                            </Trans>
+                            {!mydata.spamStatus ? (
+                              <Trans i18nKey="reportDetail.addToSpam">
+                                Add to Spam
+                              </Trans>
+                            ) : (
+                              <Trans i18nKey="reportDetail.removeSpam">
+                                Remove From Spam
+                              </Trans>
+                            )}
                           </div>
-                        ) : (
-                          <></>
-                        )}
+
+                          {!rejected ? (
+                            <div
+                              style={{ cursor: "pointer" }}
+                              className={
+                                "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent " +
+                                (color === "white"
+                                  ? " text-slate-700"
+                                  : "text-white")
+                              }
+                              onClick={() => {
+                                setRejectSubmitted(!rejectSubmitted);
+                                closeDropdownPopover();
+                              }}
+                            >
+                              <Trans i18nKey="reportDetail.rejectReport">
+                                {" "}
+                                Reject Report
+                              </Trans>
+                            </div>
+                          ) : (
+                            <></>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              )}
+                )}
+              </div>
             </div>
-          </div>
-        )}
-        {/* ################## DROPDOWN ############ */}
+          )}
+          {/* ################## DROPDOWN ############ */}
 
-        {/* ################ Modal */}
-        {/* ############# 1 */}
-        <Modal
-          size="lg"
-          active={spamSubmitted}
-          toggler={() => setSpamSubmitted(false)}
-        >
-          <ModalTitle>
-            <Heading5>
-              <Trans i18nKey="reportDetail.confirmToSpam">
+          {/* ################ Modal */}
+          {/* ############# 1 */}
+          <Modal
+            size="lg"
+            active={spamSubmitted}
+            toggler={() => setSpamSubmitted(false)}
+          >
+            <ModalTitle>
+              <Heading5>
+                <Trans i18nKey="reportDetail.confirmToSpam">
+                  {" "}
+                  Confirm To Spam
+                </Trans>
+              </Heading5>
+            </ModalTitle>
+            <ModalBody>
+              <p>
+                <Trans i18nKey="reportDetail.confirmToSpamMsg">
+                  {" "}
+                  Are you sure you want to add this report to spam
+                </Trans>
+              </p>
+            </ModalBody>
+            <ModalFooter>
+              <Button
+                color="brown"
+                onClick={() => addToSpamReport()}
+                data-cy="btn-report-detail-confirm-spam"
+              >
+                <Trans i18nKey="reportDetail.confirm"> Confirm</Trans>
+              </Button>
+              <Button color="brown" onClick={() => handleDeleteCancel()}>
                 {" "}
-                Confirm To Spam
-              </Trans>
-            </Heading5>
-          </ModalTitle>
-          <ModalBody>
-            <p>
-              <Trans i18nKey="reportDetail.confirmToSpamMsg">
-                {" "}
-                Are you sure you want to add this report to spam
-              </Trans>
-            </p>
-          </ModalBody>
-          <ModalFooter>
-            <Button
-              color="brown"
-              onClick={() => addToSpamReport()}
-              data-cy="btn-report-detail-confirm-spam"
-            >
-              <Trans i18nKey="reportDetail.confirm"> Confirm</Trans>
-            </Button>
-            <Button color="brown" onClick={() => handleDeleteCancel()}>
-              {" "}
-              <Trans i18nKey="reportDetail.cancel"> Cancel</Trans>
-            </Button>
-          </ModalFooter>
-        </Modal>
+                <Trans i18nKey="reportDetail.cancel"> Cancel</Trans>
+              </Button>
+            </ModalFooter>
+          </Modal>
 
-        {/* ############### 2 */}
+          {/* ############### 2 */}
 
-        <Modal
-          size="lg"
-          active={removeSubmitted}
-          toggler={() => setRemoveSubmitted(false)}
-        >
-          <ModalTitle>
-            <Heading5>
-              {" "}
-              <Trans i18nKey="reportDetail.confirmRemoval">
+          <Modal
+            size="lg"
+            active={removeSubmitted}
+            toggler={() => setRemoveSubmitted(false)}
+          >
+            <ModalTitle>
+              <Heading5>
                 {" "}
-                Confirm Removal{" "}
-              </Trans>
-            </Heading5>
-          </ModalTitle>
-          <ModalBody>
-            <p>
-              {" "}
-              <Trans i18nKey="reportDetail.confirmRemovalMsg">
+                <Trans i18nKey="reportDetail.confirmRemoval">
+                  {" "}
+                  Confirm Removal{" "}
+                </Trans>
+              </Heading5>
+            </ModalTitle>
+            <ModalBody>
+              <p>
                 {" "}
-                Are you sure you want to remove this report to spam
-              </Trans>
-            </p>
-          </ModalBody>
-          <ModalFooter>
-            <Button
-              onClick={() => removeSpamReport()}
-              data-cy="btn-report-detail-confirm-remove-spam"
-              color="brown"
-            >
-              <Trans i18nKey="reportDetail.confirm"> Confirm</Trans>
-            </Button>
-            <Button color="brown" onClick={() => handleDeleteCancel()}>
-              {" "}
-              <Trans i18nKey="reportDetail.cancel"> Cancel</Trans>
-            </Button>
-          </ModalFooter>
-        </Modal>
+                <Trans i18nKey="reportDetail.confirmRemovalMsg">
+                  {" "}
+                  Are you sure you want to remove this report to spam
+                </Trans>
+              </p>
+            </ModalBody>
+            <ModalFooter>
+              <Button
+                onClick={() => removeSpamReport()}
+                data-cy="btn-report-detail-confirm-remove-spam"
+                color="brown"
+              >
+                <Trans i18nKey="reportDetail.confirm"> Confirm</Trans>
+              </Button>
+              <Button color="brown" onClick={() => handleDeleteCancel()}>
+                {" "}
+                <Trans i18nKey="reportDetail.cancel"> Cancel</Trans>
+              </Button>
+            </ModalFooter>
+          </Modal>
 
-        {/* ############ 3 */}
-        <Modal size="lg" active={submitted} toggler={() => setSubmitted(false)}>
-          <ModalTitle>
-            <Heading5>
-              <Trans i18nKey="transferTo">
-                Transfer Report to other Sector
-              </Trans>{" "}
-            </Heading5>
-          </ModalTitle>
-          <ModalBody>
-            {mydata.sector && mydata.sector.sector_type && (
-              <TransferRadio
-                sector_type={mydata.sector.sector_type}
-                report={mydata.id}
-                submitted={submitted}
-                setSubmitted={setSubmitted}
-              />
-            )}
-          </ModalBody>
-          <ModalFooter>
-            {/* <Button color="brown" onClick={() => handleDeleteCancel()}>
+          {/* ############ 3 */}
+          <Modal
+            size="lg"
+            active={submitted}
+            toggler={() => setSubmitted(false)}
+          >
+            <ModalTitle>
+              <Heading5>
+                <Trans i18nKey="transferTo">
+                  Transfer Report to other Sector
+                </Trans>{" "}
+              </Heading5>
+            </ModalTitle>
+            <ModalBody>
+              {mydata.sector && mydata.sector.sector_type && (
+                <TransferRadio
+                  sector_type={mydata.sector.sector_type}
+                  report={mydata.id}
+                  submitted={submitted}
+                  setSubmitted={setSubmitted}
+                />
+              )}
+            </ModalBody>
+            <ModalFooter>
+              {/* <Button color="brown" onClick={() => handleDeleteCancel()}>
             {" "}
             Cancel
           </Button> */}
-          </ModalFooter>
-        </Modal>
+            </ModalFooter>
+          </Modal>
 
-        {/* ############ MODAL 4 */}
-        <Modal
-          size="lg"
-          active={rejectSubmitted}
-          toggler={() => setRejectSubmitted(false)}
-        >
-          <ModalTitle>
-            <Heading5>
-              {" "}
-              <Trans i18nKey="reportDetail.confirm"> Confirm </Trans>
-              <Trans i18nKey="reportDetail.transfer">Transfer</Trans>
-            </Heading5>
-          </ModalTitle>
-          <ModalBody>
-            <p>
-              <Trans i18nKey="reportDetail.rejectMsg">
+          {/* ############ MODAL 4 */}
+          <Modal
+            size="lg"
+            active={rejectSubmitted}
+            toggler={() => setRejectSubmitted(false)}
+          >
+            <ModalTitle>
+              <Heading5>
                 {" "}
-                Are you sure you want to Reject this report
-              </Trans>
-            </p>
-          </ModalBody>
-          <ModalFooter>
-            <Button color="brown" onClick={() => rejectReport()}>
-              <Trans i18nKey="reportDetail.confirm">Confirm</Trans>
-            </Button>
-            <Button color="brown" onClick={() => handleDeleteCancel()}>
-              {" "}
-              <Trans i18nKey="reportDetail.cancel">cancel</Trans>
-            </Button>
-          </ModalFooter>
-        </Modal>
+                <Trans i18nKey="reportDetail.confirm"> Confirm </Trans>
+                <Trans i18nKey="reportDetail.transfer">Transfer</Trans>
+              </Heading5>
+            </ModalTitle>
+            <ModalBody>
+              <p>
+                <Trans i18nKey="reportDetail.rejectMsg">
+                  {" "}
+                  Are you sure you want to Reject this report
+                </Trans>
+              </p>
+            </ModalBody>
+            <ModalFooter>
+              <Button color="brown" onClick={() => rejectReport()}>
+                <Trans i18nKey="reportDetail.confirm">Confirm</Trans>
+              </Button>
+              <Button color="brown" onClick={() => handleDeleteCancel()}>
+                {" "}
+                <Trans i18nKey="reportDetail.cancel">cancel</Trans>
+              </Button>
+            </ModalFooter>
+          </Modal>
 
-        {/* ####################### MODAL */}
-        {/* </div> */}
+          {/* ####################### MODAL */}
+          {/* </div> */}
 
-        {/* <ReportInfo data={mydata}/> */}
+          {/* <ReportInfo data={mydata}/> */}
         </div>
         {/* </div> */}
-         <Footer /> 
+        <Footer />
       </>
     )
   );

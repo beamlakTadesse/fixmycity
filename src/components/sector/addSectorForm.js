@@ -81,7 +81,7 @@ export default function AddSectorForm({ isActive, setIsActive }) {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    const url = `${url}/v1/admins/sector/sector/`;
+    const url1 = `${url}/v1/admins/sector/sector/`;
     setSubmitted(true);
 
     try {
@@ -113,7 +113,7 @@ export default function AddSectorForm({ isActive, setIsActive }) {
         console.log("hello form is submmitted");
         setSubmitted(false);
 
-        await fetch(url, requestOptions)
+        await fetch(url1, requestOptions)
           .then((response) => {
             if (!response.ok) {
               setStatus(response.status);
@@ -126,6 +126,7 @@ export default function AddSectorForm({ isActive, setIsActive }) {
             setData(data);
             // this.setState({ isLoading: false, downlines: data.response });
             console.log("DATA STORED");
+            alert("Sector Created.");
             setShowModal(false);
 
             if (mydata.length === 0) {

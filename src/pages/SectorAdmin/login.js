@@ -2,7 +2,7 @@ import { Input, Image, Button } from "@material-tailwind/react";
 import logo from "../../assets/img/fix.jpg";
 import addis from "../../assets/img/addis.jpg";
 import React, { useState, useEffect } from "react";
-import { useNavigate, Route, useLocation } from "react-router-dom";
+import { useNavigate, Route, useLocation, NavLink } from "react-router-dom";
 import { setRole } from "helpers/utils";
 import jwt_decode from "jwt-decode";
 import useAuth from "../../hooks/auth";
@@ -146,9 +146,9 @@ export default function LogInSectorAdmin() {
           </form>
           <div className="text-center pt-12 pb-12">
             <p>
-              <a href="register.html" class="underline font-semibold">
+              <NavLink to="/password-reset/" class="underline font-semibold">
                 Forgot password?
-              </a>
+              </NavLink>
             </p>
           </div>
         </div>

@@ -22,7 +22,7 @@ export default function Dashboard() {
   return (
     <>
       <Sidebar />
-      <div className="bg-[#DEB887] pt-14 pb-28 px-3 md:px-8 h-auto"></div>
+      <div className="bg-[#a08679] pt-14 pb-28 px-3 md:px-8 h-auto"></div>
 
       <div className="px-3 md:px-8 h-auto -mt-24">
         <div className="container mx-auto max-w-full">

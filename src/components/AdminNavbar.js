@@ -70,7 +70,6 @@ export default function AdminNavbar({ showSidebar, setShowSidebar }) {
     setTimeout(() => {
       setIsLoading(false);
     }, 1500);
-    console.log("wert7687oilkcgxfdtrytuyiu");
   };
 
   const loadUserFromServer = useCallback(async () => {
@@ -82,7 +81,7 @@ export default function AdminNavbar({ showSidebar, setShowSidebar }) {
   }, []);
 
   return (
-    <nav className="bg-[#DEB887]  py-6 px-3">
+    <nav className="bg-[#a08679]  py-6 px-3">
       <div className="container max-w-full mx-auto flex items-center justify-between md:pr-8 md:pl-10">
         <div className="md:hidden">
           <Button

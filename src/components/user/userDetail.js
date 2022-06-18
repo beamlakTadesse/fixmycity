@@ -29,7 +29,14 @@ export default function UserDetail() {
   const url2 = `${url}/v1/report_by_user/` + id;
   const fetchData = async () => {
     try {
-      const response = await fetch(url1);
+      const requestOptions = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      };
+      const response = await fetch(url1, requestOptions);
 
       const json = await response.json();
 
@@ -181,7 +188,7 @@ export default function UserDetail() {
             <div className="xl:col-start-1 xl:col-end-2 px-4 mb-16">
               {reports.length != 0 ? (
                 <table className="items-center w-full bg-transparent border-collapse">
-                  <thead className="border-b bg-gray-800">
+                  <thead className="border-b bg-[#DEB887]  ">
                     <tr>
                       <th className="px-2 text-white align-middle border-r border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
                         <Trans i18nKey="users.Image">Image</Trans>

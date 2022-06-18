@@ -14,9 +14,9 @@ export default function AnnouncementList({ announcements }) {
   const dispatch = useDispatch();
   // const announcements = useSelector(state => state.announcement);
 
-  // useEffect(() => {
-  //     dispatch(announcementActions.getAll());
-  // }, [])
+  useEffect(() => {
+    // dispatch(announcementActions.getAll());
+  }, [announcements]);
   // console.log("announcement2", announcements['items']);
 
   return isLoading ? (
