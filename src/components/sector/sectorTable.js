@@ -83,7 +83,7 @@ export default function SectorTable({ isEmpty }) {
                     <Trans i18nKey="profile.phone"> Phone</Trans>
                   </th>
                   <th className="px-2 text-brown-500 align-middle border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
-                    <Trans i18nKey="profile.phone"> District Type</Trans>
+                    <Trans i18nKey="sector.DistrictType"> District Type</Trans>
                   </th>
                 </tr>
               </thead>

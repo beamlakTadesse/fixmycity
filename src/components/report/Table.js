@@ -123,8 +123,8 @@ export function ReportStatusColumnFilter({
         <option value="">All</option>
         {options.map((option, i) => (
           <option key={i} value={option}>
-            {option === "UNRESOLVED"
-              ? "UnResolved"
+            {option === "PENDING"
+              ? "Pending"
               : option === "RESOLVED"
               ? "Resolved"
               : "Rejected"}
@@ -141,7 +141,7 @@ export function ReportUser({ value }) {
       className={classNames(
         "px-3 py-1 camelcase leading-wide font-bold text-xs rounded-full shadow-sm",
         value.startsWith("RESOLVED") ? "bg-green-100 text-green-800" : null,
-        value.startsWith("UNRESOLVED") ? "bg-yellow-100 text-yellow-800" : null,
+        value.startsWith("PENDING") ? "bg-yellow-100 text-yellow-800" : null,
         value.startsWith("REJECTED") ? "bg-red-100 text-red-800" : null
       )}
     >
@@ -159,7 +159,7 @@ export function StatusPill({ value }) {
       className={classNames(
         "px-3 py-1 camelcase leading-wide font-bold text-xs rounded-full shadow-sm",
         value.startsWith("RESOLVED") ? "bg-green-100 text-green-800" : null,
-        value.startsWith("UNRESOLVED") ? "bg-black-100 text-black-800" : null,
+        value.startsWith("PENDING") ? "bg-black-100 text-black-800" : null,
         value.startsWith("REJECTED") ? "bg-red-100 text-red-800" : null
       )}
     >
@@ -311,9 +311,9 @@ function Table({ columns, data }) {
     {
       columns,
       data,
-      initialState: {
-        hiddenColumns: ["spamStatus"],
-      },
+      // initialState: {
+      //   hiddenColumns: ["spamStatus"],
+      // },
     },
     useFilters, // useFilters!
     useGlobalFilter,

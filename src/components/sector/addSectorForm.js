@@ -10,6 +10,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import { sectorActions, userActions } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import * as Yup from "yup";
 
 import Modal from "@material-tailwind/react/Modal";
 import ModalHeader from "@material-tailwind/react/ModalHeader";
@@ -19,9 +21,10 @@ import { url } from "helpers/strings";
 // import authHeader from 'helpers'
 export default function AddSectorForm({ isActive, setIsActive }) {
   const dispatch = useDispatch();
+  // let lelaSelected = 0;
 
-  const [lati, setLat] = useState(null);
-  const [lngi, setLng] = useState(null);
+  const [lati, setLat] = useState(9.0079232);
+  const [lngi, setLng] = useState(38.7678208);
 
   // const [showModal, setShowModal] = useState(false);
   const [checked, setChecked] = React.useState(false);
@@ -47,11 +50,19 @@ export default function AddSectorForm({ isActive, setIsActive }) {
     district_name: "",
     email: "",
     phone_number: "",
-    sector_type: 4,
+    sector_type: 3,
     lat: null,
     lng: null,
   });
   const [showModal, setShowModal] = useState(false);
+  const [lelaSelected, setLelaSelected] = useState(0);
+
+  // let lelaSelected = 0;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   // const [showModal, setShowModal] = useState(me_active);
   const [submitted, setSubmitted] = useState(false);
@@ -76,9 +87,17 @@ export default function AddSectorForm({ isActive, setIsActive }) {
     setInputs((inputs) => ({ ...inputs, [name]: value }));
   }
 
+  const handleChangeRadio = (event) => {
+    setLelaSelected(event.target.value)
+  }
+
+  const resetRadioState = () => {
+    setLelaSelected(0);
+  }
+
   // useEffect(()=>{
 
-  async function handleSubmit(e) {
+  async function handleSubmit1(e) {
     e.preventDefault();
 
     const url1 = `${url}/v1/admins/sector/sector/`;
@@ -104,12 +123,13 @@ export default function AddSectorForm({ isActive, setIsActive }) {
             main_sector: checked,
             district_name: district_name,
             phone_number: phone_number,
-            sector_type: 4,
+            sector_type: lelaSelected,
             email: email,
             lng: lngi,
             lat: lati,
           }),
         };
+        console.log("Selected___",lelaSelected)
         console.log("hello form is submmitted");
         setSubmitted(false);
 
@@ -128,7 +148,7 @@ export default function AddSectorForm({ isActive, setIsActive }) {
             console.log("DATA STORED");
             alert("Sector Created.");
             setShowModal(false);
-
+            
             if (mydata.length === 0) {
               setIsEmpty(true);
             }
@@ -137,6 +157,8 @@ export default function AddSectorForm({ isActive, setIsActive }) {
             console.log("error: " + error);
             setErrorMessage("Please try Again");
             setError(true);
+            alert("Sector Not Created pls try Again!!!!!");
+
           });
         setTimeout(() => {
           setIsLoading(false);
@@ -150,6 +172,8 @@ export default function AddSectorForm({ isActive, setIsActive }) {
   }
 
   const [startDate, setStartDate] = useState(new Date());
+ 
+
   return (
     <Modal size="lg" active={isActive} toggler={() => setIsActive(false)}>
       {/* active={me_active} toggler={() =>{me_active=!isactive}}> */}
@@ -213,15 +237,100 @@ export default function AddSectorForm({ isActive, setIsActive }) {
                   )}
                 </div>
                 <div className="w-full lg:w-6/12 pl-4 mb-10 font-light">
-                  <DatePicker
+                  {/* <DatePicker
                     selected={startDate}
                     onChange={(date) => setStartDate(date)}
-                  />
+                  /> */}
+
+          <form >
+          <h4>Select Sector Type:</h4>
+          
+            <div className="form-check mt-3">
+              <label htmlFor="Elpa">
+                <input
+                  {...register("sectors", { required: true })}
+                  type="radio"
+                  name="sectors"
+                  value={4}
+                  className="form-check-input"
+                  onChange={handleChangeRadio}
+                  id="elpa"
+                />{" "}
+                Elpa
+              </label>
+            </div>
+         
+
+         
+            <div className="form-check">
+              <label htmlFor="water">
+                <input
+                  {...register("sectors", { required: true })}
+                  type="radio"
+                  name="sectors"
+                  value={2}
+                  onChange={handleChangeRadio}
+                
+                  className="form-check-input"
+                  id="water"
+                />{" "}
+                Water
+              </label>
+            </div>
+         
+
+          
+            <div className="form-check">
+              <label htmlFor="roads">
+                <input
+                  {...register("sectors", { required: true })}
+                  type="radio"
+                  name="sectors"
+                  value={3}
+                  className="form-check-input"
+                  onChange={handleChangeRadio}
+
+                  id="roads"
+                />
+                Roads
+              </label>
+            </div>
+         
+
+          
+            <div className="form-check">
+              <label htmlFor="tele">
+                <input
+                  {...register("sectors", { required: true })}
+                  type="radio"
+                  name="sectors"
+                  value={1}
+                  onChange={handleChangeRadio}
+
+                  className="form-check-input"
+                  id="tele"
+                />
+                Tele
+              </label>
+            </div>
+         
+
+          {/* <div className="text-danger mt-3">
+            {errors.sectors?.type === "required" && "Here Are the only sectors"}
+          </div> */}
+          {/* <Button
+            color="brown"
+            type="submit"
+            className="btn btn-dark center mt-4"
+          >
+            Transfer
+          </Button> */}
+        </form>
                 </div>
               </div>
               <div className="grid grid-rows-3 grid-flow-col gap-1">
                 <div className="row-span-3">
-                  <Button color="brown" onClick={(e) => handleSubmit(e)}>
+                  <Button color="brown" onClick={(e) => handleSubmit1(e)}>
                     Submit
                   </Button>
                 </div>

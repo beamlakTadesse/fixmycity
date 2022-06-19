@@ -3,7 +3,7 @@ export function phonenumber(inputtxt) {
   if (inputtxt.match(phoneno)) {
     return null;
   } else {
-    alert("Incorrect Phone");
+    // alert("Incorrect Phone");
     return "Incorrect Phone";
   }
 }
@@ -12,7 +12,7 @@ export function nameValidation(inputtxt) {
   if (inputtxt.match(letters)) {
     return true;
   } else {
-    alert("Incorrect name");
+    // alert("Incorrect name");
     return false;
   }
 }
