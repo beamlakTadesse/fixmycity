@@ -13,7 +13,6 @@ import { NavLink } from "react-router-dom";
 import { url } from "helpers/strings";
 import React, { useState, useEffect, useCallback, useContext } from "react";
 import { getUserId } from "helpers/utils";
-import { UserContext, UserDispatchContext } from "context/userProvider";
 import { Trans } from "react-i18next";
 
 export default function AdminNavbar({ showSidebar, setShowSidebar }) {
@@ -36,9 +35,6 @@ export default function AdminNavbar({ showSidebar, setShowSidebar }) {
     // setRol();
   }
 
-  const userDetails = useContext(UserContext);
-  const setUserDetails = useContext(UserDispatchContext);
-
   const token = localStorage.getItem("token");
 
   const userId = getUserId(token);
@@ -56,12 +52,6 @@ export default function AdminNavbar({ showSidebar, setShowSidebar }) {
         setImage(
           `http://res.cloudinary.com/shetechs/${json.user.ProfileImage}`
         );
-        setUserDetails({
-          firstname: users.firstname,
-          lastname: users.lastname,
-          phone_number: users.phone_number,
-          ProfileImage: image,
-        });
       }
     } catch (error) {
       console.log("error", error);

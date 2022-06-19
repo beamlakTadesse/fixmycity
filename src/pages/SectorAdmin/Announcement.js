@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Button } from "@material-tailwind/react";
 import AnnouncementList from "components/sector/Announcement/AnnouncementList";
 import AddAnnouncement from "components/sector/Announcement/AddAnnouncement";
@@ -9,10 +9,11 @@ import Sidebar from "components/Sidebar";
 import Footer from "components/Footer";
 import { url } from "helpers/strings";
 import { Trans } from "react-i18next";
+import { AnnContext } from "context/annProvider";
 
 export default function Announcement() {
   const [showModal, setShowModal] = React.useState(false);
-
+  const [state, dispatch] = useContext(AnnContext);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setError] = useState(false);
   const [unAuth, setAnuth] = useState(false);
@@ -39,6 +40,11 @@ export default function Announcement() {
         if (response.ok) {
           console.log(json);
           setAnn(json);
+
+          dispatch({
+            type: "LIST",
+            payload: json,
+          });
           // console.log(announcements.length);
         }
 
@@ -81,7 +87,7 @@ export default function Announcement() {
             {announcements && announcements.length === 0 ? (
               <div>No Data</div>
             ) : (
-              <AnnouncementList announcements={announcements} />
+              <AnnouncementList announcements={state.ann} />
             )}
           </div>
         </div>

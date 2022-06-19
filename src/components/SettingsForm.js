@@ -20,32 +20,6 @@ export default function SettingsForm({ editProfile, setEditProfile }) {
   const [phoneError, setPhoneError] = useState(null);
   const [nameError, setNameError] = useState(null);
 
-  useEffect(() => {
-    const url1 = `${url}/v1/admins/users/` + id;
-    const fetchData = async () => {
-      setIsLoading(true);
-      try {
-        const response = await fetch(url1);
-
-        const json = await response.json();
-
-        if (json) {
-          setData(json.user);
-        }
-
-        console.log("Sectors: ", json.user);
-      } catch (error) {
-        console.log("error", error);
-        setError(true);
-      }
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 1500);
-    };
-
-    fetchData();
-  }, []);
-
   const changeHandler = (event) => {
     setSelectedFile(event.target.files[0]);
     setIsFilePicked(true);
@@ -62,7 +36,37 @@ export default function SettingsForm({ editProfile, setEditProfile }) {
     const { name, value } = e.target;
     setInputs((inputs) => ({ ...inputs, [name]: value }));
   }
+  useEffect(() => {
+    const url1 = `${url}/v1/admins/users/` + id;
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const response = await fetch(url1);
 
+        const json = await response.json();
+
+        if (json) {
+          setData(json.user);
+          setInputs({
+            // email: mydata.email,
+            firstname: mydata.first_name,
+            lastname: mydata.last_name,
+            phone_number: mydata.phone_number,
+          });
+        }
+
+        console.log("Sectors: ", json.user);
+      } catch (error) {
+        console.log("error", error);
+        setError(true);
+      }
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1500);
+    };
+
+    fetchData();
+  }, []);
   function editProfile() {
     const url2 = `${url}/v1/admins/edit_profile/`;
     const formData = new FormData();

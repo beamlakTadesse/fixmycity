@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Button } from "@material-tailwind/react";
 import Modal from "@material-tailwind/react/Modal";
 import ModalHeader from "@material-tailwind/react/ModalHeader";
@@ -12,10 +12,10 @@ import CardHeader from "@material-tailwind/react/CardHeader";
 import CardBody from "@material-tailwind/react/CardBody";
 import Input from "@material-tailwind/react/Input";
 import "react-datepicker/dist/react-datepicker.css";
-import { useDispatch, useSelector } from "react-redux";
-import userDetailContext from "../../../pages/SectorAdmin/Announcement";
+
 import { url } from "helpers/strings";
 import { Trans } from "react-i18next";
+import { AnnContext } from "context/annProvider";
 export default function AddAnnouncement({ isActive, setIsActive }) {
   const [showModal, setShowModal] = useState(false);
 
@@ -57,9 +57,8 @@ export default function AddAnnouncement({ isActive, setIsActive }) {
     setIsFilePicked(true);
   };
 
-  const dispatch = useDispatch();
+  const [state, dispatch] = useContext(AnnContext);
 
-  const [mydata, setData] = useState(null);
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -89,31 +88,22 @@ export default function AddAnnouncement({ isActive, setIsActive }) {
         console.log(requestOptions);
         // console.log(formData.get("title"));
         // console.log(formData.get("description"));
+        const response = await fetch(url1, requestOptions);
 
-        await fetch(url1, requestOptions)
-          .then((response) => {
-            if (!response.ok) {
-              setStatus(response.status);
-              setShowModal(true);
-
-              throw new Error(response.status);
-            } else {
-              alert("Poseted succesfully!");
-              console.log(response.json);
-            }
-          })
-          .then((data) => {
-            setData(data);
-            // this.setState({ isLoading: false, downlines: data.response });
-            console.log("DATA STORED");
-            setShowModal(false);
-            setIsActive(false);
-          })
-          .catch((error) => {
-            console.log("error: " + error);
-            setErrorMessage("Please try Again");
-            setError(true);
+        const json = await response.json();
+        console.log(json);
+        if (response.ok) {
+          alert("Poseted succesfully!");
+          dispatch({
+            type: "ADD",
+            payload: json.data,
           });
+          setShowModal(false);
+          setIsActive(false);
+        } else {
+          setStatus(response.status);
+          setShowModal(true);
+        }
       }
     } catch (error) {
       console.log("error", error);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Button } from "@material-tailwind/react";
 import Card from "@material-tailwind/react/Card";
 import CardHeader from "@material-tailwind/react/CardHeader";
@@ -8,14 +8,16 @@ import AnnouncementCard from "./mycard";
 import { useDispatch, useSelector } from "react-redux";
 import { announcementActions } from "actions";
 import Loader from "../shared/loader";
+import { AnnContext } from "context/annProvider";
 export default function AnnouncementList({ announcements }) {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setError] = useState(false);
-  const dispatch = useDispatch();
-  // const announcements = useSelector(state => state.announcement);
 
+  // const announcements = useSelector(state => state.announcement);
+  const [state, dispatch] = useContext(AnnContext);
+  console.log(announcements);
   useEffect(() => {
-    // dispatch(announcementActions.getAll());
+    // dispatch(ann         ouncementActions.getAll());
   }, [announcements]);
   // console.log("announcement2", announcements['items']);
 

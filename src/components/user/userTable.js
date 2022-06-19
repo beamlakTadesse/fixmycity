@@ -19,12 +19,12 @@ import RegisterPage from "./register";
 import Loader from "components/sector/shared/loader";
 import ErrorPage2 from "components/sector/shared/errorPage2";
 import { url } from "helpers/strings";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Trans } from "react-i18next";
 
 export default function UserTable() {
   // const users = useSelector(state => state.users);
-
+  const navigate = useNavigate();
   // const user = useSelector(state => state.authentication.user);
   const dispatch = useDispatch();
 
@@ -32,38 +32,38 @@ export default function UserTable() {
   const [isEmpty, setIsEmpty] = useState(true);
   const [isError, setError] = useState(false);
   const [users, setUsers] = useState([]);
+  const url1 = `${url}/v1/admins/users/`;
+
+  const fetchData = async () => {
+    setIsLoading(true);
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    };
+    try {
+      const response = await fetch(url1, requestOptions);
+
+      const json = await response.json();
+      console.log(json.user);
+      setUsers(json.user);
+
+      if (users.length > 0) {
+        setIsEmpty(false);
+      } else {
+        setIsEmpty(true);
+      }
+
+      // console.log("Sectors: ", json.sectors[0].district_name);
+    } catch (error) {
+      console.log("error", error);
+      setError(true);
+    }
+  };
   useEffect(() => {
     // mounted.current = true;
-    const url1 = `${url}/v1/admins/users/`;
-
-    const fetchData = async () => {
-      setIsLoading(true);
-      const requestOptions = {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      };
-      try {
-        const response = await fetch(url1, requestOptions);
-
-        const json = await response.json();
-        console.log(json.user);
-        setUsers(json.user);
-
-        if (users.length > 0) {
-          setIsEmpty(false);
-        } else {
-          setIsEmpty(true);
-        }
-
-        // console.log("Sectors: ", json.sectors[0].district_name);
-      } catch (error) {
-        console.log("error", error);
-        setError(true);
-      }
-    };
 
     fetchData();
     setTimeout(() => {
@@ -78,14 +78,16 @@ export default function UserTable() {
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
     };
+
     const response = await fetch(
       // TODO change url
+
       `${url}/customUser/removeban/${id}`,
       requestOptions
     );
+
     const json = await response.json();
-    console.log(json);
-    console.log(response);
+    fetchData();
   };
   const [msg, setMsg] = useState("");
   async function handleDeleteUser(id) {

@@ -1,9 +1,8 @@
 import { url } from "helpers/strings";
-import { getUserId } from "helpers/utils";
 import React, { useReducer, createContext, useState } from "react";
 
-export const UserContext = createContext();
-var data = {};
+export const AnnContext = createContext();
+var data = [];
 const fetchData = async () => {
   try {
     const requestOptions = {
@@ -24,27 +23,42 @@ const fetchData = async () => {
 fetchData();
 
 const initialState = {
-  user: data,
+  ann: data,
   loading: false,
   error: null,
 };
-
-const token = localStorage.getItem("token");
-
-const userId = getUserId(token);
-const url1 = `${url}/v1/admins/users/` + userId;
+const url1 = `${url}/v1/announcment/getOwnAnnouncment/`;
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case "EDIT":
+    case "ADD":
+      console.log(action.payload);
       return {
-        user: [...state.user, action.payload],
+        ann: [...state.ann, action.payload],
       };
+    case "EDIT": {
+      const newArray = [...state.ann];
+      const index = state.ann.findIndex((ann) => ann.id == action.payload.id);
+      state.ann.forEach((ann) => {
+        if (ann.id == action.payload.id) {
+          newArray[index] = action.payload;
+        }
+      });
+
+      newArray[index] = action.payload;
+
+      return {
+        ann: newArray,
+      };
+    }
     case "LIST":
       return {
-        user: action.payload,
+        ann: action.payload,
       };
-
+    case "DEL":
+      return {
+        ann: state.ann.filter((contact) => contact.id !== action.payload),
+      };
     case "START":
       return {
         loading: true,
@@ -58,12 +72,12 @@ const reducer = (state, action) => {
   }
 };
 
-export const UserContextProvider = (props) => {
+export const AnnContextProvider = (props) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <UserContext.Provider value={[state, dispatch]}>
+    <AnnContext.Provider value={[state, dispatch]}>
       {props.children}
-    </UserContext.Provider>
+    </AnnContext.Provider>
   );
 };

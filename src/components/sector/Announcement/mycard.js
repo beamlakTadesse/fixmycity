@@ -2,7 +2,7 @@ import Image from "@material-tailwind/react/Image";
 // import thumb from "../public/thumb.svg";
 // import thumb from '../../../assets/img/aawsa.png';
 import thumb from "../../../assets/img/aara.jpg";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 // import { FaReact } from "react-icons/fa";
 import { SiTypescript } from "react-icons/si";
 // import { AiOutlineClockCircle } from "react-icons/ai";
@@ -20,6 +20,7 @@ import ModalTitle from "@material-tailwind/react/ModalHeader";
 import Modal from "@material-tailwind/react/Modal";
 import EditAnnouncement from "./editAnnouncement";
 import { Trans } from "react-i18next";
+import { AnnContext } from "context/annProvider";
 
 export default function AnnouncementCard({
   title,
@@ -31,6 +32,39 @@ export default function AnnouncementCard({
   address,
 }) {
   console.log(id);
+  console.log(id);
+
+  console.log(id);
+
+  const [state, dispatch] = useContext(AnnContext);
+  const delAnn = () => {
+    console.log("id...", id);
+    dispatch({
+      type: "DEL",
+      payload: id,
+    });
+  };
+  const fetchData = async () => {
+    const url1 = `${url}/v1/announcment/getOwnAnnouncment/`;
+    try {
+      const requestOptions = {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      };
+      const response = await fetch(url1, requestOptions);
+
+      const json = await response.json();
+
+      if (response.ok) {
+        dispatch({
+          type: "LIST",
+          payload: json,
+        });
+      }
+    } catch (e) {}
+  };
   const deleteAnn = async (id) => {
     const url1 = `${url}/v1/announcment/${id}/`;
 
@@ -45,6 +79,8 @@ export default function AnnouncementCard({
 
       const response = await fetch(url1, requestOptions);
       if (response.ok) {
+        delAnn();
+        fetchData();
         // const json = await response.json();
         // console.log("Spam Report: ", json);
       }

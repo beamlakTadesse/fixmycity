@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Button } from "@material-tailwind/react";
 import Modal from "@material-tailwind/react/Modal";
 import ModalHeader from "@material-tailwind/react/ModalHeader";
@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import userDetailContext from "../../../pages/SectorAdmin/Announcement";
 import { url } from "helpers/strings";
 import { Trans } from "react-i18next";
+import { AnnContext } from "context/annProvider";
 export default function EditAnnouncement({
   isActive,
   setIsActive,
@@ -64,10 +65,7 @@ export default function EditAnnouncement({
     setIsFilePicked(true);
   };
 
-  const dispatch = useDispatch();
-
-  const [mydata, setData] = useState(null);
-  console.log(id);
+  const [state, dispatch] = useContext(AnnContext);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -103,31 +101,47 @@ export default function EditAnnouncement({
       console.log(requestOptions);
       // console.log(formData.get("title"));
       console.log(formData.get("image"));
+      const response = await fetch(url1, requestOptions);
 
-      await fetch(url1, requestOptions)
-        .then((response) => {
-          if (!response.ok) {
-            setStatus(response.status);
-            setShowModal(true);
-            alert("not updated");
-            throw new Error(response.status);
-          } else return response.json();
-        })
-        .then((data) => {
-          setData(data);
-
-          // this.setState({ isLoading: false, downlines: data.response });
-          console.log("DATA STORED");
-          alert("updated sucesfully");
-          setShowModal(false);
-          setIsActive(false);
-        })
-        .catch((error) => {
-          console.log("error: " + error);
-          setErrorMessage("Please try Again");
-          setError(true);
+      const json = await response.json();
+      console.log(json);
+      if (response.ok) {
+        alert("updated sucesfully");
+        dispatch({
+          type: "EDIT",
+          payload: json.data,
         });
+        setShowModal(false);
+        setIsActive(false);
+      } else {
+        alert("not updated");
+        setStatus(response.status);
+        setShowModal(true);
+      }
     } catch (error) {
+      // await fetch(url1, requestOptions)
+      //   .then((response) => {
+      //     if (!response.ok) {
+      //       setStatus(response.status);
+      //       setShowModal(true);
+      //       alert("not updated");
+      //       throw new Error(response.status);
+      //     } else return response.json();
+      //   })
+      //   .then((data) => {
+      //     setData(data);
+
+      //     // this.setState({ isLoading: false, downlines: data.response });
+      //     console.log("DATA STORED");
+      //   alert("updated sucesfully");
+      //   setShowModal(false);
+      //   setIsActive(false);
+      // })
+      // .catch((error) => {
+      //   console.log("error: " + error);
+      //   setErrorMessage("Please try Again");
+      //   setError(true);
+      // });
       console.log("error", error);
     }
 

@@ -43,6 +43,7 @@ import UserDetail from "components/user/userDetail";
 import PasswordReset from "pages/passwordreset";
 import ChangePassword from "pages/changePass";
 import ChangePasswordR from "pages/changePass";
+import { AnnContextProvider } from "context/annProvider";
 // import Authorization from "RequireAuth";
 
 function App() {
@@ -72,7 +73,16 @@ function App() {
           <Route element={<RequireAuth allowedRoles={[2]} />}>
             <Route exact path="/sector/dashboard" element={<SectorDash />} />
 
-            <Route exact path="/announcement" element={<Announcement />} />
+            <Route
+              exact
+              path="/announcement"
+              element={
+                <AnnContextProvider>
+                  <Announcement />{" "}
+                </AnnContextProvider>
+              }
+            />
+
             <Route exact path="/ayy" element={<AnnouncementList />} />
             <Route exact path="/sector/reports" element={<Report />} />
 
