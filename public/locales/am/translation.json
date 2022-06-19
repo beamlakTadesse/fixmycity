@@ -40,6 +40,8 @@
     "confirm": "አረጋግጥ",
     "cancel": "ሰርዝ",
     "confirmRemoval": "መወገድን ያረጋግጡ",
+    "confirmReject": "ሪፖርት ውድቅ ማድርግ አረጋግጥ",
+
     "confirmRemovalMsg": "እርግጠኛ ነዎት ይህን ወደ አይፈለጌ መልዕክት ዘገባ ማስወገድ ይፈልጋሉ",
     "transferTo": "ሪፖርትን ወደ ሌላ ዘርፍ ያስተላልፉ",
     "rejectMsg": "እርግጠኛ ነዎት ይህን ሪፖርት ውድቅ ማድረግ ይፈልጋሉ",

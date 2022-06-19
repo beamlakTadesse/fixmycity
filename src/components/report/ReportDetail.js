@@ -281,7 +281,7 @@ export default function ReportDet() {
                     </h3>
                   </Button>
                 )}
-                {mydata.status === "UNRESOLVED" && !mydata.spamStatus && (
+                {mydata.status === "PENDING" && !mydata.spamStatus && (
                   <Button
                     className="ml-[30px] mt-[30px]"
                     style={{ backgroundColor: "rgb(34,139,34)" }}
@@ -312,7 +312,7 @@ export default function ReportDet() {
 
               <div className="w-[500px]  mt-[40px]">
                 <div className="bg-white  w-[300px] h-[80px] mt-[40px] ml-[20px] rounded-xl flex border-1 border-solid">
-                  {mydata.status === "UNRESOLVED" ? (
+                  {mydata.status === "PENDING" ? (
                     <img src={Active} className=" w-[80px]   rounded-xl" />
                   ) : (
                     <img
@@ -324,14 +324,14 @@ export default function ReportDet() {
                     <p className="ml-[40px] mt-4 text-xl font-light">
                       {mydata.status === "RESOLVED" ? (
                         <Trans i18nKey="reportDetail.resolved">Resolved</Trans>
-                      ) : mydata.status === "UNRESOLVED" ? (
+                      ) : mydata.status === "PENDING" ? (
                         <Trans i18nKey="reportDetail.active">Active</Trans>
                       ) : (
                         <Trans i18nKey="reportDetail.rejected">Rejected</Trans>
                       )}
                     </p>
                     <hr className="border-1 ml-7"></hr>
-                    {mydata.status == "UNRESOLVED" ? (
+                    {mydata.status == "PENDING" ? (
                       <p className="ml-[100px] mt-2 font-light text-sm">
                         {toDate(mydata.postedAt)}
                       </p>
@@ -609,8 +609,7 @@ export default function ReportDet() {
             <ModalTitle>
               <Heading5>
                 {" "}
-                <Trans i18nKey="reportDetail.confirm"> Confirm </Trans>
-                <Trans i18nKey="reportDetail.transfer">Transfer</Trans>
+                <Trans i18nKey="reportDetail.confirmReject">Confirm Reject</Trans>
               </Heading5>
             </ModalTitle>
             <ModalBody>

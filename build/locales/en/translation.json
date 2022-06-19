@@ -1,0 +1,133 @@
+{
+  "settings": {
+    "changeLanguage": "Change Language"
+  },
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "sectorDashboard": "Sector Dashboard",
+    "sector": "Sector",
+    "users": "Users",
+    "report": "Report",
+    "profile": "Profile",
+    "announcement": "Announcement"
+  },
+  "sectorDashboard": {
+    "Overview": " Overview",
+    "ReportStatus": "Report Status",
+    "SectorAdmin": "Sector Admin",
+    "BranchName": "Branch Name"
+  },
+  "report": {
+    "map": "Show In Map",
+    "page": "Page",
+    "of": "of",
+    "show": "Show",
+    "Search": "Search",
+    "ShowSpamStatus": "Show Spam Status"
+  },
+  "reportDetail": {
+    "reportedIssue": " Reported Issue",
+    "resolve": " Resolve",
+    "location": "Location",
+    "addis": "Addis Ababa",
+    "otherOption": "Other Option",
+    "transfer": "Transfer",
+    "rejectReport": "Reject Report",
+    "confirmDelete": "Confirm Delete",
+    "confirmToSpam": "Confirm To Spam",
+    "confirmToSpamMsg": "Are you sure you want to add this report to spam",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "confirmRemoval": "Confirm Removal",
+    "confirmReject": "Confirm Reject Report",
+
+    "confirmRemovalMsg": "Are you sure you want to remove this report to spam",
+    "transferTo": "Transfer Report to other Sector",
+    "rejectMsg": "Are you sure you want to Reject this report",
+    "addToSpam": "Add To Spam",
+    "removeSpam": "Remove Spam",
+    "resolved": "Resolved",
+    "active": "Active",
+    "rejected": "Rejected"
+  },
+  "profile": {
+    "editProfile": "Edit Profile",
+    "personalInformation": " personal Information",
+    "fullname": " Full name",
+    "username": "Username",
+    "email": "Email",
+    "ethiopia": "Ethiopia",
+    "phone": "Phone No.",
+    "sectorInformation": "Sector Information",
+    "myAccount": "My Account",
+    "settings": " Settings",
+    "firstName": " First Name",
+    "lastName": "Last Name",
+    "changePassword": "Change Password",
+    "oldpassword": "Old password",
+    "passwordmissmatch": " Password missmatch",
+    "newpassword": "new password",
+    "confirmpassword": "confirm password",
+    "help": "Help",
+    "logout": "Logout",
+    "Message": "Message",
+    "send": "Send"
+  },
+  "announcement": {
+    "postAnnouncement": "Post Announcement",
+    "seeLess": "See Less",
+    "seeDetail": "See Detail",
+    "updated": "Updated",
+    "delete": " Delete",
+    "confDelete": "Are you sure you want to remove this Announcement",
+    "postedBY": "Posted BY",
+    "address": "Address",
+    "title": "Title",
+    "districtName": "District Name",
+    "description": "Description",
+    "submit": "Submit",
+    "editAnnouncement": "Edit Announcement"
+  },
+  "help": {
+    " FixMyCity": " Fix My City",
+    "userManual": "  User Manual",
+    "moto": " Make Our City Better!!!",
+    "SectorDashboard": "Sector Dashboard",
+    "msg1": "Shows the general analitics of reports",
+    "msg2": "It shows all reports in a table then we can filter the reports with status of resolved and un resolved, and also we can filter spam and non spam reports. If we want to see the details of a speific report we can click the name of that report.",
+    "transfersReport": "Transfers Report",
+    "msg3": " After going to report detail page we can click the other options then, when the options arive we can click transfer button. After clicking transfer we can the choose the sector we want it to be tranferd to, then we can transfer a report to other sectors.",
+    "AddtoSpamReport": "Add to Spam Report",
+    "msg4": " After going to report detail page we can click the other options then, when the options arive we can click reject report button. After clicking the button we can confirm the rejection.",
+    "msg5": "After going to report detail page we can click the other options then, when the options arive we can click add to spam report button. After clicking the button we can confirm the the tranfer."
+  },
+  "sectorAdmin": {
+    "ActiveSectorsAdmin": "Active Sectors Admin",
+    "SeeMore": "See More",
+    "Visitors": "Visitors",
+    "NumberofSectors'Branch": "Number of Sectors' Branch"
+  },
+  "users": {
+    "Users": "Users",
+    "nodata": "No Data to Display",
+    "UserState": "User State",
+    "activate": "Activate",
+    "Active": "Active",
+    "Image": "Image",
+    "Description": "Description",
+    "SpamStatus": "Spam Status",
+    "ReportStatus": " Report Status",
+    "PostedDate": "Posted Date",
+    "NoReportyet": "No Report yet"
+  },
+  "sector": {
+    "CreateSector": " Create Sector",
+    "Sectors": "Sectors",
+    "DistrictType": "District Type",
+    "NoDatatoDisplay": "No Data to Display"
+  },
+  "adminDash": {
+    "AddSectorAdmin": "Add Sector Admin",
+    "SelectSector": "Select Sector"
+  }
+}

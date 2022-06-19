@@ -39,6 +39,8 @@
     "confirm": "Confirm",
     "cancel": "Cancel",
     "confirmRemoval": "Confirm Removal",
+    "confirmReject": "Confirm Reject Report",
+
     "confirmRemovalMsg": "Are you sure you want to remove this report to spam",
     "transferTo": "Transfer Report to other Sector",
     "rejectMsg": "Are you sure you want to Reject this report",

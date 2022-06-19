@@ -44,6 +44,7 @@ function ReportShow() {
 
         // idAccessor:"id",
       },
+      
       {
         Header: "Name",
         accessor: "user.first_name",
@@ -83,20 +84,16 @@ function ReportShow() {
         Filter: ReportStatusColumnFilter, // new
         // filter: 'includes',
       },
-
       {
-        idAccessor: "state",
-
-        // id: "spamStatus",
-        Header: "spamStatus",
-        accessor: "state",
-
+        // idAccessor: "spamStatus",
+        id: "spamStatus",
+        Header: "SpamStatus",
+        accessor: 'spamStatus',
         Cell: SpamStatus,
         Filter: SelectColumnFilter, // new
         // filter: "includes",
-
-        // filter: 'includes',
-      },
+            },
+     
       {
         Header: "Like Count",
         accessor: "like_count",

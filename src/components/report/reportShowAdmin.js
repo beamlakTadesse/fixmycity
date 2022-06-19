@@ -79,14 +79,14 @@ function ReportShowAdmin() {
       },
 
       {
+        // idAccessor: "spamStatus",
         id: "spamStatus",
-        Header: "spamStatus",
-        accessor: "spamStatus",
-
+        Header: "SpamStatus",
+        accessor: 'spamStatus',
         Cell: SpamStatus,
         Filter: SelectColumnFilter, // new
-        filter: "includes",
-      },
+        // filter: "includes",
+            },
     ],
     []
   );

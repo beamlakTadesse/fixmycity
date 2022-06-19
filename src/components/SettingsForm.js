@@ -78,7 +78,7 @@ export default function SettingsForm({ editProfile, setEditProfile }) {
     if (inputs.lastname) {
       setNameError(nameValidation(inputs.lastname));
       if (nameError === null) {
-        formData.append("first_name", inputs.lastname);
+        formData.append("last_name", inputs.lastname);
       }
     }
     if (inputs.phone_number) {
@@ -91,7 +91,7 @@ export default function SettingsForm({ editProfile, setEditProfile }) {
     const requestOptions = {
       method: "PATCH",
       headers: {
-        "Access-Control-Allow-Origin": "*",
+        // "Access-Control-Allow-Origin": "*",
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
 
